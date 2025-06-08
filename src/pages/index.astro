@@ -1,16 +1,62 @@
 ---
-
+// 1. We import our master Layout component.
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Rethinking Anxiety Care: Using Data to Bridge the Gap Between Lived Experience and Clinical Support.</h1>
+      <p>
+        We are co-designing a human-centered digital tool that uses technology to understand emotion responses, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
+      </p>
+      <a href="/project-story" class="button">Explore the Project</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* These styles ONLY apply to the homepage content */
+  .hero {
+    /* Make the hero section take up most of the screen height */
+    min-height: 70vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    padding: 0 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 1.125rem;
+    max-width: 650px;
+    margin: 0 auto 2rem auto; /* center the paragraph block */
+  }
+
+  .button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+</style>

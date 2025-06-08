@@ -1,0 +1,45 @@
+---
+// We can run JavaScript here before the page is built.
+// Let's get the current year automatically!
+const currentYear = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; {currentYear} Luigi Andrea Moretti. All rights reserved.</p>
+    <nav class="footer-nav">
+      <a href="https://www.linkedin.com/in/luigiandreamoretti/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-border);
+    padding: 2rem 0;
+    margin-top: 4rem; /* Add some space above the footer */
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .container {
+    /* This is the same container class from the Header,
+       ensuring our content stays aligned and centered. */
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-nav a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav a:hover {
+    color: var(--color-primary);
+  }
+</style>
