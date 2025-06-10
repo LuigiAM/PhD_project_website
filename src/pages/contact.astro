@@ -3,12 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import IconLinkedIn from '../components/icons/IconLinkedIn.astro';
 import IconScholar from '../components/icons/IconScholar.astro';
 import IconMail from '../components/icons/IconMail.astro';
+import IconWebsite from '../components/icons/IconWebsite.astro';
 ---
 <Layout>
-  <section class="page-container">
+  <section class="container">
     <div class="contact-header">
       <div class="profile-image">
-        <img src="https://placekitten.com/200/200" alt="A photo of Luigi Andrea Moretti" />
+        <img src="https://i1.rgstatic.net/ii/profile.image/11431281174827543-1689353364772_Q128/Luigi-Moretti-2.jpg" alt="A photo of Luigi Andrea Moretti" />
       </div>
       <div class="header-text">
         <h1>Let's Connect</h1>
@@ -17,9 +18,9 @@ import IconMail from '../components/icons/IconMail.astro';
     </div>
 
     <div class="contact-main">
-      <a href="mailto:your.email@example.com" class="email-link">
+      <a href="mailto:luigi.moretti@uwe.ac.uk" class="email-link">
         <IconMail />
-        <span>your.email@example.com</span>
+        <span>luigi.moretti@uwe.ac.uk</span>
       </a>
     </div>
 
@@ -30,9 +31,13 @@ import IconMail from '../components/icons/IconMail.astro';
           <IconLinkedIn />
           <span>LinkedIn</span>
         </a>
-        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link">
+        <a href="https://scholar.google.co.uk/citations?user=KJTGED4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="social-link">
           <IconScholar />
           <span>Google Scholar</span>
+        </a>
+        <a href="https://www.luigiandreamoretti.com" target="_blank" rel="noopener noreferrer" class="social-link">
+          <IconWebsite />
+          <span>Personal Website</span>
         </a>
       </div>
     </div>

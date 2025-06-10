@@ -21,6 +21,8 @@
   --color-background: #F7F7F7; /* A very light gray for the background */
   --color-white: #FFFFFF;
   --color-border: #DDDDDD;
+    /* ... other colors ... */
+  --color-text-muted: #666;
 }
 
 /* 3. Global Styles */
@@ -36,14 +38,14 @@ body {
   line-height: 1.6; /* Improves readability */
 }
 
-/* A simple container for our page content */
+/* A simple container for our page content 
 .page-container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 4rem 2rem; /* Adds space top/bottom and left/right */
-}
+  padding: 4rem 2rem; /* Adds space top/bottom and left/right 
+} 
 
-/* Our global container to center content and add margins */
+/* Our global container to center content and add margins 
 .container {
   width: 100%;
   max-width: 1100px;
@@ -51,4 +53,12 @@ body {
   margin-right: auto;
   padding-left: 2rem;
   padding-right: 2rem;
+} 
+
+/* Add this to global.css and remove all other container styles */
+.container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4rem 2rem; /* 4rem top/bottom, 2rem left/right */
 }

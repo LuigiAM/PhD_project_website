@@ -5,7 +5,7 @@ import IconUser from '../components/icons/IconUser.astro';
 import IconStethoscope from '../components/icons/IconStethoscope.astro';
 ---
 <Layout>
-  <section class="page-container">
+  <section class="container">
     <div class="header">
       <h1>Help Shape the Future of Mental Health Tech</h1>
       <p class="thank-you-note">
@@ -17,7 +17,7 @@ import IconStethoscope from '../components/icons/IconStethoscope.astro';
       <RecruitmentCard
         title="For Individuals with Lived Experience"
         buttonText="Express Interest as a Participant"
-        buttonLink="mailto:your.email@example.com?subject=Interest in Participating (Lived Experience)"
+        buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Lived Experience)"
         theme="light"
         icon="user"
       >
@@ -28,13 +28,13 @@ import IconStethoscope from '../components/icons/IconStethoscope.astro';
 
       <RecruitmentCard
         title="For Clinicians & Carers"
-        buttonText="Express Interest as a Supporter"
-        buttonLink="mailto:your.email@example.com?subject=Interest in Participating (Supporter)"
+        buttonText="Express Interest as a Participant"
+        buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Supporter)"
         theme="primary"
         icon="stethoscope"
       >
         <p>
-          Your professional expertise and experience are vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations in practice.
+          Your professional or personal expertise and experience are vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations in practice.
         </p>
       </RecruitmentCard>
     </div>
@@ -57,6 +57,18 @@ import IconStethoscope from '../components/icons/IconStethoscope.astro';
     color: #555;
   }
 
+.recruitment-grid {
+  display: grid;
+  gap: 2rem; /* This creates space between the cards */
+
+  /* 1. Mobile First (Default): A single column for narrow screens. */
+  grid-template-columns: 1fr;
+}
+
+/* 2. Larger Screens: On screens 768px wide and up (tablets/desktops), 
+      switch to two equal columns. */
+@media (min-width: 768px) {
   .recruitment-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* Default: 1 column on
+    grid-template-columns: 1fr 1fr;
+  }
+}
