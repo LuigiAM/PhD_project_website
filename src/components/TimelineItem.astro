@@ -1,0 +1,100 @@
+---
+import IconPublication from './icons/IconPublication.astro';
+import IconAward from './icons/IconAward.astro';
+import IconMilestone from './icons/IconMilestone.astro';
+
+type Props = {
+  title: string;
+  date: string;
+  position: 'left' | 'right';
+  icon: 'publication' | 'award' | 'milestone';
+}
+const { title, date, position, icon } = Astro.props;
+
+const icons = {
+  publication: IconPublication,
+  award: IconAward,
+  milestone: IconMilestone,
+}
+const IconComponent = icons[icon];
+---
+<div class:list={["timeline-item", `timeline-item-${position}`]}>
+  <div class="timeline-dot">
+    <IconComponent />
+  </div>
+  <div class="timeline-content">
+    <time class="timeline-date">{date}</time>
+    <h3 class="timeline-title">{title}</h3>
+    <div class="timeline-description">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .timeline-item {
+    position: relative;
+    width: 50%;
+    padding: 1rem 2rem 2rem 2rem;
+  }
+  .timeline-item-left {
+    left: 0;
+  }
+  .timeline-item-right {
+    left: 50%;
+  }
+  .timeline-dot {
+    position: absolute;
+    top: 1.5rem;
+    width: 50px;
+    height: 50px;
+    background: var(--color-background);
+    border: 3px solid var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-primary);
+  }
+  .timeline-item-left .timeline-dot {
+    right: -25px;
+  }
+  .timeline-item-right .timeline-dot {
+    left: -25px;
+  }
+  .timeline-content {
+    padding: 1.5rem;
+    background: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    position: relative;
+  }
+  .timeline-date {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .timeline-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Responsive styles for mobile */
+  @media (max-width: 768px) {
+    .timeline-item {
+      width: 100%;
+      padding-left: 4rem;
+      padding-right: 0;
+    }
+    .timeline-item-right {
+      left: 0%;
+    }
+    .timeline-item-left .timeline-dot,
+    .timeline-item-right .timeline-dot {
+      left: -10px;
+      top: 1rem;
+    }
+  }
+</style>

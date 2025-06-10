@@ -1,9 +1,63 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import TimelineItem from '../components/TimelineItem.astro';
 ---
 <Layout>
-  <div class="page-container">
-    <h1>Achievements</h1>
-    <p>Content coming soon...</p>
-  </div>
+  <section class="page-container">
+    <div class="achievements-header">
+      <h1>Milestones & Achievements</h1>
+      <p>A timeline of key publications, awards, and project milestones.</p>
+    </div>
+
+    <div class="timeline-wrapper">
+      <div class="timeline-line"></div>
+
+      <TimelineItem date="May 2025" title="Project Milestone Reached" position="left" icon="milestone">
+        <p>Completed Phase 3 of the co-design methodology, solidifying the core feature set for the initial prototype.</p>
+      </TimelineItem>
+
+      <TimelineItem date="January 2025" title="First Paper Published" position="right" icon="publication">
+        <p>Published our findings on 'Affective Computing in Clinical Contexts' in a peer-reviewed journal. <a href="#">Read paper</a></p>
+      </TimelineItem>
+
+      <TimelineItem date="September 2024" title="Digital Health Grant Awarded" position="left" icon="award">
+        <p>Received a competitive grant from the National Institute for Health Research (NIHR) to support prototype development.</p>
+      </TimelineItem>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .achievements-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .achievements-header h1 {
+    font-size: 3rem;
+  }
+  .achievements-header p {
+    font-size: 1.125rem;
+    color: #666;
+  }
+  .timeline-wrapper {
+    position: relative;
+    max-width: 1100px; /* Changed from 900px */
+    margin: 0 auto;
+  }
+  .timeline-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background-color: var(--color-border);
+    transform: translateX(-50%);
+  }
+
+  /* Responsive styles for mobile */
+  @media (max-width: 768px) {
+    .timeline-line {
+      left: 15px;
+    }
+  }
+</style>

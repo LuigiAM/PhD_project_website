@@ -1,9 +1,137 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import IconLinkedIn from '../components/icons/IconLinkedIn.astro';
+import IconScholar from '../components/icons/IconScholar.astro';
+import IconMail from '../components/icons/IconMail.astro';
 ---
 <Layout>
-  <div class="page-container">
-    <h1>Contact Me</h1>
-    <p>Content coming soon...</p>
-  </div>
+  <section class="page-container">
+    <div class="contact-header">
+      <div class="profile-image">
+        <img src="https://placekitten.com/200/200" alt="A photo of Luigi Andrea Moretti" />
+      </div>
+      <div class="header-text">
+        <h1>Let's Connect</h1>
+        <p>I'm always open to discussing research, collaboration opportunities, or new ideas in health technology. The best ways to reach me are below.</p>
+      </div>
+    </div>
+
+    <div class="contact-main">
+      <a href="mailto:your.email@example.com" class="email-link">
+        <IconMail />
+        <span>your.email@example.com</span>
+      </a>
+    </div>
+
+    <div class="contact-socials">
+      <h3>Find me elsewhere</h3>
+      <div class="social-grid">
+        <a href="https://www.linkedin.com/in/luigiandreamoretti/" target="_blank" rel="noopener noreferrer" class="social-link">
+          <IconLinkedIn />
+          <span>LinkedIn</span>
+        </a>
+        <a href="#" target="_blank" rel="noopener noreferrer" class="social-link">
+          <IconScholar />
+          <span>Google Scholar</span>
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .contact-header {
+    display: grid;
+    grid-template-columns: auto 1fr; /* Image column sized to content, text takes the rest */
+    gap: 2rem;
+    align-items: center;
+    margin: 0 auto 4rem auto;
+    max-width: 800px;
+  }
+  .profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* Prevents image distortion */
+    border: 4px solid var(--color-primary);
+  }
+  .header-text {
+    text-align: left;
+  }
+  .header-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .header-text p {
+    font-size: 1.125rem;
+    color: #666;
+  }
+
+  /* On mobile, stack the image on top of the text */
+  @media (max-width: 600px) {
+    .contact-header {
+      grid-template-columns: 1fr; /* Switch to a single column */
+      text-align: center;
+      gap: 1.5rem;
+    }
+    .profile-image {
+      margin: 0 auto;
+    }
+    .header-text {
+      text-align: center;
+    }
+  }
+
+  /* Styles for the rest of the page (unchanged) */
+  .contact-main {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .email-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+  }
+  .contact-socials {
+    text-align: center;
+  }
+  .contact-socials h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .social-grid {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+    width: 120px;
+  }
+  .social-link:hover {
+    color: var(--color-primary);
+  }
+  .social-link span {
+    font-weight: 700;
+  }
+</style>

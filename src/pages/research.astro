@@ -1,9 +1,120 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// I've taken the content you provided earlier and put it into variables
+const abstract = "Anxiety disorders consistently present challenges of under-/mis-diagnosis due to difficulties in differential diagnoses and the presence of common comorbidities. Standard self-reported approaches for assessing emotional regulation face criticism for their paradoxical nature, while semi-structured interviews may lack specificity and cross-cultural validity. This project explores if and how affective computing can address and mitigate the current issues.";
+
+const objectives = [
+  "To co-design a digital emotion-monitoring tool for individuals with anxiety disorders, enabling the collection of longitudinal data in real-world, daily contexts.",
+  "To support clinical conversations.",
+  "To support the interruption of anxiety loops.",
+  "To support early help-seeking behaviour."
+];
+
+const methodology = "To address high dropout rates in digital mental health tools and focus on real needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across six phases, of which three have already been completed. Our approach focuses on the use of longitudinal emotion recognition data to identify anxiety patterns: from bio-signals (e.g. heart rate, galvanic skin response), along with user-generated data, like diaries and recordings, analysed for tone and content. Information from both mobilephones and wearables also allow to contexualise both the emotion data collected and the suggested coping strategies.";
+
+const techStack = ["Wearables", "Bio-signals (HR, GSR)", "Affective Computing", "Co-Design", "Python", "Data Analysis"];
+
+const references = [
+  "[1] M. Berking and P. Wupperman, ‘Emotion regulation and mental health: recent findings, current challenges, and future directions’, Curr. Opin. Psychiatry, vol. 25, no. 2, pp. 128–134, Mar. 2012, doi: 10.1097/YCO.0b013e3283503669.",
+  "[2] Noorbergen, T.J., Adam, M.T., Teubner, T. and Collins, C.E., 2021. Using co-design in mobile health system development: a qualitative study with experts in co-design and mobile health system development. JMIR mHealth and uHealth, 9(11), p.e27896."
+];
 ---
 <Layout>
-  <div class="page-container">
-    <h1>The Research</h1>
-    <p>Content coming soon...</p>
-  </div>
+  <section class="hero-banner">
+    <img src="https://images.unsplash.com/photo-1579547945412-480251499599?q=80&w=2140" alt="Abstract background of data and light" />
+  </section>
+
+  <section class="container">
+    <div class="research-content">
+      <h1>Research & Methodology</h1>
+
+      <h2>Abstract</h2>
+      <blockquote>{abstract}</blockquote>
+
+      <h2>Objectives</h2>
+      <ul>
+        {objectives.map(item => <li>{item}</li>)}
+      </ul>
+
+      <h2>Methodology</h2>
+      <p>{methodology}</p>
+
+      <h2>Technology & Concepts</h2>
+      <div class="tech-stack">
+        {techStack.map(tag => <span class="tag">{tag}</span>)}
+      </div>
+
+      <h2>References</h2>
+      <div class="references">
+        {references.map(ref => <p><small>{ref}</small></p>)}
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .hero-banner {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 4rem;
+  }
+  .hero-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .research-content {
+    max-width: 800px; /* Narrower for better readability */
+    margin: 0 auto;
+  }
+
+  .research-content h1 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .research-content h2 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.5rem;
+  }
+
+  blockquote {
+    font-style: italic;
+    color: #555;
+    border-left: 4px solid var(--color-primary);
+    padding-left: 1.5rem;
+    margin-left: 0;
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 2rem;
+  }
+  li {
+    margin-bottom: 0.5rem;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--color-background);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .references p {
+    margin-bottom: 0.5rem;
+  }
+</style>

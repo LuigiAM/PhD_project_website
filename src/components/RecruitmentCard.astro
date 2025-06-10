@@ -1,0 +1,113 @@
+---
+import IconUser from './icons/IconUser.astro';
+import IconStethoscope from './icons/IconStethoscope.astro';
+
+type Props = {
+  title: string;
+  buttonText: string;
+  buttonLink: string;
+  theme?: 'light' | 'primary';
+  icon?: 'user' | 'stethoscope';
+}
+const { title, buttonText, buttonLink, theme = 'light', icon } = Astro.props;
+
+const icons = {
+  user: IconUser,
+  stethoscope: IconStethoscope,
+};
+const IconComponent = icon ? icons[icon] : null;
+---
+<div class:list={["card", `theme-${theme}`]}>
+  {IconComponent && (
+    <div class="icon-wrapper">
+      <IconComponent />
+    </div>
+  )}
+  <h2>{title}</h2>
+  <div class="description">
+    <slot />
+  </div>
+  <a href={buttonLink} class="button">{buttonText}</a>
+</div>
+
+<style>
+  .card {
+    padding: 2.5rem;
+    border-radius: 8px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .icon-wrapper {
+    margin: 0 auto 1.5rem auto;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrapper svg {
+    width: 32px;
+    height: 32px;
+  }
+  .description {
+    flex-grow: 1;
+    margin: 1.5rem 0;
+    line-height: 1.7;
+  }
+  .card h2 {
+    font-size: 1.75rem;
+  }
+  .button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  /* REVISED Theme for "Lived Experience" card */
+  .theme-light {
+    background-color: var(--color-white);
+    border: 2px solid var(--color-primary); /* Use primary color for border */
+  }
+  .theme-light .icon-wrapper {
+    background-color: var(--color-background);
+    color: var(--color-primary);
+  }
+  .theme-light h2 {
+    color: var(--color-primary); /* Use primary color for title */
+  }
+  .theme-light .button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  /* Theme for "Supporters" card */
+  .theme-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+  .theme-primary .icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-white);
+  }
+  .theme-primary h2 {
+    color: var(--color-white);
+  }
+  .theme-primary .description {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  .theme-primary .button {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+</style>

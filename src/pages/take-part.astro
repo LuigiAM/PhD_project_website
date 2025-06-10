@@ -1,9 +1,62 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import RecruitmentCard from '../components/RecruitmentCard.astro';
+import IconUser from '../components/icons/IconUser.astro';
+import IconStethoscope from '../components/icons/IconStethoscope.astro';
 ---
 <Layout>
-  <div class="page-container">
-    <h1>Take Part</h1>
-    <p>Content coming soon...</p>
-  </div>
+  <section class="page-container">
+    <div class="header">
+      <h1>Help Shape the Future of Mental Health Tech</h1>
+      <p class="thank-you-note">
+        This project is only possible because of the generous time and invaluable insights from our co-design partners. A sincere thank you to all the individuals with lived experience, carers, and clinicians who have guided this journey so far.
+      </p>
+    </div>
+
+    <div class="recruitment-grid">
+      <RecruitmentCard
+        title="For Individuals with Lived Experience"
+        buttonText="Express Interest as a Participant"
+        buttonLink="mailto:your.email@example.com?subject=Interest in Participating (Lived Experience)"
+        theme="light"
+        icon="user"
+      >
+        <p>
+          Your insights are crucial to building a tool that is truly helpful. Participation may involve taking part in workshops, interviews, and prototype evaluations to share your thoughts and feedback. You will be compensated for your time.
+        </p>
+      </RecruitmentCard>
+
+      <RecruitmentCard
+        title="For Clinicians & Carers"
+        buttonText="Express Interest as a Supporter"
+        buttonLink="mailto:your.email@example.com?subject=Interest in Participating (Supporter)"
+        theme="primary"
+        icon="stethoscope"
+      >
+        <p>
+          Your professional expertise and experience are vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations in practice.
+        </p>
+      </RecruitmentCard>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
+  }
+  .header h1 {
+    font-size: 3rem;
+  }
+  .thank-you-note {
+    margin-top: 1.5rem;
+    font-size: 1.125rem;
+    font-style: italic;
+    color: #555;
+  }
+
+  .recruitment-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Default: 1 column on

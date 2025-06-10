@@ -1,0 +1,91 @@
+---
+// This is our flexible, reusable component for zigzag sections.
+import type { HTMLAttributes } from 'astro/types';
+
+// 1. Define the "props" (inputs) that this component accepts.
+type Props = {
+  title: string;
+  theme?: 'light' | 'dark'; // Optional: for alternating backgrounds
+  imagePosition?: 'left' | 'right'; // Optional: for zigzag effect
+  imageSrc?: string; // Optional: path to an image
+  imageAlt?: string; // Optional: description for the image
+  linkUrl?: string; // Optional: URL to make the image a link
+  videoSrc?: string; // Optional: path to a video
+} & HTMLAttributes<'div'>; // Allows passing standard HTML attributes like class
+
+const {
+  title,
+  theme = 'light',
+  imagePosition = 'right',
+  imageSrc,
+  imageAlt = 'Descriptive image', // Default alt text
+  linkUrl,
+  videoSrc
+} = Astro.props;
+---
+
+<section class:list={["feature-section", { "dark-theme": theme === 'dark' }]}>
+  <div class:list={["container", "feature-container", { "image-on-left": imagePosition === 'left' }]}>
+
+    <div class="text-content">
+      <h2>{title}</h2>
+      <slot />
+    </div>
+
+    <div class="media-content">
+      {videoSrc ? (
+        <video autoplay loop muted playsinline src={videoSrc}></video>
+      ) : imageSrc && linkUrl ? (
+        <a href={linkUrl} target="_blank" rel="noopener noreferrer">
+          <img src={imageSrc} alt={imageAlt} />
+        </a>
+      ) : imageSrc ? (
+        <img src={imageSrc} alt={imageAlt} />
+      ) : null}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    padding: 5rem 0;
+    background-color: var(--color-white);
+  }
+  .feature-section.dark-theme {
+    background-color: var(--color-background);
+  }
+
+  .feature-container {
+    display: grid;
+    grid-template-columns: 1fr; /* On mobile, one column */
+    gap: 2rem;
+    align-items: center;
+  }
+
+  /* On larger screens, use two columns */
+  @media (min-width: 768px) {
+    .feature-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Logic to flip the column order for the zigzag effect */
+  .feature-container.image-on-left .media-content {
+    order: -1;
+  }
+
+  .text-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .media-content img,
+  .media-content video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+</style>

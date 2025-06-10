@@ -1,0 +1,31 @@
+---
+// This component is a simple wrapper. Its only job is to arrange its children.
+---
+<div class="card-grid">
+  <slot />
+</div>
+
+<style>
+  .card-grid {
+    display: grid;
+    gap: 2rem;
+
+    /* 1. Mobile First (Default): Always start with a single column. */
+    grid-template-columns: 1fr;
+  }
+
+  /* 2. Tablet and Laptop: At 600px wide and up, switch to 2 columns. */
+  @media (min-width: 600px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* 3. Large Desktops: At 1200px wide and up, switch to 4 columns. 
+     This ensures it still looks good on very wide screens. */
+  @media (min-width: 1200px) {
+    .card-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>
