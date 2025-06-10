@@ -8,6 +8,11 @@ on:
   # Allows you to run this workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
+# This is the new section that grants the workflow permissions
+permissions:
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +22,3 @@ jobs:
 
       - name: Install, build, and deploy
         uses: withastro/action@v2
-        # with:
-          # path: . # The root of your project (optional)
-          # node-version: 20 # The specific version of Node.js to use (optional)
-          # package-manager: npm # The package manager to use (optional)
