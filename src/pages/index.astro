@@ -6,12 +6,20 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
   <section class="hero">
     <div class="hero-content">
-      <h1>MEMOPAD: Multimodal Emotional Monitoring in Clinical Pathways for Anxiety Disorders</h1>
+      <h1>MEMOPAD: Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders</h1>
       <p>
         We are co-designing a human-centered digital tool that uses technology to understand emotion responses, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
       </p>
-      <a href="https://go.uwe.ac.uk/CodesignAnxietyNewslettertory" class="button">Read the newsletter archive</a>
-      <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe to the newsletter</a>
+
+      {/* --- NEW NEWSLETTER SECTION --- */}
+      <div class="newsletter-section">
+        <h3 class="newsletter-title">Monthly Newsletter</h3>
+        <div class="button-group">
+          <a href="https://go.uwe.ac.uk/CodesignAnxietyNewslettertory" class="button">Read the archive</a>
+          <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button button-secondary">Subscribe</a>
+        </div>
+      </div>
+
     </div>
   </section>
 </Layout>
@@ -19,7 +27,6 @@ import Layout from '../layouts/Layout.astro';
 <style>
   /* These styles ONLY apply to the homepage content */
   .hero {
-    /* Make the hero section take up most of the screen height */
     min-height: 70vh; 
     display: flex;
     align-items: center;
@@ -42,22 +49,54 @@ import Layout from '../layouts/Layout.astro';
   .hero p {
     font-size: 1.125rem;
     max-width: 650px;
-    margin: 0 auto 2rem auto; /* center the paragraph block */
+    margin: 0 auto 2.5rem auto; /* Increased bottom margin */
   }
 
+  /* --- STYLES FOR THE NEW SECTION --- */
+  .newsletter-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .newsletter-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .button-group {
+    display: flex;
+    flex-wrap: wrap; /* Helps on small screens */
+    justify-content: center;
+    gap: 1rem; /* Clean space between buttons */
+  }
+  
   .button {
     display: inline-block;
     background-color: var(--color-primary);
     color: var(--color-white);
     padding: 0.75rem 1.5rem;
+    border: 2px solid var(--color-primary); /* Added border for consistency */
     border-radius: 4px;
     text-decoration: none;
     font-weight: 700;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.2s ease;
   }
 
   .button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  /* A new style for the secondary "Subscribe" button */
+  .button.button-secondary {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+
+  .button.button-secondary:hover {
+    background-color: var(--color-background);
   }
 </style>

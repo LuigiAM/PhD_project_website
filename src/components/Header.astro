@@ -1,5 +1,5 @@
 ---
-// No JavaScript needed for our simple header yet.
+// No JavaScript needed.
 ---
 <header class="site-header">
   <div class="container">
@@ -17,19 +17,24 @@
 </header>
 
 <style>
-  /* These styles ONLY apply to the Header.astro component. */
   .site-header {
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border);
-    padding: 1rem 0;
+    padding: 1.5rem 0;
+    
+    /* --- STICKY HEADER STYLES --- */
+    position: sticky; /* Reverted to 'sticky' for a cleaner layout flow */
+    top: 0;          /* Stick to the very top of the screen */
+    width: 100%;     /* Ensure it spans the full width */
+    z-index: 100;    /* Keep it on top of all other content */
   }
 
+  /* This container is specific to the header's needs */
   .container {
-    /* This style ONLY applies to the container inside the header */
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 2rem; /* The key fix: No top/bottom padding */
+    padding: 0 2rem;
     
     display: flex;
     justify-content: space-between;
@@ -37,28 +42,41 @@
   }
 
   .site-logo {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
   }
 
   .site-nav ul {
-    list-style: none; /* Removes the black dots */
+    list-style: none;
     display: flex;
-    gap: 1.5rem; /* Creates space between the links */
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
   }
 
   .site-nav a {
     color: var(--color-text);
     text-decoration: none;
     font-size: 1rem;
-    padding: 0.5rem 0; /* Gives a bigger click area */
     transition: color 0.2s ease;
   }
 
-  /* A nice hover effect using our primary brand color */
   .site-nav a:hover {
     color: var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .site-nav ul {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem 1.5rem;
+    }
   }
 </style>

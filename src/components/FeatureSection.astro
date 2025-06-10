@@ -49,7 +49,7 @@ const {
 
 <style>
   .feature-section {
-    padding: 3rem 0;
+    padding: 3.5rem 0;
     background-color: var(--color-white);
   }
   .feature-section.dark-theme {
@@ -59,7 +59,7 @@ const {
   .feature-container {
     display: grid;
     grid-template-columns: 1fr; /* On mobile, one column */
-    gap: 2rem;
+    gap: 3rem; /* Increased gap slightly for balance */
     align-items: center;
   }
 
@@ -80,6 +80,9 @@ const {
     margin-bottom: 1rem;
   }
 
+  /* --- CORRECTED STYLES START HERE --- */
+
+  /* Step 1: Style the actual image and video elements */
   .media-content img,
   .media-content video {
     width: 100%;
@@ -87,5 +90,19 @@ const {
     display: block;
     border-radius: 8px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  /* Step 2: Style the link that WRAPS the image */
+  .media-content a {
+    display: block; /* Makes the link behave like a block */
+    line-height: 0; /* Removes extra space */
+    border-radius: 8px; /* Important for the hover effect's shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  /* Step 3: Apply the hover animation to the LINK */
+  .media-content a:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   }
 </style>
