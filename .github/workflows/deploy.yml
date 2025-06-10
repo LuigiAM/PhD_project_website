@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          # We have removed the 'cache: npm' line to force a fresh install
           
       - name: Install dependencies 🔧
         run: npm install
