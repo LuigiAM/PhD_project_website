@@ -1,24 +1,32 @@
 name: Deploy to GitHub Pages
 
 on:
-  # Run automatically when you push to the `main` branch
   push:
     branches:
       - main
-  # Allows you to run this workflow manually from the Actions tab on GitHub
   workflow_dispatch:
 
-# This is the new section that grants the workflow permissions
-permissions:
-  pages: write
-  id-token: write
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out your repository
+      - name: Checkout 🛎️
         uses: actions/checkout@v4
 
-      - name: Install, build, and deploy
-        uses: withastro/action@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          
+      - name: Install dependencies 🔧
+        run: npm install
+
+      - name: Build 🏗️
+        run: npm run build
+
+      - name: Deploy 🚀
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
