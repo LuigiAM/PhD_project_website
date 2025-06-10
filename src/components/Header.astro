@@ -1,16 +1,22 @@
 ---
-// No JavaScript needed.
+// This gets the base path from your `astro.config.mjs` file.
+// In development, it's '/'
+// On GitHub Pages, it will be '/PhD_project_website/'
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 <header class="site-header">
   <div class="container">
-    <a href="/" class="site-logo">MEMOPAD</a>
+    {/* The link to the homepage is now correctly set to the base URL */}
+    <a href={BASE_URL} class="site-logo">MEMOPAD</a>
+
     <nav class="site-nav">
       <ul>
-        <li><a href="/project-story">Project Story</a></li>
-        <li><a href="/research">The Research</a></li>
-        <li><a href="/achievements">Achievements</a></li>
-        <li><a href="/take-part">Take Part</a></li>
-        <li><a href="/contact">Contact</a></li>
+        {/* All other links are now prefixed with the base URL */}
+        <li><a href={`${BASE_URL}project-story/`}>Project Story</a></li>
+        <li><a href={`${BASE_URL}research/`}>The Research</a></li>
+        <li><a href={`${BASE_URL}achievements/`}>Achievements</a></li>
+        <li><a href={`${BASE_URL}take-part/`}>Take Part</a></li>
+        <li><a href={`${BASE_URL}contact/`}>Contact</a></li>
       </ul>
     </nav>
   </div>
@@ -21,33 +27,26 @@
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border);
     padding: 1.5rem 0;
-    
-    /* --- STICKY HEADER STYLES --- */
-    position: sticky; /* Reverted to 'sticky' for a cleaner layout flow */
-    top: 0;          /* Stick to the very top of the screen */
-    width: 100%;     /* Ensure it spans the full width */
-    z-index: 100;    /* Keep it on top of all other content */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
   }
-
-  /* This container is specific to the header's needs */
   .container {
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
     padding: 0 2rem;
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
   .site-logo {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
   }
-
   .site-nav ul {
     list-style: none;
     display: flex;
@@ -55,24 +54,20 @@
     margin: 0;
     padding: 0;
   }
-
   .site-nav a {
     color: var(--color-text);
     text-decoration: none;
     font-size: 1rem;
     transition: color 0.2s ease;
   }
-
   .site-nav a:hover {
     color: var(--color-primary);
   }
-
   @media (max-width: 768px) {
     .container {
       flex-direction: column;
       gap: 1.5rem;
     }
-
     .site-nav ul {
       flex-wrap: wrap;
       justify-content: center;
