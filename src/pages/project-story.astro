@@ -3,15 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
-
-const BASE_URL = import.meta.env.BASE_URL;
 ---
 <Layout>
   <section class="page-hero">
     <div class="container">
       <h1>Seeing the Gap, Building the Bridge</h1>
       <p class="subtitle">
-        I'm Luigi A. Moretti, MD & MSc HealthTech. This is the story of how a personal drive evolved into a PhD project exploring how emotion recognition technology can benefit mental health.
+        I'm Luigi A. Moretti, MD & MSc HealthTech, and this is the story of how a personal drive evolved into a PhD project aimed at exploring if and how emotion recognition technology can benefit mental health.
       </p>
     </div>
   </section>
@@ -21,24 +19,25 @@ const BASE_URL = import.meta.env.BASE_URL;
     theme="light"
     imagePosition="left"
     imageSrc="https://assets.publishing.service.gov.uk/media/5c66eb7fe5274a72bbe5fd36/Infographic_-_mental_health_rates.jpg"
-    imageAlt="Wellbeing and mental health in the UK infographic"
+    imageAlt="TWellbeing and mental health in the UK infographic"
     linkUrl="https://digital.nhs.uk/data-and-information/publications/statistical/adult-psychiatric-morbidity-survey/adult-psychiatric-morbidity-survey-survey-of-mental-health-and-wellbeing-england-2014"
   >
     <p>
-      This journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and feeling powerless to help, I saw an urgent need for better tools and a more empathetic system—an opportunity to make a meaningful difference that could not be ignored.
+      This journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and feeling powerless to help, I saw a clear and urgent need for better tools and a more empathetic system, an opportunity to make a meaningful difference that could not be ignored. (Click the image to view the NHS article)
     </p>
   </FeatureSection>
 
+  {/* --- THIS IS THE MODIFIED SECTION --- */}
   <FeatureSection
     title="From Startup to Science"
     theme="dark"
     imagePosition="right"
-    imageSrc="https://img.youtube.com/vi/zCHwg8tJSfg/maxresdefault.jpg"
+    imageSrc="https://www.eleganzadelgusto.com/wordpress/wp-content/uploads/2017/11/ot11b51mod-1024x578.jpg"
     imageAlt="IntelliHearts mobile app demo video thumbnail"
     linkUrl="https://www.youtube.com/watch?v=zCHwg8tJSfg"
   >
     <p>
-      The first step was a feature for my previous startup, IntelliHearts: a one-lead ECG emotion recognition tool designed to reduce the high drop-off rates common in digital health apps. Unexpectedly, the feature generated more excitement than the core product, with users, investors, and experts all highlighting its standalone potential for clinical use.
+      The first step was a feature for my previous startup, IntelliHearts: a one-lead ECG emotion recognition tool designed to reduce the high drop-off rates common in digital health apps. Unexpectedly, the feature generated more excitement than the core product, with users, investors, and experts all highlighting its standalone potential for clinical use. (Click the image to watch the demo)
     </p>
   </FeatureSection>
 
@@ -46,12 +45,12 @@ const BASE_URL = import.meta.env.BASE_URL;
     title="The PhD Project"
     theme="light"
     imagePosition="left"
-    imageSrc={`${BASE_URL}/UWE_Bristol_logo.png`}
+    imageSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/UWE_Bristol_logo.svg/640px-UWE_Bristol_logo.svg.png"
     imageAlt="The official logo for UWE Bristol"
     linkUrl="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#section-5"
   >
     <p>
-      This spark of interest led me to pursue the idea with academic rigor. During my MSc, my project supervisor, David Western, and viva examiner, Michael Loizou, saw the potential and encouraged my application for a PhD scholarship at UWE Bristol. With their support, and now joined by the multidisciplinary expertise of Miles and Paul, this research was born.
+      This spark of interest led me to pursue the idea with academic rigor. During my MSc, my project supervisor, David Western, and viva examiner, Michael Loizou, saw the potential and encouraged my application for a PhD scholarship at UWE Bristol. With their support, and now joined by the multidisciplinary expertise of Miles and Paul, this research was born. (Click the image to go to the UWE Bristol website)
     </p>
   </FeatureSection>
   
@@ -60,10 +59,10 @@ const BASE_URL = import.meta.env.BASE_URL;
       <h2>Supervisory Team</h2>
       <p class="subtitle">The expert team providing invaluable guidance for this project.</p>
       <CardGrid>
-        <Card name="Dr David Western" title="Director of Studies" imgSrc="https://uwe-repository.worktribe.com/avatar/8058350?fit=0" imgAlt="Photo of David Western" expertise="AI and smart sensing" linkUrl="#" />
-        <Card name="Dr Michael Loizou" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/8058351?fit=0" imgAlt="Photo of Michael Loizou" expertise="Affective computing in health" linkUrl="https://uwe-repository.worktribe.com/person/8058351/michael-loizou" />
-        <Card name="Dr Miles Thompson" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/8058428?fit=0" imgAlt="Photo of Miles Thompson" expertise="Clinical psychology" linkUrl="#" />
-        <Card name="Dr Paul Matthews" title="Supervisor" imgSrc="https://fetstudy.uwe.ac.uk/~pmatthew/profile.jpg" imgAlt="Photo of Paul Matthews" expertise="Mental health Apps" linkUrl="#" />
+        <Card name="Dr David Western" title="Director of Studies" imgSrc="https://uwe-repository.worktribe.com/avatar/792407?fit=0" imgAlt="Photo of David Western UWE Bristol" expertise="Artificial inteligence and smart sensing in health" />
+        <Card name="Dr Michael Loizou" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/8058351?fit=0" imgAlt="Photo of Michael Loizou UWE Bristol" expertise="Affective computing implementations in health" />
+        <Card name="Dr Miles Thompson" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/696945" imgAlt="Photo of Miles Thompson UWE Bristol" expertise="Clinical psychology" />
+        <Card name="Dr Paul Matthews" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/434419?fit=0" imgAlt="Photo of Paul Matthews UWE Bristol" expertise="Data science and mobile apps in mental health" />
       </CardGrid>
     </div>
   </section>
@@ -77,7 +76,7 @@ const BASE_URL = import.meta.env.BASE_URL;
     linkUrl="/take-part"
   >
     <p>
-      Technology built in a vacuum often fails. Our foundation is built on listening. We use a co-design methodology, actively partnering with patients, clinicians, and carers at every stage. Their lived experiences and professional insights are not just feedback—they are the blueprint for building a tool that is truly relevant, safe, and effective.
+      Technology built in a vacuum often fails. Our foundation is built on listening. We use a co-design methodology, actively partnering with patients, clinicians, and carers at every stage. Their lived experiences and professional insights are not just feedback, they are the blueprint for building a tool that is truly relevant, safe, and effective. (Click the image to take part in our co-design!)
     </p>
   </FeatureSection>
 
@@ -89,11 +88,12 @@ const BASE_URL = import.meta.env.BASE_URL;
       </p>
     </div>
   </section>
+
 </Layout>
 
 <style>
   .team-section {
-    padding: 0rem 2rem 0rem;
+    padding: 0rem 2rem 0rem; /* Reduced padding */
     background-color: var(--color-white);
     text-align: center;
   }
@@ -114,8 +114,9 @@ const BASE_URL = import.meta.env.BASE_URL;
     text-align: center;
     background-color: var(--color-white);
   }
+
   .page-outro {
-    padding: 4rem 2rem;
+    padding: 4rem 2rem; /* Reduced padding to match other sections */
     text-align: center;
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -136,4 +137,5 @@ const BASE_URL = import.meta.env.BASE_URL;
     font-size: 1.125rem;
     opacity: 0.9;
   }
+
 </style>
