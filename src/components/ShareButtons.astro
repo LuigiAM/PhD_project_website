@@ -1,0 +1,140 @@
+---
+// src/components/ShareButtons.astro
+import IconLinkedIn from './icons/IconLinkedIn.astro';
+import IconX from './icons/IconX.astro';
+import IconEmail from './icons/IconEmail.astro';
+import IconLink from './icons/IconLink.astro';
+
+// This prop allows us to pass a custom title for the share text
+const { pageTitle = "Check out this PhD project" } = Astro.props;
+---
+
+<div class="share-container">
+  <p class="share-title">Share this page</p>
+  <div class="share-buttons">
+    <a 
+      id="share-linkedin"
+      href="#" 
+      class="share-button" 
+      aria-label="Share on LinkedIn"
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <IconLinkedIn />
+    </a>
+    <a 
+      id="share-x"
+      href="#" 
+      class="share-button" 
+      aria-label="Share on X"
+      target="_blank" 
+      rel="noopener noreferrer"
+    >
+      <IconX />
+    </a>
+    <a 
+      id="share-email"
+      href="#"
+      class="share-button" 
+      aria-label="Share via Email"
+    >
+      <IconEmail />
+    </a>
+    <button id="copy-link" class="share-button" aria-label="Copy link">
+      <IconLink />
+    </button>
+  </div>
+  <span id="copy-feedback" class="copy-feedback"></span>
+</div>
+
+<script define:vars={{ pageTitle }}>
+  // This script runs on the client to make the buttons dynamic
+  document.addEventListener('DOMContentLoaded', () => {
+    const pageUrl = window.location.href;
+    const shareText = encodeURIComponent(pageTitle);
+
+    const linkedInBtn = document.getElementById('share-linkedin');
+    if (linkedInBtn) {
+      linkedInBtn.href = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}&title=${shareText}`;
+    }
+
+    const xBtn = document.getElementById('share-x');
+    if (xBtn) {
+      xBtn.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${shareText}`;
+    }
+
+    const emailBtn = document.getElementById('share-email');
+    if (emailBtn) {
+      emailBtn.href = `mailto:?subject=${shareText}&body=I thought you might be interested in this project: ${pageUrl}`;
+    }
+
+    const copyBtn = document.getElementById('copy-link');
+    const feedbackEl = document.getElementById('copy-feedback');
+    if (copyBtn && feedbackEl) {
+      copyBtn.addEventListener('click', () => {
+        const tempInput = document.createElement('input');
+        document.body.appendChild(tempInput);
+        tempInput.value = pageUrl;
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        
+        feedbackEl.textContent = 'Link copied!';
+        feedbackEl.classList.add('visible');
+        setTimeout(() => {
+          feedbackEl.classList.remove('visible');
+        }, 2000);
+      });
+    }
+  });
+</script>
+
+<style>
+  .share-container {
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+    margin-top: 2rem;
+  }
+  .share-title {
+    font-weight: 700;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+  .share-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  .share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .share-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+  .copy-feedback {
+    display: block;
+    margin-top: 1rem;
+    color: var(--color-primary);
+    font-weight: 700;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .copy-feedback.visible {
+    opacity: 1;
+  }
+</style>

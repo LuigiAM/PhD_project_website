@@ -3,13 +3,20 @@ import Layout from '../layouts/Layout.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
+import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE NEW COMPONENT
+
+const BASE_URL = import.meta.env.BASE_URL;
 ---
-<Layout>
+
+<Layout
+  title="Project Story - The MEMOPAD Journey"
+  description="Discover the story behind the MEMOPAD project, from its personal beginnings to its academic evolution. Learn how we are co-designing a digital tool to enhance mental health care through emotion recognition technology."
+>
   <section class="page-hero">
     <div class="container">
       <h1>Seeing the Gap, Building the Bridge</h1>
       <p class="subtitle">
-        I'm Luigi A. Moretti, MD & MSc HealthTech, and this is the story of how a personal drive evolved into a PhD project aimed at exploring if and how emotion recognition technology can benefit mental health.
+        I'm Luigi A. Moretti, MD & MSc HealthTech. This is the story of how a personal drive evolved into a PhD project exploring how emotion recognition technology can benefit mental health.
       </p>
     </div>
   </section>
@@ -19,25 +26,26 @@ import CardGrid from '../components/CardGrid.astro';
     theme="light"
     imagePosition="left"
     imageSrc="https://assets.publishing.service.gov.uk/media/5c66eb7fe5274a72bbe5fd36/Infographic_-_mental_health_rates.jpg"
-    imageAlt="TWellbeing and mental health in the UK infographic"
+    imageAlt="Wellbeing and mental health in the UK infographic"
     linkUrl="https://digital.nhs.uk/data-and-information/publications/statistical/adult-psychiatric-morbidity-survey/adult-psychiatric-morbidity-survey-survey-of-mental-health-and-wellbeing-england-2014"
   >
     <p>
-      This journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and feeling powerless to help, I saw a clear and urgent need for better tools and a more empathetic system, an opportunity to make a meaningful difference that could not be ignored. (Click the image to view the NHS article)
+      This journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and feeling powerless to help, I saw a clear and urgent need for better tools and a more empathetic system—an opportunity to make a meaningful difference that could not be ignored.
+      <small class="click-prompt">(Click the image to view the NHS article)</small>
     </p>
   </FeatureSection>
 
-  {/* --- THIS IS THE MODIFIED SECTION --- */}
   <FeatureSection
     title="From Startup to Science"
     theme="dark"
     imagePosition="right"
-    imageSrc="https://www.eleganzadelgusto.com/wordpress/wp-content/uploads/2017/11/ot11b51mod-1024x578.jpg"
+    imageSrc="https://img.youtube.com/vi/zCHwg8tJSfg/maxresdefault.jpg"
     imageAlt="IntelliHearts mobile app demo video thumbnail"
     linkUrl="https://www.youtube.com/watch?v=zCHwg8tJSfg"
   >
     <p>
-      The first step was a feature for my previous startup, IntelliHearts: a one-lead ECG emotion recognition tool designed to reduce the high drop-off rates common in digital health apps. Unexpectedly, the feature generated more excitement than the core product, with users, investors, and experts all highlighting its standalone potential for clinical use. (Click the image to watch the demo)
+      The first step was a feature for my previous startup, IntelliHearts: a one-lead ECG emotion recognition tool designed to reduce the high drop-off rates common in digital health apps. Unexpectedly, the feature generated more excitement than the core product, with users, investors, and experts all highlighting its standalone potential for clinical use.
+      <small class="click-prompt">(Click the image to watch the demo)</small>
     </p>
   </FeatureSection>
 
@@ -45,12 +53,13 @@ import CardGrid from '../components/CardGrid.astro';
     title="The PhD Project"
     theme="light"
     imagePosition="left"
-    imageSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/UWE_Bristol_logo.svg/640px-UWE_Bristol_logo.svg.png"
+    imageSrc={`${BASE_URL}/UWE_Bristol_logo.png`}
     imageAlt="The official logo for UWE Bristol"
     linkUrl="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#section-5"
   >
     <p>
-      This spark of interest led me to pursue the idea with academic rigor. During my MSc, my project supervisor, David Western, and viva examiner, Michael Loizou, saw the potential and encouraged my application for a PhD scholarship at UWE Bristol. With their support, and now joined by the multidisciplinary expertise of Miles and Paul, this research was born. (Click the image to go to the UWE Bristol website)
+      This spark of interest led me to pursue the idea with academic rigor. During my MSc, my project supervisor, David Western, and viva examiner, Michael Loizou, saw the potential and encouraged my application for a PhD scholarship at UWE Bristol. With their support, and now joined by the multidisciplinary expertise of Miles and Paul, this research was born.
+      <small class="click-prompt">(Click the image to go to the UWE Bristol website)</small>
     </p>
   </FeatureSection>
   
@@ -59,10 +68,10 @@ import CardGrid from '../components/CardGrid.astro';
       <h2>Supervisory Team</h2>
       <p class="subtitle">The expert team providing invaluable guidance for this project.</p>
       <CardGrid>
-        <Card name="Dr David Western" title="Director of Studies" imgSrc="https://uwe-repository.worktribe.com/avatar/792407?fit=0" imgAlt="Photo of David Western UWE Bristol" expertise="Artificial inteligence and smart sensing in health" />
-        <Card name="Dr Michael Loizou" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/8058351?fit=0" imgAlt="Photo of Michael Loizou UWE Bristol" expertise="Affective computing implementations in health" />
-        <Card name="Dr Miles Thompson" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/696945" imgAlt="Photo of Miles Thompson UWE Bristol" expertise="Clinical psychology" />
-        <Card name="Dr Paul Matthews" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/434419?fit=0" imgAlt="Photo of Paul Matthews UWE Bristol" expertise="Data science and mobile apps in mental health" />
+        <Card name="Dr David Western" title="Director of Studies" imgSrc="https://uwe-repository.worktribe.com/avatar/792407?fit=0" imgAlt="Photo of David Western UWE Bristol" expertise="Artificial intelligence and smart sensing in health" linkUrl="#" />
+        <Card name="Dr Michael Loizou" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/8058351?fit=0" imgAlt="Photo of Michael Loizou UWE Bristol" expertise="Affective computing implementations in health" linkUrl="https://uwe-repository.worktribe.com/person/8058351/michael-loizou" />
+        <Card name="Dr Miles Thompson" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/696945" imgAlt="Photo of Miles Thompson UWE Bristol" expertise="Clinical psychology" linkUrl="#" />
+        <Card name="Dr Paul Matthews" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/434419?fit=0" imgAlt="Photo of Paul Matthews UWE Bristol" expertise="Data science and mobile apps in mental health" linkUrl="#" />
       </CardGrid>
     </div>
   </section>
@@ -76,9 +85,15 @@ import CardGrid from '../components/CardGrid.astro';
     linkUrl="/take-part"
   >
     <p>
-      Technology built in a vacuum often fails. Our foundation is built on listening. We use a co-design methodology, actively partnering with patients, clinicians, and carers at every stage. Their lived experiences and professional insights are not just feedback, they are the blueprint for building a tool that is truly relevant, safe, and effective. (Click the image to take part in our co-design!)
+      Technology built in a vacuum often fails. Our foundation is built on listening. We use a co-design methodology, actively partnering with patients, clinicians, and carers at every stage. Their lived experiences and professional insights are not just feedback—they are the blueprint for building a tool that is truly relevant, safe, and effective.
+      <small class="click-prompt">(Click the image to take part in our co-design!)</small>
     </p>
   </FeatureSection>
+
+  {/* --- ADD THE SHARE BUTTONS COMPONENT HERE --- */}
+  <div class="container share-wrapper">
+    <ShareButtons pageTitle="The MEMOPAD Journey: A PhD Project Story" />
+  </div>
 
   <section class="page-outro">
     <div class="container">
@@ -88,12 +103,11 @@ import CardGrid from '../components/CardGrid.astro';
       </p>
     </div>
   </section>
-
 </Layout>
 
 <style>
   .team-section {
-    padding: 0rem 2rem 0rem; /* Reduced padding */
+    padding: 0rem 2rem 0rem;
     background-color: var(--color-white);
     text-align: center;
   }
@@ -114,9 +128,8 @@ import CardGrid from '../components/CardGrid.astro';
     text-align: center;
     background-color: var(--color-white);
   }
-
   .page-outro {
-    padding: 4rem 2rem; /* Reduced padding to match other sections */
+    padding: 4rem 2rem;
     text-align: center;
     background-color: var(--color-primary);
     color: var(--color-white);
@@ -137,5 +150,17 @@ import CardGrid from '../components/CardGrid.astro';
     font-size: 1.125rem;
     opacity: 0.9;
   }
-
+  .click-prompt {
+    display: block;
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+  
+  /* --- NEW STYLE FOR THE SHARE WRAPPER --- */
+  .share-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 0;
+  }
 </style>
