@@ -1,110 +1,147 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// We get the base URL from the astro.config.mjs file
-const BASE_URL = import.meta.env.BASE_URL;
-
-// Content variables...
-const abstract = "Anxiety disorders consistently present challenges of underdiagnosis and misdiagnosis due to difficulties in differential diagnoses and the presence of common comorbidities. Standard self-reported approaches for assessing emotional regulation face criticism for their paradoxical nature, while semi-structured interviews may lack specificity and cross-cultural validity. This project explores if and how affective computing can address and mitigate the current issues.";
-const objectives = [
-  "To co-design a digital emotion-monitoring tool with and for individuals with anxiety disorders, enabling the collection of longitudinal data in real-world, daily contexts.",
-  "To provide structured, interpretable, and longitudinal data that can support and enrich clinical conversations.",
-  "To support the interruption of anxiety loops.",
-  "To support early help-seeking behaviour by improving emotional literacy."
-];
-const methodology = "To address high dropout rates in digital mental health tools and focus on real needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across six phases, of which three have already been completed. Our approach focuses on the use of longitudinal emotion recognition data to identify anxiety patterns: from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.";
-const techStack = ["Wearables", "Bio-signals (HR, EDA)", "Affective Computing", "Co-Design", "Emotion Recognition",];
-const references = [
-  "[1] M. Berking and P. Wupperman, ‘Emotion regulation and mental health: recent findings, current challenges, and future directions’, Curr. Opin. Psychiatry, vol. 25, no. 2, pp. 128–134, Mar. 2012, doi: 10.1097/YCO.0b013e3283503669.",
-  "[2] Noorbergen, T.J., Adam, M.T., Teubner, T. and Collins, C.E., 2021. Using co-design in mobile health system development: a qualitative study with experts in co-design and mobile health system development. JMIR mHealth and uHealth, 9(11), p.e27896."
-];
+import IconLinkedIn from '../components/icons/IconLinkedIn.astro';
+import IconScholar from '../components/icons/IconScholar.astro';
+import IconMail from '../components/icons/IconMail.astro';
+import IconWebsite from '../components/icons/IconWebsite.astro';
+import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORTED
 ---
-<Layout>
-  <section class="hero-banner">
-    {/* MODIFIED: The image source now includes the BASE_URL prefix */}
-    <img src={`${BASE_URL}/research-hero-banner.jpg`} alt="Luigi A. Moretti presenting at digital mental health conference" />
-  </section>
-
+<Layout
+  title="Contact Luigi Andrea Moretti"
+  description="Get in touch with Luigi Andrea Moretti for research, collaboration, or inquiries in health technology."
+>
   <section class="container">
-    <div class="research-content">
-      <h1>Research & Methodology</h1>
-      {/* ... rest of the content ... */}
-      <h2>Abstract</h2>
-      <blockquote>{abstract}</blockquote>
-      <h2>Objectives</h2>
-      <ul>
-        {objectives.map(item => <li>{item}</li>)}
-      </ul>
-      <h2>Methodology</h2>
-      <p>{methodology}</p>
-      <h2>Key Words</h2>
-      <div class="tech-stack">
-        {techStack.map(tag => <span class="tag">{tag}</span>)}
+    <div class="contact-header">
+      <div class="profile-image">
+        <img src="https://i1.rgstatic.net/ii/profile.image/11431281174827543-1689353364772_Q128/Luigi-Moretti-2.jpg" alt="A photo of Luigi Andrea Moretti" />
       </div>
-      <h2>References</h2>
-      <div class="references">
-        {references.map(ref => <p><small>{ref}</small></p>)}
+      <div class="header-text">
+        <h1>Let's Connect</h1>
+        <p>I'm always open to discussing research, collaboration opportunities, or new ideas in health technology. The best ways to reach me are below.</p>
       </div>
     </div>
+
+    <div class="contact-main">
+      <a href="mailto:luigi.moretti@uwe.ac.uk" class="email-link">
+        <IconMail />
+        <span>luigi.moretti@uwe.ac.uk</span>
+      </a>
+    </div>
+
+    <div class="contact-socials">
+      <h3>Find me elsewhere</h3>
+      <div class="social-grid">
+        <a href="https://www.linkedin.com/in/luigiandreamoretti/" target="_blank" rel="noopener noreferrer" class="social-link">
+          <IconLinkedIn />
+          <span>LinkedIn</span>
+        </a>
+        <a href="https://scholar.google.co.uk/citations?user=KJTGED4AAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="social-link">
+          <IconScholar />
+          <span>Google Scholar</span>
+        </a>
+        <a href="https://www.luigiandreamoretti.com" target="_blank" rel="noopener noreferrer" class="social-link">
+          <IconWebsite />
+          <span>Personal Website</span>
+        </a>
+      </div>
+    </div>
+    
+    {/* --- ADDED SHARE BUTTONS --- */}
+    <ShareButtons pageTitle="Contact Luigi A. Moretti" />
   </section>
 </Layout>
 
 <style>
-  /* All styles remain the same */
-  .hero-banner {
-    width: 100%;
-    height: 400px;
+  .contact-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: center;
+    margin: 0 auto 4rem auto;
+    max-width: 800px;
+  }
+  .profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-primary);
+  }
+  .header-text {
+    text-align: left;
+  }
+  .header-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .header-text p {
+    font-size: 1.125rem;
+    color: var(--color-text-muted); /* CORRECTED: Uses global color variable */
+  }
+
+  @media (max-width: 600px) {
+    .contact-header {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 1.5rem;
+    }
+    .profile-image {
+      margin: 0 auto;
+    }
+    .header-text {
+      text-align: center;
+    }
+  }
+
+  .contact-main {
+    text-align: center;
     margin-bottom: 4rem;
   }
-  .hero-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .email-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
   }
-  .research-content {
-    max-width: 800px;
-    margin: 0 auto;
+  .email-link:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
   }
-  .research-content h1 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
+  .contact-socials {
     text-align: center;
   }
-  .research-content h2 {
-    font-size: 2rem;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 0.5rem;
+  .contact-socials h3 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
   }
-  blockquote {
-    font-style: italic;
-    color: var(--color-text-muted);
-    border-left: 4px solid var(--color-primary);
-    padding-left: 1.5rem;
-    margin-left: 0;
-  }
-  ul {
-    list-style-type: disc;
-    padding-left: 2rem;
-  }
-  li {
-    margin-bottom: 0.5rem;
-  }
-  .tech-stack {
+  .social-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    justify-content: center;
+    gap: 1.5rem;
   }
-  .tag {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background-color: var(--color-background);
-    border-radius: 4px;
-    font-size: 0.875rem;
+  .social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    text-decoration: none;
+    width: 120px;
+  }
+  .social-link:hover {
+    color: var(--color-primary);
+  }
+  .social-link span {
     font-weight: 700;
-  }
-  .references p {
-    margin-bottom: 0.5rem;
   }
 </style>

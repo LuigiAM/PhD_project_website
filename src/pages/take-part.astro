@@ -1,11 +1,14 @@
 ---
-title: "Take Part - Co-Design the Future of Mental Health Tech"
 import Layout from '../layouts/Layout.astro';
 import RecruitmentCard from '../components/RecruitmentCard.astro';
 import IconUser from '../components/icons/IconUser.astro';
 import IconStethoscope from '../components/icons/IconStethoscope.astro';
+import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE NEW COMPONENT
 ---
-<Layout>
+<Layout
+  title="Take Part - Co-Design the Future of Mental Health Tech"
+  description="Join our co-design initiative to shape a mental health tool that truly meets the needs of users and clinicians. Your voice matters!"
+>
   <section class="container">
     <div class="header">
       <h1>Help Shape the Future of Mental Health Tech</h1>
@@ -35,10 +38,14 @@ import IconStethoscope from '../components/icons/IconStethoscope.astro';
         icon="stethoscope"
       >
         <p>
-          Your professional or personal expertise and experience are vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations in practice.
+          Your professional expertise or personal experience is vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations in practice.
         </p>
       </RecruitmentCard>
     </div>
+
+    {/* --- ADDED SHARE BUTTONS COMPONENT --- */}
+    <ShareButtons pageTitle="Help Shape the Future of Mental Health Tech" />
+
   </section>
 </Layout>
 
@@ -55,21 +62,18 @@ import IconStethoscope from '../components/icons/IconStethoscope.astro';
     margin-top: 1.5rem;
     font-size: 1.125rem;
     font-style: italic;
-    color: #555;
+    color: var(--color-text-muted); /* CORRECTED: Uses the global color variable */
   }
 
 .recruitment-grid {
   display: grid;
-  gap: 2rem; /* This creates space between the cards */
-
-  /* 1. Mobile First (Default): A single column for narrow screens. */
+  gap: 2rem;
   grid-template-columns: 1fr;
 }
 
-/* 2. Larger Screens: On screens 768px wide and up (tablets/desktops), 
-      switch to two equal columns. */
 @media (min-width: 768px) {
   .recruitment-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
+</style>
