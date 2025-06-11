@@ -1,6 +1,7 @@
 ---
 // 1. We import our master Layout component.
 import Layout from '../layouts/Layout.astro';
+import ShareButtons from '../components/ShareButtons.astro';
 ---
 
 {/* Pass the title and description as props to the Layout component. */}
@@ -15,7 +16,7 @@ import Layout from '../layouts/Layout.astro';
         We are co-designing a human-centered digital tool that uses technology to understand emotion responses, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
       </p>
 
-      {/* --- NEW NEWSLETTER SECTION --- */}
+      {/* --- NEWSLETTER SECTION --- */}
       <div class="newsletter-section">
         <h3 class="newsletter-title">Monthly Newsletter</h3>
         <div class="button-group">
@@ -25,7 +26,15 @@ import Layout from '../layouts/Layout.astro';
       </div>
 
     </div>
+
   </section>
+
+    {/* --- SHARE BUTTONS COMPONENT --- */}
+    <ShareButtons 
+      pageTitle="MEMOPAD: Help Shape the Future of Mental Health Tech" 
+      shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
+      />
+
 </Layout>
 
 <style>

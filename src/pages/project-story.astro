@@ -39,7 +39,7 @@ const BASE_URL = import.meta.env.BASE_URL;
     title="From Startup to Science"
     theme="dark"
     imagePosition="right"
-    imageSrc="https://img.youtube.com/vi/zCHwg8tJSfg/maxresdefault.jpg"
+    imageSrc="https://www.eleganzadelgusto.com/wordpress/wp-content/uploads/2017/11/ot11b51mod-1024x578.jpg"
     imageAlt="IntelliHearts mobile app demo video thumbnail"
     linkUrl="https://www.youtube.com/watch?v=zCHwg8tJSfg"
   >
@@ -53,13 +53,13 @@ const BASE_URL = import.meta.env.BASE_URL;
     title="The PhD Project"
     theme="light"
     imagePosition="left"
-    imageSrc={`${BASE_URL}/UWE_Bristol_logo.png`}
+    imageSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/UWE_Bristol_logo.svg/640px-UWE_Bristol_logo.svg.png"
     imageAlt="The official logo for UWE Bristol"
     linkUrl="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#section-5"
   >
     <p>
       This spark of interest led me to pursue the idea with academic rigor. During my MSc, my project supervisor, David Western, and viva examiner, Michael Loizou, saw the potential and encouraged my application for a PhD scholarship at UWE Bristol. With their support, and now joined by the multidisciplinary expertise of Miles and Paul, this research was born.
-      <small class="click-prompt">(Click the image to go to the UWE Bristol website)</small>
+      <small class="click-prompt">(Click the image to go to the UWE Bristol project website)</small>
     </p>
   </FeatureSection>
   
@@ -68,10 +68,10 @@ const BASE_URL = import.meta.env.BASE_URL;
       <h2>Supervisory Team</h2>
       <p class="subtitle">The expert team providing invaluable guidance for this project.</p>
       <CardGrid>
-        <Card name="Dr David Western" title="Director of Studies" imgSrc="https://uwe-repository.worktribe.com/avatar/792407?fit=0" imgAlt="Photo of David Western UWE Bristol" expertise="Artificial intelligence and smart sensing in health" linkUrl="#" />
+        <Card name="Dr David Western" title="Director of Studies" imgSrc="https://uwe-repository.worktribe.com/avatar/792407?fit=0" imgAlt="Photo of David Western UWE Bristol" expertise="Artificial intelligence and smart sensing in health" linkUrl="https://uwe-repository.worktribe.com/person/792407/david-western" />
         <Card name="Dr Michael Loizou" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/8058351?fit=0" imgAlt="Photo of Michael Loizou UWE Bristol" expertise="Affective computing implementations in health" linkUrl="https://uwe-repository.worktribe.com/person/8058351/michael-loizou" />
-        <Card name="Dr Miles Thompson" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/696945" imgAlt="Photo of Miles Thompson UWE Bristol" expertise="Clinical psychology" linkUrl="#" />
-        <Card name="Dr Paul Matthews" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/434419?fit=0" imgAlt="Photo of Paul Matthews UWE Bristol" expertise="Data science and mobile apps in mental health" linkUrl="#" />
+        <Card name="Dr Miles Thompson" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/696945" imgAlt="Photo of Miles Thompson UWE Bristol" expertise="Clinical psychology" linkUrl="https://uwe-repository.worktribe.com/index.php/person/696945/miles-thompson" />
+        <Card name="Dr Paul Matthews" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/434419?fit=0" imgAlt="Photo of Paul Matthews UWE Bristol" expertise="Data science and mobile apps in mental health" linkUrl="https://uwe-repository.worktribe.com/person/434419/paul-matthews" />
       </CardGrid>
     </div>
   </section>
@@ -92,7 +92,10 @@ const BASE_URL = import.meta.env.BASE_URL;
 
   {/* --- ADD THE SHARE BUTTONS COMPONENT HERE --- */}
   <div class="container share-wrapper">
-    <ShareButtons pageTitle="The MEMOPAD Journey: A PhD Project Story" />
+    <ShareButtons 
+      pageTitle="The MEMOPAD Journey: A PhD Project Story"
+      shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
+/>
   </div>
 
   <section class="page-outro">

@@ -1,23 +1,32 @@
 ---
-// Props for a single person's card
+// This component now accepts an optional 'linkUrl' to make the whole card a link.
 type Props = {
   name: string;
   title: string;
   imgSrc: string;
   imgAlt: string;
-  expertise?: string; // <-- NEW PROP
+  expertise?: string;
+  linkUrl?: string; // <-- NEW optional prop
 }
-const { name, title, imgSrc, imgAlt, expertise } = Astro.props;
+const { name, title, imgSrc, imgAlt, expertise, linkUrl } = Astro.props;
+
+// Determine whether the root element should be a link (<a>) or a plain div.
+const Tag = linkUrl ? 'a' : 'div';
 ---
-<div class="card">
+
+<Tag 
+  href={linkUrl} 
+  class="card" 
+  target={linkUrl ? '_blank' : undefined} 
+  rel={linkUrl ? 'noopener noreferrer' : undefined}
+>
   <img src={imgSrc} alt={imgAlt} class="card-img" />
   <div class="card-content">
     <h3 class="card-name">{name}</h3>
     <p class="card-title">{title}</p>
-    {/* --- NEW ELEMENT --- */}
     {expertise && <p class="card-expertise">{expertise}</p>}
   </div>
-</div>
+</Tag>
 
 <style>
   .card {
@@ -27,8 +36,15 @@ const { name, title, imgSrc, imgAlt, expertise } = Astro.props;
     overflow: hidden;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: block; /* Ensures the card behaves consistently as a block */
+    height: 100%; /* Ensures cards in a grid have the same height */
+
+    /* --- New styles for link behavior --- */
+    text-decoration: none;
+    color: inherit; /* Inherits text color from parent */
   }
-  .card:hover {
+  /* Only apply hover effect if the card is a link */
+  a.card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   }
@@ -48,7 +64,6 @@ const { name, title, imgSrc, imgAlt, expertise } = Astro.props;
     color: var(--color-text-muted);
     font-size: 1rem;
   }
-  /* --- NEW STYLE --- */
   .card-expertise {
     font-size: 0.875rem;
     font-style: italic;
