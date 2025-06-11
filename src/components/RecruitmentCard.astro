@@ -8,15 +8,21 @@ type Props = {
   buttonLink: string;
   theme?: 'light' | 'primary';
   icon?: 'user' | 'stethoscope';
+  documentImageUrl?: string; // <-- NEW optional prop
+  documentPdfUrl?: string;   // <-- NEW optional prop
 }
-const { title, buttonText, buttonLink, theme = 'light', icon } = Astro.props;
+const { title, buttonText, buttonLink, theme = 'light', icon, documentImageUrl, documentPdfUrl } = Astro.props;
 
 const icons = {
   user: IconUser,
   stethoscope: IconStethoscope,
 };
 const IconComponent = icon ? icons[icon] : null;
+
+// Get the base URL for constructing correct asset paths
+const BASE_URL = import.meta.env.BASE_URL;
 ---
+
 <div class:list={["card", `theme-${theme}`]}>
   {IconComponent && (
     <div class="icon-wrapper">
@@ -26,6 +32,16 @@ const IconComponent = icon ? icons[icon] : null;
   <h2>{title}</h2>
   <div class="description">
     <slot />
+
+    {/* --- NEW DOCUMENT LINK SECTION --- */}
+    {/* This block only appears if both an image and a PDF URL are provided */}
+    {documentImageUrl && documentPdfUrl && (
+      <a href={`${BASE_URL}${documentPdfUrl}`} target="_blank" rel="noopener noreferrer" class="document-link">
+        <img src={`${BASE_URL}${documentImageUrl}`} alt={`Preview of the one-page summary for ${title}`} class="document-preview" />
+        <span><br>View One-Page Summary (PDF)</span>
+      </a>
+    )}
+
   </div>
   <a href={buttonLink} class="button">{buttonText}</a>
 </div>
@@ -53,7 +69,7 @@ const IconComponent = icon ? icons[icon] : null;
     height: 32px;
   }
   .description {
-    flex-grow: 1;
+    flex-grow: 1; /* This makes the card content grow to fill space */
     margin: 1.5rem 0;
     line-height: 1.7;
   }
@@ -68,29 +84,69 @@ const IconComponent = icon ? icons[icon] : null;
     font-weight: 700;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: auto; /* Pushes the button to the bottom */
   }
   .button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
 
-  /* REVISED Theme for "Lived Experience" card */
+  /* --- NEW STYLES FOR DOCUMENT LINK --- */
+  .document-link {
+    display: block;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .document-link:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+  }
+  .document-preview {
+    width: 60%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  .document-link span {
+    font-weight: 700;
+  }
+  .theme-light .document-link {
+    color: var(--color-primary);
+  }
+  .theme-light .document-link:hover {
+    background-color: #fdfdfd;
+  }
+  .theme-primary .document-link {
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  .theme-primary .document-link:hover {
+    border-color: var(--color-white);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Theme for "Lived Experience" card */
   .theme-light {
     background-color: var(--color-white);
-    border: 2px solid var(--color-primary); /* Use primary color for border */
+    border: 2px solid var(--color-primary);
   }
   .theme-light .icon-wrapper {
     background-color: var(--color-background);
     color: var(--color-primary);
   }
   .theme-light h2 {
-    color: var(--color-primary); /* Use primary color for title */
+    color: var(--color-primary);
   }
   .theme-light .button {
     background-color: var(--color-primary);
     color: var(--color-white);
   }
-
   /* Theme for "Supporters" card */
   .theme-primary {
     background-color: var(--color-primary);

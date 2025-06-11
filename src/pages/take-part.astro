@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import RecruitmentCard from '../components/RecruitmentCard.astro';
 import IconUser from '../components/icons/IconUser.astro';
 import IconStethoscope from '../components/icons/IconStethoscope.astro';
-import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE NEW COMPONENT
+import ShareButtons from '../components/ShareButtons.astro';
 ---
 <Layout
   title="Take Part - Co-Design the Future of Mental Health Tech"
@@ -24,6 +24,8 @@ import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE N
         buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Lived Experience)"
         theme="light"
         icon="user"
+        documentImageUrl="/one-page-public-preview.jpg"
+        documentPdfUrl="/one-page-public.pdf"
       >
         <p>
           Your insights are crucial to building a tool that is truly helpful. Participation may involve taking part in workshops, interviews, and prototype evaluations to share your thoughts and feedback. You will be compensated for your time.
@@ -31,11 +33,13 @@ import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE N
       </RecruitmentCard>
 
       <RecruitmentCard
-        title="For Clinicians & Carers"
+        title="For Clinicians & Informal/Unpaid Carers"
         buttonText="Express Interest as a Participant"
         buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Supporter)"
         theme="primary"
         icon="stethoscope"
+        documentImageUrl="/one-page-clinician-preview.jpg"
+        documentPdfUrl="/one-page-clinician.pdf"
       >
         <p>
           Your professional expertise or personal experience is vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations in practice.
@@ -43,11 +47,7 @@ import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE N
       </RecruitmentCard>
     </div>
 
-    {/* --- SHARE BUTTONS COMPONENT --- */}
-    <ShareButtons 
-      pageTitle="MEMOPAD: Help Shape the Future of Mental Health Tech" 
-      shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
-      />
+    <ShareButtons pageTitle="Help Shape the Future of Mental Health Tech" />
 
   </section>
 </Layout>
@@ -65,7 +65,7 @@ import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE N
     margin-top: 1.5rem;
     font-size: 1.125rem;
     font-style: italic;
-    color: var(--color-text-muted); /* CORRECTED: Uses the global color variable */
+    color: var(--color-text-muted);
   }
 
 .recruitment-grid {
