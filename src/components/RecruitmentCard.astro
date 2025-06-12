@@ -8,10 +8,12 @@ type Props = {
   buttonLink: string;
   theme?: 'light' | 'primary';
   icon?: 'user' | 'stethoscope';
-  documentImageUrl?: string; // <-- NEW optional prop
-  documentPdfUrl?: string;   // <-- NEW optional prop
+  documentImageUrl?: string;
+  documentPdfUrl?: string;
+  involvementDetails?: string[];
 }
-const { title, buttonText, buttonLink, theme = 'light', icon, documentImageUrl, documentPdfUrl } = Astro.props;
+
+const { title, buttonText, buttonLink, theme = 'light', icon, documentImageUrl, documentPdfUrl, involvementDetails } = Astro.props;
 
 const icons = {
   user: IconUser,
@@ -19,7 +21,6 @@ const icons = {
 };
 const IconComponent = icon ? icons[icon] : null;
 
-// Get the base URL for constructing correct asset paths
 const BASE_URL = import.meta.env.BASE_URL;
 ---
 
@@ -32,18 +33,22 @@ const BASE_URL = import.meta.env.BASE_URL;
   <h2>{title}</h2>
   <div class="description">
     <slot />
-
-    {/* --- DOCUMENT LINK SECTION --- */}
-    {/* This block only appears if both an image and a PDF URL are provided */}
+    
+    {involvementDetails && involvementDetails.length > 0 && (
+      <div class="involvement-section">
+        <strong>Types of involvement:</strong>
+        <ul>
+          {involvementDetails.map(detail => <li>{detail}</li>)}
+        </ul>
+      </div>
+    )}
+    
     {documentImageUrl && documentPdfUrl && (
-      // CORRECTED: Added BASE_URL to both the link and the image source.
-      // The prop values in take-part.astro should start with a slash, e.g., "/one-page-public.pdf"
       <a href={`${BASE_URL}${documentPdfUrl}`} target="_blank" rel="noopener noreferrer" class="document-link">
         <img src={`${BASE_URL}${documentImageUrl}`} alt={`Preview of the one-page summary for ${title}`} class="document-preview" />
         <span><br>View One-Page Summary (PDF)</span>
       </a>
     )}
-
   </div>
   <a href={buttonLink} class="button">{buttonText}</a>
 </div>
@@ -71,12 +76,33 @@ const BASE_URL = import.meta.env.BASE_URL;
     height: 32px;
   }
   .description {
-    flex-grow: 1; /* This makes the card content grow to fill space */
+    flex-grow: 1;
     margin: 1.5rem 0;
     line-height: 1.7;
+    text-align: left;
+  }
+  .involvement-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  .involvement-section strong {
+    font-weight: 700;
+  }
+  .involvement-section ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+    margin-top: 0.5rem;
+  }
+  .theme-primary .involvement-section {
+    background-color: rgba(255,255,255,0.1);
   }
   .card h2 {
     font-size: 1.75rem;
+    text-align: center;
   }
   .button {
     display: inline-block;
@@ -86,23 +112,21 @@ const BASE_URL = import.meta.env.BASE_URL;
     font-weight: 700;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-top: auto; /* Pushes the button to the bottom */
+    margin-top: auto;
   }
   .button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   }
-
-  /* --- NEW STYLES FOR DOCUMENT LINK --- */
   .document-link {
     display: block;
     margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
     padding: 0.75rem;
     border: 1px solid var(--color-border);
     border-radius: 8px;
     text-decoration: none;
     transition: all 0.2s ease;
+    text-align: center;
   }
   .document-link:hover {
     border-color: var(--color-primary);
@@ -132,8 +156,6 @@ const BASE_URL = import.meta.env.BASE_URL;
     border-color: var(--color-white);
     background-color: rgba(255, 255, 255, 0.1);
   }
-
-  /* Theme for "Lived Experience" card */
   .theme-light {
     background-color: var(--color-white);
     border: 2px solid var(--color-primary);
@@ -149,7 +171,6 @@ const BASE_URL = import.meta.env.BASE_URL;
     background-color: var(--color-primary);
     color: var(--color-white);
   }
-  /* Theme for "Supporters" card */
   .theme-primary {
     background-color: var(--color-primary);
     color: var(--color-white);
