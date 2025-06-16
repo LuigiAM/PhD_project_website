@@ -1,17 +1,13 @@
 ---
 // This gets the base path from your `astro.config.mjs` file.
-// In development, it's '/'
-// On GitHub Pages, it will be '/PhD_project_website'
 const BASE_URL = import.meta.env.BASE_URL;
 ---
 <header class="site-header">
   <div class="container">
-    {/* The link to the homepage is now correctly set to the base URL */}
     <a href={BASE_URL} class="site-logo">MEMOPAD</a>
 
     <nav class="site-nav">
       <ul>
-        {/* All other links are now prefixed with the base URL and a slash */}
         <li><a href={`${BASE_URL}/project-story/`}>Project Story</a></li>
         <li><a href={`${BASE_URL}/research/`}>The Research</a></li>
         <li><a href={`${BASE_URL}/achievements/`}>Achievements</a></li>
@@ -46,7 +42,14 @@ const BASE_URL = import.meta.env.BASE_URL;
     font-weight: 700;
     color: var(--color-text);
     text-decoration: none;
+    transition: color 0.2s ease; /* ADDED: Smooth transition */
   }
+
+  /* --- NEW HOVER STYLE FOR LOGO --- */
+  .site-logo:hover {
+    color: var(--color-primary);
+  }
+
   .site-nav ul {
     list-style: none;
     display: flex;

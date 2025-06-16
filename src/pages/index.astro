@@ -11,7 +11,15 @@ import ShareButtons from '../components/ShareButtons.astro';
 >
   <section class="hero">
     <div class="hero-content">
-      <h1><br>MEMOPAD: Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders</h1>
+      <h1>
+        <br>MEMOPAD: 
+        <span class="highlight">M</span>ultimodal 
+        <span class="highlight">E</span>motion 
+        <span class="highlight">Mo</span>nitoring in Clinical 
+        <span class="highlight">P</span>athways for 
+        <span class="highlight">A</span>nxiety 
+        <span class="highlight">D</span>isorders
+      </h1>
       <p>
         We are co-designing a human-centered digital tool that uses technology to understand emotion responses, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
       </p>
@@ -30,10 +38,12 @@ import ShareButtons from '../components/ShareButtons.astro';
   </section>
 
     {/* --- SHARE BUTTONS COMPONENT --- */}
-    <ShareButtons 
-      pageTitle="MEMOPAD: Help Shape the Future of Mental Health Tech" 
-      shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
-      />
+    <div class="share-wrapper container">
+      <ShareButtons 
+        pageTitle="MEMOPAD: Help Shape the Future of Mental Health Tech" 
+        shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
+        />
+    </div>
 
 </Layout>
 
@@ -57,6 +67,11 @@ import ShareButtons from '../components/ShareButtons.astro';
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
+  }
+
+  /* --- NEW STYLE FOR HIGHLIGHTED LETTERS --- */
+  .hero h1 .highlight {
+    color: var(--color-primary);
   }
 
   .hero p {
@@ -103,7 +118,6 @@ import ShareButtons from '../components/ShareButtons.astro';
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
 
-  /* A new style for the secondary "Subscribe" button */
   .button.button-secondary {
     background-color: var(--color-white);
     color: var(--color-primary);
@@ -111,5 +125,11 @@ import ShareButtons from '../components/ShareButtons.astro';
 
   .button.button-secondary:hover {
     background-color: var(--color-background);
+  }
+  
+  /* --- NEW STYLE FOR SHARE WRAPPER --- */
+  .share-wrapper {
+    padding-top: 0;
+    padding-bottom: 4rem;
   }
 </style>
