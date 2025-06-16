@@ -1,12 +1,18 @@
 ---
-// This gets the base path from your `astro.config.mjs` file.
 const BASE_URL = import.meta.env.BASE_URL;
 ---
 <header class="site-header">
   <div class="container">
-    <a href={BASE_URL} class="site-logo">MEMOPAD</a>
+    <a href={BASE_URL} class="site-logo">MEMoPAD</a>
 
-    <nav class="site-nav">
+    {/* Hamburger Menu Button (visible only on mobile) */}
+    <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
+      <span class="sr-only">Menu</span>
+      <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+
+    <nav class="site-nav" id="primary-navigation">
       <ul>
         <li><a href={`${BASE_URL}/project-story/`}>Project Story</a></li>
         <li><a href={`${BASE_URL}/research/`}>The Research</a></li>
@@ -18,11 +24,25 @@ const BASE_URL = import.meta.env.BASE_URL;
   </div>
 </header>
 
+<script>
+  // This script toggles the mobile menu visibility
+  const menuToggle = document.querySelector('.menu-toggle');
+  const primaryNav = document.querySelector('.site-nav');
+
+  menuToggle.addEventListener('click', () => {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    menuToggle.setAttribute('aria-expanded', !isExpanded);
+    primaryNav.classList.toggle('is-open');
+    document.body.classList.toggle('no-scroll');
+  });
+</script>
+
 <style>
+  /* --- BASE HEADER STYLES --- */
   .site-header {
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border);
-    padding: 1.5rem 0;
+    padding: 1rem 0;
     position: sticky;
     top: 0;
     width: 100%;
@@ -40,16 +60,53 @@ const BASE_URL = import.meta.env.BASE_URL;
   .site-logo {
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-text);
     text-decoration: none;
-    transition: color 0.2s ease; /* ADDED: Smooth transition */
-  }
-
-  /* --- NEW HOVER STYLE FOR LOGO --- */
-  .site-logo:hover {
+    transition: color 0.2s ease;
+    /* --- UPDATED: Sets the default color to green --- */
     color: var(--color-primary);
   }
 
+  /* --- UPDATED: Turns the logo black/dark grey only on hover --- */
+  .site-logo:hover {
+    color: var(--color-text);
+  }
+
+  /* --- HAMBURGER MENU STYLES --- */
+  .menu-toggle {
+    display: none; /* This is crucial: HIDE the button by default on desktop */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001; /* Ensure it's above the overlay */
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  .icon-close {
+    display: none;
+  }
+  .menu-toggle[aria-expanded="true"] .icon-menu {
+    display: none;
+  }
+  .menu-toggle[aria-expanded="true"] .icon-close {
+    display: block;
+  }
+  body.no-scroll {
+    overflow: hidden;
+  }
+
+  /* --- DESKTOP NAVIGATION --- */
+  .site-nav {
+    display: block; /* Desktop navigation is visible by default */
+  }
   .site-nav ul {
     list-style: none;
     display: flex;
@@ -66,15 +123,31 @@ const BASE_URL = import.meta.env.BASE_URL;
   .site-nav a:hover {
     color: var(--color-primary);
   }
+
+
+  /* --- MOBILE NAVIGATION STYLES --- */
   @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-      gap: 1.5rem;
+    .menu-toggle {
+      display: block; /* SHOW the button on mobile */
+    }
+    .site-nav {
+      display: none; /* HIDE the nav links by default on mobile */
+      position: fixed;
+      inset: 0; /* Cover the whole screen */
+      background-color: var(--color-white);
+      padding: 6rem 2rem;
+      z-index: 1000;
+    }
+    .site-nav.is-open {
+      display: block; /* Show menu when open */
     }
     .site-nav ul {
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem 1.5rem;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    .site-nav a {
+      font-size: 1.5rem;
     }
   }
 </style>

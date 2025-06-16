@@ -1,18 +1,15 @@
 ---
-// 1. We import our master Layout component.
 import Layout from '../layouts/Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 ---
-
-{/* Pass the title and description as props to the Layout component. */}
 <Layout
-  title="MEMOPAD | Multimodal Emotion Monitoring for Anxiety Disorders"
-  description="The MEMOPAD project, led by Luigi A. Moretti. A PhD initiative co-designing a human-centered digital tool to provide clear, continuous, and interpretable emotion data for anxiety care."
+  title="MEMoPAD | Multimodal Emotion Monitoring for Anxiety Disorders"
+  description="The MEMoPAD project, led by Luigi A. Moretti. A PhD initiative co-designing a human-centered digital tool to provide clear, continuous, and interpretable emotion data for anxiety care."
 >
   <section class="hero">
     <div class="hero-content">
       <h1>
-        <br>
+        <br> 
         <span class="highlight">M</span>ultimodal 
         <span class="highlight">E</span>motion 
         <span class="highlight">Mo</span>nitoring in Clinical 
@@ -20,35 +17,31 @@ import ShareButtons from '../components/ShareButtons.astro';
         <span class="highlight">A</span>nxiety 
         <span class="highlight">D</span>isorders
       </h1>
-      <p>
+      {/* --- UPDATED: Changed from <p> to <h3> --- */}
+      <h3>
         We are co-designing a human-centered digital tool that uses technology to understand emotion responses, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
-      </p>
+      </h3>
 
-      {/* --- NEWSLETTER SECTION --- */}
       <div class="newsletter-section">
         <h3 class="newsletter-title">Monthly Newsletter</h3>
         <div class="button-group">
-          <a href="https://go.uwe.ac.uk/CodesignAnxietyNewsletter" class="button">Read the archive</a>
-          <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button button-secondary">Subscribe</a>
+          {/* --- UPDATED: Swapped button classes --- */}
+          <a href="https://go.uwe.ac.uk/CodesignAnxietyNewsletter" class="button button-secondary">Read the archive</a>
+          <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe</a>
         </div>
       </div>
-
     </div>
-
   </section>
 
-    {/* --- SHARE BUTTONS COMPONENT --- */}
     <div class="share-wrapper container">
       <ShareButtons 
-        pageTitle="MEMOPAD: Help Shape the Future of Mental Health Tech" 
-        shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
+        pageTitle="MEMoPAD: Help Shape the Future of Mental Health Tech" 
+        shareDescription="In the MEMoPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
         />
     </div>
-
 </Layout>
 
 <style>
-  /* These styles ONLY apply to the homepage content */
   .hero {
     min-height: 70vh; 
     display: flex;
@@ -56,78 +49,69 @@ import ShareButtons from '../components/ShareButtons.astro';
     justify-content: center;
     text-align: center;
   }
-
   .hero-content {
     max-width: 800px;
     padding: 0 2rem;
   }
-
   .hero h1 {
-    font-size: 3rem;
+    font-size: 2.75rem; /* --- UPDATED: Font size reduced --- */
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1.5rem;
   }
-
-  /* --- STYLE FOR HIGHLIGHTED LETTERS --- */
   .hero h1 .highlight {
     color: var(--color-primary);
   }
-
-  .hero p {
+  
+  /* --- NEW: Style for the h3 subtitle --- */
+  .hero h3 {
     font-size: 1.125rem;
+    font-weight: 400; /* Normal font weight */
+    line-height: 1.6;
     max-width: 650px;
-    margin: 0 auto 2.5rem auto; /* Increased bottom margin */
+    margin: 0 auto 2.5rem auto;
+    color: var(--color-text-muted);
   }
 
-  /* --- STYLES FOR THE NEW SECTION --- */
   .newsletter-section {
     margin-top: 3rem;
     padding-top: 2rem;
     border-top: 1px solid var(--color-border);
   }
-
   .newsletter-title {
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--color-text-muted);
     margin-bottom: 1.5rem;
   }
-
   .button-group {
     display: flex;
-    flex-wrap: wrap; /* Helps on small screens */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem; /* Clean space between buttons */
+    gap: 1rem;
   }
-  
   .button {
     display: inline-block;
     background-color: var(--color-primary);
     color: var(--color-white);
     padding: 0.75rem 1.5rem;
-    border: 2px solid var(--color-primary); /* Added border for consistency */
+    border: 2px solid var(--color-primary);
     border-radius: 4px;
     text-decoration: none;
     font-weight: 700;
     transition: all 0.2s ease;
   }
-
   .button:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   }
-
   .button.button-secondary {
     background-color: var(--color-white);
     color: var(--color-primary);
   }
-
   .button.button-secondary:hover {
     background-color: var(--color-background);
   }
-  
-  /* --- NEW STYLE FOR SHARE WRAPPER --- */
   .share-wrapper {
     padding-top: 0;
     padding-bottom: 4rem;

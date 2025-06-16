@@ -3,10 +3,11 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
-// Get the title and description passed from each page.
-// Provide default values in case a page doesn't specify them.
+// --- ADD THIS LINE ---
+const BASE_URL = import.meta.env.BASE_URL;
+
 const {
-  title = "MEMOPAD: Multimodal Emotion Monitoring for Anxiety Disorders",
+  title = "MEMoPAD: Multimodal Emotion Monitoring for Anxiety Disorders",
   description = "A PhD project exploring how co-designed emotion recognition technology can benefit mental health."
 } = Astro.props;
 ---
@@ -15,9 +16,10 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   
-  {/* --- These tags are dynamic --- */}
+  {/* --- UPDATED THIS LINE --- */}
+  <link rel="icon" type="image/png" href={`${BASE_URL}my-logo.png`} />
+  
   <title>{title}</title>
   <meta name="description" content={description} />
 
@@ -40,7 +42,7 @@ const {
       },
       {
         "@type": "Project",
-        "name": "MEMOPAD: Multimodal Emotional Monitoring in Clinical Pathways for Anxiety Disorders",
+        "name": "MEMoPAD: Multimodal Emotional Monitoring in Clinical Pathways for Anxiety Disorders",
         "url": "https://luigiam.github.io/PhD_project_website/",
         "description": "A PhD project exploring how co-designed emotion recognition technology can benefit mental health pathways for anxiety disorders.",
         "founder": {
