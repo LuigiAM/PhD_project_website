@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import TimelineItem from '../components/TimelineItem.astro';
+import InteractiveTimeline from '../components/InteractiveTimeline.astro'; // <-- IMPORT THE NEW COMPONENT
 import ShareButtons from '../components/ShareButtons.astro';
 
 const BASE_URL = import.meta.env.BASE_URL;
@@ -9,121 +9,27 @@ const BASE_URL = import.meta.env.BASE_URL;
   title="Achievements & Milestones - MEMOPAD Project"
   description="Explore the key funding, awards, publications, and project milestones for the MEMOPAD PhD project in health technology."
 >
-  {/* 3. ADDED A COVER IMAGE */}
   <section class="hero-banner">
-    <img src={`${BASE_URL}/achievements-hero-banner.jpg`} alt="Luigi A. Moretti presenting at a digital mental health conference" />
+    <img src={`${BASE_URL}/achievements-hero-banner.jpg`} alt="A desk with charts and graphs, representing project progress and achievements." />
   </section>
 
   <section class="container">
     <div class="achievements-header">
       <h1>Achievements & Milestones</h1>
-      <p>A timeline of the project's key awards, publications, and progress.</p>
-
-      {/* 4. ADDED THE LEGEND WITH JUMP LINKS */}
-      <nav class="page-legend">
-        <a href="#funding-awards">Funding & Awards</a>
-        <a href="#publications-presentations">Publications & Presentations</a>
-        <a href="#co-design-milestones">Co-Design & Milestones</a>
-      </nav>
+      <p>A timeline of the project's key awards, publications, and progress. Select a category below to explore.</p>
     </div>
 
-    {/* --- FUNDING & AWARDS SECTION (with ID for jump link) --- */}
-    <div id="funding-awards" class="timeline-category">
-      <h2>Funding & Awards</h2>
-    </div>
-    <div class="timeline-wrapper">
-      <div class="timeline-line"></div>
-      
-      <TimelineItem date="June 2025" title="Secured CATE Student Internship" position="left" icon="award">
-        <p>Secured a '2024/25 CATE Student Internship' grant for Louis Robinson from UWE Bristol, to support the development of the working prototype.</p>
-      </TimelineItem>
-
-      <TimelineItem date="December 2024" title="Secured CATE Public Engagement Fund" position="right" icon="award">
-        <p>Awarded an additional £3000 from UWE Bristol's '2024-25 CATE Public/Community Engagement & Knowledge Exchange Project Fund' to support the project's PPIE activities.</p>
-      </TimelineItem>
-
-      {/* 1. MOVED AND REPHRASED RESEARCH VISIT */}
-      <TimelineItem date="May-Sep 2024" title="Secured Sponsored Research Visit" position="left" icon="award">
-        <p>Selected for a sponsored research visit at the University of Bristol, focusing on affective computing implementations. Supervised by Zahraa Abdallah and sponsored by MaVi: Machine Learning and Computer Vision.</p>
-      </TimelineItem>
-      
-      <TimelineItem date="June 2024" title="Won Best Student Poster Award" position="right" icon="award">
-        <p>Our poster was awarded 'Best Student Poster' at the Second Workshop on Multimodal AI, organized by the University of Sheffield and the Alan Turing Institute. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7220011283352297474/" target="_blank" rel="noopener noreferrer">View post</a></p>
-      </TimelineItem>
-
-      <TimelineItem date="April 2023" title="Secured PhD Scholarship" position="left" icon="award">
-        <p>Awarded a full PhD scholarship at UWE Bristol, including £3000 for project expenses, for the project 'Integrating affective computing and smart sensing into treatment pathways for anxiety disorders.' <a href="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#a22d2325d-c9dc-44e3-a14b-b1b09a100072" target="_blank" rel="noopener noreferrer">Learn more</a></p>
-      </TimelineItem>
-    </div>
-
-    {/* --- PUBLICATIONS & PRESENTATIONS SECTION --- */}
-    <div id="publications-presentations" class="timeline-category">
-      <h2>Publications & Presentations</h2>
-    </div>
-    <div class="timeline-wrapper">
-      <div class="timeline-line"></div>
-      
-      <TimelineItem date="February 2025" title="Presented at HEALTHINF 2025" position="left" icon="publication">
-        <p>Presented our paper, 'Affective Computing in Anxiety Disorders: A Rapid Literature Review', at the 18th International Joint Conference on Biomedical Engineering Systems and Technologies. The paper was selected for a post-conference invitation due to its high quality. <a href="https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html" target="_blank" rel="noopener noreferrer">See event</a></p>
-      </TimelineItem>
-
-      <TimelineItem date="July 2024" title="Presented at NIHR & University of Bristol Event" position="right" icon="publication">
-        <p>Presented at the 'Researcher coffee catch-up: Digital solutions for anxiety disorders', an event organized by NIHR Applied Research Collaboration West (ARC West). <a href="https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html" target="_blank" rel="noopener noreferrer">See event</a></p>
-      </TimelineItem>
-
-      <TimelineItem date="June 2024" title="Presented at DMHW 2024 Conference" position="left" icon="publication">
-        <p>Presented our project and published the abstract at the Second International Digital Mental Health and Wellbeing Conference at Ulster University. <a href="https://www.linkedin.com/posts/luigiandreamoretti_phd-startup-healthtech-activity-7214244990951055361-T5fW" target="_blank" rel="noopener noreferrer">View post</a></p>
-      </TimelineItem>
-
-      <TimelineItem date="November 2023" title="Invited Speaker at University of Aberdeen" position="right" icon="publication">
-        <p>Delivered a speech titled 'Emotion recognition can support the early detection of neurodegenerative diseases' at the AI & Computer Vision for Neurodegenerative Diseases workshop of BMVC 2023. <a href="https://sites.google.com/view/ai-cv-for-nds/home" target="_blank" rel="noopener noreferrer">See event</a></p>
-      </TimelineItem>
-      
-      <TimelineItem date="June 2023" title="Publishing collaboration" position="left" icon="publication">
-        <p>Published our paper, 'An Approach using transformer architecture for emotion recognition through Electrocardiogram Signal(s)'; co-authored with Dr Vincenzo Dentamaro, former CTO at IntelliHearts. <a href="https://ceur-ws.org/Vol-3521/paper3.pdf" target="_blank" rel="noopener noreferrer">Read paper</a></p>
-      </TimelineItem>
-    </div>
-
-    {/* --- CO-DESIGN & PROJECT MILESTONES SECTION --- */}
-    <div id="co-design-milestones" class="timeline-category">
-      <h2>Co-Design & Project Milestones</h2>
-    </div>
-    <div class="timeline-wrapper">
-      <div class="timeline-line"></div>
-      
-      <TimelineItem date="May 2025" title="Co-Design Phase III Completed" position="left" icon="milestone">
-        <p>Successfully concluded the 'Prototype' co-design phase with 19 participants, gathering ideas for the user interface and experience. Method: focus groups, interviews, and mock-ups</p>
-      </TimelineItem>
-
-      <TimelineItem date="April 2025" title="Co-Design Phase II Completed" position="right" icon="milestone">
-        <p>Successfully concluded the 'Generative' co-design phase with 20 participants, defining core features and user requirements. Method: focus groups, interviews, and storyboards.</p>
-      </TimelineItem>
-
-      <TimelineItem date="February 2025" title="Co-Design Phase I Completed" position="left" icon="milestone">
-        <p>Successfully concluded the 'Pre-design' co-design phase with 24 participants, exploring problems and needs of the different stakeholders. Method: focus groups, interviews, and whiteboard.</p>
-      </TimelineItem>
-      
-      <TimelineItem date="January 2025" title="Accepted as EPS Postgraduate Member" position="right" icon="milestone">
-        <p>Granted postgraduate membership with the prestigious Experimental Psychology Society (EPS).</p>
-      </TimelineItem>
-
-      <TimelineItem date="July 2024" title="Co-Design Phase 0 Completed" position="left" icon="milestone">
-        <p>Successfully concluded the 'Recruiting Material Consultations' co-design phase with 12 participants. Method: focus groups, interviews, and surveys.</p>
-      </TimelineItem>
-    </div>
+    {/* --- RENDER THE NEW INTERACTIVE COMPONENT --- */}
+    <InteractiveTimeline />
     
     <ShareButtons pageTitle="MEMOPAD Project Achievements" />
-
   </section>
 </Layout>
 
 <style>
-  html {
-    scroll-behavior: smooth; /* Ensures smooth scrolling for jump links */
-  }
   .hero-banner {
     width: 100%;
-    height: 350px; /* Reduced height slightly */
+    height: 350px;
     margin-bottom: 0;
   }
   .hero-banner img {
@@ -133,8 +39,8 @@ const BASE_URL = import.meta.env.BASE_URL;
   }
   .achievements-header {
     text-align: center;
-    padding-top: 4rem; /* Added padding since banner has no margin */
-    margin-bottom: 2rem;
+    padding-top: 4rem;
+    margin-bottom: 0; /* Removed bottom margin */
   }
   .achievements-header h1 {
     font-size: 3rem;
@@ -142,56 +48,7 @@ const BASE_URL = import.meta.env.BASE_URL;
   .achievements-header p {
     font-size: 1.125rem;
     color: var(--color-text-muted);
-  }
-  .page-legend {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
-    padding: 1rem 0;
-  }
-  .page-legend a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.9rem;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-  }
-  .page-legend a:hover {
-    color: var(--color-primary);
-    background-color: var(--color-background);
-  }
-  .timeline-wrapper {
-    position: relative;
-    max-width: 1100px; /* 2. MADE BOXES WIDER */
-    margin: 0 auto;
-    padding-bottom: 3rem;
-  }
-  .timeline-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 4px;
-    background-color: var(--color-border);
-    transform: translateX(-50%);
-  }
-  .timeline-category {
-    text-align: center;
-    margin: 4rem 0 2rem 0;
-    padding-top: 2rem; /* Add padding for jump link scroll offset */
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-  @media (max-width: 768px) {
-    .timeline-line {
-      left: 23px;
-    }
+    max-width: 600px;
+    margin: 0.5rem auto 0;
   }
 </style>
