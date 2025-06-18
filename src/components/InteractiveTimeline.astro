@@ -14,13 +14,13 @@ import TimelineItem from './TimelineItem.astro';
 
   <!-- Main Carousel -->
   <div class="carousel-outer">
-    <!-- Desktop Navigation Arrows -->
-    <button class="carousel-arrow prev" aria-label="Previous slide" disabled>&lt;</button>
+    <!-- Vertically Sticky Arrows -->
+    <button class="carousel-arrow prev" aria-label="Previous slide">&lt;</button>
     <button class="carousel-arrow next" aria-label="Next slide">&gt;</button>
 
     <div class="carousel-viewport">
       <div class="carousel-track">
-        <!-- Slide 1 -->
+        <!-- Slide 1: Funding & Awards -->
         <div class="carousel-slide">
           <div class="timeline-wrapper">
             <div class="timeline-line"></div>
@@ -32,7 +32,7 @@ import TimelineItem from './TimelineItem.astro';
             <TimelineItem date="April 2023" title="Secured PhD Scholarship" position="right" icon="award"><p>Awarded a full PhD scholarship at UWE Bristol, including £3000 for project expenses. <a href="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#a22d2325d-c9dc-44e3-a14b-b1b09a100072" target="_blank" rel="noopener noreferrer">Learn more</a></p></TimelineItem>
           </div>
         </div>
-        <!-- Slide 2 -->
+        <!-- Slide 2: Publications & Presentations -->
         <div class="carousel-slide">
           <div class="timeline-wrapper">
             <div class="timeline-line"></div>
@@ -43,7 +43,7 @@ import TimelineItem from './TimelineItem.astro';
             <TimelineItem date="June 2023" title="Publishing collaboration" position="left" icon="publication"><p>Published our paper, 'An Approach using transformer architecture for emotion recognition through Electrocardiogram Signal(s)'; co-authored with Dr Vincenzo Dentamaro, former CTO at IntelliHearts. <a href="https://ceur-ws.org/Vol-3521/paper3.pdf" target="_blank" rel="noopener noreferrer">Read paper</a></p></TimelineItem>
           </div>
         </div>
-        <!-- Slide 3 -->
+        <!-- Slide 3: Co-Design & Project Milestones -->
         <div class="carousel-slide">
           <div class="timeline-wrapper">
             <div class="timeline-line"></div>
@@ -59,9 +59,7 @@ import TimelineItem from './TimelineItem.astro';
 </div>
 
 <script>
-  // This robust script controls all the carousel functionality
   const initTimelineCarousel = (container) => {
-    // Robust element selection
     const tabsContainer = container.querySelector('.carousel-tabs');
     const tabs = Array.from(container.querySelectorAll('.carousel-tab'));
     const track = container.querySelector('.carousel-track');
@@ -70,26 +68,19 @@ import TimelineItem from './TimelineItem.astro';
     const nextButton = container.querySelector('.carousel-arrow.next');
 
     if (!tabsContainer || !track || slides.length === 0 || !prevButton || !nextButton) {
-      console.error('Timeline component is missing required elements.');
       return;
     }
 
     let currentIndex = 0;
-    
+
     const goToSlide = (index) => {
-      if (index < 0 || index >= slides.length) return;
-
       track.style.transform = `translateX(-${index * 100}%)`;
-
       tabs.forEach((tab, i) => tab.setAttribute('aria-expanded', i === index));
       
       const activeTab = tabs[index];
       const scrollOffset = activeTab.offsetLeft + (activeTab.offsetWidth / 2) - (tabsContainer.offsetWidth / 2);
       tabsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
-
-      prevButton.disabled = index === 0;
-      nextButton.disabled = index === slides.length - 1;
-
+      
       currentIndex = index;
     };
 
@@ -97,10 +88,17 @@ import TimelineItem from './TimelineItem.astro';
       tab.addEventListener('click', () => goToSlide(parseInt(tab.dataset.index)));
     });
 
-    prevButton.addEventListener('click', () => goToSlide(currentIndex - 1));
-    nextButton.addEventListener('click', () => goToSlide(currentIndex + 1));
+    // --- UPDATED: Arrow logic now loops ---
+    prevButton.addEventListener('click', () => {
+      const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+      goToSlide(prevIndex);
+    });
     
-    // Swipe gesture handling
+    nextButton.addEventListener('click', () => {
+      const nextIndex = (currentIndex + 1) % slides.length;
+      goToSlide(nextIndex);
+    });
+
     let touchstartX = 0;
     track.addEventListener('touchstart', e => {
       touchstartX = e.changedTouches[0].screenX;
@@ -112,7 +110,7 @@ import TimelineItem from './TimelineItem.astro';
       if (touchendX > touchstartX + 50) prevButton.click();
     });
 
-    goToSlide(0); // Initialize first slide
+    goToSlide(0);
   };
   
   document.querySelectorAll('[data-timeline-component]').forEach(initTimelineCarousel);
@@ -161,25 +159,24 @@ import TimelineItem from './TimelineItem.astro';
 
   .carousel-outer {
     position: relative;
-    padding: 0 50px; /* Space for arrows */
   }
   .carousel-viewport {
     width: 100%;
     overflow: hidden;
   }
   .carousel-track {
-    display: flex; /* This is the key change */
+    display: flex;
     transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
   }
   .carousel-slide {
     width: 100%;
-    flex-shrink: 0; /* Prevents slides from shrinking */
+    flex-shrink: 0;
   }
 
+  /* --- UPDATED: Arrows are now sticky --- */
   .carousel-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    position: sticky; /* Stick to the viewport as the user scrolls */
+    top: 50vh; /* Position them vertically in the middle of the screen */
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid var(--color-border);
@@ -188,19 +185,25 @@ import TimelineItem from './TimelineItem.astro';
     cursor: pointer; font-size: 1.5rem;
     transition: all 0.2s ease;
   }
-  .carousel-arrow:hover:not(:disabled) {
+  .carousel-arrow:hover {
     background-color: var(--color-primary);
     color: var(--color-white);
   }
-  .carousel-arrow:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
+  /* Use float to position them outside the main content flow */
+  .carousel-arrow.prev { 
+    float: left; 
+    /* Nudge it left to align with the outer page edge */
+    margin-left: -50px; 
   }
-  .carousel-arrow.prev { left: 0; }
-  .carousel-arrow.next { right: 0; }
+  .carousel-arrow.next { 
+    float: right; 
+    /* Nudge it right to align with the outer page edge */
+    margin-right: -50px; 
+  }
 
   @media (max-width: 768px) {
     .carousel-outer { padding: 0; }
+    .carousel-arrow { display: none; }
   }
 
   .timeline-wrapper {
