@@ -4,6 +4,8 @@ import RecruitmentCard from '../components/RecruitmentCard.astro';
 import IconUser from '../components/icons/IconUser.astro';
 import IconStethoscope from '../components/icons/IconStethoscope.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 <Layout
   title="Take Part - Co-Design the Future of Mental Health Tech"
@@ -23,7 +25,6 @@ import ShareButtons from '../components/ShareButtons.astro';
         buttonText="Express Interest as a Participant"
         buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Lived Experience)"
         theme="light"
-        
         documentImageUrl="/one-page-public-preview.jpg"
         documentPdfUrl="/one-page-public.pdf"
         involvementDetails={["90-120 minute focus groups", "Online surveys"]}
@@ -35,10 +36,9 @@ import ShareButtons from '../components/ShareButtons.astro';
 
       <RecruitmentCard
         title="For Clinicians & Informal/Unpaid Carers"
-        buttonText="Express Interest as a Participant"
+        buttonText="Express Interest as a Supporter"
         buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Supporter)"
         theme="primary"
-        
         documentImageUrl="/one-page-clinician-preview.jpg"
         documentPdfUrl="/one-page-clinician.pdf"
         involvementDetails={["30-minute online interviews", "Online surveys"]}
@@ -53,6 +53,10 @@ import ShareButtons from '../components/ShareButtons.astro';
       <p>All types of participation are rewarded with vouchers as a thank you for your valuable time and contribution.</p>
     </div>
 
+    <div class="final-contact-prompt">
+      <p>If you have any further questions, please do not hesitate to <a href={`${BASE_URL}/contact/`}>get in touch</a>.</p>
+    </div>
+
     <ShareButtons 
         pageTitle="Help Shape the Future of Mental Health Tech"
         shareDescription="Join the MEMOPAD project co-design initiative to help shape a digital tool for anxiety disorders. Your voice matters!"
@@ -61,35 +65,13 @@ import ShareButtons from '../components/ShareButtons.astro';
 </Layout>
 
 <style>
-  .header {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 4rem auto;
-  }
-  .header h1 {
-    font-size: 3rem;
-  }
-  .thank-you-note {
-    margin-top: 1.5rem;
-    font-size: 1.125rem;
-    font-style: italic;
-    color: var(--color-text-muted);
-  }
-  .recruitment-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 768px) {
-    .recruitment-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .voucher-note {
-    text-align: center;
-    max-width: 600px;
-    margin: 3rem auto 0 auto;
-    font-style: italic;
-    color: var(--color-text-muted);
-  }
+  .header { text-align: center; max-width: 800px; margin: 0 auto 4rem auto; }
+  .header h1 { font-size: 3rem; }
+  .thank-you-note { margin-top: 1.5rem; font-size: 1.125rem; font-style: italic; color: var(--color-text-muted); }
+  .recruitment-grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
+  @media (min-width: 768px) { .recruitment-grid { grid-template-columns: 1fr 1fr; } }
+  .voucher-note { text-align: center; max-width: 600px; margin: 3rem auto 0 auto; font-style: italic; color: var(--color-text-muted); }
+  .final-contact-prompt { text-align: center; max-width: 600px; margin: 1.5rem auto 0; font-style: italic; color: var(--color-text-muted); }
+  .final-contact-prompt a { color: var(--color-primary); font-weight: 700; font-style: normal; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color 0.2s ease; }
+  .final-contact-prompt a:hover { border-bottom-color: var(--color-primary); }
 </style>

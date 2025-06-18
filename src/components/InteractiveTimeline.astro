@@ -1,6 +1,9 @@
 ---
 // src/components/InteractiveTimeline.astro
 import TimelineItem from './TimelineItem.astro';
+
+// ADDED: Get the base URL for constructing correct links
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 <div class="carousel-container" data-timeline-component>
   <!-- 3D Tab Navigation -->
@@ -47,12 +50,16 @@ import TimelineItem from './TimelineItem.astro';
         <div class="carousel-slide">
           <div class="timeline-wrapper">
             <div class="timeline-line"></div>
-            {/* --- NEW CARD ADDED HERE --- */}
-            <TimelineItem date="July 2025" title="Co-Design Phase IV Planned" position="right" icon="milestone"><p>Working on the 'Evaluative' co-design phase, collecting feedback and suggestions for the user interface and experience. Method: focus groups, interviews, and demo. Analisys: affinity diagrams and comparative analysis; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="May 2025" title="Co-Design Phase III Completed" position="left" icon="milestone"><p>Successfully concluded the 'Prototype' co-design phase with 19 participants, gathering ideas for the user interface and experience. Method: focus groups, interviews, and mock-ups. Analisys: affinity diagrams and comparative analysis; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="April 2025" title="Co-Design Phase II Completed" position="right" icon="milestone"><p>Successfully concluded the 'Generative' co-design phase with 20 participants, defining core features and user requirements. Method: focus groups, interviews, and storyboards. Analisys: thematic and comparative; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="February 2025" title="Co-Design Phase I Completed" position="left" icon="milestone"><p>Successfully concluded the 'Pre-design' co-design phase with 24 participants, exploring problems and needs of the different stakeholders. Method: focus groups, interviews, and whiteboard. Analisys: thematic and comparative; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="July 2024" title="Co-Design Phase 0 Completed" position="right" icon="milestone"><p>Successfully concluded the 'Recruiting Material Consultations' co-design phase with 12 participants. Method: focus groups, interviews, and surveys. Analisys: affinity diagrams.</p></TimelineItem>
+            <TimelineItem date="July 2025" title="Co-Design Phase IV Planned" position="right" icon="milestone">
+              <p>
+                Working on the 'Evaluative' co-design phase, collecting feedback and suggestions for the user interface and experience. Method: focus groups, interviews, and demo. Analysis: affinity diagrams and comparative analysis; expert roundtable. 
+                <a href={`${BASE_URL}/take-part/`} class="cta-link">We are currently recruiting for this phase, click here to take part!</a>
+              </p>
+            </TimelineItem>
+            <TimelineItem date="May 2025" title="Co-Design Phase III Completed" position="left" icon="milestone"><p>Successfully concluded the 'Prototype' co-design phase with 19 participants, gathering ideas for the user interface and experience. Method: focus groups, interviews, and mock-ups. Analysis: affinity diagrams and comparative analysis; expert roundtable.</p></TimelineItem>
+            <TimelineItem date="April 2025" title="Co-Design Phase II Completed" position="right" icon="milestone"><p>Successfully concluded the 'Generative' co-design phase with 20 participants, defining core features and user requirements. Method: focus groups, interviews, and storyboards. Analysis: thematic and comparative; expert roundtable.</p></TimelineItem>
+            <TimelineItem date="February 2025" title="Co-Design Phase I Completed" position="left" icon="milestone"><p>Successfully concluded the 'Pre-design' co-design phase with 24 participants, exploring problems and needs of the different stakeholders. Method: focus groups, interviews, and whiteboard. Analysis: thematic and comparative; expert roundtable.</p></TimelineItem>
+            <TimelineItem date="July 2024" title="Co-Design Phase 0 Completed" position="right" icon="milestone"><p>Successfully concluded the 'Recruiting Material Consultations' co-design phase with 12 participants. Method: focus groups, interviews, and surveys. Analysis: affinity diagrams.</p></TimelineItem>
           </div>
         </div>
       </div>
@@ -61,7 +68,7 @@ import TimelineItem from './TimelineItem.astro';
 </div>
 
 <script>
-  // FIX 1: Added explicit types to parameters to resolve VS Code errors.
+  // Script remains the same
   const initTimelineCarousel = (container: HTMLElement) => {
     const tabsContainer = container.querySelector<HTMLElement>('.carousel-tabs');
     const tabs = Array.from(container.querySelectorAll<HTMLButtonElement>('.carousel-tab'));
@@ -69,59 +76,57 @@ import TimelineItem from './TimelineItem.astro';
     const slides = Array.from(container.querySelectorAll<HTMLElement>('.carousel-slide'));
     const prevButton = container.querySelector<HTMLButtonElement>('.carousel-arrow.prev');
     const nextButton = container.querySelector<HTMLButtonElement>('.carousel-arrow.next');
-
-    if (!tabsContainer || !track || slides.length === 0 || !prevButton || !nextButton) {
-      return;
-    }
-
+    if (!tabsContainer || !track || slides.length === 0 || !prevButton || !nextButton) return;
     let currentIndex = 0;
-
     const goToSlide = (index: number) => {
       if (index < 0 || index >= slides.length) return;
       track.style.transform = `translateX(-${index * 100}%)`;
       tabs.forEach((tab, i) => tab.setAttribute('aria-expanded', (i === index).toString()));
-      
       const activeTab = tabs[index];
       if (activeTab) {
         const scrollOffset = activeTab.offsetLeft + (activeTab.offsetWidth / 2) - (tabsContainer.offsetWidth / 2);
         tabsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
       }
-      
       currentIndex = index;
     };
-
     tabs.forEach(tab => {
       tab.addEventListener('click', () => goToSlide(parseInt(tab.dataset.index || '0')));
     });
-
     prevButton.addEventListener('click', () => {
       const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
       goToSlide(prevIndex);
     });
-    
     nextButton.addEventListener('click', () => {
       const nextIndex = (currentIndex + 1) % slides.length;
       goToSlide(nextIndex);
     });
-
     let touchstartX = 0;
-    track.addEventListener('touchstart', (e: TouchEvent) => {
-      touchstartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
+    track.addEventListener('touchstart', (e: TouchEvent) => { touchstartX = e.changedTouches[0].screenX; }, { passive: true });
     track.addEventListener('touchend', (e: TouchEvent) => {
       const touchendX = e.changedTouches[0].screenX;
       if (touchendX < touchstartX - 50) nextButton.click();
       if (touchendX > touchstartX + 50) prevButton.click();
     });
-
     goToSlide(0);
   };
-  
   document.querySelectorAll<HTMLElement>('[data-timeline-component]').forEach(initTimelineCarousel);
 </script>
 
 <style>
+  /* NEW STYLE FOR IN-CARD LINKS */
+  .cta-link {
+    display: block;
+    margin-top: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+  .cta-link:hover {
+    opacity: 0.8;
+  }
+
+  /* All other styles remain the same */
   .carousel-container { position: relative; padding: 2rem 0; }
   .carousel-tabs { display: flex; justify-content: flex-start; position: relative; border-bottom: 1px solid var(--color-border); overflow-x: auto; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
   .carousel-tabs::-webkit-scrollbar { display: none; }
@@ -137,18 +142,12 @@ import TimelineItem from './TimelineItem.astro';
   .carousel-arrow:hover { background-color: var(--color-primary); color: var(--color-white); }
   .carousel-arrow.prev { float: left; margin-left: -50px; }
   .carousel-arrow.next { float: right; margin-right: -50px; }
-
   @media (max-width: 768px) {
     .carousel-outer { padding: 0; }
     .carousel-arrow { display: none; }
-    .timeline-wrapper {
-      padding: 2rem 1rem; 
-    }
+    .timeline-wrapper { padding: 2rem 1rem; }
   }
-  
   .timeline-wrapper { position: relative; max-width: 900px; margin: 0 auto; padding: 2rem 0; }
   .timeline-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background-color: var(--color-border); transform: translateX(-50%); }
-  @media (max-width: 768px) {
-    .timeline-line { left: 23px; }
-  }
+  @media (max-width: 768px) { .timeline-line { left: 23px; } }
 </style>

@@ -1,8 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE NEW COMPONENT
+import ShareButtons from '../components/ShareButtons.astro';
 
-// We get the base URL from the astro.config.mjs file
 const BASE_URL = import.meta.env.BASE_URL;
 
 // Content variables
@@ -13,7 +12,11 @@ const objectives = [
   "To support the interruption of anxiety loops.",
   "To support early help-seeking behaviour by improving emotional literacy."
 ];
-const methodology = "To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across six phases, of which three have already been completed. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.";
+
+// --- UPDATED: Methodology is now split to allow for a link ---
+const methodologyPart1 = "To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across ";
+const methodologyPart2 = ". Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.";
+
 const techStack = ["Wearable Technology", "Bio-signals (e.g. HR, EDA)", "Affective Computing", "Co-Design", "Emotion Recognition", "Human-computer interaction (HCI)", "Digital Mental Health", "Anxiety Disorders", "Emotion Regulation", "Mobile Health (mHealth)"];
 const references = [
   "[1] M. Berking and P. Wupperman, ‘Emotion regulation and mental health: recent findings, current challenges, and future directions’, Curr. Opin. Psychiatry, vol. 25, no. 2, pp. 128–134, Mar. 2012, doi: 10.1097/YCO.0b013e3283503669.",
@@ -41,7 +44,11 @@ const references = [
       </ul>
 
       <h2>Methodology</h2>
-      <p>{methodology}</p>
+      <p>
+        {methodologyPart1}
+        <a href={`${BASE_URL}/achievements/#co-design-milestones`}>six phases, of which three have already been completed</a>
+        {methodologyPart2}
+      </p>
 
       <h2>Key Words</h2>
       <div class="tech-stack">
@@ -52,73 +59,38 @@ const references = [
       <div class="references">
         {references.map(ref => <p><small>{ref}</small></p>)}
       </div>
-
-      {/* --- SHARE BUTTONS COMPONENT --- */}
+      
       <ShareButtons 
-      pageTitle="Research & Methodology - The MEMOPAD Project" 
-      shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
+        pageTitle="Research & Methodology - The MEMOPAD Project" 
+        shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
       />
-
     </div>
   </section>
 </Layout>
 
 <style>
-  /* Styles remain the same */
-  .hero-banner {
-    width: 100%;
-    height: 400px;
-    margin-bottom: 4rem;
-  }
-  .hero-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .research-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .research-content h1 {
-    font-size: 3rem;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  .research-content h2 {
-    font-size: 2rem;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 0.5rem;
-  }
-  blockquote {
-    font-style: italic;
-    color: var(--color-text-muted);
-    border-left: 4px solid var(--color-primary);
-    padding-left: 1.5rem;
-    margin-left: 0;
-  }
-  ul {
-    list-style-type: disc;
-    padding-left: 2rem;
-  }
-  li {
-    margin-bottom: 0.5rem;
-  }
-  .tech-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-  .tag {
-    display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background-color: var(--color-background);
-    border-radius: 4px;
-    font-size: 0.875rem;
+  /* --- ADDED LINK STYLE --- */
+  .research-content p a {
+    color: var(--color-primary);
     font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease;
   }
-  .references p {
-    margin-bottom: 0.5rem;
+  .research-content p a:hover {
+    border-bottom-color: var(--color-primary);
   }
+
+  /* All other styles remain the same */
+  .hero-banner { width: 100%; height: 400px; margin-bottom: 4rem; }
+  .hero-banner img { width: 100%; height: 100%; object-fit: cover; }
+  .research-content { max-width: 800px; margin: 0 auto; }
+  .research-content h1 { font-size: 3rem; margin-bottom: 2rem; text-align: center; }
+  .research-content h2 { font-size: 2rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem; }
+  blockquote { font-style: italic; color: var(--color-text-muted); border-left: 4px solid var(--color-primary); padding-left: 1.5rem; margin-left: 0; }
+  ul { list-style-type: disc; padding-left: 2rem; }
+  li { margin-bottom: 0.5rem; }
+  .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .tag { display: inline-block; padding: 0.25rem 0.75rem; background-color: var(--color-background); border-radius: 4px; font-size: 0.875rem; font-weight: 700; }
+  .references p { margin-bottom: 0.5rem; }
 </style>

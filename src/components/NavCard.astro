@@ -1,0 +1,60 @@
+---
+// src/components/NavCard.astro
+const { href, title, imgSrc } = Astro.props;
+---
+<a href={href} class="nav-card">
+  <img src={imgSrc} alt={title} class="card-bg" loading="lazy" />
+  <div class="card-overlay"></div>
+  <h3 class="card-title">{title}</h3>
+</a>
+
+<style>
+  .nav-card {
+    display: block;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    color: var(--color-white);
+    text-decoration: none;
+    height: 250px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .nav-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+  }
+
+  .card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease-out;
+  }
+  .nav-card:hover .card-bg {
+    transform: scale(1.05);
+  }
+
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 60%);
+    transition: background-color 0.3s ease;
+  }
+  .nav-card:hover .card-overlay {
+    background-color: rgba(0,0,0,0.1);
+  }
+
+  .card-title {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+  }
+</style>

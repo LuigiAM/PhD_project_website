@@ -3,13 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
-import ShareButtons from '../components/ShareButtons.astro'; // <-- IMPORT THE NEW COMPONENT
+import ShareButtons from '../components/ShareButtons.astro';
 
 const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 <Layout
-  title="Project Story - The MEMOPAD Journey"
+  title="Project Story - The MEMoPAD Journey"
   description="Discover the story behind the MEMOPAD project, from its personal beginnings to its academic evolution. Learn how we are co-designing a digital tool to enhance mental health care through emotion recognition technology."
 >
   <section class="page-hero">
@@ -53,7 +53,7 @@ const BASE_URL = import.meta.env.BASE_URL;
     title="The PhD Project"
     theme="light"
     imagePosition="left"
-    imageSrc="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/UWE_Bristol_logo.svg/640px-UWE_Bristol_logo.svg.png"
+    imageSrc=https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/UWE_Bristol_logo.svg/640px-UWE_Bristol_logo.svg.png
     imageAlt="The official logo for UWE Bristol"
     linkUrl="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#section-5"
   >
@@ -85,85 +85,52 @@ const BASE_URL = import.meta.env.BASE_URL;
     linkUrl="/take-part"
   >
     <p>
-      Technology built in a vacuum often fails. Our foundation is built on listening. We use a co-design methodology, actively partnering with patients, clinicians, and carers at every stage. Their lived experiences and professional insights are not just feedback, they are the blueprint for building a tool that is truly relevant, safe, and effective.
+      Technology built in a vacuum often fails. Our foundation is built on listening. We use a co-design methodology, actively partnering with patients, clinicians, and carers at every stage. Their lived experiences and professional insights are not just feedback—they are the blueprint for building a tool that is truly relevant, safe, and effective.
       <small class="click-prompt">(Click the image to take part in our co-design!)</small>
     </p>
   </FeatureSection>
 
-  {/* --- ADD THE SHARE BUTTONS COMPONENT HERE --- */}
   <div class="container share-wrapper">
     <ShareButtons 
-      pageTitle="The MEMOPAD Journey: A PhD Project Story"
+      pageTitle="The MEMoPAD Journey: A PhD Project Story"
       shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
-/>
+    />
   </div>
 
   <section class="page-outro">
     <div class="container">
       <h2>Work in Progress...</h2>
       <p>
-        This project is an active and evolving journey. We are currently developing the initial prototype and preparing for the next phases of user testing and evaluation.
+        This project is an active and evolving journey. We are currently developing the initial prototype and preparing for the next phases of user testing and evaluation. 
+        <a href={`${BASE_URL}/research/`} class="outro-link">Learn more about our research and methodology</a>
       </p>
     </div>
   </section>
 </Layout>
 
 <style>
-  .team-section {
-    padding: 0rem 2rem 0rem;
-    background-color: var(--color-white);
-    text-align: center;
-  }
-  .team-section h2, .page-hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-  }
-  .team-section .subtitle, .page-hero .subtitle {
-    font-size: 1.125rem;
-    color: var(--color-text-muted);
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .page-hero {
-    padding: 0rem 2rem 0rem;
-    text-align: center;
-    background-color: var(--color-white);
-  }
-  .page-outro {
-    padding: 4rem 2rem;
-    text-align: center;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-  }
-  .page-outro .container {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-  .page-outro h2 {
-    color: var(--color-white);
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  .page-outro p {
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    font-size: 1.125rem;
-    opacity: 0.9;
-  }
-  .click-prompt {
+  .team-section { padding: 0rem 2rem 0rem; background-color: var(--color-white); text-align: center; }
+  .team-section h2, .page-hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .team-section .subtitle, .page-hero .subtitle { font-size: 1.125rem; color: var(--color-text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+  .page-hero { padding: 0rem 2rem 0rem; text-align: center; background-color: var(--color-white); }
+  .page-outro { padding: 4rem 2rem; text-align: center; background-color: var(--color-primary); color: var(--color-white); }
+  .page-outro .container { padding-top: 0; padding-bottom: 0; }
+  .page-outro h2 { color: var(--color-white); font-size: 2.5rem; margin-bottom: 1rem; }
+  .page-outro p { max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.125rem; opacity: 0.9; }
+  
+  /* --- NEW LINK STYLE --- */
+  .outro-link {
     display: block;
-    margin-top: 1rem;
-    font-style: italic;
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
+    margin-top: 1.5rem;
+    color: var(--color-white);
+    font-weight: 700;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+  .outro-link:hover {
+    opacity: 0.8;
   }
   
-  /* --- NEW STYLE FOR THE SHARE WRAPPER --- */
-  .share-wrapper {
-    padding-top: 2rem;
-    padding-bottom: 0;
-  }
+  .click-prompt { display: block; margin-top: 1rem; font-style: italic; font-size: 0.9rem; color: var(--color-text-muted); }
+  .share-wrapper { padding-top: 2rem; padding-bottom: 0; }
 </style>

@@ -1,41 +1,59 @@
 ---
-// We can run JavaScript here before the page is built.
-// Let's get the current year automatically!
+// Get the current year automatically for the copyright.
 const currentYear = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="container">
-    <p>&copy; {currentYear} Luigi Andrea Moretti. All rights reserved.<br>Your privacy matters! This website does not use any invasive tracking software.</p>
+    <p class="copyright">&copy; {currentYear} Luigi Andrea Moretti. All rights reserved.<br>Your privacy matters! This website does not use any invasive tracking software.</p>
     <nav class="footer-nav">
-      <a href="https://www.linkedin.com/in/luigiandreamoretti/" target="_blank" rel="noopener noreferrer">Let's connect on LinkedIn</a>
+      {/* --- UPDATED: This is now the newsletter link --- */}
+      <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter">
+        📬Follow the journey: subscribe to the monthly newsletter
+      </a>
     </nav>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background-color: var(--color-white);
+    background-color: var(--color-background); /* Switched to light gray for subtle contrast */
     border-top: 1px solid var(--color-border);
-    padding: 2rem 0;
-    margin-top: 4rem; /* Add some space above the footer */
+    padding: 2.5rem 0;
+    margin-top: 4rem;
     font-size: 0.9rem;
-    color: #666;
   }
-    .container {
-    /* This style ONLY applies to the container inside the footer */
+  .container {
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    padding: 0 2rem; /* The key fix: No top/bottom padding */
+    padding: 0 2rem;
+    
+    /* --- NEW: Added flexbox for layout --- */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows stacking on mobile */
+    gap: 1rem;
   }
-
+  .copyright {
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
   .footer-nav a {
-    color: #666;
+    color: var(--color-text);
+    font-weight: 700;
     text-decoration: none;
     transition: color 0.2s ease;
   }
-
   .footer-nav a:hover {
     color: var(--color-primary);
+  }
+  
+  /* --- NEW: Stack layout on small screens --- */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+      text-align: center;
+    }
   }
 </style>
