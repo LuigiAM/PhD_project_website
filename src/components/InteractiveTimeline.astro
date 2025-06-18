@@ -2,86 +2,55 @@
 // src/components/InteractiveTimeline.astro
 import TimelineItem from './TimelineItem.astro';
 ---
-<div class="carousel-container">
+<div class="carousel-container" data-timeline-component>
   <!-- 3D Tab Navigation -->
   <nav class="carousel-tabs" aria-label="Achievements Categories">
-    <button class="carousel-tab" type="button" data-index="0">Funding & Awards</button>
-    <button class="carousel-tab" type="button" data-index="1">Publications & Presentations</button>
-    <button class="carousel-tab" type="button" data-index="2">Co-Design & Milestones</button>
+    <div class="tabs-track">
+      <button class="carousel-tab" type="button" data-index="0">Funding & Awards</button>
+      <button class="carousel-tab" type="button" data-index="1">Publications & Presentations</button>
+      <button class="carousel-tab" type="button" data-index="2">Co-Design & Milestones</button>
+    </div>
   </nav>
 
   <!-- Main Carousel -->
   <div class="carousel-outer">
-    <!-- Vertically Sticky Arrows -->
-    <button class="carousel-arrow prev" aria-label="Previous slide">&lt;</button>
+    <!-- Desktop Navigation Arrows -->
+    <button class="carousel-arrow prev" aria-label="Previous slide" disabled>&lt;</button>
     <button class="carousel-arrow next" aria-label="Next slide">&gt;</button>
-    
-    <div class="carousel-viewport">
-      <!-- Sliding Track -->
-      <div class="carousel-track">
-        <!-- Slide 1: Funding & Awards -->
-        <div class="carousel-slide">
-          <div class="timeline-wrapper">
-            <div class="timeline-line"></div>
-            <TimelineItem date="June 2025" title="Secured CATE Student Internship" position="left" icon="award">
-              <p>Secured a '2024/25 CATE Student Internship' grant for Louis Robinson from UWE Bristol, to support the development of the working prototype.</p>
-            </TimelineItem>
-            <TimelineItem date="January 2025" title="Accepted as EPS Postgraduate Member" position="right" icon="award">
-              <p>Granted postgraduate membership with the prestigious Experimental Psychology Society (EPS).</p>
-            </TimelineItem>
-            <TimelineItem date="December 2024" title="Secured CATE Public Engagement Fund" position="left" icon="award">
-              <p>Awarded an additional £3000 from UWE Bristol's '2024-25 CATE Public/Community Engagement & Knowledge Exchange Project Fund' to support the project's PPIE activities.</p>
-            </TimelineItem>
-            <TimelineItem date="May-Sep 2024" title="Secured Sponsored Research Visit" position="right" icon="award">
-              <p>Selected for a sponsored research visit at the University of Bristol, focusing on affective computing implementations. Supervised by Zahraa Abdallah and sponsored by MaVi: Machine Learning and Computer Vision.</p>
-            </TimelineItem>
-            <TimelineItem date="June 2024" title="Won Best Student Poster Award" position="left" icon="award">
-              <p>Our poster was awarded 'Best Student Poster' at the Second Workshop on Multimodal AI, organized by the University of Sheffield and the Alan Turing Institute. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7220011283352297474/" target="_blank" rel="noopener noreferrer">View post</a></p>
-            </TimelineItem>
-            <TimelineItem date="April 2023" title="Secured PhD Scholarship" position="right" icon="award">
-              <p>Awarded a full PhD scholarship at UWE Bristol, including £3000 for project expenses. <a href="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#a22d2325d-c9dc-44e3-a14b-b1b09a100072" target="_blank" rel="noopener noreferrer">Learn more</a></p>
-            </TimelineItem>
-          </div>
-        </div>
 
-        <!-- Slide 2: Publications & Presentations -->
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <!-- Slide 1 -->
         <div class="carousel-slide">
           <div class="timeline-wrapper">
             <div class="timeline-line"></div>
-            <TimelineItem date="February 2025" title="Presented at HEALTHINF 2025" position="left" icon="publication">
-              <p>Presented our paper, 'Affective Computing in Anxiety Disorders: A Rapid Literature Review', at the 18th International Joint Conference on Biomedical Engineering Systems and Technologies. The paper was selected for post-publication invitation due to its high quality. <a href="https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html" target="_blank" rel="noopener noreferrer">See event</a></p>
-            </TimelineItem>
-            <TimelineItem date="July 2024" title="Presented at NIHR & University of Bristol Event" position="right" icon="publication">
-              <p>Presented at the 'Researcher coffee catch-up: Digital solutions for anxiety disorders', an event organized by NIHR Applied Research Collaboration West (ARC West). <a href="https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html" target="_blank" rel="noopener noreferrer">See event</a></p>
-            </TimelineItem>
-            <TimelineItem date="June 2024" title="Presented at DMHW 2024 Conference" position="left" icon="publication">
-              <p>Presented our project and published the abstract at the Second International Digital Mental Health and Wellbeing Conference at Ulster University. <a href="https://www.linkedin.com/posts/luigiandreamoretti_phd-startup-healthtech-activity-7214244990951055361-T5fW" target="_blank" rel="noopener noreferrer">View post</a></p>
-            </TimelineItem>
-            <TimelineItem date="November 2023" title="Invited Speaker at University of Aberdeen" position="right" icon="publication">
-              <p>Delivered a speech titled 'Emotion recognition can support the early detection of neurodegenerative diseases' at the AI & Computer Vision for Neurodegenerative Diseases workshop of BMVC 2023. <a href="https://sites.google.com/view/ai-cv-for-nds/home" target="_blank" rel="noopener noreferrer">See event</a></p>
-            </TimelineItem>
-            <TimelineItem date="June 2023" title="Publishing collaboration" position="left" icon="publication">
-              <p>Published our paper, 'An Approach using transformer architecture for emotion recognition through Electrocardiogram Signal(s)'; co-authored with Dr Vincenzo Dentamaro, former CTO at IntelliHearts. <a href="https://ceur-ws.org/Vol-3521/paper3.pdf" target="_blank" rel="noopener noreferrer">Read paper</a></p>
-            </TimelineItem>
+            <TimelineItem date="June 2025" title="Secured CATE Student Internship" position="left" icon="award"><p>Secured a '2024/25 CATE Student Internship' grant for Louis Robinson from UWE Bristol, to support the development of the working prototype.</p></TimelineItem>
+            <TimelineItem date="January 2025" title="Accepted as EPS Postgraduate Member" position="right" icon="award"><p>Granted postgraduate membership with the prestigious Experimental Psychology Society (EPS).</p></TimelineItem>
+            <TimelineItem date="December 2024" title="Secured CATE Public Engagement Fund" position="left" icon="award"><p>Awarded an additional £3000 from UWE Bristol's '2024-25 CATE Public/Community Engagement & Knowledge Exchange Project Fund' to support the project's PPIE activities.</p></TimelineItem>
+            <TimelineItem date="May-Sep 2024" title="Secured Sponsored Research Visit" position="right" icon="award"><p>Selected for a sponsored research visit at the University of Bristol, focusing on affective computing implementations. Supervised by Zahraa Abdallah and sponsored by MaVi: Machine Learning and Computer Vision.</p></TimelineItem>
+            <TimelineItem date="June 2024" title="Won Best Student Poster Award" position="left" icon="award"><p>Our poster was awarded 'Best Student Poster' at the Second Workshop on Multimodal AI, organized by the University of Sheffield and the Alan Turing Institute. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7220011283352297474/" target="_blank" rel="noopener noreferrer">View post</a></p></TimelineItem>
+            <TimelineItem date="April 2023" title="Secured PhD Scholarship" position="right" icon="award"><p>Awarded a full PhD scholarship at UWE Bristol, including £3000 for project expenses. <a href="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#a22d2325d-c9dc-44e3-a14b-b1b09a100072" target="_blank" rel="noopener noreferrer">Learn more</a></p></TimelineItem>
           </div>
         </div>
-        
-        <!-- Slide 3: Co-Design & Project Milestones -->
+        <!-- Slide 2 -->
         <div class="carousel-slide">
           <div class="timeline-wrapper">
             <div class="timeline-line"></div>
-            <TimelineItem date="May 2025" title="Co-Design Phase III Completed" position="left" icon="milestone">
-              <p>Successfully concluded the 'Prototype' co-design phase with 19 participants, gathering ideas for the user interface and experience. Method: focus groups, interviews, and mock-ups</p>
-            </TimelineItem>
-            <TimelineItem date="April 2025" title="Co-Design Phase II Completed" position="right" icon="milestone">
-              <p>Successfully concluded the 'Generative' co-design phase with 20 participants, defining core features and user requirements. Method: focus groups, interviews, and storyboards.</p>
-            </TimelineItem>
-            <TimelineItem date="February 2025" title="Co-Design Phase I Completed" position="left" icon="milestone">
-              <p>Successfully concluded the 'Pre-design' co-design phase with 24 participants, exploring problems and needs of the different stakeholders. Method: focus groups, interviews, and whiteboard.</p>
-            </TimelineItem>
-            <TimelineItem date="July 2024" title="Co-Design Phase 0 Completed" position="right" icon="milestone">
-              <p>Successfully concluded the 'Recruiting Material Consultations' co-design phase with 12 participants. Method: focus groups, interviews, and surveys.</p>
-            </TimelineItem>
+            <TimelineItem date="February 2025" title="Presented at HEALTHINF 2025" position="left" icon="publication"><p>Presented our paper, 'Affective Computing in Anxiety Disorders: A Rapid Literature Review', at the 18th International Joint Conference on Biomedical Engineering Systems and Technologies. The paper was selected for post-publication invitation due to its high quality. <a href="https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html" target="_blank" rel="noopener noreferrer">See event</a></p></TimelineItem>
+            <TimelineItem date="July 2024" title="Presented at NIHR & University of Bristol Event" position="right" icon="publication"><p>Presented at the 'Researcher coffee catch-up: Digital solutions for anxiety disorders', an event organized by NIHR Applied Research Collaboration West (ARC West). <a href="https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html" target="_blank" rel="noopener noreferrer">See event</a></p></TimelineItem>
+            <TimelineItem date="June 2024" title="Presented at DMHW 2024 Conference" position="left" icon="publication"><p>Presented our project and published the abstract at the Second International Digital Mental Health and Wellbeing Conference at Ulster University. <a href="https://www.linkedin.com/posts/luigiandreamoretti_phd-startup-healthtech-activity-7214244990951055361-T5fW" target="_blank" rel="noopener noreferrer">View post</a></p></TimelineItem>
+            <TimelineItem date="November 2023" title="Invited Speaker at University of Aberdeen" position="right" icon="publication"><p>Delivered a speech titled 'Emotion recognition can support the early detection of neurodegenerative diseases' at the AI & Computer Vision for Neurodegenerative Diseases workshop of BMVC 2023. <a href="https://sites.google.com/view/ai-cv-for-nds/home" target="_blank" rel="noopener noreferrer">See event</a></p></TimelineItem>
+            <TimelineItem date="June 2023" title="Publishing collaboration" position="left" icon="publication"><p>Published our paper, 'An Approach using transformer architecture for emotion recognition through Electrocardiogram Signal(s)'; co-authored with Dr Vincenzo Dentamaro, former CTO at IntelliHearts. <a href="https://ceur-ws.org/Vol-3521/paper3.pdf" target="_blank" rel="noopener noreferrer">Read paper</a></p></TimelineItem>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-slide">
+          <div class="timeline-wrapper">
+            <div class="timeline-line"></div>
+            <TimelineItem date="May 2025" title="Co-Design Phase III Completed" position="left" icon="milestone"><p>Successfully concluded the 'Prototype' co-design phase with 19 participants, gathering ideas for the user interface and experience. Method: focus groups, interviews, and mock-ups</p></TimelineItem>
+            <TimelineItem date="April 2025" title="Co-Design Phase II Completed" position="right" icon="milestone"><p>Successfully concluded the 'Generative' co-design phase with 20 participants, defining core features and user requirements. Method: focus groups, interviews, and storyboards.</p></TimelineItem>
+            <TimelineItem date="February 2025" title="Co-Design Phase I Completed" position="left" icon="milestone"><p>Successfully concluded the 'Pre-design' co-design phase with 24 participants, exploring problems and needs of the different stakeholders. Method: focus groups, interviews, and whiteboard.</p></TimelineItem>
+            <TimelineItem date="July 2024" title="Co-Design Phase 0 Completed" position="right" icon="milestone"><p>Successfully concluded the 'Recruiting Material Consultations' co-design phase with 12 participants. Method: focus groups, interviews, and surveys.</p></TimelineItem>
           </div>
         </div>
       </div>
@@ -90,101 +59,95 @@ import TimelineItem from './TimelineItem.astro';
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.carousel-container');
-    if (!container) return; // FIX 1: Prevent errors if component isn't on the page
-
-    const tabs = container.querySelectorAll('.carousel-tab');
+  // This robust script controls all the carousel functionality
+  const initTimelineCarousel = (container) => {
+    // Robust element selection
+    const tabsContainer = container.querySelector('.carousel-tabs');
+    const tabs = Array.from(container.querySelectorAll('.carousel-tab'));
     const track = container.querySelector('.carousel-track');
     const slides = Array.from(track.children);
-    const nextButton = container.querySelector('.carousel-arrow.next');
     const prevButton = container.querySelector('.carousel-arrow.prev');
+    const nextButton = container.querySelector('.carousel-arrow.next');
 
-    // FIX 1: Robust check for essential elements
-    if (!track || slides.length === 0 || !nextButton || !prevButton) return;
+    if (!tabsContainer || !track || slides.length === 0 || !prevButton || !nextButton) {
+      console.error('Timeline component is missing required elements.');
+      return;
+    }
 
     let currentIndex = 0;
-    let touchstartX = 0;
-    let touchendX = 0;
-
-    const setSlidePositions = () => {
-      slides.forEach((slide, index) => {
-        slide.style.left = `${index * 110}%`; // 100% width + 10% gap
-      });
-    };
-
-    const setContainerHeight = () => {
-      const activeSlide = slides[currentIndex];
-      if (activeSlide) {
-        track.style.height = `${activeSlide.offsetHeight}px`;
-      }
-    };
     
-    const goToSlide = (targetIndex) => {
-      track.style.transform = `translateX(-${targetIndex * 110}%)`;
+    const goToSlide = (index) => {
+      if (index < 0 || index >= slides.length) return;
+
+      track.style.transform = `translateX(-${index * 100}%)`;
+
+      tabs.forEach((tab, i) => tab.setAttribute('aria-expanded', i === index));
       
-      tabs.forEach((tab, index) => {
-        tab.setAttribute('aria-expanded', index === targetIndex);
-      });
-      
-      currentIndex = targetIndex;
-      setContainerHeight(); // Update height on slide change
+      const activeTab = tabs[index];
+      const scrollOffset = activeTab.offsetLeft + (activeTab.offsetWidth / 2) - (tabsContainer.offsetWidth / 2);
+      tabsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
+
+      prevButton.disabled = index === 0;
+      nextButton.disabled = index === slides.length - 1;
+
+      currentIndex = index;
     };
 
-    // --- Event Listeners ---
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => goToSlide(index));
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => goToSlide(parseInt(tab.dataset.index)));
     });
 
-    nextButton.addEventListener('click', () => {
-      goToSlide((currentIndex + 1) % slides.length);
-    });
-
-    prevButton.addEventListener('click', () => {
-      goToSlide((currentIndex - 1 + slides.length) % slides.length);
-    });
-
-    // Touch Swipe Logic
+    prevButton.addEventListener('click', () => goToSlide(currentIndex - 1));
+    nextButton.addEventListener('click', () => goToSlide(currentIndex + 1));
+    
+    // Swipe gesture handling
+    let touchstartX = 0;
     track.addEventListener('touchstart', e => {
       touchstartX = e.changedTouches[0].screenX;
     }, { passive: true });
 
     track.addEventListener('touchend', e => {
-      touchendX = e.changedTouches[0].screenX;
+      const touchendX = e.changedTouches[0].screenX;
       if (touchendX < touchstartX - 50) nextButton.click();
       if (touchendX > touchstartX + 50) prevButton.click();
     });
 
-    // Initial setup
-    setSlidePositions();
-    goToSlide(0); 
-    
-    // Recalculate heights on window resize
-    window.addEventListener('resize', setContainerHeight);
-    
-    // Use an observer to recalculate height if slide content changes (e.g., images loading)
-    const resizeObserver = new ResizeObserver(() => setContainerHeight());
-    slides.forEach(slide => resizeObserver.observe(slide));
-  });
+    goToSlide(0); // Initialize first slide
+  };
+  
+  document.querySelectorAll('[data-timeline-component]').forEach(initTimelineCarousel);
 </script>
 
 <style>
   .carousel-container {
+    position: relative;
     padding: 2rem 0;
   }
   .carousel-tabs {
     display: flex;
-    justify-content: center; /* FIX 3: Center the tabs */
-    gap: 1rem;
-    padding-bottom: 2rem;
+    justify-content: flex-start;
     position: relative;
     border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
+  .carousel-tabs::-webkit-scrollbar { display: none; }
+  
+  .tabs-track {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 2rem;
+    margin: 0 auto;
+  }
+  
   .carousel-tab {
     background: none; border: none; padding: 0.5rem 1rem;
     font-size: 1.1rem; font-weight: 700; cursor: pointer;
     position: relative; top: 0; transition: all 0.3s ease;
     color: var(--color-text-muted);
+    white-space: nowrap;
   }
   .carousel-tab[aria-expanded="true"] {
     color: var(--color-primary);
@@ -198,49 +161,25 @@ import TimelineItem from './TimelineItem.astro';
 
   .carousel-outer {
     position: relative;
+    padding: 0 50px; /* Space for arrows */
   }
   .carousel-viewport {
     width: 100%;
-    overflow: hidden; /* Hide the full slides, but allow peek-a-boo */
+    overflow: hidden;
   }
   .carousel-track {
-    position: relative;
-    display: flex;
-    transition: transform 0.5s ease-in-out, height 0.3s ease-in-out;
+    display: flex; /* This is the key change */
+    transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
   }
   .carousel-slide {
-    position: absolute;
-    top: 0;
-    width: 80%; /* Width for central slide */
-    margin: 0 10%; /* Center the slide */
-    flex-shrink: 0;
-    transition: all 0.5s ease;
+    width: 100%;
+    flex-shrink: 0; /* Prevents slides from shrinking */
   }
-  
-  /* FIX 2: Create Peek-a-boo effect */
-  .carousel-track::before,
-  .carousel-track::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 80%; /* Match slide width */
-    z-index: 2;
-    background: inherit;
-    filter: blur(5px) grayscale(50%);
-    opacity: 0.8;
-  }
-  .carousel-track::before {
-    left: -90%; /* (100% width + 10% gap) to the left */
-  }
-  .carousel-track::after {
-    left: 190%; /* (100% width + 10% gap) * 2 to the right */
-  }
-  
-  /* FIX 4: Sticky Arrows */
+
   .carousel-arrow {
-    position: sticky; /* Stick to viewport as user scrolls */
-    top: 50vh; /* Center vertically in the viewport */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 10;
     background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid var(--color-border);
@@ -249,29 +188,19 @@ import TimelineItem from './TimelineItem.astro';
     cursor: pointer; font-size: 1.5rem;
     transition: all 0.2s ease;
   }
-  .carousel-arrow:hover {
+  .carousel-arrow:hover:not(:disabled) {
     background-color: var(--color-primary);
     color: var(--color-white);
   }
-  .carousel-arrow.prev { float: left; margin-left: -22px; }
-  .carousel-arrow.next { float: right; margin-right: -22px; }
+  .carousel-arrow:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+  .carousel-arrow.prev { left: 0; }
+  .carousel-arrow.next { right: 0; }
 
   @media (max-width: 768px) {
-    .carousel-arrow { display: none; }
-    .carousel-slide { width: 100%; margin: 0; }
-    .carousel-track::before, .carousel-track::after { display: none; }
-    .carousel-track {
-      scroll-snap-type: x mandatory;
-      overflow-x: scroll;
-      -ms-overflow-style: none; /* IE and Edge */
-      scrollbar-width: none; /* Firefox */
-    }
-    .carousel-track::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
-    .carousel-slide {
-      scroll-snap-align: center;
-      position: relative; /* Change for mobile scroll snapping */
-      left: auto;
-    }
+    .carousel-outer { padding: 0; }
   }
 
   .timeline-wrapper {
