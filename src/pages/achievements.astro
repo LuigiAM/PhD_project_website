@@ -16,7 +16,10 @@ const BASE_URL = import.meta.env.BASE_URL;
   <section class="container">
     <div class="achievements-header">
       <h1>Achievements & Milestones</h1>
-      <p>A timeline of the project's key awards, publications, and progress. Select a category below to explore.</p>
+      <p>A timeline of the project's key awards, publications, and progress.</p>
+      
+      {/* REFINED PROMPT TEXT */}
+      <small class="click-prompt">(Click the categories or swipe to explore)</small>
     </div>
 
     {/* --- RENDER THE NEW INTERACTIVE COMPONENT --- */}
@@ -40,7 +43,7 @@ const BASE_URL = import.meta.env.BASE_URL;
   .achievements-header {
     text-align: center;
     padding-top: 4rem;
-    margin-bottom: 0; /* Removed bottom margin */
+    margin-bottom: 2rem;
   }
   .achievements-header h1 {
     font-size: 3rem;
@@ -50,5 +53,14 @@ const BASE_URL = import.meta.env.BASE_URL;
     color: var(--color-text-muted);
     max-width: 600px;
     margin: 0.5rem auto 0;
+  }
+  
+  /* ADDED STYLE FOR THE PROMPT */
+  .click-prompt {
+    display: block;
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
   }
 </style>
