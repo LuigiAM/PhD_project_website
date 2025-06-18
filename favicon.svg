@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1D9A84"/>
+      <stop offset="100%" stop-color="#2ECC71"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <!-- Brain half -->
+    <path d="M128 30C98 30 80 55 80 80C80 90 90 100 85 105C70 120 80 130 90 135C100 140 95 150 100 160C110 180 130 170 130 190V30Z"
+          fill="url(#greenGradient)"/>
+    <!-- Heart half with matching stroke style -->
+    <path d="M128 30C158 30 176 55 176 80C176 90 166 100 171 105C186 120 176 130 166 135C156 140 161 150 156 160C146 180 126 170 126 190V30Z"
+          fill="url(#greenGradient)"/>
+  </g>
+</svg>
