@@ -13,6 +13,10 @@ const BASE_URL = import.meta.env.BASE_URL;
     </button>
 
     <nav class="site-nav" id="primary-navigation">
+      <div class="mobile-menu-header">
+        <a href={BASE_URL} class="mobile-menu-logo">MEMoPAD</a>
+      </div>
+      <hr class="mobile-menu-divider" />
       <ul>
         <li><a href={`${BASE_URL}/project-story/`}>Project Story</a></li>
         <li><a href={`${BASE_URL}/research/`}>The Research</a></li>
@@ -20,134 +24,63 @@ const BASE_URL = import.meta.env.BASE_URL;
         <li><a href={`${BASE_URL}/take-part/`}>Take Part</a></li>
         <li><a href={`${BASE_URL}/contact/`}>Contact</a></li>
       </ul>
+      <hr class="mobile-menu-divider" />
+      <div class="mobile-menu-contact">
+        <a href="mailto:luigi.moretti@uwe.ac.uk">luigi.moretti@uwe.ac.uk</a>
+      </div>
     </nav>
   </div>
 </header>
 
 <script>
-  // This script toggles the mobile menu visibility
   const menuToggle = document.querySelector('.menu-toggle');
   const primaryNav = document.querySelector('.site-nav');
 
-  menuToggle.addEventListener('click', () => {
-    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', !isExpanded);
-    primaryNav.classList.toggle('is-open');
-    document.body.classList.toggle('no-scroll');
-  });
+  if (menuToggle && primaryNav) {
+    menuToggle.addEventListener('click', () => {
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      // --- THIS IS THE FIX ---
+      // Convert the boolean back to a string ("true" or "false")
+      menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      primaryNav.classList.toggle('is-open');
+      document.body.classList.toggle('no-scroll');
+    });
+  }
 </script>
 
 <style>
-  /* --- BASE HEADER STYLES --- */
-  .site-header {
-    background-color: var(--color-white);
-    border-bottom: 1px solid var(--color-border);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-  }
-  .container {
-    max-width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .site-logo {
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    /* --- UPDATED: Sets the default color to green --- */
-    color: var(--color-primary);
-  }
+  /* Base Header Styles */
+  .site-header { background-color: var(--color-white); border-bottom: 1px solid var(--color-border); padding: 1rem 0; position: sticky; top: 0; width: 100%; z-index: 100; }
+  .container { max-width: 1100px; margin-left: auto; margin-right: auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .site-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; transition: color 0.2s ease; color: var(--color-primary); }
+  .site-logo:hover { color: var(--color-text); }
 
-  /* --- UPDATED: Turns the logo black/dark grey only on hover --- */
-  .site-logo:hover {
-    color: var(--color-text);
-  }
+  /* Hamburger Menu Styles */
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+  .icon-close { display: none; }
+  .menu-toggle[aria-expanded="true"] .icon-menu { display: none; }
+  .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
+  body.no-scroll { overflow: hidden; }
+  .mobile-menu-header, .mobile-menu-divider, .mobile-menu-contact { display: none; }
 
-  /* --- HAMBURGER MENU STYLES --- */
-  .menu-toggle {
-    display: none; /* This is crucial: HIDE the button by default on desktop */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    z-index: 1001; /* Ensure it's above the overlay */
-  }
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-  }
-  .icon-close {
-    display: none;
-  }
-  .menu-toggle[aria-expanded="true"] .icon-menu {
-    display: none;
-  }
-  .menu-toggle[aria-expanded="true"] .icon-close {
-    display: block;
-  }
-  body.no-scroll {
-    overflow: hidden;
-  }
+  /* Desktop Navigation */
+  .site-nav ul { list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; }
+  .site-nav a { color: var(--color-text); text-decoration: none; font-size: 1rem; transition: color 0.2s ease; }
+  .site-nav a:hover { color: var(--color-primary); }
 
-  /* --- DESKTOP NAVIGATION --- */
-  .site-nav {
-    display: block; /* Desktop navigation is visible by default */
-  }
-  .site-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-  }
-  .site-nav a {
-    color: var(--color-text);
-    text-decoration: none;
-    font-size: 1rem;
-    transition: color 0.2s ease;
-  }
-  .site-nav a:hover {
-    color: var(--color-primary);
-  }
-
-
-  /* --- MOBILE NAVIGATION STYLES --- */
+  /* Mobile Navigation Styles */
   @media (max-width: 768px) {
-    .menu-toggle {
-      display: block; /* SHOW the button on mobile */
-    }
-    .site-nav {
-      display: none; /* HIDE the nav links by default on mobile */
-      position: fixed;
-      inset: 0; /* Cover the whole screen */
-      background-color: var(--color-white);
-      padding: 6rem 2rem;
-      z-index: 1000;
-    }
-    .site-nav.is-open {
-      display: block; /* Show menu when open */
-    }
-    .site-nav ul {
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-    .site-nav a {
-      font-size: 1.5rem;
-    }
+    .menu-toggle { display: block; z-index: 1001; }
+    .site-nav { display: none; position: fixed; inset: 0; background-color: var(--color-white); padding: 1rem 2rem; z-index: 1000; flex-direction: column; }
+    .site-nav.is-open { display: flex; }
+    .site-nav ul { flex-direction: column; align-items: stretch; gap: 0; text-align: center; flex-grow: 1; justify-content: center; }
+    .site-nav li { width: 100%; }
+    .site-nav a { font-size: 1.5rem; display: block; padding: 1rem 0; border-radius: 4px; }
+    .site-nav a:hover { background-color: var(--color-background); }
+    .mobile-menu-header, .mobile-menu-contact { display: block; padding: 1rem 0; }
+    .mobile-menu-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; color: var(--color-primary); }
+    .mobile-menu-divider { display: block; border: none; border-top: 1px solid var(--color-border); margin: 0; }
+    .mobile-menu-contact a { font-size: 1rem; color: var(--color-text-muted); padding: 1rem 0; }
   }
 </style>
