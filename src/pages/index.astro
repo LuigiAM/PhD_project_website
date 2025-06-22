@@ -14,21 +14,31 @@ const testimonials = [
   { quote: "Thank you for the update, Luigi. I look forward to reading the newsletter.", author: "Co-design participant from the public" },
   { quote: "Thank you so much for the update, it's wonderful to hear of all this progress.", author: "Associate Professor in Clinical Research" }
 ];
+
+const acronymLines = [
+  { letter: "M", text: "ultimodal" },
+  { letter: "E", text: "motion" },
+  { letter: "Mo", text: "nitoring in Clinical" },
+  { letter: "P", text: "athways for" },
+  { letter: "A", text: "nxiety" },
+  { letter: "D", text: "isorders" }
+];
 ---
 <Layout
   title="MEMoPAD | Multimodal Emotion Monitoring for Anxiety Disorders"
-  description="The MEMoPAD project, led by Luigi A. Moretti. A PhD initiative co-designing a human-centered digital tool to provide clear, continuous, and interpretable emotion data for anxiety care."
+  description="The MEMOPAD project, led by Luigi A. Moretti. A PhD initiative co-designing a human-centered digital tool to provide clear, continuous, and interpretable emotion data for anxiety care."
 >
   <section class="hero">
     <div class="hero-content">
-      <h1>
-        <br>
-        <span class="highlight">M</span>ultimodal 
-        <span class="highlight">E</span>motion 
-        <span class="highlight">Mo</span>nitoring in Clinical 
-        <span class="highlight">P</span>athways for 
-        <span class="highlight">A</span>nxiety 
-        <span class="highlight">D</span>isorders
+      <h1 class="animated-title">
+        <div class="acronym-breakdown">
+          {acronymLines.map(line => (
+            <div class="acronym-line">
+              <span class="acronym-letter">{line.letter}</span>
+              <span class="acronym-text" data-text={line.text}></span>
+            </div>
+          ))}
+        </div>
       </h1>
       <h3>
         We are co-designing a human-centered digital tool that uses technology to understand emotion responses, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
@@ -36,48 +46,26 @@ const testimonials = [
     </div>
   </section>
 
-  {/* --- UPDATED: This is now the "Smarter Grid" --- */}
   <section class="container nav-grid-wrapper">
     <div class="nav-grid">
-      <NavCard 
-        title="Meet the Team"
-        href={`${BASE_URL}/project-story/#team-section`}
-        imgSrc={`${BASE_URL}/project-story-card.jpeg`}
-      />
-      <NavCard 
-        title="Our Co-Design Process"
-        href={`${BASE_URL}/research/#methodology`}
-        imgSrc={`${BASE_URL}/research-hero-banner.jpg`}
-      />
-      <NavCard 
-        title="View Awards & Funding"
-        href={`${BASE_URL}/achievements/#funding-awards`}
-        imgSrc={`${BASE_URL}/MEMoPADpresentation.jpeg`}
-      />
+      <NavCard title="Meet the Team" href={`${BASE_URL}/project-story/#team-section`} imgSrc={`${BASE_URL}/project-story-card.jpeg`} />
+      <NavCard title="Our Co-Design Process" href={`${BASE_URL}/research/#methodology`} imgSrc={`${BASE_URL}/research-hero-banner.jpg`} />
+      <NavCard title="View Awards & Funding" href={`${BASE_URL}/achievements/#funding-awards`} imgSrc={`${BASE_URL}/MEMoPADpresentation.jpeg`} />
     </div>
   </section>
 
   <section class="container rationale-wrapper">
     <div class="rationale-grid">
       <div class="rationale-item">
-        <div class="item-header">
-          <IconTarget />
-          <h2>The Clinical Need</h2>
-        </div>
+        <div class="item-header"><IconTarget /><h2>The Clinical Need</h2></div>
         <p>Previous attempts to integrate structured data in mental health have faced persistent challenges, including the complexity of multimodal data, the social stigma that delays help-seeking, and difficulties in data interpretation which can hinder user engagement. We believe focusing on emotion can mitigate these issues by providing a universally understood common ground.</p>
       </div>
       <div class="rationale-item">
-        <div class="item-header">
-          <IconChip />
-          <h2>Our Approach</h2>
-        </div>
+        <div class="item-header"><IconChip /><h2>Our Approach</h2></div>
         <p>Commercially available wearable devices feature increasingly sophisticated sensors at affordable prices, without the stigma associated with medical-looking hardware. Our approach focuses on data collected from consumer wearables and mobile phones to capture longitudinal and contextualised data through multimodal affective computing.</p>
       </div>
       <div class="rationale-item">
-        <div class="item-header">
-          <IconEye />
-          <h2>Our Vision</h2>
-        </div>
+        <div class="item-header"><IconEye /><h2>Our Vision</h2></div>
         <p>Our goal is to co-design a digital tool that provides clear, continuous, and interpretable emotion data. We aim to help users understand themselves better, foster proactive self-management, and facilitate deeper, more effective conversations with their clinicians, ultimately improving pathways for anxiety care.</p>
       </div>
     </div>
@@ -117,53 +105,156 @@ const testimonials = [
 <script>
   // Script for testimonial animation
   document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector<HTMLElement>('.testimonial-slider');
-    if (!slider) return;
-    const cards = Array.from(slider.children) as HTMLElement[];
-    if (cards.length <= 1) return;
-    let currentIndex = 0;
-    const setSliderHeight = () => {
-      let maxHeight = 0;
-      cards.forEach((card: HTMLElement) => {
-        card.style.position = 'static';
-        if (card.offsetHeight > maxHeight) maxHeight = card.offsetHeight;
-        card.style.position = 'absolute';
-      });
-      slider.style.height = `${maxHeight}px`;
-    };
-    setSliderHeight();
-    window.addEventListener('resize', setSliderHeight);
-    cards.forEach((card, index) => {
-      if(index !== 0) card.classList.add('is-waiting');
-    });
-    cards[0].classList.add('is-active');
-    setInterval(() => {
-      const nextIndex = (currentIndex + 1) % cards.length;
-      cards[currentIndex].classList.remove('is-active');
-      cards[currentIndex].classList.add('is-leaving');
-      cards[nextIndex].classList.add('is-active');
-      cards[nextIndex].classList.remove('is-waiting');
-      setTimeout(() => {
-        cards[currentIndex].classList.remove('is-leaving');
-        cards[currentIndex].classList.add('is-waiting');
-        currentIndex = nextIndex;
-      }, 800);
-    }, 5000);
+    const testimonialSlider = document.querySelector<HTMLElement>('.testimonial-slider');
+    if (testimonialSlider) {
+      const cards = Array.from(testimonialSlider.children) as HTMLElement[];
+      if (cards.length > 1) {
+        let currentIndex = 0;
+        const setSliderHeight = () => {
+          let maxHeight = 0;
+          cards.forEach((card) => {
+            card.style.position = 'static';
+            if (card.offsetHeight > maxHeight) maxHeight = card.offsetHeight;
+            card.style.position = 'absolute';
+          });
+          testimonialSlider.style.height = `${maxHeight}px`;
+        };
+        setSliderHeight();
+        window.addEventListener('resize', setSliderHeight);
+        cards.forEach((card, index) => { if(index !== 0) card.classList.add('is-waiting'); });
+        cards[0].classList.add('is-active');
+        setInterval(() => {
+          const nextIndex = (currentIndex + 1) % cards.length;
+          cards[currentIndex].classList.remove('is-active');
+          cards[currentIndex].classList.add('is-leaving');
+          cards[nextIndex].classList.add('is-active');
+          cards[nextIndex].classList.remove('is-waiting');
+          setTimeout(() => {
+            cards[currentIndex].classList.remove('is-leaving');
+            cards[currentIndex].classList.add('is-waiting');
+            currentIndex = nextIndex;
+          }, 800);
+        }, 5000);
+      }
+    }
+
+    // Script for H1 typing animation
+    const textSpans = Array.from(document.querySelectorAll('.acronym-text')) as HTMLElement[];
+    if (textSpans.length > 0) {
+      let isTyping = true;
+      let currentLine = 0;
+      let currentChar = 0;
+      const type = () => {
+        if (!isTyping) return;
+        const span = textSpans[currentLine];
+        const fullText = span.dataset.text || '';
+        span.textContent = fullText.substring(0, currentChar + 1);
+        span.classList.add('has-cursor');
+        if (currentChar < fullText.length) {
+          currentChar++;
+          setTimeout(type, 50);
+        } else {
+          span.classList.remove('has-cursor');
+          currentLine++;
+          currentChar = 0;
+          if (currentLine < textSpans.length) {
+            setTimeout(type, 200);
+          } else {
+            isTyping = false;
+            setTimeout(() => { isTyping = true; erase(); }, 3000);
+          }
+        }
+      };
+      const erase = () => {
+        if (!isTyping) return;
+        let lineToDelete = textSpans.length - 1;
+        const eraseChar = () => {
+          const span = textSpans[lineToDelete];
+          const fullText = span.dataset.text || '';
+          // --- THIS IS THE FIX ---
+          // Use a fallback to ensure textContent is treated as a string
+          span.textContent = fullText.substring(0, (span.textContent || '').length - 1);
+          span.classList.add('has-cursor');
+          if ((span.textContent || '').length > 0) {
+            setTimeout(eraseChar, 30);
+          } else {
+            span.classList.remove('has-cursor');
+            lineToDelete--;
+            if (lineToDelete >= 0) {
+              eraseChar();
+            } else {
+              isTyping = false;
+              currentLine = 0;
+              setTimeout(() => { isTyping = true; type(); }, 500);
+            }
+          }
+        };
+        eraseChar();
+      };
+      type();
+    }
   });
 </script>
 
 <style>
-  /* Hero and Nav Grid Styles */
-  .hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+  /* --- STYLES FOR ANIMATED H1 --- */
+  .animated-title {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+  .acronym-breakdown {
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .acronym-line {
+    display: flex;
+    align-items: baseline;
+  }
+  .acronym-letter {
+    color: var(--color-primary);
+    font-weight: 700;
+    padding-right: 0.4rem;
+    min-width: 4rem;
+    text-align: right;
+  }
+  .acronym-text {
+    position: relative;
+  }
+  .acronym-text.has-cursor::after {
+    content: '';
+    position: absolute;
+    right: -0.2em;
+    top: 0.1em;
+    bottom: 0.1em;
+    width: 2px;
+    background: var(--color-text);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  
+  @media (min-width: 768px) {
+    .acronym-breakdown {
+      font-size: 2.5rem;
+    }
+  }
+
+  /* --- HERO AND OTHER STYLES --- */
+  .hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
   .hero-content { max-width: 800px; padding: 0 2rem; }
-  .hero h1 { font-size: 2.75rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
-  .hero h1 .highlight { color: var(--color-primary); }
-  .hero h3 { font-size: 1.125rem; font-weight: 400; line-height: 1.6; max-width: 650px; margin: 0 auto 2.5rem auto; color: var(--color-text-muted); }
+  .hero h3 { font-size: 1.125rem; font-weight: 400; line-height: 1.6; max-width: 650px; margin: 0 auto; color: var(--color-text-muted); }
+  
   .nav-grid-wrapper { padding-top: 0; padding-bottom: 2rem; }
   .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   @media (max-width: 900px) { .nav-grid { grid-template-columns: 1fr; } }
-  
-  /* Rationale Section Styles */
   .rationale-wrapper { padding-top: 2rem; padding-bottom: 2rem; }
   .rationale-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   .rationale-item .item-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
@@ -171,8 +262,6 @@ const testimonials = [
   .rationale-item svg { width: 28px; height: 28px; color: var(--color-primary); }
   .rationale-item p { color: var(--color-text-muted); }
   @media (max-width: 900px) { .rationale-grid { grid-template-columns: 1fr; } }
-
-  /* Newsletter and other styles */
   .featured-newsletter-wrapper { padding-top: 2rem; padding-bottom: 2rem; }
   .featured-newsletter { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; background-color: var(--color-white); padding: 3rem; border-radius: 12px; border: 1px solid var(--color-border); }
   .newsletter-content h2 { font-size: 2rem; line-height: 1.3; margin-bottom: 1rem; }
