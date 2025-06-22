@@ -39,8 +39,6 @@ const BASE_URL = import.meta.env.BASE_URL;
   if (menuToggle && primaryNav) {
     menuToggle.addEventListener('click', () => {
       const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      // --- THIS IS THE FIX ---
-      // Convert the boolean back to a string ("true" or "false")
       menuToggle.setAttribute('aria-expanded', String(!isExpanded));
       primaryNav.classList.toggle('is-open');
       document.body.classList.toggle('no-scroll');
@@ -78,8 +76,20 @@ const BASE_URL = import.meta.env.BASE_URL;
     .site-nav li { width: 100%; }
     .site-nav a { font-size: 1.5rem; display: block; padding: 1rem 0; border-radius: 4px; }
     .site-nav a:hover { background-color: var(--color-background); }
+    
     .mobile-menu-header, .mobile-menu-contact { display: block; padding: 1rem 0; }
-    .mobile-menu-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; color: var(--color-primary); }
+    .mobile-menu-logo { 
+      font-size: 1.25rem; 
+      font-weight: 700; 
+      text-decoration: none; 
+      color: var(--color-primary);
+      transition: color 0.2s ease;
+    }
+    /* --- NEW HOVER EFFECT --- */
+    .mobile-menu-logo:hover {
+      color: var(--color-text);
+    }
+    
     .mobile-menu-divider { display: block; border: none; border-top: 1px solid var(--color-border); margin: 0; }
     .mobile-menu-contact a { font-size: 1rem; color: var(--color-text-muted); padding: 1rem 0; }
   }

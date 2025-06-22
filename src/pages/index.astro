@@ -2,32 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import NavCard from '../components/NavCard.astro';
+import IconTarget from '../components/icons/IconTarget.astro';
+import IconChip from '../components/icons/IconChip.astro';
+import IconEye from '../components/icons/IconEye.astro';
 
 const BASE_URL = import.meta.env.BASE_URL;
 
-// --- Data for the animated quotes ---
 const testimonials = [
-  {
-    quote: "Wow. Good to see the project moving along so fast.",
-    author: "Co-design participant from the public"
-  },
-  {
-    quote: "Great newsletter! 😊",
-    author: "BNSSG (NHS) Senior Research Fellow"
-  },
-  {
-    quote: "Thank you for the update, Luigi. I look forward to reading the newsletter.",
-    author: "Co-design participant from the public"
-  },
-  {
-    quote: "Thank you so much for the update, it's wonderful to hear of all this progress.",
-    author: "Associate Professor in Clinical Research"
-  }
+  { quote: "Wow. Good to see the project moving along so fast.", author: "Co-design participant from the public" },
+  { quote: "Great newsletter! 😊", author: "BNSSG (NHS) Senior Research Fellow" },
+  { quote: "Thank you for the update, Luigi. I look forward to reading the newsletter.", author: "Co-design participant from the public" },
+  { quote: "Thank you so much for the update, it's wonderful to hear of all this progress.", author: "Associate Professor in Clinical Research" }
 ];
 ---
 <Layout
   title="MEMoPAD | Multimodal Emotion Monitoring for Anxiety Disorders"
-  description="The MEMOPAD project, led by Luigi A. Moretti. A PhD initiative co-designing a human-centered digital tool to provide clear, continuous, and interpretable emotion data for anxiety care."
+  description="The MEMoPAD project, led by Luigi A. Moretti. A PhD initiative co-designing a human-centered digital tool to provide clear, continuous, and interpretable emotion data for anxiety care."
 >
   <section class="hero">
     <div class="hero-content">
@@ -46,23 +36,50 @@ const testimonials = [
     </div>
   </section>
 
+  {/* --- UPDATED: This is now the "Smarter Grid" --- */}
   <section class="container nav-grid-wrapper">
     <div class="nav-grid">
       <NavCard 
-        title="The Project Story"
-        href={`${BASE_URL}/project-story/`}
-        imgSrc="https://www.eleganzadelgusto.com/wordpress/wp-content/uploads/2017/11/ot11b51mod-1024x578.jpg"
+        title="Meet the Team"
+        href={`${BASE_URL}/project-story/#team-section`}
+        imgSrc={`${BASE_URL}/project-story-card.jpeg`}
       />
       <NavCard 
-        title="The Research"
-        href={`${BASE_URL}/research/`}
+        title="Our Co-Design Process"
+        href={`${BASE_URL}/research/#methodology`}
         imgSrc={`${BASE_URL}/research-hero-banner.jpg`}
       />
       <NavCard 
-        title="Achievements"
-        href={`${BASE_URL}/achievements/`}
-        imgSrc={`${BASE_URL}/achievements-hero-banner.jpg`}
+        title="View Awards & Funding"
+        href={`${BASE_URL}/achievements/#funding-awards`}
+        imgSrc={`${BASE_URL}/MEMoPADpresentation.jpeg`}
       />
+    </div>
+  </section>
+
+  <section class="container rationale-wrapper">
+    <div class="rationale-grid">
+      <div class="rationale-item">
+        <div class="item-header">
+          <IconTarget />
+          <h2>The Clinical Need</h2>
+        </div>
+        <p>Previous attempts to integrate structured data in mental health have faced persistent challenges, including the complexity of multimodal data, the social stigma that delays help-seeking, and difficulties in data interpretation which can hinder user engagement. We believe focusing on emotion can mitigate these issues by providing a universally understood common ground.</p>
+      </div>
+      <div class="rationale-item">
+        <div class="item-header">
+          <IconChip />
+          <h2>Our Approach</h2>
+        </div>
+        <p>Commercially available wearable devices feature increasingly sophisticated sensors at affordable prices, without the stigma associated with medical-looking hardware. Our approach focuses on data collected from consumer wearables and mobile phones to capture longitudinal and contextualised data through multimodal affective computing.</p>
+      </div>
+      <div class="rationale-item">
+        <div class="item-header">
+          <IconEye />
+          <h2>Our Vision</h2>
+        </div>
+        <p>Our goal is to co-design a digital tool that provides clear, continuous, and interpretable emotion data. We aim to help users understand themselves better, foster proactive self-management, and facilitate deeper, more effective conversations with their clinicians, ultimately improving pathways for anxiety care.</p>
+      </div>
     </div>
   </section>
 
@@ -78,7 +95,7 @@ const testimonials = [
       </div>
       <div class="testimonial-column">
         <div class="testimonial-slider">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial) => (
             <div class="testimonial-card">
               <p class="quote">“{testimonial.quote}”</p>
               <p class="author">&mdash; {testimonial.author}</p>
@@ -98,116 +115,84 @@ const testimonials = [
 </Layout>
 
 <script>
-  // This script animates the testimonial cards
+  // Script for testimonial animation
   document.addEventListener('DOMContentLoaded', () => {
-    // UPDATED: Explicitly type slider as an HTMLElement
     const slider = document.querySelector<HTMLElement>('.testimonial-slider');
     if (!slider) return;
-
     const cards = Array.from(slider.children) as HTMLElement[];
     if (cards.length <= 1) return;
-
     let currentIndex = 0;
-    
     const setSliderHeight = () => {
       let maxHeight = 0;
-      // UPDATED: Explicitly type card as an HTMLElement
       cards.forEach((card: HTMLElement) => {
         card.style.position = 'static';
-        if (card.offsetHeight > maxHeight) {
-          maxHeight = card.offsetHeight;
-        }
+        if (card.offsetHeight > maxHeight) maxHeight = card.offsetHeight;
         card.style.position = 'absolute';
       });
       slider.style.height = `${maxHeight}px`;
     };
-
     setSliderHeight();
     window.addEventListener('resize', setSliderHeight);
-    
     cards.forEach((card, index) => {
       if(index !== 0) card.classList.add('is-waiting');
     });
     cards[0].classList.add('is-active');
-
     setInterval(() => {
       const nextIndex = (currentIndex + 1) % cards.length;
-      
       cards[currentIndex].classList.remove('is-active');
       cards[currentIndex].classList.add('is-leaving');
-      
       cards[nextIndex].classList.add('is-active');
       cards[nextIndex].classList.remove('is-waiting');
-
       setTimeout(() => {
         cards[currentIndex].classList.remove('is-leaving');
         cards[currentIndex].classList.add('is-waiting');
         currentIndex = nextIndex;
       }, 800);
-
     }, 5000);
   });
 </script>
 
 <style>
+  /* Hero and Nav Grid Styles */
   .hero { min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; }
   .hero-content { max-width: 800px; padding: 0 2rem; }
   .hero h1 { font-size: 2.75rem; font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
   .hero h1 .highlight { color: var(--color-primary); }
   .hero h3 { font-size: 1.125rem; font-weight: 400; line-height: 1.6; max-width: 650px; margin: 0 auto 2.5rem auto; color: var(--color-text-muted); }
-
   .nav-grid-wrapper { padding-top: 0; padding-bottom: 2rem; }
   .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   @media (max-width: 900px) { .nav-grid { grid-template-columns: 1fr; } }
   
+  /* Rationale Section Styles */
+  .rationale-wrapper { padding-top: 2rem; padding-bottom: 2rem; }
+  .rationale-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .rationale-item .item-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+  .rationale-item h2 { font-size: 1.5rem; color: var(--color-primary); }
+  .rationale-item svg { width: 28px; height: 28px; color: var(--color-primary); }
+  .rationale-item p { color: var(--color-text-muted); }
+  @media (max-width: 900px) { .rationale-grid { grid-template-columns: 1fr; } }
+
+  /* Newsletter and other styles */
   .featured-newsletter-wrapper { padding-top: 2rem; padding-bottom: 2rem; }
   .featured-newsletter { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; background-color: var(--color-white); padding: 3rem; border-radius: 12px; border: 1px solid var(--color-border); }
   .newsletter-content h2 { font-size: 2rem; line-height: 1.3; margin-bottom: 1rem; }
   .newsletter-content p { font-size: 1.1rem; color: var(--color-text-muted); margin-bottom: 2rem; }
-  
   .testimonial-column { display: flex; align-items: center; justify-content: center; }
-  .testimonial-slider {
-    position: relative;
-    width: 100%;
-    transition: height 0.3s ease-in-out;
-  }
-  .testimonial-card {
-    position: absolute;
-    inset: 0;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s ease-in-out;
-  }
-  .testimonial-card.is-active {
-    transform: translateY(0);
-    opacity: 1;
-    z-index: 2;
-  }
-  .testimonial-card.is-leaving {
-    transform: translateY(-100%);
-    opacity: 0;
-    z-index: 1;
-  }
-  .testimonial-card.is-waiting {
-    transform: translateY(100%);
-    opacity: 0;
-    z-index: 1;
-  }
+  .testimonial-slider { position: relative; width: 100%; transition: height 0.3s ease-in-out; }
+  .testimonial-card { position: absolute; inset: 0; padding: 1rem; display: flex; flex-direction: column; justify-content: center; transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s ease-in-out; }
+  .testimonial-card.is-active { transform: translateY(0); opacity: 1; z-index: 2; }
+  .testimonial-card.is-leaving { transform: translateY(-100%); opacity: 0; z-index: 1; }
+  .testimonial-card.is-waiting { transform: translateY(100%); opacity: 0; z-index: 1; }
   .testimonial-card .quote { font-size: 1.1rem; font-style: italic; line-height: 1.6; flex-grow: 1; }
   .testimonial-card .author { font-weight: 700; margin-top: 1rem; text-align: right; }
-
   @media (max-width: 900px) {
     .featured-newsletter { grid-template-columns: 1fr; }
     .testimonial-column { order: -1; margin-bottom: 2rem; min-height: 150px; }
   }
-
   .button-group { display: flex; flex-wrap: wrap; gap: 1rem; }
   .button { display: inline-block; background-color: var(--color-primary); color: var(--color-white); padding: 0.75rem 1.5rem; border: 2px solid var(--color-primary); border-radius: 4px; text-decoration: none; font-weight: 700; transition: all 0.2s ease; }
   .button:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
   .button.button-secondary { background-color: var(--color-white); color: var(--color-primary); }
   .button.button-secondary:hover { background-color: var(--color-background); }
-  
   .share-wrapper { padding-top: 2rem; padding-bottom: 4rem; }
 </style>
