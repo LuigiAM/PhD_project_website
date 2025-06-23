@@ -12,10 +12,7 @@ const objectives = [
   "To support the interruption of anxiety loops.",
   "To support early help-seeking behaviour by improving emotional literacy."
 ];
-const methodology = "To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across six phases, of which three have already been completed. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.";
 const techStack = ["Wearable Technology", "Bio-signals (e.g. HR, EDA)", "Affective Computing", "Co-Design", "Emotion Recognition", "Human-computer interaction (HCI)", "Digital Mental Health", "Anxiety Disorders", "Emotion Regulation", "Mobile Health (mHealth)"];
-
-// --- UPDATED: Added your new publication to the list ---
 const references = [
   "[1] M. Berking and P. Wupperman, ‘Emotion regulation and mental health: recent findings, current challenges, and future directions’, Curr. Opin. Psychiatry, vol. 25, no. 2, pp. 128–134, Mar. 2012, doi: 10.1097/YCO.0b013e3283503669.",
   "[2] Noorbergen, T.J., Adam, M.T., Teubner, T. and Collins, C.E., 2021. Using co-design in mobile health system development: a qualitative study with experts in co-design and mobile health system development. JMIR mHealth and uHealth, 9(11), p.e27896.",
@@ -40,29 +37,40 @@ const references = [
       <h2>Objectives</h2>
       <ul>{objectives.map(item => <li>{item}</li>)}</ul>
 
-      <h2>Methodology</h2>
+      <h2 id="methodology">Methodology</h2>
       <p>
         To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href={`${BASE_URL}/achievements/#co-design-milestones`}>six phases, of which three have already been completed</a>. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.
       </p>
 
-      {/* --- NEW Q&A SECTION --- */}
+      {/* --- NEW KEY CONCEPTS SECTION --- */}
+      <div class="definitions-section">
+        <h2>Key Concepts</h2>
+        <div class="definition-item">
+          <h4>What are Anxiety Disorders?</h4>
+          <p>Anxiety Disorders are a group of mental health conditions characterized by significant feelings of anxiety and fear. These include Generalized Anxiety Disorder (GAD), Obsessive-Compulsive Disorder (OCD), Panic Disorder (PD), Post-Traumatic Stress Disorder (PTSD), and Social Phobia (or Social Anxiety Disorder, SAD). To illustrate the scale of the issue, approximately one in ten people in the UK are affected (Adult Psychiatric Morbidity Survey, 2014), yet these conditions remain significantly under- and misdiagnosed due to clinical complexity and comorbidities <a href="#reference-3" class="citation-link">[3]</a>.</p>
+        </div>
+        <div class="definition-item">
+          <h4>What is Affective Computing?</h4>
+          <p>A field of computer science that studies and explores emotions and their components. It involves developing systems and devices that can recognize, interpret, process, and simulate human affects, often by analyzing physiological and behavioral signals. Research consistently shows that in this field, multimodal approaches (using multiple data sources) tend to outperform unimodal ones <a href="#reference-3" class="citation-link">[3]</a>.</p>
+        </div>
+      </div>
+      
       <div class="qna-section">
         <h2>Insights from Our Research</h2>
         <div class="qna-item">
           <h4>What are the common technologies used for emotion recognition in anxiety research?</h4>
-          <p>Current research often relies on analyzing bio-signals collected from wearable devices. The most prevalent approaches quantify emotion using a model of valence (positive vs. negative) and arousal (intensity). Many existing studies have a strong focus on specific conditions like Post-Traumatic Stress Disorder (PTSD), showing the potential for these technologies in targeted clinical applications, and trans-diagnostic approaches are also promising [3].</p>
+          <p>Current research often relies on analyzing bio-signals collected from wearable devices. The most prevalent approaches quantify emotion using a model of valence (positive vs. negative) and arousal (intensity). Many existing studies have a strong focus on specific conditions like Post-Traumatic Stress Disorder (PTSD), showing the potential for these technologies in targeted clinical applications, and trans-diagnostic approaches are also promising <a href="#reference-3" class="citation-link">[3]</a>.</p>
         </div>
         <div class="qna-item">
           <h4>What are the main opportunities for this technology in mental health?</h4>
-          <p>The literature highlights a significant opportunity to use affective computing to enhance and support traditional care. Key applications include monitoring treatment progression in therapies like CBT, assessing the efficacy of advanced treatments, and most importantly, fostering a more patient-centric approach by enhancing the quality of the interaction between clinicians and patients [3].</p>
+          <p>The literature highlights a significant opportunity to use affective computing to enhance and support traditional care. Key applications include monitoring treatment progression in therapies like CBT, assessing the efficacy of advanced treatments, and most importantly, fostering a more patient-centric approach by enhancing the quality of the interaction between clinicians and patients <a href="#reference-3" class="citation-link">[3]</a>.</p>
         </div>
         <div class="qna-item">
           <h4>How does MEMoPAD's approach address the current gaps?</h4>
-          <p>While existing research is promising, many studies are conducted in controlled lab settings. MEMoPAD aims to address this by focusing on collecting longitudinal data in real-world contexts using consumer wearables. Furthermore, by emphasizing a co-design methodology from the very beginning, we ensure the final tool is not only technologically advanced but also truly usable, interpretable, and valuable to both individuals with anxiety and their clinicians [3].</p>
+          <p>While existing research is promising, many studies are conducted in controlled lab settings. MEMoPAD aims to address this by focusing on collecting longitudinal data in real-world contexts using consumer wearables. Furthermore, by emphasizing a co-design methodology from the very beginning, we ensure the final tool is not only technologically advanced but also truly usable, interpretable, and valuable to both individuals with anxiety and their clinicians <a href="#reference-3" class="citation-link">[3]</a>.</p>
         </div>
       </div>
 
-      {/* --- NEW SLIDESHOW SECTION --- */}
       <div class="slideshow-section">
         <h2>View the Slideshow</h2>
         <a href="https://www.linkedin.com/posts/luigiandreamoretti_literature-review-affective-computing-in-activity-7316080903959601153-aU0N/" target="_blank" rel="noopener noreferrer" class="slideshow-link">
@@ -77,10 +85,10 @@ const references = [
       <h2>References</h2>
       <div class="references">
         {references.map((ref, index) => (
-          <p>
+          // Added an ID to the third reference for jump links
+          <p id={index === 2 ? 'reference-3' : undefined}>
             <small>
               {ref}
-              {/* Add a link for the new reference */}
               {index === 2 && <a href="https://www.researchgate.net/publication/389361853_Affective_Computing_in_Anxiety_Disorders_A_Rapid_Literature_Review_of_Emotion_Recognition_Applications" target="_blank" rel="noopener noreferrer"> Read paper</a>}
             </small>
           </p>
@@ -93,6 +101,7 @@ const references = [
 </Layout>
 
 <style>
+  html { scroll-behavior: smooth; } /* Smooth scrolling for jump links */
   /* Base Styles */
   .research-content p a { color: var(--color-primary); font-weight: 700; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color 0.2s ease; }
   .research-content p a:hover { border-bottom-color: var(--color-primary); }
@@ -105,22 +114,34 @@ const references = [
   ul { list-style-type: disc; padding-left: 2rem; }
   li { margin-bottom: 0.5rem; }
   
+  /* --- NEW DEFINITIONS SECTION STYLES --- */
+  .definitions-section {
+    margin-top: 3rem;
+  }
+  .definition-item {
+    background-color: var(--color-background);
+    padding: 1.5rem;
+    border-left: 4px solid var(--color-primary);
+    margin-bottom: 2rem;
+  }
+  .definition-item h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+  }
+  .definition-item p {
+    color: var(--color-text-muted);
+  }
+
   /* Q&A Section Styles */
   .qna-section { margin-top: 3rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
   .qna-item { margin-bottom: 2rem; }
-  .qna-item h4 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    color: var(--color-text); /* UPDATED: Changed from green to black/text color */
-  }
+  .qna-item h4 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--color-text); }
   .qna-item p { color: var(--color-text-muted); }
 
   /* Slideshow Section Styles */
   .slideshow-section { text-align: center; margin-top: 2rem; }
-  .slideshow-section h2 {
-    font-size: 1.5rem; /* UPDATED: Made font smaller */
-    border-bottom: none; /* Removed the underline for a cleaner look */
-  }
+  .slideshow-section h2 { font-size: 1.5rem; border-bottom: none; }
   .slideshow-link { display: inline-block; text-decoration: none; color: var(--color-text); transition: transform 0.2s ease; }
   .slideshow-link:hover { transform: translateY(-4px); }
   .slideshow-link img { width: 100%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
@@ -131,4 +152,7 @@ const references = [
   .tag { display: inline-block; padding: 0.25rem 0.75rem; background-color: var(--color-background); border-radius: 4px; font-size: 0.875rem; font-weight: 700; }
   .references p { margin-bottom: 0.5rem; }
   .references a { font-weight: 700; color: var(--color-primary); text-decoration: none; }
+  .citation-link {
+    font-weight: 700;
+  }
 </style>
