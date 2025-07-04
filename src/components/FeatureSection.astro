@@ -10,6 +10,7 @@ type Props = {
   imageSrc?: string; // Optional: path to an image
   imageAlt?: string; // Optional: description for the image
   linkUrl?: string; // Optional: URL to make the image a link
+  linkTitle?: string;
   videoSrc?: string; // Optional: path to a video
 } & HTMLAttributes<'div'>; // Allows passing standard HTML attributes like class
 
@@ -20,6 +21,7 @@ const {
   imageSrc,
   imageAlt = 'Descriptive image', // Default alt text
   linkUrl,
+  linkTitle,
   videoSrc
 } = Astro.props;
 ---
