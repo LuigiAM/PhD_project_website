@@ -7,29 +7,19 @@ type Props = {
   buttonText: string;
   buttonLink: string;
   theme?: 'light' | 'primary';
-  icon?: 'user' | 'stethoscope';
   documentImageUrl?: string;
   documentPdfUrl?: string;
   involvementDetails?: string[];
 }
 
-const { title, buttonText, buttonLink, theme = 'light', icon, documentImageUrl, documentPdfUrl, involvementDetails } = Astro.props;
+const { title, buttonText, buttonLink, theme = 'light', documentImageUrl, documentPdfUrl, involvementDetails } = Astro.props;
 
-const icons = {
-  user: IconUser,
-  stethoscope: IconStethoscope,
-};
-const IconComponent = icon ? icons[icon] : null;
-
+// Get the base URL for constructing correct asset paths
 const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 <div class:list={["card", `theme-${theme}`]}>
-  {IconComponent && (
-    <div class="icon-wrapper">
-      <IconComponent />
-    </div>
-  )}
+  {/* The 'icon' prop was removed from the component logic as requested */}
   <h2>{title}</h2>
   <div class="description">
     <slot />
@@ -44,8 +34,8 @@ const BASE_URL = import.meta.env.BASE_URL;
     )}
     
     {documentImageUrl && documentPdfUrl && (
-      <a href={`${BASE_URL}${documentPdfUrl}`} target="_blank" rel="noopener noreferrer" class="document-link">
-        <img src={`${BASE_URL}${documentImageUrl}`} alt={`Preview of the one-page summary for ${title}`} class="document-preview" />
+      <a href={`${documentPdfUrl}`} target="_blank" rel="noopener noreferrer" class="document-link">
+        <img src={`${documentImageUrl}`} alt={`Preview of the one-page summary for ${title}`} class="document-preview" />
         <span><br>View One-Page Summary (PDF)</span>
       </a>
     )}
@@ -62,19 +52,6 @@ const BASE_URL = import.meta.env.BASE_URL;
     flex-direction: column;
     text-align: center;
   }
-  .icon-wrapper {
-    margin: 0 auto 1.5rem auto;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .icon-wrapper svg {
-    width: 32px;
-    height: 32px;
-  }
   .description {
     flex-grow: 1;
     margin: 1.5rem 0;
@@ -87,7 +64,7 @@ const BASE_URL = import.meta.env.BASE_URL;
     background-color: rgba(0,0,0,0.03);
     border-radius: 4px;
     font-size: 0.9rem;
-  }
+  } /* <-- THIS WAS THE MISSING BRACE */
 
   .involvement-section strong {
     font-weight: 700;
@@ -103,6 +80,7 @@ const BASE_URL = import.meta.env.BASE_URL;
   .card h2 {
     font-size: 1.75rem;
     text-align: center;
+    margin-top: 0; /* Adjusted for no icon */
   }
   .button {
     display: inline-block;
@@ -160,10 +138,6 @@ const BASE_URL = import.meta.env.BASE_URL;
     background-color: var(--color-white);
     border: 2px solid var(--color-primary);
   }
-  .theme-light .icon-wrapper {
-    background-color: var(--color-background);
-    color: var(--color-primary);
-  }
   .theme-light h2 {
     color: var(--color-primary);
   }
@@ -173,10 +147,6 @@ const BASE_URL = import.meta.env.BASE_URL;
   }
   .theme-primary {
     background-color: var(--color-primary);
-    color: var(--color-white);
-  }
-  .theme-primary .icon-wrapper {
-    background-color: rgba(255, 255, 255, 0.1);
     color: var(--color-white);
   }
   .theme-primary h2 {

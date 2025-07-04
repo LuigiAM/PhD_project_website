@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 
-const BASE_URL = import.meta.env.BASE_URL;
 
 // Content variables
 const abstract = "Anxiety disorders present persistent challenges of underdiagnosis and misdiagnosis due to difficulties in differential diagnoses and the presence of common comorbidities. Standard self-reported approaches for assessing emotional regulation face criticism for their paradoxical nature, while semi-structured interviews can lack specificity and cross-cultural validity. This project explores how affective computing can address and mitigate these issues.";
@@ -16,7 +15,8 @@ const techStack = ["Wearable Technology", "Bio-signals (e.g. HR, EDA)", "Affecti
 const references = [
   "[1] M. Berking and P. Wupperman, ‘Emotion regulation and mental health: recent findings, current challenges, and future directions’, Curr. Opin. Psychiatry, vol. 25, no. 2, pp. 128–134, Mar. 2012, doi: 10.1097/YCO.0b013e3283503669.",
   "[2] Noorbergen, T.J., Adam, M.T., Teubner, T. and Collins, C.E., 2021. Using co-design in mobile health system development: a qualitative study with experts in co-design and mobile health system development. JMIR mHealth and uHealth, 9(11), p.e27896.",
-  "[3] Moretti, L. A., Thompson, M., Matthews, P., Loizou, M., & Western, D. (2025, January). Affective Computing in Anxiety Disorders: A Rapid Literature Review of Emotion Recognition Applications. In Proceedings of the 18th International Joint Conference on Biomedical Engineering Systems and Technologies."
+  "[3] Moretti, L. A., Thompson, M., Matthews, P., Loizou, M., & Western, D. (2025, January). Affective Computing in Anxiety Disorders: A Rapid Literature Review of Emotion Recognition Applications. In Proceedings of the 18th International Joint Conference on Biomedical Engineering Systems and Technologies.",
+  "[4] Policy paper ‘Fit for the future: 10 Year Health Plan for England. - Executive summary’ Published 3 July 2025."
 ];
 ---
 <Layout
@@ -24,7 +24,7 @@ const references = [
   description="Explore the research and methodology behind the MEMOPAD project, a PhD initiative co-designing a human-centered digital tool for emotion analysis in anxiety care."
 >
   <section class="hero-banner">
-    <img src={`${BASE_URL}/research-hero-banner.jpg`} alt="Luigi A. Moretti conference poster 2024" />
+    <img src=`/research-hero-banner.jpg` alt="Luigi A. Moretti conference poster 2024" />
   </section>
 
   <section class="container">
@@ -39,10 +39,10 @@ const references = [
 
       <h2 id="methodology">Methodology</h2>
       <p>
-        To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href={`${BASE_URL}/achievements/#co-design-milestones`}>six phases, of which three have already been completed</a>. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.
+        To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href=`/achievements/#co-design-milestones`>six phases, of which three have already been completed</a>. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.
       </p>
 
-      {/* --- NEW KEY CONCEPTS SECTION --- */}
+      {/* --- KEY CONCEPTS SECTION --- */}
       <div class="definitions-section">
         <h2>Key Concepts</h2>
         <div class="definition-item">
@@ -69,12 +69,16 @@ const references = [
           <h4>How does MEMoPAD's approach address the current gaps?</h4>
           <p>While existing research is promising, many studies are conducted in controlled lab settings. MEMoPAD aims to address this by focusing on collecting longitudinal data in real-world contexts using consumer wearables. Furthermore, by emphasizing a co-design methodology from the very beginning, we ensure the final tool is not only technologically advanced but also truly usable, interpretable, and valuable to both individuals with anxiety and their clinicians <a href="#reference-3" class="citation-link">[3]</a>.</p>
         </div>
+        <div class="qna-item">
+          <h4>Why focus on consumer wearable devices?</h4>
+          <p>Our approach leverages consumer wearables for several key reasons: precision, as their in-built sensors become increasingly accurate; affordability, making scalable research possible; comfort, which is ideal for collecting longitudinal data over the long-term; and lack of stigma, as they are commonly used and not perceived as medical devices. Furthermore, research consistently shows that multimodal approaches (using multiple data sources from these devices) tend to outperform unimodal ones in affective computing <a href="#reference-3" class="citation-link">[3]</a>. This also aligns with the UK's 10-Year Health Plan: "We will make wearables standard in preventative, chronic and post-acute NHS treatment by 2035. All NHS patients will have access to these technologies, which will be part of routine care. We will provide devices for free in areas where health need and deprivation are highest" [4].</p>
+        </div>
       </div>
 
       <div class="slideshow-section">
         <h2>View the Slideshow</h2>
         <a href="https://www.linkedin.com/posts/luigiandreamoretti_literature-review-affective-computing-in-activity-7316080903959601153-aU0N/" target="_blank" rel="noopener noreferrer" class="slideshow-link">
-          <img src={`${BASE_URL}/slideshow-preview.jpg`} alt="Preview of the literature review slideshow" />
+          <img src=`/slideshow-preview.jpg` alt="Preview of the literature review slideshow" />
           <span>Click to view on LinkedIn</span>
         </a>
       </div>
@@ -114,7 +118,7 @@ const references = [
   ul { list-style-type: disc; padding-left: 2rem; }
   li { margin-bottom: 0.5rem; }
   
-  /* --- NEW DEFINITIONS SECTION STYLES --- */
+  /* --- DEFINITIONS SECTION STYLES --- */
   .definitions-section {
     margin-top: 3rem;
   }

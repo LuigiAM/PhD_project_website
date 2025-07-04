@@ -5,7 +5,6 @@ import IconUser from '../components/icons/IconUser.astro';
 import IconStethoscope from '../components/icons/IconStethoscope.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 
-const BASE_URL = import.meta.env.BASE_URL;
 ---
 <Layout
   title="Take Part - Co-Design the Future of Mental Health Tech"
@@ -23,7 +22,7 @@ const BASE_URL = import.meta.env.BASE_URL;
       <RecruitmentCard
         title="For Individuals with Lived Experience"
         buttonText="Express Interest as a Participant"
-        buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Lived Experience)"
+        buttonLink="https://go.uwe.ac.uk/codesignPublic"
         theme="light"
         documentImageUrl="/one-page-public-preview.jpg"
         documentPdfUrl="/one-page-public.pdf"
@@ -37,7 +36,7 @@ const BASE_URL = import.meta.env.BASE_URL;
       <RecruitmentCard
         title="For Clinicians & Informal/Unpaid Carers"
         buttonText="Express Interest as a Participant"
-        buttonLink="mailto:luigi.moretti@uwe.ac.uk?subject=Interest in Participating (Supporter)"
+        buttonLink="https://go.uwe.ac.uk/codesignClinicians"
         theme="primary"
         documentImageUrl="/one-page-clinician-preview.jpg"
         documentPdfUrl="/one-page-clinician.pdf"
@@ -54,7 +53,7 @@ const BASE_URL = import.meta.env.BASE_URL;
     </div>
 
     <div class="final-contact-prompt">
-      <p>If you have any further questions, please do not hesitate to <a href={`${BASE_URL}/contact/`}>get in touch</a>.</p>
+      <p>If you have any further questions, please do not hesitate to <a href=`/contact/`>get in touch</a>.</p>
     </div>
 
     <ShareButtons 

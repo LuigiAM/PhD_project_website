@@ -2,8 +2,7 @@
 // src/components/InteractiveTimeline.astro
 import TimelineItem from './TimelineItem.astro';
 
-// ADDED: Get the base URL for constructing correct links
-const BASE_URL = import.meta.env.BASE_URL;
+
 ---
 <div class="carousel-container" data-timeline-component>
   <!-- 3D Tab Navigation -->
@@ -54,7 +53,7 @@ const BASE_URL = import.meta.env.BASE_URL;
             <TimelineItem date="July 2025" title="Co-Design Phase IV Planned" position="right" icon="milestone">
               <p>
                 Working on the 'Evaluative' co-design phase, collecting feedback and suggestions for the user interface and experience. Method: focus groups, interviews, and demo. Analysis: affinity diagrams and comparative analysis; expert roundtable. 
-                <a href={`${BASE_URL}/take-part/`} class="cta-link">We are currently recruiting for this phase, click here to take part!</a>
+                <a href=`/take-part/` class="cta-link">We are currently recruiting for this phase, click here to take part!</a>
               </p>
             </TimelineItem>
             <TimelineItem date="May 2025" title="Co-Design Phase III Completed" position="left" icon="milestone"><p>Successfully concluded the 'Prototype' co-design phase with 19 participants, gathering ideas for the user interface and experience. Method: focus groups, interviews, and mock-ups. Analysis: affinity diagrams and comparative analysis; expert roundtable.</p></TimelineItem>

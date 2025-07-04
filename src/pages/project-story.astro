@@ -5,7 +5,6 @@ import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 
-const BASE_URL = import.meta.env.BASE_URL;
 ---
 
 <Layout
@@ -102,7 +101,7 @@ const BASE_URL = import.meta.env.BASE_URL;
       <h2>Work in Progress...</h2>
       <p>
         This project is an active and evolving journey. We are currently developing the initial prototype and preparing for the next phases of user testing and evaluation. 
-        <a href={`${BASE_URL}/research/`} class="outro-link">Learn more about our research and methodology</a>
+        <a href=`/research/` class="outro-link">Learn more about our research and methodology</a>
       </p>
     </div>
   </section>

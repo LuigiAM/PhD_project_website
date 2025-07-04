@@ -3,14 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import InteractiveTimeline from '../components/InteractiveTimeline.astro'; // <-- IMPORT THE NEW COMPONENT
 import ShareButtons from '../components/ShareButtons.astro';
 
-const BASE_URL = import.meta.env.BASE_URL;
 ---
 <Layout
   title="Achievements & Milestones - MEMOPAD Project"
   description="Explore the key funding, awards, publications, and project milestones for the MEMOPAD PhD project in health technology."
 >
   <section class="hero-banner">
-    <img src={`${BASE_URL}/achievements-hero-banner.jpg`} alt="A desk with charts and graphs, representing project progress and achievements." />
+    <img src="/achievements-hero-banner.jpg" alt="A desk with charts and graphs, representing project progress and achievements." />
   </section>
 
   <section class="container">
