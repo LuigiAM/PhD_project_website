@@ -1,16 +1,13 @@
 import { defineConfig } from 'astro/config';
-
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // The full URL where your website will live.
-  // No slash at the end.
-  site: 'https://LuigiAM.github.io',
+  // UPDATED: This is now your new custom subdomain URL.
+  site: 'https://memopad.luigiandreamoretti.com',
 
-  // The name of the repository, starting with a slash.
-  // This tells Astro to add this prefix to all internal links.
-  base: '/PhD_project_website',
-
-  integrations: [sitemap()],
+  // REMOVED: The 'base' property is no longer needed because
+  // you are deploying to the root of a domain, not a subdirectory.
+  
+  integrations: [sitemap()]
 });
