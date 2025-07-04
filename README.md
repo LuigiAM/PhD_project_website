@@ -10,6 +10,14 @@ npm create astro@latest -- --template minimal
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
+## 💟 License & Attribution
+This project is open-source and available under the MIT License. You are free to use, modify, and distribute the code.
+
+If you use this code as a foundation for your own project, I would appreciate a simple attribution in your site's footer or acknowledgements page with a link back to my personal website:
+
+Website originally coded by luigiandreamoretti.com
+
+
 ## 🚀 Project Structure
 
 Inside of your Astro project, you'll see the following folders and files:

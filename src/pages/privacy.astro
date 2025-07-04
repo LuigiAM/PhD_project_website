@@ -1,0 +1,129 @@
+---
+// src/pages/privacy.astro
+import Layout from '../layouts/Layout.astro';
+
+const BASE_URL = import.meta.env.BASE_URL;
+---
+<Layout
+  title="Privacy Policy - MEMoPAD Project"
+  description="Learn how the MEMoPAD project website handles your data, including information for newsletter subscribers and research participants."
+>
+  <div class="container">
+    <div class="privacy-content">
+      <h1>Privacy Policy</h1>
+      <p class="last-updated">Last Updated: 4th July 2025</p>
+
+      <section>
+        <h2>1. Our Commitment to Your Privacy</h2>
+        <p>Your privacy is of the utmost importance to us. This website is designed to be a simple, informative resource. We do not use any first-party cookies or invasive analytics software to track your activity.</p>
+      </section>
+
+      <section>
+        <h2>2. Third-Party Services</h2>
+        <p>This website may contain links to third-party sites (e.g., LinkedIn, ResearchGate, academic publishers) or embedded content previews (e.g., from YouTube). Please be aware that interacting with this content may subject you to the privacy policies of those external services.</p>
+      </section>
+
+      <section>
+        <h2>3. Newsletter Subscribers</h2>
+        <p>If you choose to subscribe to our monthly newsletter by clicking the `mailto:` link, you are providing us with your email address.</p>
+        <ul>
+          <li><strong>Purpose of Data Collection:</strong> Your email address will be used for the sole purpose of sending you the MEMoPAD project's monthly newsletter, which contains updates on our research, findings, and milestones.</li>
+          <li><strong>Lawful Basis for Processing:</strong> We process this data based on your explicit <strong>Consent</strong>, which you provide by sending the subscription email.</li>
+          <li><strong>Data Storage:</strong> Your email address will be stored securely in a mailing list managed manually by Luigi A. Moretti. It will not be used for any other purpose or shared with third parties.</li>
+          <li><strong>Your Rights:</strong> You may unsubscribe at any time by replying to any newsletter email and requesting to be removed from the list, or by contacting us directly.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>4. Research Participants</h2>
+        <p>Individuals who express interest in participating in the co-design study are directed to a UWE Bristol data collection form. The handling of all data related to research participation is governed by the project's official, ethically approved privacy notice.</p>
+        <ul>
+            <li><strong>Ethical Approval:</strong> This research has been reviewed and approved by the University of the West of England's Research Ethics Committee. <strong>(UWE research ethics reference number: CATE-2324-274)</strong>.</li>
+            <li><strong>Detailed Information:</strong> We are fully transparent about our data handling practices for research. We strongly encourage all potential participants to read our official <a href="https://go.uwe.ac.uk/codesignPrivacyNotice" target="_blank" rel="noopener noreferrer">Co-design Participant Privacy Notice</a>, which provides comprehensive details on data storage, retention, and your rights as a participant.</li>
+            <li><strong>Newsletter Subscription for Participants:</strong> As part of our commitment to keeping participants informed, individuals who enroll in the study will also receive the monthly project newsletter. This is considered part of the ongoing communication related to the research. You may, however, opt out of these newsletter updates at any time without affecting your participation in the study.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>5. Your Data Protection Rights</h2>
+        <p>Under GDPR, you have various rights regarding your personal data, including the right to access, rectify, or erase your data, and to restrict or object to its processing.</p>
+      </section>
+
+      <section>
+        <h2>6. Contact Us</h2>
+        <p>For any questions about this privacy policy or your data, please contact the lead researcher, <strong>Luigi A. Moretti</strong>, at <a href="mailto:luigi.moretti@uwe.ac.uk">luigi.moretti@uwe.ac.uk</a>.</p>
+        <p>For formal data protection inquiries, you may also contact the <strong>UWE Bristol Data Protection Officer</strong> at <a href="mailto:dataprotection@uwe.ac.uk">dataprotection@uwe.ac.uk</a>.</p>
+      </section>
+
+    </div>
+  </div>
+
+  <a href={BASE_URL} class="back-button">Back to website</a>
+
+</Layout>
+
+<style>
+  .privacy-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 8rem; /* Space for the fixed button */
+  }
+  .privacy-content h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .last-updated {
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: 3rem;
+  }
+  .privacy-content h2 {
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0.5rem;
+  }
+  .privacy-content h4 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+  }
+  .privacy-content p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .privacy-content ul {
+    list-style-position: inside;
+    padding-left: 1rem;
+  }
+  .privacy-content li {
+    margin-bottom: 0.75rem;
+  }
+  .privacy-content a {
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .privacy-content a:hover {
+    text-decoration: underline;
+  }
+
+  .back-button {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px; /* Pill shape */
+    text-decoration: none;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
+    z-index: 100;
+  }
+  .back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+</style>

@@ -1,14 +1,18 @@
 ---
-// Get the current year automatically for the copyright.
 const currentYear = new Date().getFullYear();
+const BASE_URL = import.meta.env.BASE_URL;
 ---
 <footer class="site-footer">
   <div class="container">
-    <p class="copyright">&copy; {currentYear} Luigi Andrea Moretti. All rights reserved.<br>Your privacy matters! This website does not use any invasive tracking software.</p>
+    <div class="copyright">
+      <p>&copy; {currentYear} Luigi Andrea Moretti. All rights reserved.</p>
+      <p>Your privacy matters! This website does not use any invasive tracking software.</p>
+    </div>
     <nav class="footer-nav">
-      {/* --- UPDATED: This is now the newsletter link --- */}
+      {/* --- ADDED PRIVACY POLICY LINK --- */}
+      <a href={`${BASE_URL}/privacy/`}>Privacy Policy</a>
       <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter">
-        📬 Follow the journey: subscribe to the monthly newsletter
+        📬Follow the journey: subscribe to the monthly newsletter
       </a>
     </nav>
   </div>
@@ -16,7 +20,7 @@ const currentYear = new Date().getFullYear();
 
 <style>
   .site-footer {
-    background-color: var(--color-background); /* Switched to light gray for subtle contrast */
+    background-color: var(--color-background);
     border-top: 1px solid var(--color-border);
     padding: 2.5rem 0;
     margin-top: 4rem;
@@ -27,33 +31,42 @@ const currentYear = new Date().getFullYear();
     margin-left: auto;
     margin-right: auto;
     padding: 0 2rem;
-    
-    /* --- NEW: Added flexbox for layout --- */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Allows stacking on mobile */
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
   }
   .copyright {
     color: var(--color-text-muted);
     line-height: 1.5;
+    flex-grow: 1; /* Allows it to take up space */
+  }
+  .footer-nav {
+    display: flex;
+    gap: 1.5rem; /* Space between links */
+    flex-shrink: 0; /* Prevents links from wrapping on their own */
   }
   .footer-nav a {
     color: var(--color-text);
     font-weight: 700;
     text-decoration: none;
     transition: color 0.2s ease;
+    white-space: nowrap;
   }
   .footer-nav a:hover {
     color: var(--color-primary);
   }
   
-  /* --- NEW: Stack layout on small screens --- */
   @media (max-width: 768px) {
     .container {
       flex-direction: column;
       text-align: center;
+      gap: 2rem;
+    }
+    .footer-nav {
+      flex-direction: column;
+      gap: 1rem;
     }
   }
 </style>
