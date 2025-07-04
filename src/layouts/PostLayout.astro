@@ -1,0 +1,93 @@
+---
+// src/layouts/PostLayout.astro
+import Layout from './Layout.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+
+const { frontmatter } = Astro.props;
+---
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <section class="container">
+    <article class="post-content">
+      <header class="post-header">
+        <h1>{frontmatter.title}</h1>
+        <p class="post-date">Published on: {frontmatter.date}</p>
+      </header>
+      <div class="post-body">
+        <slot />
+      </div>
+    </article>
+
+    <div class="post-footer-nav">
+      <a href="/newsletter/" class="button button-secondary">← Back to Archive</a>
+      <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe</a>
+    </div>
+
+    <ShareButtons 
+      pageTitle={frontmatter.title}
+      shareDescription={frontmatter.description}
+    />
+  </section>
+</Layout>
+
+<style>
+  .post-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .post-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .post-header h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+  }
+  .post-date {
+    margin-top: 1rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+  .post-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+  .post-body :global(h2) {
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .post-body :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 4rem 0 2rem 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .button.button-secondary {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+  }
+  .button.button-secondary:hover {
+    background-color: var(--color-background);
+  }
+</style>

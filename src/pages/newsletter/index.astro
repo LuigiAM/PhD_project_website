@@ -1,0 +1,71 @@
+---
+// src/pages/newsletter/index.astro
+import Layout from '../../layouts/Layout.astro';
+import NewsletterCard from '../../components/NewsletterCard.astro';
+
+// This automatically finds all your newsletter markdown files
+const posts = await Astro.glob('./*.md');
+
+// --- NEW: Sort posts by date, newest first ---
+posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+---
+<Layout
+  title="Newsletter Archive - MEMoPAD Project"
+  description="A complete archive of our monthly updates, detailing our research progress, co-design insights, and project milestones."
+>
+  <section class="container">
+    <div class="archive-header">
+      <h1>Newsletter Archive</h1>
+      <p>A complete archive of our monthly updates, detailing our research progress, co-design insights, and project milestones.</p>
+      <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe for Future Updates</a>
+    </div>
+
+    <div class="post-grid">
+      {posts.map(post => (
+        <NewsletterCard
+          href={post.url}
+          title={post.frontmatter.title}
+          date={post.frontmatter.date}
+          excerpt={post.frontmatter.description}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .archive-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .archive-header h1 {
+    font-size: 3rem;
+  }
+  .archive-header p {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0.5rem auto 2rem;
+  }
+  .button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.75rem 1.5rem;
+    border: 2px solid var(--color-primary);
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+</style>
