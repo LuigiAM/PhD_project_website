@@ -1,6 +1,5 @@
 ---
 const currentYear = new Date().getFullYear();
-const BASE_URL = import.meta.env.BASE_URL;
 ---
 <footer class="site-footer">
   <div class="container">
@@ -9,8 +8,7 @@ const BASE_URL = import.meta.env.BASE_URL;
       <p>Your privacy matters! This website does not use any invasive tracking software.</p>
     </div>
     <nav class="footer-nav">
-      {/* --- ADDED PRIVACY POLICY LINK --- */}
-      <a href={`${BASE_URL}/privacy/`}>Privacy Policy</a>
+      <a href="/privacy/">Privacy Policy</a>
       <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter">
         📬Follow the journey: subscribe to the monthly newsletter
       </a>
@@ -40,12 +38,12 @@ const BASE_URL = import.meta.env.BASE_URL;
   .copyright {
     color: var(--color-text-muted);
     line-height: 1.5;
-    flex-grow: 1; /* Allows it to take up space */
+    flex-grow: 1;
   }
   .footer-nav {
     display: flex;
-    gap: 1.5rem; /* Space between links */
-    flex-shrink: 0; /* Prevents links from wrapping on their own */
+    gap: 1.5rem;
+    flex-shrink: 0;
   }
   .footer-nav a {
     color: var(--color-text);
@@ -53,6 +51,11 @@ const BASE_URL = import.meta.env.BASE_URL;
     text-decoration: none;
     transition: color 0.2s ease;
     white-space: nowrap;
+    
+    /* --- THIS IS THE FIX --- */
+    /* Allows long text strings to break to prevent overflow */
+    overflow-wrap: break-word;
+    white-space: normal; /* Allows the text to wrap */
   }
   .footer-nav a:hover {
     color: var(--color-primary);
