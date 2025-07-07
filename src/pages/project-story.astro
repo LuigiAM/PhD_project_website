@@ -108,7 +108,7 @@ import ShareButtons from '../components/ShareButtons.astro';
       </p>
             {/* --- VIDEO SECTION IN OUTRO --- */}
       <div class="outro-video-section">
-        
+        <h3>Latest MEMoPAD Demo</h3>
         <div class="video-embed-container-small">
           <iframe 
             src="https://www.youtube.com/embed/fv3UThXMMPs?rel=0" 
@@ -149,6 +149,31 @@ import ShareButtons from '../components/ShareButtons.astro';
     opacity: 0.8;
   }
   
-  .click-prompt { display: block; margin-top: 1rem; font-style: italic; font-size: 0.9rem; color: var(--color-text-muted); }
-  .share-wrapper { padding-top: 2rem; padding-bottom: 0; }
+  /* --- STYLES FOR OUTRO VIDEO --- */
+  .outro-video-section {
+    margin-top: 3rem;
+  }
+  .outro-video-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-white);
+  }
+  .video-embed-container-small {
+    position: relative;
+    max-width: 560px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    background-color: #000;
+
+    aspect-ratio: 16 / 9;
+  }
+  .video-embed-container-small iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>
