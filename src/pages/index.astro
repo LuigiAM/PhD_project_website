@@ -101,6 +101,24 @@ const acronymLines = [
     </div>
   </section>
 
+
+  {/* --- VIDEO SHOWCASE SECTION --- */}
+  <section class="container video-wrapper">
+    <div class="video-header">
+      <h2>See MEMoPAD in Action</h2>
+      <p>Watch a brief trailer showcasing the current demo and its core features for mood logging, data visualization, and contextual note-taking.</p>
+    </div>
+    <div class="video-embed-container">
+      <iframe 
+        src="https://www.youtube.com/embed/fv3UThXMMPs" 
+        title="YouTube video player for MEMoPAD Prototype Demo" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
   <section class="container featured-newsletter-wrapper">
     <div class="featured-newsletter">
       <div class="newsletter-content">
@@ -201,7 +219,7 @@ const acronymLines = [
         const eraseChar = () => {
           const span = textSpans[lineToDelete];
           const fullText = span.dataset.text || '';
-          // --- THIS IS THE FIX ---
+          
           // Use a fallback to ensure textContent is treated as a string
           span.textContent = fullText.substring(0, (span.textContent || '').length - 1);
           span.classList.add('has-cursor');
@@ -323,5 +341,44 @@ const acronymLines = [
   .button.button-secondary { background-color: var(--color-white); color: var(--color-primary); }
   .button.button-secondary:hover { background-color: var(--color-background); }
   .share-wrapper { padding-top: 2rem; padding-bottom: 4rem; }
+
+    /* --- UPDATED VIDEO SECTION STYLES --- */
+  .video-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+  .video-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .video-header p {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .video-embed-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* UPDATED: Increased max-width for more resonance */
+    margin: 0 auto; /* Center the larger container */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    background-color: #000;
+  }
+  .video-embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
 </style>
 

@@ -1,5 +1,5 @@
 ---
-const BASE_URL = import.meta.env.BASE_URL;
+// No frontmatter script needed for this component anymore
 ---
 <header class="site-header">
   <div class="container">
@@ -22,6 +22,8 @@ const BASE_URL = import.meta.env.BASE_URL;
         <li><a href="/research/">The Research</a></li>
         <li><a href="/achievements/">Achievements</a></li>
         <li><a href="/take-part/">Take Part</a></li>
+        {/* --- NEW LINK ADDED --- */}
+        <li><a href="/newsletter/">Newsletter</a></li>
         <li><a href="/contact/">Contact</a></li>
       </ul>
       <hr class="mobile-menu-divider" />
@@ -82,9 +84,8 @@ const BASE_URL = import.meta.env.BASE_URL;
       font-size: 1.25rem; 
       font-weight: 700; 
       text-decoration: none; 
-      transition: color 0.2s ease;
-      /* --- THIS IS THE FIX --- */
       color: var(--color-primary);
+      transition: color 0.2s ease;
     }
     .mobile-menu-logo:hover {
       color: var(--color-text);
