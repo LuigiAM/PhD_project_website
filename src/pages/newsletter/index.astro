@@ -2,11 +2,12 @@
 // src/pages/newsletter/index.astro
 import Layout from '../../layouts/Layout.astro';
 import NewsletterCard from '../../components/NewsletterCard.astro';
+import ShareButtons from '../../components/ShareButtons.astro'; // <-- IMPORTED
 
 // This automatically finds all your newsletter markdown files
 const posts = await Astro.glob('./*.md');
 
-// --- NEW: Sort posts by date, newest first ---
+// Sort posts by date, newest first
 posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
 ---
 <Layout
@@ -29,6 +30,14 @@ posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontma
           excerpt={post.frontmatter.description}
         />
       ))}
+    </div>
+
+    {/* --- SHARE BUTTONS --- */}
+    <div class="share-wrapper">
+      <ShareButtons 
+        pageTitle="MEMoPAD Newsletter Archive"
+        shareDescription="Explore the complete archive of the MEMoPAD project newsletter for insights into our co-design process and research findings."
+      />
     </div>
   </section>
 </Layout>
@@ -67,5 +76,9 @@ posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontma
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+  }
+
+  .share-wrapper {
+    margin-top: 4rem;
   }
 </style>
