@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 'December 2024'
-date: 'January 08, 2024'
+date: 'January 08, 2025'
 description: 'Details on becoming an Innovate Healthier Together (IHT) Fellow, new student involvement, progress on co-design sessions, and our paper acceptance at HEALTHINF 2025.'
 ---
 
