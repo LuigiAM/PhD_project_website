@@ -1,11 +1,22 @@
 ---
-// No frontmatter script needed for this component anymore
+// Get the current page's path to determine the active link
+const currentPath = Astro.url.pathname;
+
+// Define navigation links in an array for easier management
+const navLinks = [
+  { href: "/project-story/", text: "Project Story" },
+  { href: "/research/", text: "The Research" },
+  { href: "/achievements/", text: "Achievements" },
+  { href: "/take-part/", text: "Take Part" },
+  { href: "/newsletter/", text: "Newsletter" },
+  { href: "/contact/", text: "Contact" },
+];
 ---
 <header class="site-header">
   <div class="container">
     <a href="/" class="site-logo">MEMoPAD</a>
 
-    {/* Hamburger Menu Button (visible only on mobile) */}
+    {/* Hamburger Menu Button */}
     <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
       <span class="sr-only">Menu</span>
       <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -18,13 +29,18 @@
       </div>
       <hr class="mobile-menu-divider" />
       <ul>
-        <li><a href="/project-story/">Project Story</a></li>
-        <li><a href="/research/">The Research</a></li>
-        <li><a href="/achievements/">Achievements</a></li>
-        <li><a href="/take-part/">Take Part</a></li>
-        {/* --- NEW LINK ADDED --- */}
-        <li><a href="/newsletter/">Newsletter</a></li>
-        <li><a href="/contact/">Contact</a></li>
+        {navLinks.map(link => {
+          // Check if the current path starts with the link's href.
+          // This handles sub-pages like /newsletter/post correctly.
+          const isActive = currentPath.startsWith(link.href);
+          return (
+            <li>
+              <a href={link.href} class:list={[{ 'is-active': isActive }]}>
+                {link.text}
+              </a>
+            </li>
+          );
+        })}
       </ul>
       <hr class="mobile-menu-divider" />
       <div class="mobile-menu-contact">
@@ -37,7 +53,6 @@
 <script>
   const menuToggle = document.querySelector('.menu-toggle');
   const primaryNav = document.querySelector('.site-nav');
-
   if (menuToggle && primaryNav) {
     menuToggle.addEventListener('click', () => {
       const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
@@ -66,8 +81,30 @@
 
   /* Desktop Navigation */
   .site-nav ul { list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; }
-  .site-nav a { color: var(--color-text); text-decoration: none; font-size: 1rem; transition: color 0.2s ease; }
+  .site-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+    position: relative;
+    padding-bottom: 8px; /* Space for the underline */
+  }
   .site-nav a:hover { color: var(--color-primary); }
+
+  /* --- NEW: Active Link Styles --- */
+  .site-nav a.is-active {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  .site-nav a.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background-color: var(--color-primary);
+  }
 
   /* Mobile Navigation Styles */
   @media (max-width: 768px) {
@@ -78,19 +115,10 @@
     .site-nav li { width: 100%; }
     .site-nav a { font-size: 1.5rem; display: block; padding: 1rem 0; border-radius: 4px; }
     .site-nav a:hover { background-color: var(--color-background); }
-    
+    .site-nav a.is-active::after { display: none; } /* Hide underline on mobile */
     .mobile-menu-header, .mobile-menu-contact { display: block; padding: 1rem 0; }
-    .mobile-menu-logo { 
-      font-size: 1.25rem; 
-      font-weight: 700; 
-      text-decoration: none; 
-      color: var(--color-primary);
-      transition: color 0.2s ease;
-    }
-    .mobile-menu-logo:hover {
-      color: var(--color-text);
-    }
-    
+    .mobile-menu-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; color: var(--color-primary); transition: color 0.2s ease; }
+    .mobile-menu-logo:hover { color: var(--color-text); }
     .mobile-menu-divider { display: block; border: none; border-top: 1px solid var(--color-border); margin: 0; }
     .mobile-menu-contact a { font-size: 1rem; color: var(--color-text-muted); padding: 1rem 0; }
   }
