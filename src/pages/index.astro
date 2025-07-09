@@ -6,6 +6,7 @@ import IconTarget from '../components/icons/IconTarget.astro';
 import IconChip from '../components/icons/IconChip.astro';
 import IconEye from '../components/icons/IconEye.astro';
 import IconCheckCircle from '../components/icons/IconCheckCircle.astro';
+import DemoCard from '../components/DemoCard.astro';
 
 const testimonials = [
   { quote: "Wow. Good to see the project moving along so fast.", author: "Co-design participant from the public" },
@@ -103,19 +104,23 @@ const acronymLines = [
 
 
   {/* --- VIDEO SHOWCASE SECTION --- */}
-  <section class="container video-wrapper">
-    <div class="video-header">
+  <section class="container demo-wrapper">
+    <div class="demo-header">
       <h2>See MEMoPAD in Action</h2>
-      <p>Watch a brief trailer showcasing the current demo and its core features for mood logging, data visualization, and contextual note-taking.</p>
+      <p>Explore our progress through the latest video trailer of the mobile app and the interactive prototype of our web app for clinicians.</p>
     </div>
-    <div class="video-embed-container">
-      <iframe 
-        src="https://www.youtube.com/embed/fv3UThXMMPs?rel=0" 
-        title="YouTube video player for MEMoPAD Prototype Demo" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-        allowfullscreen>
-      </iframe>
+    <div class="demo-grid">
+      <DemoCard
+        title="Mobile App for Personal Use"
+        description="A brief trailer showcasing the core features for mood logging, data visualization, and contextual note-taking."
+        videoId="fv3UThXMMPs"
+      />
+      <DemoCard
+        title="Web App for Professionals"
+        description="Navigate a clickable prototype of the clinician-facing dashboard. Click the image to explore."
+        linkUrl="https://memopad-demo.luigiandreamoretti.com/"
+        imgSrc="/preview-demo-webapp.jpg"
+      />
     </div>
   </section>
 
@@ -378,6 +383,36 @@ const acronymLines = [
     left: 0;
     width: 100%;
     height: 100%;
+  }
+
+    /* --- NEW DEMO SECTION STYLES --- */
+  .demo-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+  .demo-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .demo-header p {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .demo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    text-align: left;
+  }
+  @media (max-width: 900px) {
+    .demo-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 </style>
