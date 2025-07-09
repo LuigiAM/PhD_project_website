@@ -1,110 +1,59 @@
 ---
-// This is our flexible, reusable component for zigzag sections.
+// src/components/FeatureSection.astro
 import type { HTMLAttributes } from 'astro/types';
 
-// 1. Define the "props" (inputs) that this component accepts.
 type Props = {
   title: string;
-  theme?: 'light' | 'dark'; // Optional: for alternating backgrounds
-  imagePosition?: 'left' | 'right'; // Optional: for zigzag effect
-  imageSrc?: string; // Optional: path to an image
-  imageAlt?: string; // Optional: description for the image
-  linkUrl?: string; // Optional: URL to make the image a link
-  linkTitle?: string;
-  videoSrc?: string; // Optional: path to a video
-} & HTMLAttributes<'div'>; // Allows passing standard HTML attributes like class
+  theme?: 'light' | 'dark';
+  imagePosition?: 'left' | 'right';
+  imageSrc?: string;
+  imageAlt?: string;
+  linkUrl?: string;
+  linkTitle?: string; // <-- NEW optional prop
+  videoSrc?: string;
+} & HTMLAttributes<'div'>;
 
 const {
   title,
   theme = 'light',
   imagePosition = 'right',
   imageSrc,
-  imageAlt = 'Descriptive image', // Default alt text
+  imageAlt = 'Descriptive image',
   linkUrl,
-  linkTitle,
+  linkTitle, // <-- Get the new prop
   videoSrc
 } = Astro.props;
 ---
 
 <section class:list={["feature-section", { "dark-theme": theme === 'dark' }]}>
   <div class:list={["container", "feature-container", { "image-on-left": imagePosition === 'left' }]}>
-
     <div class="text-content">
       <h2>{title}</h2>
       <slot />
     </div>
-
     <div class="media-content">
       {videoSrc ? (
         <video autoplay loop muted playsinline src={videoSrc}></video>
       ) : imageSrc && linkUrl ? (
-        <a href={linkUrl} target="_blank" rel="noopener noreferrer">
+        // UPDATED: Added the 'title' attribute to the link
+        <a href={linkUrl} target="_blank" rel="noopener noreferrer" title={linkTitle}>
           <img src={imageSrc} alt={imageAlt} />
         </a>
       ) : imageSrc ? (
         <img src={imageSrc} alt={imageAlt} />
       ) : null}
     </div>
-
   </div>
 </section>
 
 <style>
-  .feature-section {
-    padding: 3.5rem 0;
-    background-color: var(--color-white);
-  }
-  .feature-section.dark-theme {
-    background-color: var(--color-background);
-  }
-
-  .feature-container {
-    display: grid;
-    grid-template-columns: 1fr; /* On mobile, one column */
-    gap: 3rem; /* Increased gap slightly for balance */
-    align-items: center;
-  }
-
-  /* On larger screens, use two columns */
-  @media (min-width: 768px) {
-    .feature-container {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  /* Logic to flip the column order for the zigzag effect */
-  .feature-container.image-on-left .media-content {
-    order: -1;
-  }
-
-  .text-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  /* --- CORRECTED STYLES START HERE --- */
-
-  /* Step 1: Style the actual image and video elements */
-  .media-content img,
-  .media-content video {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  }
-
-  /* Step 2: Style the link that WRAPS the image */
-  .media-content a {
-    display: block; /* Makes the link behave like a block */
-    line-height: 0; /* Removes extra space */
-    border-radius: 8px; /* Important for the hover effect's shadow */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  /* Step 3: Apply the hover animation to the LINK */
-  .media-content a:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  }
+  .feature-section { padding: 3.5rem 0; background-color: var(--color-white); }
+  .feature-section.dark-theme { background-color: var(--color-background); }
+  .feature-container { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+  @media (min-width: 768px) { .feature-container { grid-template-columns: 1fr 1fr; } }
+  .feature-container.image-on-left .media-content { order: -1; }
+  .text-content h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+  .media-content img, .media-content video { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+  .media-content a { display: block; line-height: 0; border-radius: 8px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .media-content a:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
 </style>
