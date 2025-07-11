@@ -168,6 +168,7 @@ import DemoCard from '../components/DemoCard.astro';
     }
   }
   /* Style DemoCard specifically when inside the green outro */
+  /* Use :global() to override component styles specifically within this section */
   .page-outro :global(.demo-card) {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.3);
