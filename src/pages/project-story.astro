@@ -12,10 +12,14 @@ import DemoCard from '../components/DemoCard.astro';
   description="Discover the story behind the MEMOPAD project, from its personal beginnings to its academic evolution. Learn how we are co-designing a digital tool to enhance mental health care through emotion recognition technology."
 >
   <section class="page-hero">
-    <div class="container">
+    
+  <section class="hero-banner">
+        <div class="container">
+          <img src="/clinical_past2.png" alt="A desk with charts and graphs, representing project progress and achievements." />
+        </div>
       <h1>Seeing the Gap, Building the Bridge</h1>
       <p class="subtitle">
-        I'm Luigi A. Moretti, MD & MSc HealthTech. This is the story of how a personal drive evolved into a PhD project exploring how emotion recognition technology can benefit mental health.
+        This is how a personal drive evolved into a PhD project exploring how emotion recognition technology can benefit mental health.
       </p>
     </div>
   </section>
@@ -30,7 +34,7 @@ import DemoCard from '../components/DemoCard.astro';
     linkTitle="View the full NHS Adult Psychiatric Morbidity Survey"
   >
     <p>
-      This journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and feeling powerless to help despite my medical background, I saw a clear and urgent need for better tools and a more empathetic system, an opportunity to make a meaningful difference that could not be ignored.
+      I'm Luigi A. Moretti, MD & MSc HealthTech, and this journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and feeling powerless to help despite my medical background, I saw a clear and urgent need for better tools and a more empathetic system, an opportunity to make a meaningful difference that could not be ignored.
       <small class="click-prompt">(Click the image to view the NHS article)</small>
     </p>
   </FeatureSection>
@@ -176,7 +180,8 @@ import DemoCard from '../components/DemoCard.astro';
   .page-outro :global(.demo-card h3) {
     color: var(--color-white);
   }
-  .page-outro :global(.demo-card p) {
+  /* This more specific selector ensures the text color is overridden correctly */
+  .page-outro :global(.demo-card .text-content p) {
     color: rgba(255, 255, 255, 0.9);
   }
 </style>
