@@ -5,6 +5,7 @@ import NavCard from '../components/NavCard.astro';
 import IconTarget from '../components/icons/IconTarget.astro';
 import IconChip from '../components/icons/IconChip.astro';
 import IconEye from '../components/icons/IconEye.astro';
+import IconUvpCheck from '../components/icons/IconUvpCheck.astro';
 import IconCheckCircle from '../components/icons/IconCheckCircle.astro';
 import DemoCard from '../components/DemoCard.astro';
 
@@ -87,6 +88,31 @@ const acronymLines = [
         <div class="item-header"><IconEye /><h2>Our Vision</h2></div>
         <p>Our goal is to co-design a digital tool that provides clear, continuous, and interpretable emotion data. We aim to help users understand themselves better, foster proactive self-management, and facilitate deeper, more effective conversations with their clinicians, ultimately improving pathways for anxiety care.</p>
       </div>
+    </div>
+  </section>
+
+  {/* --- UNIQUE VALUE PROPOSITION SECTION --- */}
+  <section class="container uvp-wrapper">
+    <div class="uvp-callout">
+      <h2>Our Unique Value Proposition</h2>
+      <ul>
+        <li>
+          <IconUvpCheck />
+          <span><strong>Emotion as a Common Language:</strong> We use emotion as a foundational layer to make complex multimodal data more understandable and to avoid the stigma of clinical labels.</span>
+        </li>
+        <li>
+          <IconUvpCheck />
+          <span><strong>Hybrid Data Fusion:</strong> We combine passive data from everyday wearables with active, user-provided content to create a richer, more complete picture of an individual's well-being.</span>
+        </li>
+        <li>
+          <IconUvpCheck />
+          <span><strong>Semi-Structured Context:</strong> The tool allows users to add context to their data in a simple way, making the insights personally relevant and clinically valuable.</span>
+        </li>
+        <li>
+          <IconUvpCheck />
+          <span><strong>Clinical Integration Focus:</strong> From the outset, the project is designed as a tool to be integrated directly into existing clinical pathways, supporting both patients and clinicians.</span>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -214,7 +240,7 @@ const acronymLines = [
             setTimeout(type, 200);
           } else {
             isTyping = false;
-            setTimeout(() => { isTyping = true; erase(); }, 6000);
+            setTimeout(() => { isTyping = true; erase(); }, 10000);
           }
         }
       };
@@ -346,6 +372,47 @@ const acronymLines = [
   .button.button-secondary { background-color: var(--color-white); color: var(--color-primary); }
   .button.button-secondary:hover { background-color: var(--color-background); }
   .share-wrapper { padding-top: 2rem; padding-bottom: 4rem; }
+
+  /* --- UVP CALLOUT STYLES --- */
+  .uvp-wrapper {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .uvp-callout {
+    background-color: var(--color-background);
+    border-left: 4px solid var(--color-primary);
+    padding: 2rem 2.5rem;
+    border-radius: 4px;
+  }
+  .uvp-callout h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .uvp-callout ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .uvp-callout li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+  .uvp-callout li svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
+  .uvp-callout li strong {
+    color: var(--color-text);
+  }
 
     /* --- VIDEO SECTION STYLES --- */
   .video-wrapper {
