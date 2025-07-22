@@ -48,6 +48,16 @@ const references = [
         <div class="definition-item">
           <h4>What are Anxiety Disorders?</h4>
           <p>Anxiety Disorders are a group of mental health conditions characterized by significant feelings of anxiety and fear. These include Generalized Anxiety Disorder (GAD), Obsessive-Compulsive Disorder (OCD), Panic Disorder (PD), Post-Traumatic Stress Disorder (PTSD), and Social Phobia (or Social Anxiety Disorder, SAD). To illustrate the scale of the issue, approximately one in ten people in the UK are affected (Adult Psychiatric Morbidity Survey, 2014), yet these conditions remain significantly under- and misdiagnosed due to clinical complexity and comorbidities <a href="#reference-3" class="citation-link">[3]</a>.</p>
+                  {/* --- SUPPORT NOTICE --- */}
+          <div class="support-notice">
+            <p>In the event that you should require any assistance or support, we invite you to find the appropriate contacts for your need at the following link: <a href="https://www.bbc.co.uk/programmes/articles/1NGvFrTqWChr03LrYlw2Hkk/information-and-support-mental-health-self-harm" target="_blank" rel="noopener noreferrer">Information and Support: Mental Health & Self-harm</a>.</p>
+          </div>
+        </div>
+        <div class="definition-item">
+          <h4>What is Affective Computing?</h4>
+          <p>A field of computer science that studies and explores emotions and their components. It involves developing systems and devices that can recognize, interpret, process, and simulate human affects, often by analyzing physiological and behavioral signals. Research consistently shows that in this field, multimodal approaches (using multiple data sources) tend to outperform unimodal ones <a href="#reference-3" class="citation-link">[3]</a>.</p>
+        </div>
+      </div>
         </div>
         <div class="definition-item">
           <h4>What is Affective Computing?</h4>
@@ -158,5 +168,25 @@ const references = [
   .references a { font-weight: 700; color: var(--color-primary); text-decoration: none; }
   .citation-link {
     font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+  .definition-item p {
+    color: var(--color-text-muted);
+  }
+
+  /* --- SUPPORT NOTICE STYLES --- */
+  .support-notice {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+  .support-notice p {
+    font-size: 0.9rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .support-notice a {
+    font-style: normal;
   }
 </style>
