@@ -7,6 +7,7 @@ import IconLink from './icons/IconLink.astro';
 
 // This prop allows us to pass a custom title for the share text
 const { pageTitle = "Check out this PhD project" } = Astro.props;
+const pageUrl = `https://memopad.luigiandreamoretti.com${Astro.url.pathname}`;
 ---
 
 <div class="share-container">

@@ -6,7 +6,7 @@ type Props = {
   imgSrc: string;
   imgAlt: string;
   expertise?: string;
-  linkUrl?: string; // <-- NEW optional prop
+  linkUrl?: string; // <-- optional prop
 }
 const { name, title, imgSrc, imgAlt, expertise, linkUrl } = Astro.props;
 
@@ -15,7 +15,7 @@ const Tag = linkUrl ? 'a' : 'div';
 ---
 
 <Tag 
-  href={linkUrl} 
+  href={linkUrl} target="_blank" rel="noopener noreferrer" class="card-link" aria-label={`View profile for ${name}`}
   class="card" 
   target={linkUrl ? '_blank' : undefined} 
   rel={linkUrl ? 'noopener noreferrer' : undefined}
@@ -39,7 +39,7 @@ const Tag = linkUrl ? 'a' : 'div';
     display: block; /* Ensures the card behaves consistently as a block */
     height: 100%; /* Ensures cards in a grid have the same height */
 
-    /* --- New styles for link behavior --- */
+    /* --- styles for link behavior --- */
     text-decoration: none;
     color: inherit; /* Inherits text color from parent */
   }

@@ -1,8 +1,8 @@
 ---
 // src/components/NavCard.astro
-const { href, title, imgSrc } = Astro.props;
+const { href, title, imgSrc, alt, linkTitle } = Astro.props;
 ---
-<a href={href} class="nav-card">
+<a href={href} class="nav-card" title={linkTitle} aria-label={linkTitle}>
   <img src={imgSrc} alt={title} class="card-bg" loading="lazy" />
   <div class="card-overlay"></div>
   <h3 class="card-title">{title}</h3>
