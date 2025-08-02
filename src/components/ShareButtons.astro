@@ -5,72 +5,46 @@ import IconX from './icons/IconX.astro';
 import IconEmail from './icons/IconEmail.astro';
 import IconLink from './icons/IconLink.astro';
 
-// This prop allows us to pass a custom title for the share text
-const { pageTitle = "Check out this PhD project" } = Astro.props;
+// UPDATED: Destructure both props with default values
+const { 
+  pageTitle = "MEMoPAD Project", 
+  shareDescription = "A PhD project exploring how co-designed emotion recognition technology can benefit mental health." 
+} = Astro.props;
+
+// Construct the full URL on the server
 const pageUrl = `https://memopad.luigiandreamoretti.com${Astro.url.pathname}`;
+
+// Construct the share URLs on the server for simplicity and reliability
+const linkedInUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}&title=${encodeURIComponent(pageTitle)}&summary=${encodeURIComponent(shareDescription)}`;
+const xUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(pageTitle)}`;
+const emailUrl = `mailto:?subject=${encodeURIComponent(pageTitle)}&body=${encodeURIComponent(shareDescription + '\n\n' + pageUrl)}`;
 ---
 
 <div class="share-container">
   <p class="share-title">Share this page</p>
   <div class="share-buttons">
-    <a 
-      id="share-linkedin"
-      href="#" 
-      class="share-button" 
-      aria-label="Share on LinkedIn"
-      target="_blank" 
-      rel="noopener noreferrer"
-    >
+    <a href={linkedInUrl} class="share-button" aria-label="Share on LinkedIn" target="_blank" rel="noopener noreferrer">
       <IconLinkedIn />
     </a>
-    <a 
-      id="share-x"
-      href="#" 
-      class="share-button" 
-      aria-label="Share on X"
-      target="_blank" 
-      rel="noopener noreferrer"
-    >
+    <a href={xUrl} class="share-button" aria-label="Share on X (formerly Twitter)" target="_blank" rel="noopener noreferrer">
       <IconX />
     </a>
-    <a 
-      id="share-email"
-      href="#"
-      class="share-button" 
-      aria-label="Share via Email"
-    >
+    <a href={emailUrl} class="share-button" aria-label="Share via Email">
       <IconEmail />
     </a>
-    <button id="copy-link" class="share-button" aria-label="Copy link">
+    <button id="copy-link" class="share-button" aria-label="Copy link to clipboard">
       <IconLink />
     </button>
   </div>
-  <span id="copy-feedback" class="copy-feedback"></span>
+  <span id="copy-feedback" class="copy-feedback" aria-live="polite"></span>
 </div>
 
-<script define:vars={{ pageTitle }}>
-  // This script runs on the client to make the buttons dynamic
+<script define:vars={{ pageUrl }}>
+  // This script now only handles the copy-to-clipboard functionality
   document.addEventListener('DOMContentLoaded', () => {
-    const pageUrl = window.location.href;
-    const shareText = encodeURIComponent(pageTitle);
-
-    const linkedInBtn = document.getElementById('share-linkedin');
-    if (linkedInBtn) {
-      linkedInBtn.href = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}&title=${shareText}`;
-    }
-
-    const xBtn = document.getElementById('share-x');
-    if (xBtn) {
-      xBtn.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${shareText}`;
-    }
-
-    const emailBtn = document.getElementById('share-email');
-    if (emailBtn) {
-      emailBtn.href = `mailto:?subject=${shareText}&body=I thought you might be interested in this project: ${pageUrl}`;
-    }
-
     const copyBtn = document.getElementById('copy-link');
     const feedbackEl = document.getElementById('copy-feedback');
+
     if (copyBtn && feedbackEl) {
       copyBtn.addEventListener('click', () => {
         const tempInput = document.createElement('input');
