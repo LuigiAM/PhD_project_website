@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import IconWatch from '../components/icons/IconWatch.astro';
 
 
 // Content variables
@@ -41,6 +42,25 @@ const references = [
       <p>
         To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href=`/achievements/#co-design-milestones`>six phases, of which three have already been completed</a>. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.
       </p>
+
+      
+      {/* --- HARDWARE & TECHNOLOGY SECTION --- */}
+      <div class="hardware-section">
+        <div class="item-header">
+          <IconWatch />
+          <h3>Wearable & Sensors</h3>
+        </div>
+        <div class="hardware-content">
+          <div class="hardware-image">
+            <img src="/google-pixel-watch.webp" alt="A high-quality product image of the Google Pixel Watch 2." />
+          </div>
+          <div class="hardware-text">
+            <p>
+              Our research leverages the advanced sensor suite of the <strong>Google Pixel Watch 2</strong>, specifically its unique continuous electrodermal activity (cEDA), but also photoplethysmography (PPG) and skin temperature sensors. The open nature of the <strong>Wear OS</strong> platform and Google's <strong>Health Connect API</strong> provides raw data access required for scientific validation and the development of novel affective computing models.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* --- KEY CONCEPTS SECTION --- */}
       <div class="definitions-section">
@@ -185,5 +205,56 @@ const references = [
   }
   .support-notice a {
     font-style: normal;
+  }
+  /* --- NEW HARDWARE SECTION STYLES --- */
+  .hardware-section {
+    margin-top: 3rem;
+    background-color: var(--color-background);
+    padding: 2rem;
+    border-radius: 8px;
+  }
+  .hardware-section .item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .hardware-section .item-header h3 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  .hardware-section .item-header svg {
+    color: var(--color-primary);
+    width: 28px;
+    height: 28px;
+  }
+  .hardware-content {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+  .hardware-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  .hardware-text p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+  .hardware-text strong {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 600px) {
+    .hardware-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .hardware-image {
+      max-width: 120px;
+      margin: 0 auto 1rem;
+    }
   }
 </style>
