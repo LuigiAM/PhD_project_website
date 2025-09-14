@@ -30,18 +30,25 @@ const acronymLines = [
   title="MEMoPAD | Multimodal Emotion Monitoring for Anxiety Disorders"
   description="The MEMOPAD project, led by Luigi A. Moretti. A PhD initiative co-designing a human-centered digital tool to provide clear, continuous, and interpretable emotion data for anxiety care.<br> This project aims to bridge the gap between technology and mental health, offering innovative solutions for anxiety management."
 >
-  <section class="hero">
-    <div class="hero-content">
-      <h1 class="animated-title">
-        <div class="acronym-breakdown">
-          {acronymLines.map(line => (
-            <div class="acronym-line">
-              <span class="acronym-letter">{line.letter}</span>
-              <span class="acronym-text" data-text={line.text}></span>
-            </div>
-          ))}
-        </div>
-      </h1>
+<section class="hero">
+  <div class="hero-content">
+    <!-- SEO + accessibility friendly H1 -->
+    <h1 class="sr-only">
+      MEMoPAD — Multimodal Emotion Monitoring using Wearable Devices for Anxiety Disorders
+    </h1>
+
+    <!-- Decorative acronym display -->
+    <div class="animated-title" aria-hidden="true">
+      <div class="acronym-breakdown">
+        {acronymLines.map(line => (
+          <div class="acronym-line">
+            <span class="acronym-letter">{line.letter}</span>
+            <span class="acronym-text" data-text={line.text}></span>
+          </div>
+        ))}
+      </div>
+    </div>
+
       <h3>
         We are co-designing a human-centered digital tool that uses technology to understand <b>emotion responses</b>, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
       </h3>
@@ -277,6 +284,18 @@ const acronymLines = [
 
 <style>
   /* --- STYLES FOR ANIMATED H1 --- */
+  .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  }
+
   .animated-title {
     display: flex;
     justify-content: center;
