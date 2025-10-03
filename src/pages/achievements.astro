@@ -23,6 +23,14 @@ import ShareButtons from '../components/ShareButtons.astro';
     {/* --- RENDER THE INTERACTIVE COMPONENT --- */}
     <InteractiveTimeline />
     
+    <section class="container cta-section">
+      <div class="cta-box">
+        <h2>Interested in what's next?</h2>
+        <p>These milestones represent years of research and collaboration. If you're exploring partnerships, funding opportunities, or ways to bring this work into your organization, let's connect.</p>
+        <a href="/work-with-me/" class="button">Explore Collaboration Opportunities</a>
+      </div>
+    </section>
+    
     <ShareButtons pageTitle="MEMOPAD Project Achievements" />
   </section>
 </Layout>
@@ -52,6 +60,47 @@ import ShareButtons from '../components/ShareButtons.astro';
     max-width: 600px;
     margin: 0.5rem auto 0;
   }
+
+    .cta-section {
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  .cta-box {
+    text-align: center;
+    background-color: var(--color-background);
+    padding: 3rem;
+    border-radius: 12px;
+    border: 2px solid var(--color-primary);
+  }
+
+  .cta-box h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-box p {
+    font-size: 1.125rem;
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+  }
+
+  .button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.2s ease;
+  }
+
+.button:hover {
+  background-color: var(--color-text);
+  transform: translateY(-2px);
+}
   
   /* ADDED STYLE FOR THE PROMPT */
   .click-prompt {

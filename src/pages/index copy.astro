@@ -33,18 +33,27 @@ const acronymLines = [
 <section class="hero">
   <div class="hero-content">
     <!-- SEO + accessibility friendly H1 -->
-    <h1>Building wearable technology that monitors emotions to improve anxiety disorder treatment</h1>
+    <h1 class="sr-only">
+      MEMoPAD — Multimodal Emotion Monitoring using Wearable Devices for Anxiety Disorders
+    </h1>
 
-    <p class="hero-subtext">
-      I'm Luigi A. Moretti, PhD candidate at UWE Bristol, former healthtech founder, medical doctor. I'm developing emotion monitoring technology that helps patients understand themselves and clinicians provide better care. Using consumer wearables like the Google Pixel Watch 2, MEMoPAD bridges clinical research and real-world deployment.
-    </p>
-
-    <div class="hero-cta">
-      <a href="#demos" class="button button-primary">See the Prototypes</a>
-      <a href="/work-with-me/" class="button button-secondary">Work With Me</a>
+    <!-- Decorative acronym display -->
+    <div class="animated-title" aria-hidden="true">
+      <div class="acronym-breakdown">
+        {acronymLines.map(line => (
+          <div class="acronym-line">
+            <span class="acronym-letter">{line.letter}</span>
+            <span class="acronym-text" data-text={line.text}></span>
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-</section>
+
+      <h3>
+        We are co-designing a human-centered digital tool that uses technology to understand <b>emotion responses</b>, providing clear and continuous data to empower users and facilitate deeper conversations with clinicians.
+      </h3>
+    </div>
+  </section>
 
   <section class="container nav-grid-wrapper">
     <div class="nav-grid">
@@ -128,7 +137,7 @@ const acronymLines = [
 
 
   {/* --- VIDEO SHOWCASE SECTION --- */}
-  <section id="demos" class="container demo-wrapper">
+  <section class="container demo-wrapper">
     <div class="demo-header">
       <h2>See MEMoPAD in Action</h2>
       <p>Explore our progress through the latest video trailer of the mobile app and the interactive prototype of our web app for clinicians.</p>
@@ -152,7 +161,7 @@ const acronymLines = [
     <div class="featured-newsletter">
       <div class="newsletter-content">
         <h2>Get Monthly Updates & Stay Connected</h2>
-        <p>Join <b>over 125</b> researchers, clinicians, and participants for exclusive and prompt insights into our co-design process, recent findings, and upcoming milestones. No spam, just progress.</p>
+        <p>Join <b>over 100</b> researchers, clinicians, and participants for exclusive and prompt insights into our co-design process, recent findings, and upcoming milestones. No spam, just progress.</p>
         <div class="button-group">
           <a href="/newsletter" class="button button-secondary">Read the archive</a>
           <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe</a>
@@ -215,44 +224,122 @@ const acronymLines = [
       }
     }
 
+    // Script for H1 typing animation
+    const textSpans = Array.from(document.querySelectorAll('.acronym-text')) as HTMLElement[];
+    if (textSpans.length > 0) {
+      let isTyping = true;
+      let currentLine = 0;
+      let currentChar = 0;
+      const type = () => {
+        if (!isTyping) return;
+        const span = textSpans[currentLine];
+        const fullText = span.dataset.text || '';
+        span.textContent = fullText.substring(0, currentChar + 1);
+        span.classList.add('has-cursor');
+        if (currentChar < fullText.length) {
+          currentChar++;
+          setTimeout(type, 50);
+        } else {
+          span.classList.remove('has-cursor');
+          currentLine++;
+          currentChar = 0;
+          if (currentLine < textSpans.length) {
+            setTimeout(type, 200);
+          } else {
+            isTyping = false;
+            setTimeout(() => { isTyping = true; erase(); }, 10000);
+          }
+        }
+      };
+      const erase = () => {
+        if (!isTyping) return;
+        let lineToDelete = textSpans.length - 1;
+        const eraseChar = () => {
+          const span = textSpans[lineToDelete];
+          const fullText = span.dataset.text || '';
+          
+          // Use a fallback to ensure textContent is treated as a string
+          span.textContent = fullText.substring(0, (span.textContent || '').length - 1);
+          span.classList.add('has-cursor');
+          if ((span.textContent || '').length > 0) {
+            setTimeout(eraseChar, 30);
+          } else {
+            span.classList.remove('has-cursor');
+            lineToDelete--;
+            if (lineToDelete >= 0) {
+              eraseChar();
+            } else {
+              isTyping = false;
+              currentLine = 0;
+              setTimeout(() => { isTyping = true; type(); }, 500);
+            }
+          }
+        };
+        eraseChar();
+      };
+      type();
+    }
   });
 </script>
 
 <style>
+  /* --- STYLES FOR ANIMATED H1 --- */
+  .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  }
+
+  .animated-title {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+  .acronym-breakdown {
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .acronym-line {
+    display: flex;
+    align-items: baseline;
+  }
+  .acronym-letter {
+    color: var(--color-primary);
+    font-weight: 700;
+    padding-right: 0.4rem;
+    min-width: 4rem;
+    text-align: right;
+  }
+  .acronym-text {
+    position: relative;
+  }
+  .acronym-text.has-cursor::after {
+    content: '';
+    position: absolute;
+    right: -0.2em;
+    top: 0.1em;
+    bottom: 0.1em;
+    width: 2px;
+    background: var(--color-text);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  
+  @media (min-width: 768px) {
+    .acronym-breakdown {
+      font-size: 2.5rem;
+    }
+  }
 
   /* --- HERO AND OTHER STYLES --- */
-  .hero h1 {
-  font-size: 2.5rem;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hero-subtext {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  color: var(--color-text-muted);
-  max-width: 700px;
-  margin: 0 auto 2rem;
-}
-
-.hero-cta {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .hero-subtext {
-    font-size: 1.1rem;
-  }
-}
   .hero {
     min-height: 70vh;
     display: flex;

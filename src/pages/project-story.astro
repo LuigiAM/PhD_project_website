@@ -23,6 +23,42 @@ import DemoCard from '../components/DemoCard.astro';
     </div>
   </section>
 
+  <section class="container acronym-section">
+  <h2>What Does MEMoPAD Mean?</h2>
+  
+  <div class="animated-title" aria-label="MEMoPAD: Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders">
+    <div class="acronym-breakdown">
+      <div class="acronym-line">
+        <span class="acronym-letter">M</span>
+        <span class="acronym-text" data-text="ultimodal"></span>
+      </div>
+      <div class="acronym-line">
+        <span class="acronym-letter">E</span>
+        <span class="acronym-text" data-text="motion"></span>
+      </div>
+      <div class="acronym-line">
+        <span class="acronym-letter">Mo</span>
+        <span class="acronym-text" data-text="nitoring"></span>
+      </div>
+      <div class="acronym-line">
+        <span class="acronym-text" data-text="in Clinical"></span>
+      </div>
+      <div class="acronym-line">
+        <span class="acronym-letter">P</span>
+        <span class="acronym-text" data-text="athways for"></span>
+      </div>
+      <div class="acronym-line">
+        <span class="acronym-letter">A</span>
+        <span class="acronym-text" data-text="nxiety"></span>
+      </div>
+      <div class="acronym-line">
+        <span class="acronym-letter">D</span>
+        <span class="acronym-text" data-text="isorders"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
   <FeatureSection
     title="The Spark: A Personal Mission"
     theme="light"
@@ -131,7 +167,124 @@ import DemoCard from '../components/DemoCard.astro';
   </div>
 </Layout>
 
+<script>
+
+    // Script for MEMoPAD typing animation
+    const textSpans = Array.from(document.querySelectorAll('.acronym-text')) as HTMLElement[];
+    if (textSpans.length > 0) {
+      let isTyping = true;
+      let currentLine = 0;
+      let currentChar = 0;
+      const type = () => {
+        if (!isTyping) return;
+        const span = textSpans[currentLine];
+        const fullText = span.dataset.text || '';
+        span.textContent = fullText.substring(0, currentChar + 1);
+        span.classList.add('has-cursor');
+        if (currentChar < fullText.length) {
+          currentChar++;
+          setTimeout(type, 50);
+        } else {
+          span.classList.remove('has-cursor');
+          currentLine++;
+          currentChar = 0;
+          if (currentLine < textSpans.length) {
+            setTimeout(type, 200);
+          } else {
+            isTyping = false;
+            setTimeout(() => { isTyping = true; erase(); }, 10000);
+          }
+        }
+      };
+      const erase = () => {
+        if (!isTyping) return;
+        let lineToDelete = textSpans.length - 1;
+        const eraseChar = () => {
+          const span = textSpans[lineToDelete];
+          const fullText = span.dataset.text || '';
+          
+          // Use a fallback to ensure textContent is treated as a string
+          span.textContent = fullText.substring(0, (span.textContent || '').length - 1);
+          span.classList.add('has-cursor');
+          if ((span.textContent || '').length > 0) {
+            setTimeout(eraseChar, 30);
+          } else {
+            span.classList.remove('has-cursor');
+            lineToDelete--;
+            if (lineToDelete >= 0) {
+              eraseChar();
+            } else {
+              isTyping = false;
+              currentLine = 0;
+              setTimeout(() => { isTyping = true; type(); }, 500);
+            }
+          }
+        };
+        eraseChar();
+      };
+      type();
+    }
+</script>
+
+
 <style>
+  /* --- STYLES FOR ANIMATED MEMoPAD --- */
+  .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+  }
+
+  .animated-title {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 0;
+  }
+  .acronym-breakdown {
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+  .acronym-line {
+    display: flex;
+    align-items: baseline;
+  }
+  .acronym-letter {
+    color: var(--color-primary);
+    font-weight: 700;
+    padding-right: 0.4rem;
+    min-width: 4rem;
+    text-align: right;
+  }
+  .acronym-text {
+    position: relative;
+  }
+  .acronym-text.has-cursor::after {
+    content: '';
+    position: absolute;
+    right: -0.2em;
+    top: 0.1em;
+    bottom: 0.1em;
+    width: 2px;
+    background: var(--color-text);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  
+  @media (min-width: 768px) {
+    .acronym-breakdown {
+      font-size: 2.5rem;
+    }
+  }
+
+
   .team-section { padding: 4rem 2rem; background-color: var(--color-background); text-align: center; }
   .team-section h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
   .team-section .subtitle, .page-hero .subtitle { font-size: 1.125rem; color: var(--color-text-muted); margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto; }
