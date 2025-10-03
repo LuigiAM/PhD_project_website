@@ -7,6 +7,10 @@ const {
   title = "MEMoPAD: Multimodal Emotion Monitoring for Anxiety Disorders",
   description = "A PhD project exploring how co-designed emotion recognition technology can benefit mental health."
 } = Astro.props;
+
+// Construct full URL for Open Graph
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL = new URL('/og-image.jpg', Astro.site); // You'll need to create this
 ---
 <!doctype html>
 <html lang="en">
@@ -17,8 +21,29 @@ const {
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   
+  <!-- Preconnect to Google Fonts for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:site_name" content="MEMoPAD Project" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalURL} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageURL} />
+  <meta name="twitter:creator" content="@LuigiAndreaM" />
 
   <script type="application/ld+json">
   {
@@ -38,14 +63,21 @@ const {
         }
       },
       {
-        "@type": "Project",
+        "@type": "ResearchProject",
         "name": "MEMoPAD: Multimodal Emotional Monitoring in Clinical Pathways for Anxiety Disorders",
         "url": "https://memopad.luigiandreamoretti.com/",
-        "description": "A PhD project exploring how co-designed emotion recognition technology can benefit mental health pathways for anxiety disorders.",
+        "description": "PhD research using wearable devices for anxiety disorder emotion monitoring",
+        "keywords": ["anxiety disorders", "wearable devices", "affective computing", "emotion recognition", "mental health technology"],
         "founder": {
           "@type": "Person",
           "name": "Luigi A. Moretti"
-        }
+        },
+        "sponsor": {
+          "@type": "Organization",
+          "name": "UWE Bristol"
+        },
+        "award": ["NHS BNSSG ICB Grant", "CATE Student Internship", "Best Student Poster Award"],
+        "status": "Active"
       }
     ]
   }
