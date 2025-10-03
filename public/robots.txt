@@ -1,0 +1,13 @@
+# MEMoPAD Project - Robots.txt
+# Allow all crawlers access to public content
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://memopad.luigiandreamoretti.com/sitemap-0.xml
+
+# Optional: Block crawlers from accessing these if they exist
+# Disallow: /drafts/
+# Disallow: /admin/
+# Disallow: /api/
