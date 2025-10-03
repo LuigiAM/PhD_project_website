@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import IconWatch from '../components/icons/IconWatch.astro';
 
-
 // Content variables
 const abstract = "Anxiety disorders present persistent challenges of underdiagnosis and misdiagnosis due to difficulties in differential diagnoses and the presence of common comorbidities. Standard self-reported approaches for assessing emotional regulation face criticism for their paradoxical nature, while semi-structured interviews can lack specificity and cross-cultural validity. This project explores how affective computing can address and mitigate these issues.";
 const objectives = [
@@ -14,18 +13,61 @@ const objectives = [
 ];
 const techStack = ["Wearable Technology", "Bio-signals (e.g. HR, EDA)", "Affective Computing", "Co-Design", "Emotion Recognition", "Human-computer interaction (HCI)", "Digital Mental Health", "Anxiety Disorders", "Emotion Regulation", "Mobile Health (mHealth)"];
 const references = [
-  "[1] M. Berking and P. Wupperman, ‘Emotion regulation and mental health: recent findings, current challenges, and future directions’, Curr. Opin. Psychiatry, vol. 25, no. 2, pp. 128–134, Mar. 2012, doi: 10.1097/YCO.0b013e3283503669.",
+  "[1] M. Berking and P. Wupperman, 'Emotion regulation and mental health: recent findings, current challenges, and future directions', Curr. Opin. Psychiatry, vol. 25, no. 2, pp. 128–134, Mar. 2012, doi: 10.1097/YCO.0b013e3283503669.",
   "[2] Noorbergen, T.J., Adam, M.T., Teubner, T. and Collins, C.E., 2021. Using co-design in mobile health system development: a qualitative study with experts in co-design and mobile health system development. JMIR mHealth and uHealth, 9(11), p.e27896.",
   "[3] Moretti, L. A., Thompson, M., Matthews, P., Loizou, M., & Western, D. (2025, January). Affective Computing in Anxiety Disorders: A Rapid Literature Review of Emotion Recognition Applications. In Proceedings of the 18th International Joint Conference on Biomedical Engineering Systems and Technologies.",
-  "[4] Policy paper ‘Fit for the future: 10 Year Health Plan for England. - Executive summary’ Published 3 July 2025."
+  "[4] Policy paper 'Fit for the future: 10 Year Health Plan for England. - Executive summary' Published 3 July 2025."
 ];
+
+// FAQ Schema for Google
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are the common technologies used for emotion recognition in anxiety research?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Current research relies on analyzing bio-signals from wearable devices. The most prevalent approaches quantify emotion using valence (positive vs. negative) and arousal (intensity). Many studies focus on conditions like PTSD, showing potential for targeted clinical applications and trans-diagnostic approaches."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the main opportunities for this technology in mental health?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Affective computing can enhance traditional care by monitoring treatment progression in therapies like CBT, assessing treatment efficacy, and fostering patient-centric care by improving clinician-patient interactions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does MEMoPAD's approach address current gaps?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MEMoPAD focuses on collecting longitudinal data in real-world contexts using consumer wearables, unlike lab-based studies. The co-design methodology ensures the tool is technologically advanced, usable, interpretable, and valuable to both patients and clinicians."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why focus on consumer wearable devices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Consumer wearables offer precision (increasingly accurate sensors), affordability (scalable research), comfort (long-term data collection), and lack stigma (not perceived as medical devices). Multimodal approaches using these devices outperform unimodal methods in affective computing."
+      }
+    }
+  ]
+};
 ---
 <Layout
-  title="Research & Methodology - MEMOPAD Project"
-  description="Explore the research and methodology behind the MEMOPAD project, a PhD initiative co-designing a human-centered digital tool for emotion analysis in anxiety care."
+  title="Wearable Emotion Monitoring for Anxiety Disorders Research | MEMoPAD"
+  description="PhD research using Google Pixel Watch 2 and affective computing to monitor emotions in anxiety disorders. Co-designed with patients, carers, and clinicians across 7 phases."
 >
+  <!-- FAQ Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
   <section class="hero-banner">
-    <img src="/research-hero-banner.jpg" alt="Luigi A. Moretti presenting the MEMoPAD project poster at a digital mental health conference in 2024." />
+    <img src="/research-hero-banner.jpg" alt="Luigi A. Moretti presenting MEMoPAD wearable emotion monitoring research poster at digital mental health conference 2024" />
   </section>
 
   <section class="container">
@@ -41,23 +83,22 @@ const references = [
 
       <h2 id="methodology">Methodology</h2>
       <p>
-        To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href=`/achievements/#co-design-milestones`>seven phases, of which five have already been completed</a>. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies.
+        To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href="/achievements/#co-design-milestones">seven phases, of which five have already been completed</a>. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies. <a href="/project-story/">Learn more about our co-design journey</a>.
       </p>
 
-      
       {/* --- HARDWARE & TECHNOLOGY SECTION --- */}
       <div class="hardware-section">
         <div class="item-header">
           <IconWatch />
-          <h3>Wearable & Sensors</h3>
+          <h3 id="wearable-sensors">Wearable & Sensors</h3>
         </div>
         <div class="hardware-content">
           <div class="hardware-image">
-            <img src="/google-pixel-watch.webp" alt="A high-quality product image of the Google Pixel Watch 2." />
+            <img src="/google-pixel-watch.webp" alt="Google Pixel Watch 2 with cEDA electrodermal activity sensor for anxiety emotion monitoring" />
           </div>
           <div class="hardware-text">
             <p>
-              Our research leverages the advanced sensor suite of the <strong>Google Pixel Watch 2</strong>, specifically its unique continuous electrodermal activity (cEDA), but also photoplethysmography (PPG) and skin temperature sensors. The open nature of the <strong>Wear OS</strong> platform and Google's <strong>Health Connect API</strong> provides raw data access required for scientific validation and the development of novel affective computing models.
+              Our research leverages the advanced sensor suite of the <strong>Google Pixel Watch 2</strong>, specifically its unique continuous electrodermal activity (cEDA), but also photoplethysmography (PPG) and skin temperature sensors. The open nature of the <strong>Wear OS</strong> platform and Google's <strong>Health Connect API</strong> provides raw data access required for scientific validation and the development of novel <a href="#affective-computing">affective computing models</a>.
             </p>
           </div>
         </div>
@@ -69,18 +110,15 @@ const references = [
         <div class="definition-item">
           <h4>What are Anxiety Disorders?</h4>
           <p>Anxiety Disorders are a group of mental health conditions characterized by significant feelings of anxiety and fear. These include Generalized Anxiety Disorder (GAD), Obsessive-Compulsive Disorder (OCD), Panic Disorder (PD), Post-Traumatic Stress Disorder (PTSD), and Social Phobia (or Social Anxiety Disorder, SAD). To illustrate the scale of the issue, approximately one in ten people in the UK are affected (Adult Psychiatric Morbidity Survey, 2014), yet these conditions remain significantly under- and misdiagnosed due to clinical complexity and comorbidities <a href="#reference-3" class="citation-link">[3]</a>.</p>
-                  {/* --- SUPPORT NOTICE --- */}
+          {/* --- SUPPORT NOTICE --- */}
           <div class="support-notice">
             <p>In the event that you should require any assistance or support, we invite you to find the appropriate contacts for your need at the following link: <a href="https://www.bbc.co.uk/programmes/articles/1NGvFrTqWChr03LrYlw2Hkk/information-and-support-mental-health-self-harm" target="_blank" rel="noopener noreferrer">Information and Support: Mental Health & Self-harm</a>.</p>
           </div>
         </div>
-        <div class="definition-item">
+        <div class="definition-item" id="affective-computing">
           <h4>What is Affective Computing?</h4>
           <p>A field of computer science that studies and explores emotions and their components. It involves developing systems and devices that can recognize, interpret, process, and simulate human affects, often by analyzing physiological and behavioral signals. Research consistently shows that in this field, multimodal approaches (using multiple data sources) tend to outperform unimodal ones <a href="#reference-3" class="citation-link">[3]</a>.</p>
         </div>
-      </div>
-        </div>
-
       </div>
       
       <div class="qna-section">
@@ -106,7 +144,7 @@ const references = [
       <div class="slideshow-section">
         <h2>View the Slideshow</h2>
         <a href="https://www.linkedin.com/posts/luigiandreamoretti_literature-review-affective-computing-in-activity-7316080903959601153-aU0N/" target="_blank" rel="noopener noreferrer" class="slideshow-link">
-          <img src="/slideshow-preview.jpg" alt="Cover slide of a presentation titled 'Affective Computing in Anxiety Disorders: A Rapid Literature Review'." />
+          <img src="/slideshow-preview.jpg" alt="Affective Computing in Anxiety Disorders rapid literature review presentation cover slide by Luigi A. Moretti" />
           <span>Click to view on LinkedIn</span>
         </a>
       </div>
@@ -117,7 +155,6 @@ const references = [
       <h2>References</h2>
       <div class="references">
         {references.map((ref, index) => (
-          // Added an ID to the third reference for jump links
           <p id={index === 2 ? 'reference-3' : undefined}>
             <small>
               {ref}
@@ -127,22 +164,20 @@ const references = [
         ))}
       </div>
       
-      <ShareButtons pageTitle="Research & Methodology - The MEMOPAD Project" shareDescription="In the MEMoPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." />
+      <ShareButtons pageTitle="Wearable Emotion Monitoring Research for Anxiety Disorders" shareDescription="PhD research using Google Pixel Watch 2 and affective computing to improve anxiety disorder care through co-designed emotion monitoring technology." />
     </div>
   </section>
 </Layout>
 
 <style>
-
   .page-subtitle {
-  text-align: center;
-  font-size: 1.25rem;
-  color: var(--color-text-muted);
-  margin-top: -1.5rem;
-  margin-bottom: 2rem;
-}
-  html { scroll-behavior: smooth; } /* Smooth scrolling for jump links */
-  /* Base Styles */
+    text-align: center;
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+  }
+  html { scroll-behavior: smooth; }
   .research-content p a { color: var(--color-primary); font-weight: 700; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color 0.2s ease; }
   .research-content p a:hover { border-bottom-color: var(--color-primary); }
   .hero-banner { width: 100%; height: 400px; margin-bottom: 4rem; }
@@ -154,7 +189,6 @@ const references = [
   ul { list-style-type: disc; padding-left: 2rem; }
   li { margin-bottom: 0.5rem; }
   
-  /* --- DEFINITIONS SECTION STYLES --- */
   .definitions-section {
     margin-top: 3rem;
   }
@@ -173,13 +207,11 @@ const references = [
     color: var(--color-text-muted);
   }
 
-  /* Q&A Section Styles */
   .qna-section { margin-top: 3rem; border-top: 1px solid var(--color-border); padding-top: 1rem; }
   .qna-item { margin-bottom: 2rem; }
   .qna-item h4 { font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--color-text); }
   .qna-item p { color: var(--color-text-muted); }
 
-  /* Slideshow Section Styles */
   .slideshow-section { text-align: center; margin-top: 2rem; }
   .slideshow-section h2 { font-size: 1.5rem; border-bottom: none; }
   .slideshow-link { display: inline-block; text-decoration: none; color: var(--color-text); transition: transform 0.2s ease; }
@@ -187,7 +219,6 @@ const references = [
   .slideshow-link img { width: 100%; max-width: 500px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
   .slideshow-link span { display: block; margin-top: 1rem; font-weight: 700; color: var(--color-text-muted); }
 
-  /* Keywords and References */
   .tech-stack { display: flex; flex-wrap: wrap; gap: 0.75rem; }
   .tag { display: inline-block; padding: 0.25rem 0.75rem; background-color: var(--color-background); border-radius: 4px; font-size: 0.875rem; font-weight: 700; }
   .references p { margin-bottom: 0.5rem; }
@@ -197,11 +228,7 @@ const references = [
     color: var(--color-primary);
     text-decoration: none;
   }
-  .definition-item p {
-    color: var(--color-text-muted);
-  }
 
-  /* --- SUPPORT NOTICE STYLES --- */
   .support-notice {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
@@ -215,7 +242,7 @@ const references = [
   .support-notice a {
     font-style: normal;
   }
-  /* --- HARDWARE SECTION STYLES --- */
+
   .hardware-section {
     margin-top: 3rem;
     background-color: var(--color-background);
