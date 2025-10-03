@@ -4,13 +4,59 @@ import Layout from './Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 
 const { frontmatter } = Astro.props;
+
+// Parse date for schema (handle inconsistent formats)
+const parseDate = (dateStr: string) => {
+  // Try parsing as-is first
+  const parsed = new Date(dateStr);
+  if (!isNaN(parsed.getTime())) {
+    return parsed.toISOString();
+  }
+  // Fallback: return empty string if unparseable
+  return '';
+};
+
+const publishedDate = parseDate(frontmatter.date);
+const articleURL = new URL(Astro.url.pathname, Astro.site);
 ---
+
 <Layout title={frontmatter.title} description={frontmatter.description}>
+  <!-- Schema for Newsletter/BlogPosting -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": frontmatter.title,
+    "description": frontmatter.description,
+    "datePublished": publishedDate,
+    "author": {
+      "@type": "Person",
+      "name": "Luigi A. Moretti",
+      "url": "https://memopad.luigiandreamoretti.com/contact/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MEMoPAD Project",
+      "url": "https://memopad.luigiandreamoretti.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://memopad.luigiandreamoretti.com/favicon.svg"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": articleURL
+    },
+    "articleSection": "Research Updates",
+    "keywords": ["anxiety disorders", "wearable technology", "mental health research", "co-design", "emotion monitoring"]
+  })} />
+
   <section class="container">
     <article class="post-content">
       <header class="post-header">
         <h1>{frontmatter.title}</h1>
-        <p class="post-date">Published on: {frontmatter.date}</p>
+        <p class="post-date">
+          <time datetime={publishedDate}>Published on: {frontmatter.date}</time>
+        </p>
       </header>
       <div class="post-body">
         <slot />
