@@ -1,16 +1,18 @@
 ---
 const currentYear = new Date().getFullYear();
+const lastUpdated = "October 2025"; // Update this manually when making major changes
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="copyright">
       <p>&copy; {currentYear} Luigi Andrea Moretti. All rights reserved.</p>
       <p>Your privacy matters! This website does not use any invasive tracking software.</p>
+      <p class="timestamp">Project status as of {lastUpdated} · Website last updated {lastUpdated}</p>
     </div>
     <nav class="footer-nav">
       <a href="/privacy/">Privacy Policy</a>
       <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter">
-        📬Follow the journey: subscribe to the monthly newsletter
+        📬 Follow the journey: subscribe to the monthly newsletter
       </a>
     </nav>
   </div>
@@ -40,6 +42,12 @@ const currentYear = new Date().getFullYear();
     line-height: 1.5;
     flex-grow: 1;
   }
+  .copyright .timestamp {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.8;
+  }
   .footer-nav {
     display: flex;
     gap: 1.5rem;
@@ -50,12 +58,8 @@ const currentYear = new Date().getFullYear();
     font-weight: 700;
     text-decoration: none;
     transition: color 0.2s ease;
-    white-space: nowrap;
-    
-    /* --- THIS IS THE FIX --- */
-    /* Allows long text strings to break to prevent overflow */
     overflow-wrap: break-word;
-    white-space: normal; /* Allows the text to wrap */
+    white-space: normal;
   }
   .footer-nav a:hover {
     color: var(--color-primary);

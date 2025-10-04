@@ -37,6 +37,51 @@ const testimonials = [
   </div>
 </section>
 
+<!-- AI-Optimized Key Takeaways Section -->
+<section class="container key-takeaways-wrapper">
+  <div class="key-takeaways">
+
+    
+    <div class="facts-grid">
+      <div class="fact-item">
+        <strong>What</strong>
+        <p>Wearable emotion monitoring for anxiety disorders (GAD, PTSD, OCD, PD, SAD)</p>
+      </div>
+      <div class="fact-item">
+        <strong>Who</strong>
+        <p>Luigi A. Moretti, MD, MSc HealthTech, PhD candidate at UWE Bristol</p>
+      </div>
+      <div class="fact-item">
+        <strong>Technology</strong>
+        <p>Google Pixel Watch 2 sensors (cEDA, PPG, skin temperature) + self-reported data on the mobile app</p>
+      </div>
+      <div class="fact-item">
+        <strong>Validation</strong>
+        <p>87+ co-design participants across 7 phases (5 completed)</p>
+      </div>
+      <div class="fact-item">
+        <strong>Funding</strong>
+        <p>£4,500+ from NHS BNSSG ICB and UWE Bristol</p>
+      </div>
+      <div class="fact-item">
+        <strong>Impact</strong>
+        <p>Published at HEALTHINF 2025, Best Student Poster Award winner at Multimodal AI 2024</p>
+      </div>
+    </div>
+
+    <div class="how-it-helps">
+      <h3>How Emotion Monitoring Helps Anxiety Disorders</h3>
+      <ul>
+        <li><strong>Continuous tracking:</strong> Captures patterns missed by self-report questionnaires</li>
+        <li><strong>Real-world context:</strong> Links emotions to daily activities, triggers, and coping strategies</li>
+        <li><strong>Objective data:</strong> Reduces recall bias and provides physiological evidence for clinical conversations</li>
+        <li><strong>Early intervention:</strong> Improves self-awareness, supporting proactiveness and timely interventions</li>
+        <li><strong>Personalized insights:</strong> Recognizes individual patterns and multimodal data correlations</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
   <section class="container nav-grid-wrapper">
     <div class="nav-grid">
       <NavCard 
@@ -254,6 +299,123 @@ const testimonials = [
   .hero-content { max-width: 800px; padding: 0 2rem; }
   .hero h3 { font-size: 1.125rem; font-weight: 400; line-height: 1.6; max-width: 650px; margin: 0 auto; color: var(--color-text-muted); }
   
+  /* Key Takeaways Section */
+  .key-takeaways-wrapper {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .key-takeaways {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-left: 6px solid var(--color-primary);
+    border-radius: 12px;
+    padding: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .key-takeaways h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .takeaway-summary {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 2.5rem;
+    font-weight: 500;
+  }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .fact-item {
+    background-color: var(--color-white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .fact-item strong {
+    display: block;
+    color: var(--color-primary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+
+  .fact-item p {
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .how-it-helps {
+    background-color: var(--color-white);
+    padding: 2rem;
+    border-radius: 8px;
+    border-top: 3px solid var(--color-primary);
+  }
+
+  .how-it-helps h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .how-it-helps ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .how-it-helps li {
+    padding-left: 2rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+  }
+
+  .how-it-helps li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.3rem;
+  }
+
+  .how-it-helps li strong {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 768px) {
+    .key-takeaways {
+      padding: 2rem;
+    }
+    
+    .key-takeaways h2 {
+      font-size: 2rem;
+    }
+    
+    .takeaway-summary {
+      font-size: 1.1rem;
+    }
+    
+    .facts-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .nav-grid-wrapper { padding-top: 2rem; padding-bottom: 2rem; }
   .nav-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   @media (max-width: 900px) { .nav-grid { grid-template-columns: 1fr; } }
