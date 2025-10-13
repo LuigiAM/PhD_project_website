@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
 title: 'August 2025'
-date: 'Septemebr 09, 2025'
+date: 'September 09, 2025'
 description: 'Some months are for sowing, while others are for reaping. August was certainly one of the latter for the MEMoPAD project.'
 ---
 Some months are for sowing, while others are for reaping. August was certainly one of the latter for the MEMoPAD project, and it’s a joy to share the fruits of our collective efforts with you!
