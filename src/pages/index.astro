@@ -23,17 +23,26 @@ const testimonials = [
 >
 <section class="hero">
   <div class="hero-content">
-    <!-- SEO + accessibility friendly H1 -->
-    <h1>Building wearable technology that monitors emotions to improve anxiety disorders treatment</h1>
-
-    <p class="hero-subtext">
-      I'm Luigi A. Moretti, PhD candidate at UWE Bristol, former healthtech founder, medical doctor. I'm developing emotion monitoring technology that helps patients understand themselves and clinicians provide better care. Using consumer wearables like the Google Pixel Watch 2, MEMoPAD bridges clinical research and real-world deployment.
-    </p>
-
-    <div class="hero-cta">
-      <a href="#demos" class="button button-primary">See the Prototypes</a>
-      <a href="/collaborate/" class="button button-secondary">Work With Me</a>
+    <div class="hero-text">
+      <h1>Building wearable technology that monitors emotions to improve anxiety disorders treatment</h1>
+      
+      <p class="hero-subtext">
+        I'm Luigi A. Moretti, PhD candidate at UWE Bristol, former healthtech founder, medical doctor. I'm developing emotion monitoring technology that helps patients understand themselves and clinicians provide better care. Using consumer wearables like the Google Pixel Watch 2, MEMoPAD bridges clinical research and real-world deployment.
+      </p>
     </div>
+
+    <div class="hero-image">
+      <img 
+        src="public/memopad-hero-image.png" 
+        alt="MEMoPAD ecosystem showing clinical web dashboard, personal mobile app, and Google Pixel Watch 2 integration"
+        loading="eager"
+      />
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#demos" class="button button-primary">See the Prototypes</a>
+    <a href="/collaborate/" class="button button-secondary">Work With Me</a>
   </div>
 </section>
 
@@ -246,21 +255,55 @@ const testimonials = [
 <style>
 
   /* --- HERO AND OTHER STYLES --- */
-  .hero h1 {
+.hero {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.hero-text {
+  text-align: right;
+}
+
+.hero h1 {
   font-size: 2.5rem;
   line-height: 1.2;
   margin-bottom: 1.5rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .hero-subtext {
   font-size: 1.25rem;
   line-height: 1.6;
   color: var(--color-text-muted);
-  max-width: 700px;
-  margin: 0 auto 2rem;
+  margin: 0;
+}
+
+.hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  max-width: 550px;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.15));
+  border-radius: 16px;
 }
 
 .hero-cta {
@@ -270,24 +313,29 @@ const testimonials = [
   flex-wrap: wrap;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .hero-text {
+    text-align: center;
+  }
+  
   .hero h1 {
     font-size: 2rem;
   }
+  
   .hero-subtext {
     font-size: 1.1rem;
   }
-}
-  .hero {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  .hero-content { max-width: 800px; padding: 0 2rem; }
-  .hero h3 { font-size: 1.125rem; font-weight: 400; line-height: 1.6; max-width: 650px; margin: 0 auto; color: var(--color-text-muted); }
   
+  .hero-image {
+    order: -1; /* Image appears above text on mobile */
+  }
+}
+
   /* Key Takeaways Section */
   .key-takeaways-wrapper {
     padding-top: 3rem;
@@ -557,4 +605,3 @@ const testimonials = [
   }
 </style>
 </style>
-
