@@ -12,12 +12,12 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageURL = new URL('/og-image.jpg', Astro.site);
 
-// Schema.org structured data with Gemini improvements
+// Schema.org structured data - using stable core types
 const schemaData = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "ResearchProject",
+      "@type": "Project",
       "@id": "https://memopad.luigiandreamoretti.com/#research-project",
       "name": "MEMoPAD",
       "alternateName": "Multimodal Emotion Monitoring using Wearable Devices for Anxiety Disorders",
@@ -28,18 +28,7 @@ const schemaData = {
       "startDate": "2023-10-01",
       "endDate": "2026-09-30",
       
-      "keywords": [
-        "wearable technology",
-        "emotion monitoring",
-        "anxiety disorders",
-        "affective computing",
-        "digital mental health",
-        "co-design",
-        "Google Pixel Watch",
-        "electrodermal activity",
-        "photoplethysmography",
-        "clinical decision support"
-      ],
+      "keywords": "wearable technology, emotion monitoring, anxiety disorders, affective computing, digital mental health, co-design, Google Pixel Watch, electrodermal activity, photoplethysmography, clinical decision support",
       
       "about": [
         {
@@ -111,88 +100,85 @@ const schemaData = {
       "contributor": [
         {
           "@type": "Person",
-          "name": "Dr. Melisa Duque",
+          "name": "Dr. David Western",
           "jobTitle": "Lead Supervisor",
           "affiliation": {
             "@type": "EducationalOrganization",
             "@id": "https://www.uwe.ac.uk/#organization"
           },
-          "sameAs": "https://orcid.org/0000-0002-4303-7423"
+          "sameAs": "https://people.uwe.ac.uk/Person/DavidWestern"
         },
         {
           "@type": "Person",
-          "name": "Dr. Ross McLachlan",
+          "name": "Dr. Miles Thompson",
           "jobTitle": "Second Supervisor",
           "affiliation": {
             "@type": "EducationalOrganization",
-            "@id": "https://www.uwe.ac.uk/#organization"
+            "@id": "https://people.uwe.ac.uk/Person/Miles2Thompson"
           }
         },
         {
           "@type": "Person",
-          "name": "Dr. Rosie Iles-Smith",
-          "jobTitle": "External Supervisor",
+          "name": "Dr. Paul Matthews",
+          "jobTitle": "Second Supervisor",
           "affiliation": {
-            "@type": "Organization",
-            "name": "NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board",
-            "url": "https://bnssg.icb.nhs.uk/"
-          }
-        }
-      ],
-      
-      "fundedBy": [
-        {
-          "@type": "Grant",
-          "name": "UWE Bristol PhD Scholarship",
-          "funder": {
             "@type": "EducationalOrganization",
-            "@id": "https://www.uwe.ac.uk/#organization"
+            "@id": "https://people.uwe.ac.uk/Person/Paul2Matthews"
           }
         },
         {
-          "@type": "Grant",
-          "name": "NHS BNSSG ICB Research Grant",
-          "funder": {
+          "@type": "Person",
+          "name": "Dr. Michael Loizou",
+          "jobTitle": "External Supervisor",
+          "affiliation": {
             "@type": "Organization",
-            "name": "NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board",
-            "url": "https://bnssg.icb.nhs.uk/"
+            "name": "University of Plymouth",
+            "url": "https://www.plymouth.ac.uk/staff/michael-loizou"
           }
         }
       ],
       
-      "isPartOf": {
+      "funder": [
+        {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.uwe.ac.uk/#organization"
+        },
+        {
+          "@type": "Organization",
+          "name": "NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board",
+          "url": "https://bnssg.icb.nhs.uk/"
+        }
+      ],
+      
+      "parentOrganization": {
         "@type": "EducationalOrganization",
         "@id": "https://www.uwe.ac.uk/#organization"
+      }
+    },
+    
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://memopad.luigiandreamoretti.com/#publication-1",
+      "name": "Wearable and Mobile Affective Computing for Anxiety Disorders: A Scoping Review",
+      "datePublished": "2025-01-01",
+      "isPartOf": {
+        "@type": "EventSeries",
+        "name": "HEALTHINF 2025 - 18th International Conference on Health Informatics"
       },
-      
-      "ethicsPolicy": {
-        "@type": "CreativeWork",
-        "name": "UWE Research Ethics Approval",
-        "identifier": "CATE-2324-274"
-      },
-      
-      "publication": [
+      "identifier": [
         {
-          "@type": "ScholarlyArticle",
-          "name": "Wearable and Mobile Affective Computing for Anxiety Disorders: A Scoping Review",
-          "datePublished": "2025-01-01",
-          "isPartOf": {
-            "@type": "PublicationEvent",
-            "name": "HEALTHINF 2025 - 18th International Conference on Health Informatics"
-          },
-          "identifier": [
-            {
-              "@type": "PropertyValue",
-              "propertyID": "DOI",
-              "value": "10.5220/0013322800003911"
-            }
-          ],
-          "url": "https://doi.org/10.5220/0013322800003911",
-          "author": {
-            "@id": "https://luigiandreamoretti.com/#person"
-          }
+          "@type": "PropertyValue",
+          "propertyID": "DOI",
+          "value": "10.5220/0013322800003911"
         }
-      ]
+      ],
+      "url": "https://doi.org/10.5220/0013322800003911",
+      "about": {
+        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
+      },
+      "author": {
+        "@id": "https://luigiandreamoretti.com/#person"
+      }
     },
     
     {
@@ -222,10 +208,6 @@ const schemaData = {
       
       "softwareRequirements": "Android 9.0+, Google Pixel Watch 2",
       
-      "isBasedOn": {
-        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
-      },
-      
       "author": {
         "@id": "https://luigiandreamoretti.com/#person"
       },
@@ -233,6 +215,10 @@ const schemaData = {
       "provider": {
         "@type": "EducationalOrganization",
         "@id": "https://www.uwe.ac.uk/#organization"
+      },
+      
+      "isRelatedTo": {
+        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
       }
     },
     
@@ -262,6 +248,14 @@ const schemaData = {
           "item": "https://memopad.luigiandreamoretti.com/"
         }
       ]
+    },
+    
+    {
+      "@type": "DefinedTerm",
+      "@id": "https://memopad.luigiandreamoretti.com/#ethics",
+      "name": "UWE Research Ethics Approval",
+      "identifier": "CATE-2324-274",
+      "inDefinedTermSet": "University of the West of England Research Ethics Committee"
     }
   ]
 };
