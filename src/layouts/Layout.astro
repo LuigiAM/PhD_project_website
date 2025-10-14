@@ -10,7 +10,261 @@ const {
 
 // Construct full URL for Open Graph
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL('/og-image.jpg', Astro.site); // You'll need to create this
+const ogImageURL = new URL('/og-image.jpg', Astro.site);
+
+// Schema.org structured data with Gemini improvements
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ResearchProject",
+      "@id": "https://memopad.luigiandreamoretti.com/#research-project",
+      "name": "MEMoPAD",
+      "alternateName": "Multimodal Emotion Monitoring using Wearable Devices for Anxiety Disorders",
+      "description": "A PhD research project co-designing a human-centered digital tool that uses consumer wearables (Google Pixel Watch 2) to provide clear, continuous, and interpretable emotion data for anxiety care. The project bridges clinical research and real-world deployment through participatory design with patients, clinicians, and carers.",
+      "url": "https://memopad.luigiandreamoretti.com/",
+      "image": "https://memopad.luigiandreamoretti.com/memopad-hero-image.png",
+      
+      "startDate": "2023-10-01",
+      "endDate": "2026-09-30",
+      
+      "keywords": [
+        "wearable technology",
+        "emotion monitoring",
+        "anxiety disorders",
+        "affective computing",
+        "digital mental health",
+        "co-design",
+        "Google Pixel Watch",
+        "electrodermal activity",
+        "photoplethysmography",
+        "clinical decision support"
+      ],
+      
+      "about": [
+        {
+          "@type": "MedicalCondition",
+          "name": "Generalized Anxiety Disorder",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "F41.1",
+            "codingSystem": "ICD-10"
+          }
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Post-Traumatic Stress Disorder",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "F43.1",
+            "codingSystem": "ICD-10"
+          }
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Obsessive-Compulsive Disorder",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "F42",
+            "codingSystem": "ICD-10"
+          }
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Panic Disorder",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "F41.0",
+            "codingSystem": "ICD-10"
+          }
+        },
+        {
+          "@type": "MedicalCondition",
+          "name": "Social Anxiety Disorder",
+          "code": {
+            "@type": "MedicalCode",
+            "codeValue": "F40.1",
+            "codingSystem": "ICD-10"
+          }
+        }
+      ],
+      
+      "author": {
+        "@type": "Person",
+        "@id": "https://luigiandreamoretti.com/#person",
+        "name": "Luigi A. Moretti",
+        "alternateName": "Luigi Andrea Moretti",
+        "jobTitle": "PhD Researcher in Wearable Mental Health Technology",
+        "affiliation": {
+          "@type": "EducationalOrganization",
+          "@id": "https://www.uwe.ac.uk/#organization",
+          "name": "University of the West of England, Bristol",
+          "url": "https://www.uwe.ac.uk/"
+        },
+        "sameAs": [
+          "https://orcid.org/0009-0002-6180-0565",
+          "https://scholar.google.co.uk/citations?user=KJTGED4AAAAJ",
+          "https://www.linkedin.com/in/luigiandreamoretti/"
+        ]
+      },
+      
+      "contributor": [
+        {
+          "@type": "Person",
+          "name": "Dr. Melisa Duque",
+          "jobTitle": "Lead Supervisor",
+          "affiliation": {
+            "@type": "EducationalOrganization",
+            "@id": "https://www.uwe.ac.uk/#organization"
+          },
+          "sameAs": "https://orcid.org/0000-0002-4303-7423"
+        },
+        {
+          "@type": "Person",
+          "name": "Dr. Ross McLachlan",
+          "jobTitle": "Second Supervisor",
+          "affiliation": {
+            "@type": "EducationalOrganization",
+            "@id": "https://www.uwe.ac.uk/#organization"
+          }
+        },
+        {
+          "@type": "Person",
+          "name": "Dr. Rosie Iles-Smith",
+          "jobTitle": "External Supervisor",
+          "affiliation": {
+            "@type": "Organization",
+            "name": "NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board",
+            "url": "https://bnssg.icb.nhs.uk/"
+          }
+        }
+      ],
+      
+      "fundedBy": [
+        {
+          "@type": "Grant",
+          "name": "UWE Bristol PhD Scholarship",
+          "funder": {
+            "@type": "EducationalOrganization",
+            "@id": "https://www.uwe.ac.uk/#organization"
+          }
+        },
+        {
+          "@type": "Grant",
+          "name": "NHS BNSSG ICB Research Grant",
+          "funder": {
+            "@type": "Organization",
+            "name": "NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board",
+            "url": "https://bnssg.icb.nhs.uk/"
+          }
+        }
+      ],
+      
+      "isPartOf": {
+        "@type": "EducationalOrganization",
+        "@id": "https://www.uwe.ac.uk/#organization"
+      },
+      
+      "ethicsPolicy": {
+        "@type": "CreativeWork",
+        "name": "UWE Research Ethics Approval",
+        "identifier": "CATE-2324-274"
+      },
+      
+      "publication": [
+        {
+          "@type": "ScholarlyArticle",
+          "name": "Wearable and Mobile Affective Computing for Anxiety Disorders: A Scoping Review",
+          "datePublished": "2025-01-01",
+          "isPartOf": {
+            "@type": "PublicationEvent",
+            "name": "HEALTHINF 2025 - 18th International Conference on Health Informatics"
+          },
+          "identifier": [
+            {
+              "@type": "PropertyValue",
+              "propertyID": "DOI",
+              "value": "10.5220/0013322800003911"
+            }
+          ],
+          "url": "https://doi.org/10.5220/0013322800003911",
+          "author": {
+            "@id": "https://luigiandreamoretti.com/#person"
+          }
+        }
+      ]
+    },
+    
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://memopad.luigiandreamoretti.com/#software",
+      "name": "MEMoPAD",
+      "alternateName": "MEMoPAD Mobile App",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Android",
+      "description": "Mobile application for personal emotion tracking, mood logging, and data visualization using Google Pixel Watch 2 sensors (cEDA, PPG, skin temperature).",
+      "screenshot": "https://memopad.luigiandreamoretti.com/memopad-hero-image.png",
+      
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "GBP"
+      },
+      
+      "featureList": [
+        "Continuous emotion monitoring via wearable sensors",
+        "Real-time mood logging and self-report integration",
+        "Contextual note-taking linked to physiological data",
+        "Data visualization and pattern recognition",
+        "Privacy-preserving local data storage",
+        "Clinical dashboard integration for healthcare providers"
+      ],
+      
+      "softwareRequirements": "Android 9.0+, Google Pixel Watch 2",
+      
+      "isBasedOn": {
+        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
+      },
+      
+      "author": {
+        "@id": "https://luigiandreamoretti.com/#person"
+      },
+      
+      "provider": {
+        "@type": "EducationalOrganization",
+        "@id": "https://www.uwe.ac.uk/#organization"
+      }
+    },
+    
+    {
+      "@type": "WebSite",
+      "@id": "https://memopad.luigiandreamoretti.com/#website",
+      "url": "https://memopad.luigiandreamoretti.com/",
+      "name": "MEMoPAD Project",
+      "description": "Official website for the MEMoPAD research project on wearable emotion monitoring for anxiety disorders",
+      "publisher": {
+        "@id": "https://www.uwe.ac.uk/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
+      },
+      "inLanguage": "en-GB"
+    },
+    
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://memopad.luigiandreamoretti.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://memopad.luigiandreamoretti.com/"
+        }
+      ]
+    }
+  ]
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -45,49 +299,14 @@ const ogImageURL = new URL('/og-image.jpg', Astro.site); // You'll need to creat
   <meta name="twitter:image" content={ogImageURL} />
   <meta name="twitter:creator" content="@LuigiAndreaM" />
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Person",
-        "name": "Luigi A. Moretti",
-        "url": "https://memopad.luigiandreamoretti.com/contact/",
-        "sameAs": [
-          "https://www.linkedin.com/in/luigiandreamoretti/",
-          "https://www.researchgate.net/profile/Luigi-Moretti-2"
-        ],
-        "affiliation": {
-          "@type": "Organization",
-          "name": "UWE Bristol"
-        }
-      },
-      {
-        "@type": "ResearchProject",
-        "name": "MEMoPAD: Multimodal Emotional Monitoring in Clinical Pathways for Anxiety Disorders",
-        "url": "https://memopad.luigiandreamoretti.com/",
-        "description": "PhD research using wearable devices for anxiety disorder emotion monitoring",
-        "keywords": ["anxiety disorders", "wearable devices", "affective computing", "emotion recognition", "mental health technology"],
-        "founder": {
-          "@type": "Person",
-          "name": "Luigi A. Moretti"
-        },
-        "sponsor": {
-          "@type": "Organization",
-          "name": "UWE Bristol"
-        },
-        "award": ["NHS BNSSG ICB Grant", "CATE Student Internship", "Best Student Poster Award"],
-        "status": "Active"
-      }
-    ]
-  }
-  </script>
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
 </head>
 <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
 </body>
 </html>
