@@ -2,7 +2,8 @@
 // src/pages/newsletter/index.astro
 import Layout from '../../layouts/Layout.astro';
 import NewsletterCard from '../../components/NewsletterCard.astro';
-import ShareButtons from '../../components/ShareButtons.astro'; // <-- IMPORTED
+import ShareButtons from '../../components/ShareButtons.astro';
+import SubscribeButtons from '../../components/SubscribeButtons.astro';
 
 // This automatically finds all your newsletter markdown files
 const posts = await Astro.glob('./*.md');
@@ -18,7 +19,7 @@ posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontma
     <div class="archive-header">
       <h1>Newsletter Archive</h1>
       <p>A complete archive of our monthly updates, detailing our research progress, co-design insights, and project milestones.</p>
-      <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe for Future Updates</a>
+            <SubscribeButtons />
     </div>
 
     <div class="post-grid">

@@ -7,6 +7,7 @@ import IconChip from '../components/icons/IconChip.astro';
 import IconEye from '../components/icons/IconEye.astro';
 import IconUvpCheck from '../components/icons/IconUvpCheck.astro';
 import IconCheckCircle from '../components/icons/IconCheckCircle.astro';
+import SubscribeButtons from '../components/SubscribeButtons.astro';
 import DemoCard from '../components/DemoCard.astro';
 
 const testimonials = [
@@ -183,9 +184,11 @@ const testimonials = [
     <div class="newsletter-content">
       <h2>Get Monthly Updates & Stay Connected</h2>
       <p>Join <b>over 300</b> researchers, clinicians, and participants for exclusive and prompt insights into our co-design process, recent findings, and upcoming milestones. No spam, just progress.</p>
-      <div class="button-group">
+      
+      <SubscribeButtons />
+      
+      <div style="margin-top: 1rem;">
         <a href="/newsletter" class="button button-secondary">Read the archive</a>
-        <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe</a>
       </div>
     </div>
     <div class="testimonial-column">
