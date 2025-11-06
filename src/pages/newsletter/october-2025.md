@@ -56,4 +56,4 @@ October felt like a behind-the-scenes month: refining prototypes, submitting eth
 If you're working on deployment-focused AI, co-design methods, or wearable health tech, I'd love to hear what you're tackling. If you're considering taking part in our ongoing co-design journey and have any questions, please feel free to ask me.
 
 
-Click here if you want to follow the newsletter on LinkedIn: Subscribe on LinkedIn https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7381688210289999872 
+Click here if you want to follow the newsletter on LinkedIn: https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7381688210289999872 
