@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/PostLayout.astro
-title: 'November 2024'
-date: 'December 03, 2024'
+title: 'November 2025'
+date: 'December 04, 2025'
 description: 'MEMoPAD is transitioning from design to deployment + A 2-minute animated story showing how our technology for mental health works in daily life'
 ---
 
