@@ -47,6 +47,19 @@ const testimonials = [
     <a href="#demos" class="button button-primary">See the Prototypes</a>
     <a href="/collaborate/" class="button button-secondary">Work With Me</a>
   </div>
+
+  <div class="hero-video-wrapper">
+    <div class="hero-video">
+      <iframe
+        src="https://www.youtube.com/embed/9uJHqtzO6cw?rel=0&modestbranding=1&controls=1"
+        title="MEMoPAD video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+
 </section>
 
 <!-- Rest of sections unchanged -->
@@ -183,7 +196,7 @@ const testimonials = [
   <div class="featured-newsletter">
     <div class="newsletter-content">
       <h2>Get Monthly Updates & Stay Connected</h2>
-      <p>Join <b>over 350</b> researchers, clinicians, and participants for exclusive and prompt insights into our co-design process, recent findings, and upcoming milestones. No spam, just progress.</p>
+      <p>Join <b>over 400</b> researchers, clinicians, and participants for exclusive and prompt insights into our co-design process, recent findings, and upcoming milestones. No spam, just progress.</p>
       
       <SubscribeButtons />
       
@@ -490,4 +503,13 @@ const testimonials = [
 .demo-header p { font-size: 1.125rem; color: var(--color-text-muted); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; }
 .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; }
 @media (max-width: 900px) { .demo-grid { grid-template-columns: 1fr; } }
+
+/* HERO VIDEO - centered, larger and responsive */
+.hero-video-wrapper { display: flex; justify-content: center; align-items: center; margin-top: 2rem; padding: 0 1rem; width: 100%; }
+.hero-video { width: 100%; max-width: 1200px; }
+.hero-video iframe { width: 100%; height: min(60vh, 720px); max-height: 720px; border: 0; box-shadow: none; display: block; }
+@media (max-width: 900px) {
+  .hero-video { max-width: 100%; }
+  .hero-video iframe { height: 40vh; }
+}
 </style>
