@@ -7,40 +7,50 @@ type Props = {
   buttonText: string;
   buttonLink: string;
   theme?: 'light' | 'primary';
+  layout?: 'vertical' | 'horizontal';
+  imageUrl?: string;
+  imageAlt?: string;
   documentImageUrl?: string;
   documentPdfUrl?: string;
   involvementDetails?: string[];
 }
 
-const { title, buttonText, buttonLink, theme = 'light', documentImageUrl, documentPdfUrl, involvementDetails } = Astro.props;
+const { title, buttonText, buttonLink, theme = 'light', layout = 'vertical', imageUrl, imageAlt, documentImageUrl, documentPdfUrl, involvementDetails } = Astro.props;
 
 // Get the base URL for constructing correct asset paths
 const BASE_URL = import.meta.env.BASE_URL;
 ---
 
-<div class:list={["card", `theme-${theme}`]}>
-  {/* The 'icon' prop was removed from the component logic as requested */}
-  <h2>{title}</h2>
-  <div class="description">
-    <slot />
-    
-    {involvementDetails && involvementDetails.length > 0 && (
-      <div class="involvement-section">
-        <strong>Types of involvement:</strong>
-        <ul>
-          {involvementDetails.map(detail => <li>{detail}</li>)}
-        </ul>
-      </div>
-    )}
-    
-    {documentImageUrl && documentPdfUrl && (
-      <a href={`${documentPdfUrl}`} target="_blank" rel="noopener noreferrer" class="document-link">
-        <img src={`${documentImageUrl}`} alt={`Preview of the one-page summary for ${title}`} class="document-preview" />
-        <span><br>View One-Page Summary (PDF)</span>
-      </a>
-    )}
+<div class:list={["card", `theme-${theme}`, `layout-${layout}`]}>
+  {layout === 'horizontal' && imageUrl && (
+    <div class="card-image">
+      <img src={imageUrl} alt={imageAlt || title} />
+    </div>
+  )}
+
+  <div class="card-content">
+    <h2>{title}</h2>
+    <div class="description">
+      <slot />
+
+      {involvementDetails && involvementDetails.length > 0 && (
+        <div class="involvement-section">
+          <strong>Types of involvement:</strong>
+          <ul>
+            {involvementDetails.map(detail => <li>{detail}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {documentImageUrl && documentPdfUrl && (
+        <a href={`${documentPdfUrl}`} target="_blank" rel="noopener noreferrer" class="document-link">
+          <img src={`${documentImageUrl}`} alt={`Preview of the one-page summary for ${title}`} class="document-preview" />
+          <span><br>View One-Page Summary (PDF)</span>
+        </a>
+      )}
+    </div>
+    <a href={buttonLink} class="button">{buttonText}</a>
   </div>
-  <a href={buttonLink} class="button">{buttonText}</a>
 </div>
 
 <style>
@@ -52,6 +62,40 @@ const BASE_URL = import.meta.env.BASE_URL;
     flex-direction: column;
     text-align: center;
   }
+
+  /* Horizontal Layout */
+  .layout-horizontal {
+    flex-direction: row;
+    gap: 2rem;
+    background-color: #fafafa;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .layout-horizontal .card-image {
+    flex: 0 0 55%;
+    overflow: hidden;
+    border-radius: 8px 0 0 8px;
+    margin: -2.5rem 0 -2.5rem -2.5rem;
+  }
+
+  .layout-horizontal .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 100%;
+  }
+
+  .layout-horizontal .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-content {
+    width: 100%;
+  }
+
   .description {
     flex-grow: 1;
     margin: 1.5rem 0;
@@ -158,5 +202,24 @@ const BASE_URL = import.meta.env.BASE_URL;
   .theme-primary .button {
     background-color: var(--color-white);
     color: var(--color-primary);
+  }
+
+  /* Responsive: Stack horizontal cards on mobile */
+  @media (max-width: 767px) {
+    .layout-horizontal {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .layout-horizontal .card-image {
+      flex: none;
+      width: 100%;
+      margin: -2.5rem -2.5rem 0 -2.5rem;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .layout-horizontal .card-image img {
+      max-height: 250px;
+    }
   }
 </style>

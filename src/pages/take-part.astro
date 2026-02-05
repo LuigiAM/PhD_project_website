@@ -40,14 +40,31 @@ import ShareButtons from '../components/ShareButtons.astro';
         theme="primary"
         documentImageUrl="/one-page-clinician-preview.jpg"
         documentPdfUrl="/one-page-clinician.pdf"
-        involvementDetails={["30-minute online interviews", "Online surveys"]}
+        involvementDetails={["20-30 minute online interviews", "Online surveys"]}
       >
         <p>
           Your professional expertise or personal experience is vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations.
         </p>
       </RecruitmentCard>
     </div>
-    
+
+    <div class="horizontal-card-container">
+      <RecruitmentCard
+        layout="horizontal"
+        title="Side Project Opportunity"
+        buttonText="Express Interest as a Participant"
+        buttonLink="https://example.com/placeholder"
+        theme="light"
+        imageUrl="/HUGandMilbotix.jpg"
+        imageAlt="HUG therapeutic comforter and Milbotix SmartSocks sensors for anxiety research"
+        involvementDetails={["90 min lab session"]}
+      >
+        <p>
+          We're exploring whether HUG, a therapeutic comforter designed for people with dementia, can also help people with anxiety. Using SmartSocks® sensors, we'll measure HUG's calming effects through physiological signals like heart rate and skin conductance.
+        </p>
+      </RecruitmentCard>
+    </div>
+
     <div class="voucher-note">
       <p>All types of participation are rewarded with vouchers as a thank you for your valuable time and contribution.</p>
     </div>
@@ -69,6 +86,7 @@ import ShareButtons from '../components/ShareButtons.astro';
   .thank-you-note { margin-top: 1.5rem; font-size: 1.125rem; font-style: italic; color: var(--color-text-muted); }
   .recruitment-grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
   @media (min-width: 768px) { .recruitment-grid { grid-template-columns: 1fr 1fr; } }
+  .horizontal-card-container { margin-top: 2.5rem; }
   .voucher-note { text-align: center; max-width: 600px; margin: 3rem auto 0 auto; font-style: italic; color: var(--color-text-muted); }
   .final-contact-prompt { text-align: center; max-width: 600px; margin: 1.5rem auto 0; font-style: italic; color: var(--color-text-muted); }
   .final-contact-prompt a { color: var(--color-primary); font-weight: 700; font-style: normal; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color 0.2s ease; }
