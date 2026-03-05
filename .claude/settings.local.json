@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/luigi/OneDrive - UWE Bristol/project_website/PhD_project_website/$TEMP/**)",
+      "Read(//c/Users/luigi/OneDrive - UWE Bristol/project_website/PhD_project_website/$TMP/**)"
+    ]
+  }
+}
