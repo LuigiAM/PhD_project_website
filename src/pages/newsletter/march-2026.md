@@ -2,7 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: 'March 2026'
 date: 'April 01, 2026'
-description: 'Phase V surveys are online and HUGxSmartSock data collection is over! We are preparing Phase VI while the project gain more traction.'
+description: 'Phase V surveys are online and HUGxSmartSock data collection is over! We are preparing Phase VI while the project gains more traction and visibility.'
 ---
 
 March brought significant progress on multiple fronts. Let me walk you through what's happened, where we're headed, and some interesting opportunities in digital mental health.
