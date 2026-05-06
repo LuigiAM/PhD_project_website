@@ -62,6 +62,24 @@ const testimonials = [
 
 </section>
 
+<section class="container press-banner-wrapper">
+  <p class="press-label">As seen in</p>
+  <div class="press-logos">
+    <a href="https://www.uwe.ac.uk/news/memopad" target="_blank" rel="noopener noreferrer" aria-label="UWE Bristol news article about MEMoPAD">
+      <img src="/logo-uwe-bristol.webp" alt="UWE Bristol" />
+    </a>
+    <a href="https://milbotix.com/meet-the-smartsocksdiscovery-pioneers-luigi-moretti/" target="_blank" rel="noopener noreferrer" aria-label="Milbotix article about MEMoPAD SmartSocks">
+      <img src="/logo-milbotix.webp" alt="Milbotix" />
+    </a>
+    <a href="https://www.bristol247.com/business/news-business/uni-researcher-develops-digital-tool-to-help-people-with-anxiety-disorders/" target="_blank" rel="noopener noreferrer" aria-label="Bristol 24/7 article about MEMoPAD">
+      <img src="/logo-bristol247.webp" alt="Bristol 24/7" />
+    </a>
+    <a href="https://www.bristolhealthpartners.org.uk/news/researcher-develops-new-digital-tool-for-people-with-anxiety-disorders/" target="_blank" rel="noopener noreferrer" aria-label="Bristol Health Partners article about MEMoPAD">
+      <img src="/logo-bristol-health-partners.webp" alt="Bristol Health Partners" />
+    </a>
+  </div>
+</section>
+
 <!-- Rest of sections unchanged -->
 <section class="container key-takeaways-wrapper">
   <div class="key-takeaways">
@@ -560,6 +578,61 @@ const testimonials = [
 .demo-card .text-content { padding: 1.5rem; text-align: left; }
 .demo-card .text-content h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
 .demo-card .text-content p { color: var(--color-text-muted); line-height: 1.6; }
+
+/* PRESS BANNER */
+.press-banner-wrapper {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.press-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.press-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem 3rem;
+}
+
+.press-logos a {
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.65;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+  filter: grayscale(100%);
+}
+
+.press-logos a:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
+
+.press-logos img {
+  height: 48px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+@media (max-width: 600px) {
+  .press-logos {
+    gap: 1.5rem 2rem;
+  }
+  .press-logos img {
+    height: 36px;
+    max-width: 120px;
+  }
+}
 
 /* HERO VIDEO - centered, larger and responsive */
 .hero-video-wrapper { display: flex; justify-content: center; align-items: center; margin-top: 2rem; padding: 0 1rem; width: 100%; }
