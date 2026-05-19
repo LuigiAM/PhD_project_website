@@ -1,6 +1,35 @@
+SCOPE
+=====
+
+This LICENSE file applies ONLY to the software components of this repository.
+
+In scope (MIT License, below):
+- Astro framework configuration and build scripts (astro.config.mjs,
+  package.json, tsconfig.json)
+- Custom Astro components and layouts (src/components/, src/layouts/)
+- TypeScript/JavaScript utility code
+- Page templates (the .astro structural code in src/pages/)
+
+Out of scope (all rights reserved — see NOTICE.md):
+- Page content and textual material (the prose, headings, and copy authored
+  within src/pages/ and src/pages/newsletter/)
+- The MEMoPAD name, wordmark, and any associated visual brand identity
+- All images, graphics, illustrations, screenshots, and visual assets in
+  public/ (including but not limited to hero images, prototype UI mockups,
+  partner logos used by permission, photographs, and favicons)
+- All PDF documents in public/ (including one-pager briefs)
+- Newsletter content and any blog/article material
+
+For permissions on out-of-scope materials, contact:
+hello@luigimoretti.com
+
+See NOTICE.md for the complete scope breakdown.
+
+================================================================================
+
 MIT License
 
-Copyright (c) 2025 Luigi A. Moretti
+Copyright (c) 2025-2026 Luigi A. Moretti
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

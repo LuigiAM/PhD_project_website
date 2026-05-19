@@ -11,11 +11,16 @@ npm create astro@latest -- --template minimal
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
 ## 💟 License & Attribution
-This project is open-source and available under the MIT License. You are free to use, modify, and distribute the code.
 
-If you use this code as a foundation for your own project, I would appreciate a simple attribution in your site's footer or acknowledgements page with a link back to my personal website:
+This repository contains both software and non-software materials, governed by **different terms**. Please read both files before reusing anything from this repository.
 
-Website originally coded by luigiandreamoretti.com
+**Software components** — the Astro framework configuration, custom components, layouts, build scripts, and page template structure — are released under the [MIT License](./LICENSE). You may use, modify, and redistribute these freely. Attribution back to this project is appreciated but not required.
+
+**Non-software materials** — including all written content, the MEMoPAD name and brand, all images and graphics under `public/`, prototype-related imagery and screenshots, and all PDF documents — are **© 2025–2026 Luigi A. Moretti, all rights reserved**. These materials are **not** covered by the MIT License. See [NOTICE.md](./NOTICE.md) for the full scope breakdown.
+
+Visual depictions of the MEMoPAD prototype (phone, smartwatch, web app) are subject to **pending UK registered design protection** and must not be reproduced, adapted, or incorporated into derivative works without written permission.
+
+For licensing inquiries: **hello@luigimoretti.com**
 
 
 ## 🚀 Project Structure
