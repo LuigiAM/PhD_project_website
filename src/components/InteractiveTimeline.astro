@@ -1,165 +1,177 @@
 ---
 // src/components/InteractiveTimeline.astro
+// Accessible tabs (one per category) over a vertical timeline.
+// Data lives in src/data/achievements.ts. Each panel id doubles as a deep link,
+// e.g. /achievements/#co-design-milestones opens that tab.
 import TimelineItem from './TimelineItem.astro';
-
-
+import { ACHIEVEMENTS } from '../data/achievements';
 ---
-<div class="carousel-container" data-timeline-component>
-  <!-- 3D Tab Navigation -->
-  <nav class="carousel-tabs" aria-label="Achievements Categories">
-    <div class="tabs-track">
-      <button class="carousel-tab" type="button" data-index="0">Funding & Awards</button>
-      <button class="carousel-tab" type="button" data-index="1">Publications & Presentations</button>
-      <button class="carousel-tab" type="button" data-index="2">Co-Design & Milestones</button>
-    </div>
-  </nav>
-
-  <!-- Main Carousel -->
-  <div class="carousel-outer">
-    <!-- Vertically Sticky Arrows -->
-    <button class="carousel-arrow prev" aria-label="Previous slide">&lt;</button>
-    <button class="carousel-arrow next" aria-label="Next slide">&gt;</button>
-
-    <div class="carousel-viewport">
-      <div class="carousel-track">
-        <!-- Slide 1: Funding & Awards -->
-        <div class="carousel-slide">
-          <div class="timeline-wrapper">
-            <div class="timeline-line"></div>
-            <TimelineItem date="August 2025" title="MHP Associate member" position="left" icon="award"><p>Associate members are researchers not based at the Hubs, who join the Mental Health Platform because they align with their aims and values. <a href="https://www.mentalhealthplatform.ac.uk/associate-members" target="_blank" rel="noopener noreferrer">Learn more</a></p></TimelineItem>
-            <TimelineItem date="August 2025" title="Won the SmartSocks Pioneers Competition by Milbotix" position="right" icon="award"><p>Secured a smartsocks kit worth £1,000 to explore Milbotix's products potential in mental health. <a href="https://milbotix.com/smartsocks_discovery_pioneers_competition_winners/" target="_blank" rel="noopener noreferrer">Learn more</a></p></TimelineItem>
-            <TimelineItem date="August 2025" title="Secured a NHS BNSSG ICB grant" position="left" icon="award"><p>Secured a £1,500 grant for PPIE activities from the NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board</p></TimelineItem>
-            <!-- <TimelineItem date="June 2025" title="Secured CATE Student Internship" position="left" icon="award"><p>Secured a '2024/25 CATE Student Internship' grant (£2,000) for Louis Robinson from UWE Bristol, to support the development of the working prototype.</p></TimelineItem>  -->
-            <TimelineItem date="January 2025" title="Accepted as EPS Postgraduate Member" position="right" icon="award"><p>Granted postgraduate membership with the prestigious Experimental Psychology Society (EPS).</p></TimelineItem>
-            <TimelineItem date="December 2024" title="Secured CATE Public Engagement Fund" position="left" icon="award"><p>Awarded an additional £3000 from UWE Bristol's '2024-25 CATE Public/Community Engagement & Knowledge Exchange Project Fund' to support the project's PPIE activities.</p></TimelineItem>
-            <TimelineItem date="December 2024" title="Accepted as IHT Fellow" position="right" icon="award"><p>Welcomed into the dynamic Innovate Healthier Together community, dedicated to reimagining health and care across Bristol, North Somerset and South Gloucestershire (BNSSG, NHS). <a href="https://bnssghealthiertogether.org.uk/our-work/ihtfellowship/" target="_blank" rel="noopener noreferrer">Learn more</a></p></TimelineItem>
-            <TimelineItem date="May-Sep 2024" title="Secured Sponsored Research Visit" position="left" icon="award"><p>Selected for a sponsored research visit at the University of Bristol, focusing on affective computing implementations. Supervised by Zahraa Abdallah and sponsored by MaVi: Machine Learning and Computer Vision.</p></TimelineItem>
-            <TimelineItem date="June 2024" title="Won Best Student Poster Award" position="right" icon="award"><p>Our poster was awarded 'Best Student Poster' at the Second Workshop on Multimodal AI, organized by the University of Sheffield and the Alan Turing Institute. <a href="https://www.linkedin.com/feed/update/urn:li:activity:7220011283352297474/" target="_blank" rel="noopener noreferrer">View post</a></p></TimelineItem>
-            <TimelineItem date="April 2023" title="Secured PhD Scholarship" position="left" icon="award"><p>Awarded a full PhD scholarship at UWE Bristol, including £3000 for project expenses. <a href="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#a22d2325d-c9dc-44e3-a14b-b1b09a100072" target="_blank" rel="noopener noreferrer">Learn more</a></p></TimelineItem>
-          </div>
-        </div>
-        <!-- Slide 2: Publications & Presentations -->
-        <div class="carousel-slide">
-          <div class="timeline-wrapper">
-            <div class="timeline-line"></div>
-
-            <TimelineItem date="July 2026" title="Paper and prototype demo at the Interactive Health Conference 2026" position="left" icon="publication"><p>Published a paper and presenting a live and interactive demo of MEMoPAD protoype to researchers, industry and policy makers. This will allow us to collect feedback from stakeholders not involved in the co-design joureny and otherwise difficult to reach out.<a href="https://dl.acm.org/doi/full/10.1145/3786579.3804994" target="_blank" rel="noopener noreferrer">See conference paper</a></p></TimelineItem>
-            <TimelineItem date="April 2026" title="Short paper at the CHI 2026 workshop" position="right" icon="publication"><p>Published a short paper as part of the Engagement in Digital Health Interventions Workshop to explore how out PPIE activietes, both in the methodology and in the results, sustain the engagement of the stakeholders in MEMoPAD. <a href="https://drive.google.com/file/d/1qrAk2zDY3VQas3r4SqpbkHbKEQn-A9lj/view" target="_blank" rel="noopener noreferrer">See Short Paper (page 77)</a></p></TimelineItem>
-            <TimelineItem date="November 2025" title="Position paper at the BCS HCI 2025" position="left" icon="publication"><p>Published a position paper about the first three stages of our co-design project, at the 'Co-Designing Human-Centered AI Technologies for Health and Wellbeing' Workshop. This work was developed in collaboration with Carmel McGrath and Lucy Condon from the NIHR ARC West, University Hospitals Bristol and Weston NHS Foundation Trust. <a href="https://sites.google.com/view/bcs-hci-2025-workshop/position-papers" target="_blank" rel="noopener noreferrer">See Position Papers</a></p></TimelineItem>
-            <TimelineItem date="September 2025" title="Technical poster at the 3rd Multimodal AI Workshop" position="right" icon="publication"><p>Presented a technical poster for introducing our proposal for the multimodal and contextualised affective computing analysis of longitudinal data. A work realised in collaboration with Vincenzo Dentamaro from the University of Bari -currently in research visit at Oxford University. Won best human photo about multimodal AI. <a href="https://multimodalai.github.io/multimodalai25/accepted-abstracts/" target="_blank" rel="noopener noreferrer">View all abstracts</a></p></TimelineItem>
-            <TimelineItem date="February 2025" title="Presented at HEALTHINF 2025" position="left" icon="publication"><p>Published our paper, 'Affective Computing in Anxiety Disorders: A Rapid Literature Review', at the 18th International Joint Conference on Biomedical Engineering Systems and Technologies. The paper was selected for post-publication invitation due to its high quality. <a href="https://www.linkedin.com/posts/luigiandreamoretti_literature-review-affective-computing-in-activity-7316080903959601153-aU0N?utm_source=share&utm_medium=member_desktop&rcm=ACoAACmwWCUBkcoFbba-othDIgkerQOa3kS_aGg" target="_blank" rel="noopener noreferrer">See event</a></p></TimelineItem>
-            <TimelineItem date="July 2024" title="Presented at NIHR & University of Bristol Event" position="right" icon="publication"><p>Presented at the 'Researcher coffee catch-up: Digital solutions for anxiety disorders', an event organized by NIHR Applied Research Collaboration West (ARC West). <a href="https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html" target="_blank" rel="noopener noreferrer">See event</a></p></TimelineItem>
-            <TimelineItem date="May 2024" title="Presentation at 'AI in Precision Psychiatry' workshop" position="left" icon="publication"><p>An event hosted by Elizabeth Blackwell Institute and the Bristol Neuroscience Network at the University of Bristol. <a href="https://www.youtube.com/watch?v=_PDEcOkDbsQ" target="_blank" rel="noopener noreferrer">Watch video</a></p></TimelineItem>
-            <TimelineItem date="June 2024" title="Published 2 abstracts at DMHW 2024 Conference" position="right" icon="publication"><p>Presented MEMoPAD project and published the abstract at the Second International Digital Mental Health and Wellbeing Conference at Ulster University. <a href="https://pure.ulster.ac.uk/ws/portalfiles/portal/214843091/DMHW-Conference-Proceedings-2024.pdf" target="_blank" rel="noopener noreferrer">View published abstracts</a></p></TimelineItem>
-            <TimelineItem date="November 2023" title="Invited Speaker at University of Aberdeen" position="left" icon="publication"><p>Delivered a speech titled 'Emotion recognition can support the early detection of neurodegenerative diseases' at the AI & Computer Vision for Neurodegenerative Diseases workshop of BMVC 2023. <a href="https://sites.google.com/view/ai-cv-for-nds/home" target="_blank" rel="noopener noreferrer">See event</a></p></TimelineItem>
-            <TimelineItem date="June 2023" title="Publishing collaboration" position="right" icon="publication"><p>Published our paper, 'An Approach using transformer architecture for emotion recognition through Electrocardiogram Signal(s)'; co-authored with Dr Vincenzo Dentamaro, former CTO at IntelliHearts. <a href="https://ceur-ws.org/Vol-3521/paper3.pdf" target="_blank" rel="noopener noreferrer">Read paper</a></p></TimelineItem>
-          </div>
-        </div>
-        <!-- Slide 3: Co-Design & Project Milestones -->
-        <div class="carousel-slide">
-          <div class="timeline-wrapper">
-            <div class="timeline-line"></div>
-                        <TimelineItem date="September 2026" title="Co-Design Phase VI Ongoing" position="left" icon="milestone">
-              <p>
-                Obtained the ethical approval and completed the development for the 'Post-design' co-design phase, the longitudinal data collection phase. Time to let the participants use the MEMoPAD prototype in their daily life!
-                <a href="/take-part/" class="cta-link">We are currently recruiting for this phase, click here to take part!</a>
-              </p>
-            </TimelineItem>
-            <TimelineItem date="March 2026" title="HUG&SmartSocks" position="right" icon="milestone"><p>Parallel project exploring emotion responses in people reporting anxiety while using <a href="https://hug.world/">HUG</a> and wearing <a href="https://milbotix.com/">Milbotix smart socks</a></p></TimelineItem>
-            <TimelineItem date="May 2026" title="Co-Design Phase V Completed" position="left" icon="milestone"><p>Successfully concluded the 'Implementation' co-design phase with 16 lab participants, and 120+ online surveys entries collecting feedback and suggestions for the next iteration of the prototype. Method: lab controlled data collection sessions. Analysis: physiological time series analysis; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="September 2025" title="Co-Design Phase IV Completed" position="right" icon="milestone"><p>Successfully concluded the 'Evaluative' co-design phase with 25 participants, collecting feedback and suggestions for the user interface and experience. Method: focus groups, interviews, and demo. Analysis: affinity diagrams and comparative analysis; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="May 2025" title="Co-Design Phase III Completed" position="left" icon="milestone"><p>Successfully concluded the 'Prototype' co-design phase with 19 participants, gathering ideas for the user interface and experience. Method: focus groups, interviews, and mock-ups. Analysis: affinity diagrams and comparative analysis; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="April 2025" title="Co-Design Phase II Completed" position="right" icon="milestone"><p>Successfully concluded the 'Generative' co-design phase with 20 participants, defining core features and user requirements. Method: focus groups, interviews, and storyboards. Analysis: thematic and comparative; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="February 2025" title="Co-Design Phase I Completed" position="left" icon="milestone"><p>Successfully concluded the 'Pre-design' co-design phase with 24 participants, exploring problems and needs of the different stakeholders. Method: focus groups, interviews, and whiteboard. Analysis: thematic and comparative; expert roundtable.</p></TimelineItem>
-            <TimelineItem date="July 2024" title="Co-Design Phase 0 Completed" position="right" icon="milestone"><p>Successfully concluded the 'Recruiting Material Consultations' co-design phase with 12 participants. Method: focus groups, interviews, and surveys. Analysis: affinity diagrams.</p></TimelineItem>
-          </div>
-        </div>
-      </div>
+<div class="timeline-tabs" data-timeline-component>
+  <div class="tabs-scroller">
+    <div class="tabs-track" role="tablist" aria-label="Achievement categories">
+      {ACHIEVEMENTS.map((category, index) => (
+        <button
+          class="timeline-tab"
+          type="button"
+          role="tab"
+          id={`tab-${category.id}`}
+          aria-controls={category.id}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          tabindex={index === 0 ? 0 : -1}
+        >
+          {category.name}
+        </button>
+      ))}
     </div>
   </div>
+
+  {ACHIEVEMENTS.map((category, index) => (
+    <section
+      class="timeline-panel"
+      role="tabpanel"
+      id={category.id}
+      aria-labelledby={`tab-${category.id}`}
+      tabindex="0"
+      hidden={index !== 0}
+    >
+      <h2 class="sr-only">{category.name}</h2>
+      <div class="timeline-wrapper">
+        <div class="timeline-line"></div>
+        {category.items.map((item, i) => (
+          <TimelineItem
+            date={item.label}
+            datetime={item.date}
+            title={item.title}
+            position={i % 2 === 0 ? 'left' : 'right'}
+            icon={category.icon}
+          >
+            <p set:html={item.html} />
+          </TimelineItem>
+        ))}
+      </div>
+    </section>
+  ))}
 </div>
 
+<noscript>
+  <style>.timeline-panel[hidden] { display: block; }</style>
+</noscript>
+
 <script>
-  // Script remains the same
-  const initTimelineCarousel = (container: HTMLElement) => {
-    const tabsContainer = container.querySelector<HTMLElement>('.carousel-tabs');
-    const tabs = Array.from(container.querySelectorAll<HTMLButtonElement>('.carousel-tab'));
-    const track = container.querySelector<HTMLElement>('.carousel-track');
-    const slides = Array.from(container.querySelectorAll<HTMLElement>('.carousel-slide'));
-    const prevButton = container.querySelector<HTMLButtonElement>('.carousel-arrow.prev');
-    const nextButton = container.querySelector<HTMLButtonElement>('.carousel-arrow.next');
-    if (!tabsContainer || !track || slides.length === 0 || !prevButton || !nextButton) return;
+  const initTimelineTabs = (container: HTMLElement) => {
+    const tabs = Array.from(container.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const panels = Array.from(container.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+    const scroller = container.querySelector<HTMLElement>('.tabs-scroller');
+    if (tabs.length === 0 || panels.length !== tabs.length) return;
+
     let currentIndex = 0;
-    const goToSlide = (index: number) => {
-      if (index < 0 || index >= slides.length) return;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      tabs.forEach((tab, i) => tab.setAttribute('aria-expanded', (i === index).toString()));
-      const activeTab = tabs[index];
-      if (activeTab) {
-        const scrollOffset = activeTab.offsetLeft + (activeTab.offsetWidth / 2) - (tabsContainer.offsetWidth / 2);
-        tabsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
-      }
+
+    const select = (index: number, { focus = false, updateHash = false } = {}) => {
+      if (index < 0 || index >= tabs.length) return;
+      tabs.forEach((tab, i) => {
+        const selected = i === index;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panels[i].hidden = !selected;
+      });
       currentIndex = index;
+      const active = tabs[index];
+      if (focus) active.focus();
+      if (scroller) {
+        const offset = active.offsetLeft + active.offsetWidth / 2 - scroller.offsetWidth / 2;
+        scroller.scrollTo({ left: offset, behavior: 'smooth' });
+      }
+      if (updateHash) history.replaceState(null, '', `#${panels[index].id}`);
     };
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => goToSlide(parseInt(tab.dataset.index || '0')));
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => select(index, { updateHash: true }));
+      tab.addEventListener('keydown', (e) => {
+        const keyMap: Record<string, number> = {
+          ArrowRight: (index + 1) % tabs.length,
+          ArrowLeft: (index - 1 + tabs.length) % tabs.length,
+          Home: 0,
+          End: tabs.length - 1,
+        };
+        if (e.key in keyMap) {
+          e.preventDefault();
+          select(keyMap[e.key], { focus: true, updateHash: true });
+        }
+      });
     });
-    prevButton.addEventListener('click', () => {
-      const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
-      goToSlide(prevIndex);
+
+    // Swipe between categories on touch devices
+    let touchStartX = 0;
+    let touchStartY = 0;
+    container.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+    container.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].screenX - touchStartX;
+      const dy = e.changedTouches[0].screenY - touchStartY;
+      if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy)) return;
+      const next = dx < 0 ? currentIndex + 1 : currentIndex - 1;
+      if (next >= 0 && next < tabs.length) select(next, { updateHash: true });
     });
-    nextButton.addEventListener('click', () => {
-      const nextIndex = (currentIndex + 1) % slides.length;
-      goToSlide(nextIndex);
-    });
-    let touchstartX = 0;
-    track.addEventListener('touchstart', (e: TouchEvent) => { touchstartX = e.changedTouches[0].screenX; }, { passive: true });
-    track.addEventListener('touchend', (e: TouchEvent) => {
-      const touchendX = e.changedTouches[0].screenX;
-      if (touchendX < touchstartX - 50) nextButton.click();
-      if (touchendX > touchstartX + 50) prevButton.click();
-    });
-    goToSlide(0);
+
+    // Open the tab named in the URL hash (deep links from other pages)
+    const selectFromHash = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const index = panels.findIndex((panel) => panel.id === id);
+      if (index >= 0) {
+        select(index);
+        container.scrollIntoView({ block: 'start' });
+      }
+    };
+    selectFromHash();
+    window.addEventListener('hashchange', selectFromHash);
   };
-  document.querySelectorAll<HTMLElement>('[data-timeline-component]').forEach(initTimelineCarousel);
+
+  document.querySelectorAll<HTMLElement>('[data-timeline-component]').forEach(initTimelineTabs);
 </script>
 
 <style>
-  /* NEW STYLE FOR IN-CARD LINKS */
-  .cta-link {
-    display: block;
-    margin-top: 1rem;
+  .timeline-tabs { position: relative; padding: 2rem 0; scroll-margin-top: 5rem; }
+  .tabs-scroller {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-scroller::-webkit-scrollbar { display: none; }
+  .tabs-track { display: flex; gap: 1rem; margin: 0 auto; }
+  .timeline-tab {
+    background: none;
+    border: none;
+    border-bottom: 4px solid transparent;
+    padding: 0.75rem 1rem;
+    font: inherit;
+    font-size: 1.1rem;
     font-weight: 700;
-    color: var(--color-primary);
-    text-decoration: none;
-    transition: opacity 0.2s ease;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease;
   }
-  .cta-link:hover {
-    opacity: 0.8;
+  .timeline-tab:hover { color: var(--color-text); }
+  .timeline-tab[aria-selected="true"] {
+    color: var(--color-primary-strong);
+    border-bottom-color: var(--color-primary-strong);
   }
+  .timeline-tab:focus-visible { outline-offset: -3px; }
+  .timeline-panel:focus-visible { outline-offset: 4px; }
 
-  /* All other styles remain the same */
-  .carousel-container { position: relative; padding: 2rem 0; }
-  .carousel-tabs { display: flex; justify-content: flex-start; position: relative; border-bottom: 1px solid var(--color-border); overflow-x: auto; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
-  .carousel-tabs::-webkit-scrollbar { display: none; }
-  .tabs-track { display: flex; gap: 1rem; padding-bottom: 2rem; margin: 0 auto; }
-  .carousel-tab { background: none; border: none; padding: 0.5rem 1rem; font-size: 1.1rem; font-weight: 700; cursor: pointer; position: relative; top: 0; transition: all 0.3s ease; color: var(--color-text-muted); white-space: nowrap; }
-  .carousel-tab[aria-expanded="true"] { color: var(--color-primary); transform: translateY(6px); }
-  .carousel-tab[aria-expanded="true"]::after { content: ''; position: absolute; bottom: -13px; left: 0; right: 0; height: 4px; background-color: var(--color-primary); }
-  .carousel-outer { position: relative; }
-  .carousel-viewport { width: 100%; overflow: hidden; }
-  .carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1); }
-  .carousel-slide { width: 100%; flex-shrink: 0; }
-  .carousel-arrow { position: sticky; top: 50vh; z-index: 10; background-color: rgba(255, 255, 255, 0.9); border: 1px solid var(--color-border); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; font-size: 1.5rem; transition: all 0.2s ease; }
-  .carousel-arrow:hover { background-color: var(--color-primary); color: var(--color-white); }
-  .carousel-arrow.prev { float: left; margin-left: -50px; }
-  .carousel-arrow.next { float: right; margin-right: -50px; }
-  @media (max-width: 768px) {
-    .carousel-outer { padding: 0; }
-    .carousel-arrow { display: none; }
-    .timeline-wrapper { padding: 2rem 1rem; }
-  }
   .timeline-wrapper { position: relative; max-width: 900px; margin: 0 auto; padding: 2rem 0; }
   .timeline-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background-color: var(--color-border); transform: translateX(-50%); }
-  @media (max-width: 768px) { .timeline-line { left: 23px; } }
+  .timeline-panel :global(.timeline-description a) {
+    color: var(--color-primary-strong);
+    font-weight: 700;
+  }
+
+  @media (max-width: 768px) {
+    .tabs-track { margin: 0; }
+    .timeline-wrapper { padding: 2rem 1rem; }
+    .timeline-line { left: 23px; }
+  }
 </style>

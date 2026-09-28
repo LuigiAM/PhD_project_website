@@ -5,10 +5,13 @@ import IconLinkedIn from '../components/icons/IconLinkedIn.astro';
 import IconScholar from '../components/icons/IconScholar.astro';
 import IconWebsite from '../components/icons/IconWebsite.astro';
 import IconMail from '../components/icons/IconMail.astro';
+import { Image } from 'astro:assets';
+import { PRIMARY_EMAIL, mailto } from '../data/project';
+import headshot from '../assets/images/hero-linkedin.webp';
 ---
 
 <Layout
-  title="Contact - MEMoPAD Project"
+  title="Contact | MEMoPAD"
   description="Get in touch with Luigi A. Moretti to discuss the MEMoPAD project, collaborations, or participation opportunities."
 >
   <section class="container">
@@ -21,14 +24,14 @@ import IconMail from '../components/icons/IconMail.astro';
         </p>
         
         <div class="contact-main">
-          <a href="mailto:luigi.moretti@uwe.ac.uk?cc=hello@luigimoretti.com" class="email-button">
+          <a href={mailto()} class="email-button">
             <IconMail />
-            <span>luigi.moretti@uwe.ac.uk</span>
+            <span>{PRIMARY_EMAIL}</span>
           </a>
         </div>
 
         <div class="contact-socials">
-          <h3>Find me elsewhere</h3>
+          <h2>Find me elsewhere</h2>
           <div class="social-grid">
             <a href="https://www.linkedin.com/in/luigiandreamoretti/" target="_blank" rel="noopener noreferrer" class="social-link">
               <IconLinkedIn />
@@ -49,7 +52,7 @@ import IconMail from '../components/icons/IconMail.astro';
       {/* --- Right Column: Bio Card --- */}
       <div class="bio-card">
         <div class="bio-image">
-          <img src="/hero-linkedin.webp" alt="Headshot of Luigi Andrea Moretti" />
+          <Image src={headshot} alt="Headshot of Luigi Andrea Moretti" width={120} height={120} densities={[1, 2]} />
         </div>
         <div class="bio-content">
           <h2>Luigi A. Moretti</h2>
@@ -101,12 +104,12 @@ import IconMail from '../components/icons/IconMail.astro';
     border-radius: 8px;
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--color-primary-strong);
     text-decoration: none;
     transition: all 0.2s ease;
   }
   .email-button:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-strong);
     color: var(--color-white);
     border-color: var(--color-primary);
     transform: translateY(-2px);
@@ -118,7 +121,7 @@ import IconMail from '../components/icons/IconMail.astro';
     padding-top: 2rem;
     border-top: 1px solid var(--color-border);
   }
-  .contact-socials h3 {
+  .contact-socials h2 {
     font-size: 1.25rem;
     margin-bottom: 1.5rem;
     font-weight: 700;
@@ -141,7 +144,7 @@ import IconMail from '../components/icons/IconMail.astro';
     transition: all 0.2s ease;
   }
   .social-link:hover {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-strong);
     color: var(--color-white);
     transform: translateY(-4px);
   }
@@ -163,7 +166,7 @@ import IconMail from '../components/icons/IconMail.astro';
     margin: 0 auto 1.5rem;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   }
-  .bio-image img {
+  .bio-image :global(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -187,7 +190,7 @@ import IconMail from '../components/icons/IconMail.astro';
     .contact-details {
       text-align: center;
     }
-    .contact-socials h3 {
+    .contact-socials h2 {
       text-align: center;
     }
   }

@@ -1,19 +1,29 @@
 ---
+import { PROJECT, SUBSCRIBE_MAILTO } from '../data/project';
+
 const currentYear = new Date().getFullYear();
-const lastUpdated = "September 2026"; // Update this manually when making major changes
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="copyright">
       <p>&copy; {currentYear} Luigi Andrea Moretti. All rights reserved.</p>
-      <p class="timestamp">Project status as of {lastUpdated} · Website last updated {lastUpdated}</p>
+      <p class="timestamp">Project status as of {PROJECT.statusAsOf}</p>
     </div>
-    <nav class="footer-nav">
+    <nav class="footer-nav" aria-label="Footer">
       <a href="/privacy/">Privacy Policy</a>
-      <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter">
+      <a href="/rss.xml">RSS feed</a>
+      <a href={SUBSCRIBE_MAILTO}>
         📬 Follow the journey: subscribe to the monthly newsletter
       </a>
     </nav>
+  </div>
+  <div class="container support-note">
+    <p>
+      <strong>Need support now?</strong> MEMoPAD is a research project, not a clinical service.
+      If you are struggling, call <a href="tel:111">NHS 111</a> and choose the mental health option (England),
+      call Samaritans free on <a href="tel:116123">116&nbsp;123</a>, or text SHOUT to <a href="sms:85258">85258</a>.
+      In an emergency, call 999.
+    </p>
   </div>
 </footer>
 
@@ -21,7 +31,7 @@ const lastUpdated = "September 2026"; // Update this manually when making major 
   .site-footer {
     background-color: var(--color-background);
     border-top: 1px solid var(--color-border);
-    padding: 2.5rem 0;
+    padding: 2.5rem 0 1.5rem;
     margin-top: 4rem;
     font-size: 0.9rem;
   }
@@ -45,12 +55,12 @@ const lastUpdated = "September 2026"; // Update this manually when making major 
     margin-top: 0.5rem;
     font-size: 0.85rem;
     font-style: italic;
-    opacity: 0.8;
   }
   .footer-nav {
     display: flex;
     gap: 1.5rem;
     flex-shrink: 0;
+    flex-wrap: wrap;
   }
   .footer-nav a {
     color: var(--color-text);
@@ -61,9 +71,21 @@ const lastUpdated = "September 2026"; // Update this manually when making major 
     white-space: normal;
   }
   .footer-nav a:hover {
-    color: var(--color-primary);
+    color: var(--color-primary-strong);
   }
-  
+  .support-note {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .support-note a {
+    color: var(--color-primary-strong);
+    font-weight: 700;
+  }
+
   @media (max-width: 768px) {
     .container {
       flex-direction: column;

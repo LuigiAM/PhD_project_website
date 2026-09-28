@@ -1,26 +1,36 @@
 ---
-// This component now accepts an optional 'linkUrl' to make the whole card a link.
+// Team member card. With 'linkUrl', the whole card links to the person's profile.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 type Props = {
   name: string;
   title: string;
-  imgSrc: string;
+  img: ImageMetadata;
   imgAlt: string;
   expertise?: string;
-  linkUrl?: string; // <-- optional prop
+  linkUrl?: string;
 }
-const { name, title, imgSrc, imgAlt, expertise, linkUrl } = Astro.props;
+const { name, title, img, imgAlt, expertise, linkUrl } = Astro.props;
 
 // Determine whether the root element should be a link (<a>) or a plain div.
 const Tag = linkUrl ? 'a' : 'div';
 ---
 
-<Tag 
-  href={linkUrl} target="_blank" rel="noopener noreferrer" class="card-link" aria-label={`View profile for ${name}`}
-  class="card" 
-  target={linkUrl ? '_blank' : undefined} 
+<Tag
+  href={linkUrl}
+  class="card"
+  target={linkUrl ? '_blank' : undefined}
   rel={linkUrl ? 'noopener noreferrer' : undefined}
 >
-  <img src={imgSrc} alt={imgAlt} class="card-img" />
+  <Image
+    src={img}
+    alt={imgAlt}
+    class="card-img"
+    widths={[300, 600]}
+    width={Math.min(600, img.width)}
+    sizes="(max-width: 600px) 100vw, 300px"
+  />
   <div class="card-content">
     <h3 class="card-name">{name}</h3>
     <p class="card-title">{title}</p>
@@ -48,10 +58,12 @@ const Tag = linkUrl ? 'a' : 'div';
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
   }
-  .card-img {
+  .card :global(.card-img) {
     width: 100%;
-    height: 200px;
+    height: 220px;
     object-fit: cover;
+    object-position: center 30%;
+    display: block;
   }
   .card-content {
     padding: 1.5rem;

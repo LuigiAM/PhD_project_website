@@ -2,60 +2,77 @@
 // src/layouts/PostLayout.astro
 import Layout from './Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import { SITE_URL, SUBSCRIBE_MAILTO } from '../data/project';
 
-const { frontmatter } = Astro.props;
-
-// Parse date for schema (handle inconsistent formats)
-const parseDate = (dateStr: string) => {
-  // Try parsing as-is first
-  const parsed = new Date(dateStr);
-  if (!isNaN(parsed.getTime())) {
-    return parsed.toISOString();
-  }
-  // Fallback: return empty string if unparseable
-  return '';
+type Neighbour = { href: string; issue: string; title: string };
+type Props = {
+  title: string;
+  issue: string;
+  date: Date;
+  description: string;
+  newer?: Neighbour;
+  older?: Neighbour;
 };
 
-const publishedDate = parseDate(frontmatter.date);
+const { title, issue, date, description, newer, older } = Astro.props;
+
+const publishedISO = date.toISOString();
+const displayDate = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const articleURL = new URL(Astro.url.pathname, Astro.site);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "datePublished": publishedISO,
+  "image": `${SITE_URL}/og-image.jpg`,
+  "inLanguage": "en-GB",
+  "author": {
+    "@type": "Person",
+    "@id": "https://luigiandreamoretti.com/#person",
+    "name": "Luigi A. Moretti",
+    "url": "https://luigiandreamoretti.com"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "MEMoPAD Project",
+    "url": `${SITE_URL}/`,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/apple-touch-icon.png`
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": articleURL.href
+  },
+  "isPartOf": {
+    "@type": "Periodical",
+    "name": "MEMoPAD Newsletter",
+    "url": `${SITE_URL}/newsletter/`
+  },
+  "articleSection": "Research Updates",
+  "keywords": ["anxiety disorders", "wearable technology", "mental health research", "co-design", "emotion monitoring"]
+};
 ---
 
-<Layout title={frontmatter.title} description={frontmatter.description}>
-  <!-- Schema for Newsletter/BlogPosting -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "headline": frontmatter.title,
-    "description": frontmatter.description,
-    "datePublished": publishedDate,
-    "author": {
-      "@type": "Person",
-      "name": "Luigi A. Moretti",
-      "url": "https://memopad.luigiandreamoretti.com/contact/"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "MEMoPAD Project",
-      "url": "https://memopad.luigiandreamoretti.com/",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://memopad.luigiandreamoretti.com/favicon.svg"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": articleURL
-    },
-    "articleSection": "Research Updates",
-    "keywords": ["anxiety disorders", "wearable technology", "mental health research", "co-design", "emotion monitoring"]
-  })} />
+<Layout
+  title={`${title} | MEMoPAD Newsletter, ${issue}`}
+  description={description}
+  ogType="article"
+  publishedTime={publishedISO}
+  breadcrumbName={issue}
+>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} slot="head" />
 
   <section class="container">
     <article class="post-content">
       <header class="post-header">
-        <h1>{frontmatter.title}</h1>
+        <p class="post-issue">MEMoPAD Newsletter · {issue}</p>
+        <h1>{title}</h1>
         <p class="post-date">
-          <time datetime={publishedDate}>Published on: {frontmatter.date}</time>
+          <time datetime={publishedISO}>Sent on {displayDate}</time>
         </p>
       </header>
       <div class="post-body">
@@ -63,14 +80,31 @@ const articleURL = new URL(Astro.url.pathname, Astro.site);
       </div>
     </article>
 
+    {(newer || older) && (
+      <nav class="post-pagination" aria-label="More newsletter issues">
+        {older ? (
+          <a href={older.href} class="pagination-link older" rel="prev">
+            <span class="pagination-label">← Previous issue · {older.issue}</span>
+            <span class="pagination-title">{older.title}</span>
+          </a>
+        ) : <span />}
+        {newer ? (
+          <a href={newer.href} class="pagination-link newer" rel="next">
+            <span class="pagination-label">Next issue · {newer.issue} →</span>
+            <span class="pagination-title">{newer.title}</span>
+          </a>
+        ) : <span />}
+      </nav>
+    )}
+
     <div class="post-footer-nav">
       <a href="/newsletter/" class="button button-secondary">← Back to Archive</a>
-      <a href="mailto:luigi.moretti@uwe.ac.uk?subject=I want to subscribe to the newsletter" class="button">Subscribe</a>
+      <a href={SUBSCRIBE_MAILTO} class="button">Subscribe</a>
     </div>
 
-    <ShareButtons 
-      pageTitle={frontmatter.title}
-      shareDescription={frontmatter.description}
+    <ShareButtons
+      pageTitle={title}
+      shareDescription={description}
     />
   </section>
 </Layout>
@@ -84,8 +118,16 @@ const articleURL = new URL(Astro.url.pathname, Astro.site);
     text-align: center;
     margin-bottom: 3rem;
   }
+  .post-issue {
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-primary-strong);
+    margin-bottom: 0.75rem;
+  }
   .post-header h1 {
-    font-size: 3rem;
+    font-size: 2.75rem;
     line-height: 1.2;
   }
   .post-date {
@@ -96,44 +138,95 @@ const articleURL = new URL(Astro.url.pathname, Astro.site);
   .post-body {
     font-size: 1.1rem;
     line-height: 1.8;
+    overflow-wrap: break-word;
   }
   .post-body :global(h2) {
-    font-size: 2rem;
+    font-size: 1.6rem;
+    line-height: 1.3;
     margin-top: 2.5rem;
     margin-bottom: 1rem;
   }
   .post-body :global(p) {
     margin-bottom: 1.5rem;
   }
-  
+  .post-body :global(ul),
+  .post-body :global(ol) {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .post-body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .post-body :global(a) {
+    color: var(--color-primary-strong);
+    font-weight: 700;
+  }
+  .post-body :global(blockquote) {
+    border-left: 4px solid var(--color-primary);
+    background-color: var(--color-white);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+  }
+  .post-body :global(blockquote p) {
+    margin-bottom: 0;
+  }
+  .post-body :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1rem 0;
+  }
+
+  .post-pagination {
+    max-width: 800px;
+    margin: 4rem auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .pagination-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-white);
+    text-decoration: none;
+    color: var(--color-text);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .pagination-link:hover {
+    border-color: var(--color-primary-strong);
+    transform: translateY(-2px);
+  }
+  .pagination-link.newer {
+    text-align: right;
+  }
+  .pagination-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-primary-strong);
+  }
+  .pagination-title {
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
   .post-footer-nav {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 1rem;
-    margin: 4rem 0 2rem 0;
+    margin: 3rem 0 2rem 0;
     padding-top: 2rem;
     border-top: 1px solid var(--color-border);
   }
-  .button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--color-primary);
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.2s ease;
-  }
-  .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  }
-  .button.button-secondary {
-    background-color: var(--color-white);
-    color: var(--color-primary);
-  }
-  .button.button-secondary:hover {
-    background-color: var(--color-background);
+
+  @media (max-width: 600px) {
+    .post-header h1 { font-size: 2rem; }
+    .post-pagination { grid-template-columns: 1fr; }
+    .pagination-link.newer { text-align: left; }
   }
 </style>

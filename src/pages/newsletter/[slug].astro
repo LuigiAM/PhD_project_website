@@ -1,0 +1,32 @@
+---
+// src/pages/newsletter/[slug].astro
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('newsletter')).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+  );
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      newer: posts[i - 1] ? { href: `/newsletter/${posts[i - 1].id}/`, issue: posts[i - 1].data.issue, title: posts[i - 1].data.title } : undefined,
+      older: posts[i + 1] ? { href: `/newsletter/${posts[i + 1].id}/`, issue: posts[i + 1].data.issue, title: posts[i + 1].data.title } : undefined,
+    },
+  }));
+}
+
+const { post, newer, older } = Astro.props;
+const { Content } = await render(post);
+---
+<PostLayout
+  title={post.data.title}
+  issue={post.data.issue}
+  date={post.data.date}
+  description={post.data.description}
+  newer={newer}
+  older={older}
+>
+  <Content />
+</PostLayout>

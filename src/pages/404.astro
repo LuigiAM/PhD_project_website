@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Page not found | MEMoPAD"
+  description="The page you were looking for could not be found on the MEMoPAD project website."
+  breadcrumbName="Page not found"
+>
+  <section class="container not-found">
+    <p class="code">404</p>
+    <h1>This page could not be found</h1>
+    <p class="lead">It may have moved, or the link may be mistyped. Here are some good places to continue:</p>
+    <ul class="links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/research/">The Research</a></li>
+      <li><a href="/achievements/">Achievements & Milestones</a></li>
+      <li><a href="/newsletter/">Newsletter Archive</a></li>
+      <li><a href="/contact/">Contact</a></li>
+    </ul>
+    <a href="/" class="button">Back to the homepage</a>
+  </section>
+</Layout>
+
+<style>
+  .not-found {
+    text-align: center;
+    max-width: 700px;
+  }
+  .code {
+    font-size: 5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary-strong);
+  }
+  h1 {
+    font-size: 2.5rem;
+    margin: 1rem 0;
+  }
+  .lead {
+    color: var(--color-text-muted);
+    font-size: 1.125rem;
+  }
+  .links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+    margin: 2rem 0;
+  }
+  .links a {
+    color: var(--color-primary-strong);
+    font-weight: 700;
+  }
+</style>

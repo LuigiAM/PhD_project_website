@@ -1,41 +1,43 @@
 ---
 // src/pages/newsletter/index.astro
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import NewsletterCard from '../../components/NewsletterCard.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
 import SubscribeButtons from '../../components/SubscribeButtons.astro';
 
-// This automatically finds all your newsletter markdown files
-const posts = await Astro.glob('./*.md');
-
-// Sort posts by date, newest first
-posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+// Newest first
+const posts = (await getCollection('newsletter')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
 ---
 <Layout
-  title="Newsletter Archive - MEMoPAD Project"
-  description="A complete archive of our monthly updates, detailing our research progress, co-design insights, and project milestones."
+  title="Newsletter Archive | MEMoPAD"
+  description="Every monthly MEMoPAD newsletter since July 2024: research progress, co-design insights and project milestones."
+  breadcrumbName="Newsletter"
 >
   <section class="container">
     <div class="archive-header">
       <h1>Newsletter Archive</h1>
       <p>A complete archive of our monthly updates, detailing our research progress, co-design insights, and project milestones.</p>
-            <SubscribeButtons />
+      <SubscribeButtons />
+      <p class="rss-link"><a href="/rss.xml">Or follow via RSS</a></p>
     </div>
 
     <div class="post-grid">
       {posts.map(post => (
         <NewsletterCard
-          href={post.url}
-          title={post.frontmatter.title}
-          date={post.frontmatter.date}
-          excerpt={post.frontmatter.description}
+          href={`/newsletter/${post.id}/`}
+          title={post.data.title}
+          issue={post.data.issue}
+          date={post.data.date}
+          excerpt={post.data.description}
         />
       ))}
     </div>
 
-    {/* --- SHARE BUTTONS --- */}
     <div class="share-wrapper">
-      <ShareButtons 
+      <ShareButtons
         pageTitle="MEMoPAD Newsletter Archive"
         shareDescription="Explore the complete archive of the MEMoPAD project newsletter for insights into our co-design process and research findings."
       />
@@ -57,20 +59,13 @@ posts.sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontma
     max-width: 600px;
     margin: 0.5rem auto 2rem;
   }
-  .button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: var(--color-white);
-    padding: 0.75rem 1.5rem;
-    border: 2px solid var(--color-primary);
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: 700;
-    transition: all 0.2s ease;
+  .archive-header .rss-link {
+    margin: 1rem auto 0;
+    font-size: 0.95rem;
   }
-  .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  .rss-link a {
+    color: var(--color-primary-strong);
+    font-weight: 700;
   }
 
   .post-grid {

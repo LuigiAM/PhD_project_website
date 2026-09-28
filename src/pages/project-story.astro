@@ -5,16 +5,40 @@ import Card from '../components/Card.astro';
 import CardGrid from '../components/CardGrid.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import DemoCard from '../components/DemoCard.astro';
+import { Image } from 'astro:assets';
+import { PROJECT } from '../data/project';
+import clinicalPast from '../assets/images/clinical_past.png';
+import nhsInfographic from '../assets/images/nhs-mental-health-infographic.jpg';
+import intelliheartsThumb from '../assets/images/intellihearts-demo-thumbnail.jpg';
+import uweLogo from '../assets/images/logo-uwe-bristol.webp';
+import videoStory from '../assets/images/MEMoPAD-video-story.webp';
+import dashboardPreview from '../assets/images/preview-demo-webapp.jpg';
+import appTrailerPoster from '../assets/video/_ZfFJO2GutQ.jpg';
+import davidWestern from '../assets/images/davidwestern.jpg';
+import michaelLoizou from '../assets/images/michaelloizou.jpg';
+import milesThompson from '../assets/images/milesthompson.jpg';
+import paulMatthews from '../assets/images/paulmatthews.jpg';
+
+// "M" + "ultimodal", etc. Joined, these spell PROJECT.acronym.
+const acronymLines = [
+  { letter: 'M', text: 'ultimodal' },
+  { letter: 'E', text: 'motion' },
+  { letter: 'Mo', text: 'nitoring' },
+  { letter: '', text: 'in Clinical' },
+  { letter: 'P', text: 'athways for' },
+  { letter: 'A', text: 'nxiety' },
+  { letter: 'D', text: 'isorders' },
+];
 ---
 
 <Layout
-  title="Project Story - The MEMoPAD Journey"
-  description="Discover the story behind the MEMOPAD project, from its personal beginnings to its academic evolution. Learn how we are co-designing a digital tool to enhance mental health care through emotion recognition technology."
+  title="Project Story: The MEMoPAD Journey | MEMoPAD"
+  description="The story behind MEMoPAD, from a personal mission and a startup feature to a UWE Bristol PhD co-designing emotion monitoring for anxiety care."
 >
   <section class="page-hero">
     <div class="container">
       <div class="hero-image-container">
-        <img src="/clinical_past.png" alt="A diagram showing clinical limitations and a digital solution pathway." />
+        <Image src={clinicalPast} alt="A diagram showing clinical limitations and a digital solution pathway." widths={[500, 1000]} width={Math.min(1000, clinicalPast.width)} sizes="(max-width: 540px) 100vw, 500px" loading="eager" fetchpriority="high" />
       </div>
       <h1>Seeing the Gap, Building the Bridge</h1>
       <p class="subtitle">
@@ -26,35 +50,15 @@ import DemoCard from '../components/DemoCard.astro';
   <section class="container acronym-section">
   <h2>What Does MEMoPAD Mean?</h2>
   
-  <div class="animated-title" aria-label="MEMoPAD: Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders">
+  <p class="sr-only">MEMoPAD stands for {PROJECT.acronym}.</p>
+  <div class="animated-title" aria-hidden="true">
     <div class="acronym-breakdown">
-      <div class="acronym-line">
-        <span class="acronym-letter">M</span>
-        <span class="acronym-text" data-text="ultimodal"></span>
-      </div>
-      <div class="acronym-line">
-        <span class="acronym-letter">E</span>
-        <span class="acronym-text" data-text="motion"></span>
-      </div>
-      <div class="acronym-line">
-        <span class="acronym-letter">Mo</span>
-        <span class="acronym-text" data-text="nitoring"></span>
-      </div>
-      <div class="acronym-line">
-        <span class="acronym-text" data-text="in Clinical"></span>
-      </div>
-      <div class="acronym-line">
-        <span class="acronym-letter">P</span>
-        <span class="acronym-text" data-text="athways for"></span>
-      </div>
-      <div class="acronym-line">
-        <span class="acronym-letter">A</span>
-        <span class="acronym-text" data-text="nxiety"></span>
-      </div>
-      <div class="acronym-line">
-        <span class="acronym-letter">D</span>
-        <span class="acronym-text" data-text="isorders"></span>
-      </div>
+      {acronymLines.map((line) => (
+        <div class="acronym-line">
+          {line.letter && <span class="acronym-letter">{line.letter}</span>}
+          <span class="acronym-text" data-text={line.text}>{line.text}</span>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -63,13 +67,14 @@ import DemoCard from '../components/DemoCard.astro';
     title="The Spark: A Personal Mission"
     theme="light"
     imagePosition="left"
-    imageSrc="https://assets.publishing.service.gov.uk/media/5c66eb7fe5274a72bbe5fd36/Infographic_-_mental_health_rates.jpg"
+    image={nhsInfographic}
     imageAlt="NHS infographic showing statistics on wellbeing and mental health in the UK."
+    imageCredit="Infographic: GOV.UK, Open Government Licence v3.0"
     linkUrl="https://digital.nhs.uk/data-and-information/publications/statistical/adult-psychiatric-morbidity-survey/adult-psychiatric-morbidity-survey-survey-of-mental-health-and-wellbeing-england-2014"
     linkTitle="View the full NHS Adult Psychiatric Morbidity Survey"
   >
     <p>
-      I'm <a href=`/contact`>Luigi A. Moretti MD, MSc in HealthTech</a> and this journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and <b>feeling powerless</b> to help despite my medical background, I saw <b>a clear and urgent need</b> for better tools and a more empathetic system, an opportunity to make a meaningful difference that could not be ignored.
+      I'm <a href="/contact/">Luigi A. Moretti MD, MSc in HealthTech</a> and this journey began with a personal truth: watching loved ones navigate the complexities of mental healthcare. Faced with their long-term struggles and <b>feeling powerless</b> to help despite my medical background, I saw <b>a clear and urgent need</b> for better tools and a more empathetic system, an opportunity to make a meaningful difference that could not be ignored.
       <small class="click-prompt">(Click the image to view the NHS article)</small>
     </p>
   </FeatureSection>
@@ -78,9 +83,9 @@ import DemoCard from '../components/DemoCard.astro';
     title="From Startup to Science"
     theme="dark"
     imagePosition="right"
-    imageSrc="https://www.eleganzadelgusto.com/wordpress/wp-content/uploads/2017/11/ot11b51mod-1024x578.jpg"
+    image={intelliheartsThumb}
     imageAlt="Video thumbnail for the IntelliHearts mobile app emotion recognition demo."
-    linkUrl="https://www.youtube.com/watch?v=zCHwg8tJSfg?rel=0"
+    linkUrl="https://www.youtube.com/watch?v=zCHwg8tJSfg"
     linkTitle="Watch the IntelliHearts app demo on YouTube"
   >
     <p>
@@ -93,7 +98,7 @@ import DemoCard from '../components/DemoCard.astro';
     title="The PhD Project"
     theme="light"
     imagePosition="left"
-    imageSrc="/logo-uwe-bristol.webp"
+    image={uweLogo}
     imageAlt="The official logo for UWE Bristol, the university hosting the MEMoPAD project."
     linkUrl="https://www.uwe.ac.uk/research/centres-and-groups/reach/members#section-5"
     linkTitle="Visit the official UWE Bristol research project page"
@@ -109,21 +114,21 @@ import DemoCard from '../components/DemoCard.astro';
       <h2>Supervisory Team</h2>
       <p class="subtitle">The expert team providing invaluable guidance for this project.</p>
       <CardGrid>
-        <Card name="Dr David Western" title="Director of Studies" imgSrc="https://uwe-repository.worktribe.com/avatar/792407?fit=0" imgAlt="Photo of David Western UWE Bristol" expertise="Artificial intelligence and smart sensing in health" linkUrl="https://uwe-repository.worktribe.com/person/792407/david-western" />
-        <Card name="Dr Michael Loizou" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/8058351?fit=0" imgAlt="Photo of Michael Loizou UWE Bristol" expertise="Affective computing implementations in health" linkUrl="https://uwe-repository.worktribe.com/person/8058351/michael-loizou" />
-        <Card name="Dr Miles Thompson" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/696945" imgAlt="Photo of Miles Thompson UWE Bristol" expertise="Clinical psychology" linkUrl="https://uwe-repository.worktribe.com/index.php/person/696945/miles-thompson" />
-        <Card name="Dr Paul Matthews" title="Supervisor" imgSrc="https://uwe-repository.worktribe.com/avatar/434419?fit=0" imgAlt="Photo of Paul Matthews UWE Bristol" expertise="Data science and mobile apps in mental health" linkUrl="https://uwe-repository.worktribe.com/person/434419/paul-matthews" />
+        <Card name="Dr David Western" title="Director of Studies" img={davidWestern} imgAlt="Photo of David Western UWE Bristol" expertise="Artificial intelligence and smart sensing in health" linkUrl="https://uwe-repository.worktribe.com/person/792407/david-western" />
+        <Card name="Dr Michael Loizou" title="Supervisor" img={michaelLoizou} imgAlt="Photo of Michael Loizou UWE Bristol" expertise="Affective computing implementations in health" linkUrl="https://uwe-repository.worktribe.com/person/8058351/michael-loizou" />
+        <Card name="Dr Miles Thompson" title="Supervisor" img={milesThompson} imgAlt="Photo of Miles Thompson UWE Bristol" expertise="Clinical psychology" linkUrl="https://uwe-repository.worktribe.com/index.php/person/696945/miles-thompson" />
+        <Card name="Dr Paul Matthews" title="Supervisor" img={paulMatthews} imgAlt="Photo of Paul Matthews UWE Bristol" expertise="Data science and mobile apps in mental health" linkUrl="https://uwe-repository.worktribe.com/person/434419/paul-matthews" />
       </CardGrid>
     </div>
   </section>
 
   <FeatureSection
-    title="From Startup to Science"
+    title="Built on Listening"
     theme="dark"
     imagePosition="right"
-    imageSrc="/MEMoPAD-video-story.webp"
+    image={videoStory}
     imageAlt="Video thumbnail for a video story of MEMoPAD implemented in real life."
-    linkUrl="https://youtu.be/9uJHqtzO6cw?rel=0"
+    linkUrl="https://youtu.be/9uJHqtzO6cw"
     linkTitle="Watch how MEMoPAD can affect mental health care"
   >
     <p>
@@ -134,25 +139,29 @@ import DemoCard from '../components/DemoCard.astro';
 
   <section class="page-outro">
     <div class="container">
-      <h2>Work in Progress...</h2>
+      <h2>Where We Are Now</h2>
       <p>
-        This project is an active and evolving journey. We are currently developing the initial prototype and preparing for the next phases of user testing and evaluation.
+        The working prototype is out of the lab: in co-design Phase VI, participants in Bristol are using the MEMoPAD watch and companion app in their daily lives for up to five weeks. Thesis submission is expected by the end of 2026, with the viva by March 2027. Next, we are exploring how to get MEMoPAD to the people who need it, including commercialisation, NHS collaborations and clinical trials.
         <a href="/research/" class="outro-link">Learn more about our research and methodology.</a>
       </p>
 
       <div class="outro-demo-section">
-        <h3>Latest MEMoPAD Demo</h3>
+        <h3>Early Prototype Demos (2025)</h3>
         <div class="demo-grid">
           <DemoCard
             title="Mobile App for Personal Use"
-            description="Watch the latest trailer for our personal-use mobile application."
+            description="Trailer of the early 2025 personal-use mobile app. The current version reflects feedback from co-design Phases IV and V."
             videoId="_ZfFJO2GutQ"
+            poster={appTrailerPoster}
+            badge="Early prototype (2025)"
           />
           <DemoCard
             title="Web App for Professionals"
-            description="Explore the interactive prototype of the clinician-facing dashboard"
+            description="Explore the interactive prototype of the clinician-facing dashboard (early 2025 version)."
             linkUrl="https://memopad-demo.luigiandreamoretti.com/"
-            imgSrc="/preview-demo-webapp.jpg"
+            img={dashboardPreview}
+            imgAlt="Screenshot of the clinician web dashboard (opens the interactive prototype in a new tab)"
+            badge="Early prototype (2025)"
           />
         </div>
       </div>
@@ -162,84 +171,42 @@ import DemoCard from '../components/DemoCard.astro';
   <div class="container share-wrapper">
     <ShareButtons 
       pageTitle="The MEMoPAD Journey: A PhD Project Story"
-      shareDescription="In the MEMOPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
+      shareDescription="In the MEMoPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
     />
   </div>
 </Layout>
 
 <script>
-
-    // Script for MEMoPAD typing animation
-    const textSpans = Array.from(document.querySelectorAll('.acronym-text')) as HTMLElement[];
-    if (textSpans.length > 0) {
-      let isTyping = true;
-      let currentLine = 0;
-      let currentChar = 0;
-      const type = () => {
-        if (!isTyping) return;
-        const span = textSpans[currentLine];
-        const fullText = span.dataset.text || '';
-        span.textContent = fullText.substring(0, currentChar + 1);
-        span.classList.add('has-cursor');
-        if (currentChar < fullText.length) {
-          currentChar++;
-          setTimeout(type, 50);
-        } else {
-          span.classList.remove('has-cursor');
-          currentLine++;
-          currentChar = 0;
-          if (currentLine < textSpans.length) {
-            setTimeout(type, 200);
-          } else {
-            isTyping = false;
-            setTimeout(() => { isTyping = true; erase(); }, 10000);
-          }
-        }
-      };
-      const erase = () => {
-        if (!isTyping) return;
-        let lineToDelete = textSpans.length - 1;
-        const eraseChar = () => {
-          const span = textSpans[lineToDelete];
-          const fullText = span.dataset.text || '';
-          
-          // Use a fallback to ensure textContent is treated as a string
-          span.textContent = fullText.substring(0, (span.textContent || '').length - 1);
-          span.classList.add('has-cursor');
-          if ((span.textContent || '').length > 0) {
-            setTimeout(eraseChar, 30);
-          } else {
-            span.classList.remove('has-cursor');
-            lineToDelete--;
-            if (lineToDelete >= 0) {
-              eraseChar();
-            } else {
-              isTyping = false;
-              currentLine = 0;
-              setTimeout(() => { isTyping = true; type(); }, 500);
-            }
-          }
-        };
-        eraseChar();
-      };
-      type();
-    }
+  // Typing animation for the MEMoPAD acronym. Plays once, and is skipped
+  // entirely when the visitor prefers reduced motion (full text is server-rendered).
+  const textSpans = Array.from(document.querySelectorAll<HTMLElement>('.acronym-text'));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (textSpans.length > 0 && !reduceMotion) {
+    textSpans.forEach((span) => { span.textContent = ''; });
+    let currentLine = 0;
+    let currentChar = 0;
+    const type = () => {
+      const span = textSpans[currentLine];
+      const fullText = span.dataset.text || '';
+      span.textContent = fullText.substring(0, currentChar + 1);
+      span.classList.add('has-cursor');
+      if (currentChar < fullText.length) {
+        currentChar++;
+        setTimeout(type, 50);
+      } else {
+        span.classList.remove('has-cursor');
+        currentLine++;
+        currentChar = 0;
+        if (currentLine < textSpans.length) setTimeout(type, 200);
+      }
+    };
+    type();
+  }
 </script>
 
 
 <style>
   /* --- STYLES FOR ANIMATED MEMoPAD --- */
-  .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-  }
 
   .animated-title {
     display: flex;
@@ -257,7 +224,7 @@ import DemoCard from '../components/DemoCard.astro';
     align-items: baseline;
   }
   .acronym-letter {
-    color: var(--color-primary);
+    color: var(--color-primary-strong);
     font-weight: 700;
     padding-right: 0.4rem;
     min-width: 4rem;
@@ -299,7 +266,7 @@ import DemoCard from '../components/DemoCard.astro';
     max-width: 500px;
     margin: 0 auto 2rem;
   }
-  .hero-image-container img {
+  .hero-image-container :global(img) {
     width: 100%;
     height: auto;
     border-radius: 8px;
@@ -309,10 +276,10 @@ import DemoCard from '../components/DemoCard.astro';
     margin-top: 2rem;
   }
   
-  .page-outro { padding: 4rem 2rem; text-align: center; background-color: var(--color-primary); color: var(--color-white); }
+  .page-outro { padding: 4rem 2rem; text-align: center; background-color: var(--color-primary-strong); color: var(--color-white); }
   .page-outro .container { padding-top: 0; padding-bottom: 0; }
   .page-outro h2 { color: var(--color-white); font-size: 2.5rem; margin-bottom: 1rem; }
-  .page-outro p { max-width: 600px; margin-left: auto; margin-right: auto; font-size: 1.125rem; opacity: 0.9; }
+  .page-outro > .container > p { max-width: 640px; margin-left: auto; margin-right: auto; font-size: 1.125rem; }
   .outro-link { display: block; margin-top: 1.5rem; color: var(--color-white); font-weight: 700; opacity: 1; transition: opacity 0.2s ease; }
   .outro-link:hover { opacity: 0.8; }
   .click-prompt { display: block; margin-top: 1rem; font-style: italic; font-size: 0.9rem; color: var(--color-text-muted); }
@@ -321,7 +288,6 @@ import DemoCard from '../components/DemoCard.astro';
   .outro-demo-section h3 { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--color-white); }
   .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; text-align: left; max-width: 1100px; margin: 0 auto; }
   @media (max-width: 900px) { .demo-grid { grid-template-columns: 1fr; } }
-  .page-outro :global(.demo-card) { background-color: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); }
-  .page-outro :global(.demo-card h3) { color: var(--color-white); }
-  .page-outro :global(.demo-card .text-content p) { color: rgba(255, 255, 255, 0.9); }
+  /* Demo cards keep their own white background and colours for contrast */
+  .page-outro :global(.demo-card) { color: var(--color-text); }
 </style>

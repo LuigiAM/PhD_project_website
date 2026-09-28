@@ -1,225 +1,187 @@
 ---
-import IconUser from './icons/IconUser.astro';
-import IconStethoscope from './icons/IconStethoscope.astro';
-
+// src/components/RecruitmentCard.astro
+// A recruitment call: text, what's involved and a call to action on the left,
+// an optional one-page summary preview on the right.
 type Props = {
   title: string;
   buttonText: string;
   buttonLink: string;
-  theme?: 'light' | 'primary';
-  layout?: 'vertical' | 'horizontal';
-  imageUrl?: string;
-  imageAlt?: string;
+  status?: 'open' | 'closed';
+  involvementDetails?: string[];
   documentImageUrl?: string;
   documentPdfUrl?: string;
-  involvementDetails?: string[];
-}
+  note?: string;
+};
 
-const { title, buttonText, buttonLink, theme = 'light', layout = 'vertical', imageUrl, imageAlt, documentImageUrl, documentPdfUrl, involvementDetails } = Astro.props;
-
-// Get the base URL for constructing correct asset paths
-const BASE_URL = import.meta.env.BASE_URL;
+const {
+  title,
+  buttonText,
+  buttonLink,
+  status = 'open',
+  involvementDetails,
+  documentImageUrl,
+  documentPdfUrl,
+  note,
+} = Astro.props;
 ---
 
-<div class:list={["card", `theme-${theme}`, `layout-${layout}`]}>
-  {layout === 'horizontal' && imageUrl && (
-    <div class="card-image">
-      <img src={imageUrl} alt={imageAlt || title} />
-    </div>
-  )}
-
-  <div class="card-content">
+<article class:list={['recruitment-card', `is-${status}`, { 'has-document': documentImageUrl && documentPdfUrl }]} data-card="recruitment">
+  <div class="card-main">
+    <p class="status-pill">{status === 'open' ? 'Recruiting now' : 'Recruitment closed'}</p>
     <h2>{title}</h2>
     <div class="description">
       <slot />
-
-      {involvementDetails && involvementDetails.length > 0 && (
-        <div class="involvement-section">
-          <strong>Types of involvement:</strong>
-          <ul>
-            {involvementDetails.map(detail => <li>{detail}</li>)}
-          </ul>
-        </div>
-      )}
-
-      {documentImageUrl && documentPdfUrl && (
-        <a href={`${documentPdfUrl}`} target="_blank" rel="noopener noreferrer" class="document-link">
-          <img src={`${documentImageUrl}`} alt={`Preview of the one-page summary for ${title}`} class="document-preview" />
-          <span><br>View One-Page Summary (PDF)</span>
-        </a>
-      )}
     </div>
-    <a href={buttonLink} class="button">{buttonText}</a>
+
+    {involvementDetails && involvementDetails.length > 0 && (
+      <div class="involvement">
+        <h3>What's involved</h3>
+        <ul>
+          {involvementDetails.map((detail) => <li>{detail}</li>)}
+        </ul>
+      </div>
+    )}
+
+    {note && <p class="note">{note}</p>}
+
+    {status === 'open' && (
+      <div class="actions">
+        <a href={buttonLink} class="button" target="_blank" rel="noopener noreferrer">{buttonText}</a>
+      </div>
+    )}
   </div>
-</div>
+
+  {documentPdfUrl && (
+    <a href={documentPdfUrl} class="document-link" target="_blank" rel="noopener noreferrer">
+      {documentImageUrl && <img src={documentImageUrl} alt="" width="535" height="757" loading="lazy" />}
+      <span>One-page summary (PDF)</span>
+    </a>
+  )}
+</article>
 
 <style>
-  .card {
-    padding: 2.5rem;
-    border-radius: 8px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  /* Horizontal Layout */
-  .layout-horizontal {
-    flex-direction: row;
+  .recruitment-card {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 2rem;
-    background-color: #fafafa;
+    background-color: var(--color-white);
     border: 1px solid var(--color-border);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-top: 5px solid var(--color-primary-strong);
+    border-radius: 12px;
+    padding: 2.5rem;
+  }
+  .recruitment-card.is-closed {
+    border-top-color: var(--color-border);
+  }
+  @media (min-width: 768px) {
+    .recruitment-card.has-document {
+      grid-template-columns: 1fr 200px;
+      gap: 3rem;
+      align-items: center;
+    }
   }
 
-  .layout-horizontal .card-image {
-    flex: 0 0 55%;
-    overflow: hidden;
-    border-radius: 8px 0 0 8px;
-    margin: -2.5rem 0 -2.5rem -2.5rem;
-  }
-
-  .layout-horizontal .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    min-height: 100%;
-  }
-
-  .layout-horizontal .card-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-content {
-    width: 100%;
-  }
-
-  .description {
-    flex-grow: 1;
-    margin: 1.5rem 0;
-    line-height: 1.7;
-    text-align: left;
-  }
-  .involvement-section {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background-color: rgba(0,0,0,0.03);
-    border-radius: 4px;
-    font-size: 0.9rem;
-  } /* <-- THIS WAS THE MISSING BRACE */
-
-  .involvement-section strong {
-    font-weight: 700;
-  }
-  .involvement-section ul {
-    list-style-type: disc;
-    padding-left: 1.25rem;
-    margin-top: 0.5rem;
-  }
-  .theme-primary .involvement-section {
-    background-color: rgba(255,255,255,0.1);
-  }
-  .card h2 {
-    font-size: 1.75rem;
-    text-align: center;
-    margin-top: 0; /* Adjusted for no icon */
-  }
-  .button {
+  .status-pill {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    text-decoration: none;
+    font-size: 0.8rem;
     font-weight: 700;
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin-top: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
+    padding: 0.2rem 0.75rem;
+    margin-bottom: 1rem;
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
   }
-  .button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  }
-  .document-link {
-    display: block;
-    margin-top: 1.5rem;
-    padding: 0.75rem;
+  .is-closed .status-pill {
+    background-color: var(--color-background);
+    color: var(--color-text-muted);
     border: 1px solid var(--color-border);
+  }
+
+  h2 {
+    text-wrap: balance;
+    font-size: 1.75rem;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+  .description {
+    line-height: 1.7;
+    color: var(--color-text);
+  }
+  .description :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .involvement {
+    margin: 1.25rem 0;
+    padding: 1rem 1.25rem;
+    background-color: var(--color-background);
     border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    text-align: center;
   }
-  .document-link:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
-  }
-  .document-preview {
-    width: 60%;
-    height: auto;
-    border-radius: 4px;
+  .involvement h3 {
+    font-size: 0.95rem;
     margin-bottom: 0.5rem;
   }
-  .document-link span {
+  .involvement ul {
+    padding-left: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .note {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .actions {
+    margin-top: 0.5rem;
+  }
+
+  /* One-page summary: thumbnail + caption on wide screens, plain link on phones */
+  .document-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    justify-self: center;
+    color: var(--color-primary-strong);
     font-weight: 700;
+    font-size: 0.95rem;
+    text-align: center;
   }
-  .theme-light .document-link {
-    color: var(--color-primary);
+  .document-link img {
+    width: 200px;
+    height: auto;
+    display: block;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .theme-light .document-link:hover {
-    background-color: #fdfdfd;
+  .document-link:hover img {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
   }
-  .theme-primary .document-link {
-    color: var(--color-white);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-  .theme-primary .document-link:hover {
-    border-color: var(--color-white);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  .theme-light {
-    background-color: var(--color-white);
-    border: 2px solid var(--color-primary);
-  }
-  .theme-light h2 {
-    color: var(--color-primary);
-  }
-  .theme-light .button {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-  }
-  .theme-primary {
-    background-color: var(--color-primary);
-    color: var(--color-white);
-  }
-  .theme-primary h2 {
-    color: var(--color-white);
-  }
-  .theme-primary .description {
-    color: rgba(255, 255, 255, 0.9);
-  }
-  .theme-primary .button {
-    background-color: var(--color-white);
-    color: var(--color-primary);
+  .document-link span {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
-  /* Responsive: Stack horizontal cards on mobile */
   @media (max-width: 767px) {
-    .layout-horizontal {
-      flex-direction: column;
-      gap: 0;
+    .recruitment-card {
+      padding: 1.75rem 1.5rem;
+      gap: 1.25rem;
     }
-
-    .layout-horizontal .card-image {
-      flex: none;
+    .document-link {
+      justify-self: start;
+      align-items: flex-start;
+    }
+    .document-link img {
+      display: none;
+    }
+    .actions .button {
       width: 100%;
-      margin: -2.5rem -2.5rem 0 -2.5rem;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .layout-horizontal .card-image img {
-      max-height: 250px;
     }
   }
 </style>

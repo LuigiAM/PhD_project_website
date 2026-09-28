@@ -1,94 +1,230 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import RecruitmentCard from '../components/RecruitmentCard.astro';
-import IconUser from '../components/icons/IconUser.astro';
-import IconStethoscope from '../components/icons/IconStethoscope.astro';
 import ShareButtons from '../components/ShareButtons.astro';
+import SubscribeButtons from '../components/SubscribeButtons.astro';
+import { PHASES, PROJECT } from '../data/project';
 
+// Open call: clinicians and informal/unpaid carers.
+// Phase VI (people with lived experience) recruitment is closed.
+const pastWaysToTakePart = [
+  'Focus groups and workshops (online and in person)',
+  'One-to-one interviews with clinicians and carers',
+  'Online surveys',
+  'Lab-based sessions with wearable sensors',
+  'Using the MEMoPAD prototype in daily life (Phase VI)',
+];
+const completedPhases = PHASES.filter((p) => p.status === 'completed').length;
 ---
 <Layout
-  title="Take Part - Co-Design the Future of Mental Health Tech"
-  description="Join our co-design initiative to shape a mental health tool that truly meets the needs of users and clinicians. Your voice matters!"
+  title="Take Part: Co-Design the Future of Mental Health Tech | MEMoPAD"
+  description="Clinicians and informal carers: help shape MEMoPAD through short online interviews and surveys. Phase VI recruitment for people with lived experience is closed."
 >
-  <section class="container">
-    <div class="header">
+  <section class="container take-part">
+    <header class="page-header">
       <h1>Help Shape the Future of Mental Health Tech</h1>
-      <p class="thank-you-note">
-        This project is only possible because of the generous time and invaluable insights from our co-design partners. A sincere thank you to all the individuals with lived experience, carers, and clinicians who have guided this journey so far.
+      <p class="intro">
+        MEMoPAD is co-designed with people with lived experience of anxiety, carers and clinicians. A sincere thank you to everyone who has guided this journey so far.
       </p>
-    </div>
+    </header>
 
-    <div class="recruitment-grid">
-      <RecruitmentCard
-        title="For Individuals with Lived Experience"
-        buttonText="Express Interest as a Participant"
-        buttonLink="https://go.uwe.ac.uk/codesignPublic"
-        theme="light"
-        documentImageUrl="/one-page-public-preview.jpg"
-        documentPdfUrl="/one-page-public.pdf"
-        involvementDetails={["90-120 minute focus groups", "Online surveys"]}
-      >
+    <RecruitmentCard
+      title="For Clinicians & Informal/Unpaid Carers"
+      buttonText="Express Interest as a Participant"
+      buttonLink="https://go.uwe.ac.uk/codesignClinicians"
+      documentImageUrl="/one-page-clinician-preview.jpg"
+      documentPdfUrl="/one-page-clinician.pdf"
+      involvementDetails={["20–30 minute online interviews", "Online surveys"]}
+      note="Participation is rewarded with a voucher as a thank you for your time."
+    >
+      <p>
+        Your professional expertise or personal experience is vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations.
+      </p>
+    </RecruitmentCard>
+
+    <div class="card-row">
+      <article class="info-card" data-card="phase-vi">
+        <p class="eyebrow">Phase VI · Recruitment closed</p>
+        <h2>Phase VI is under way</h2>
+        <ul class="facts" aria-label="Phase VI at a glance">
+          <li><strong>10</strong> participants</li>
+          <li><strong>5</strong> weeks max</li>
+          <li><strong>Bristol</strong> based</li>
+        </ul>
         <p>
-          Your insights are crucial to building a tool that is truly helpful. Participation may involve taking part in workshops, interviews, and prototype evaluations to share your thoughts and feedback.
+          People with lived experience of anxiety are using the MEMoPAD watch and companion app in their daily lives. It is the first real-world test of whether co-design helps people keep using a digital mental health tool.
         </p>
-      </RecruitmentCard>
+        <p>Thank you to everyone who applied and to everyone who shared the call.</p>
+      </article>
 
-      <RecruitmentCard
-        title="For Clinicians & Informal/Unpaid Carers"
-        buttonText="Express Interest as a Participant"
-        buttonLink="https://go.uwe.ac.uk/codesignClinicians"
-        theme="primary"
-        documentImageUrl="/one-page-clinician-preview.jpg"
-        documentPdfUrl="/one-page-clinician.pdf"
-        involvementDetails={["20-30 minute online interviews", "Online surveys"]}
-      >
-        <p>
-          Your professional expertise or personal experience is vital to ensure this tool is clinically relevant, safe, and effective. We invite you to help shape a tool that can facilitate deeper, more insightful conversations.
-        </p>
-      </RecruitmentCard>
+      <article class="info-card" data-card="past">
+        <p class="eyebrow">The co-design so far</p>
+        <h2>How people have taken part</h2>
+        <p>Across {completedPhases} completed co-design phases ({PROJECT.participantsWording}), people have contributed through:</p>
+        <ul>
+          {pastWaysToTakePart.map((way) => <li>{way}</li>)}
+        </ul>
+        <p class="card-link"><a href="/achievements/#co-design-milestones">See every co-design phase →</a></p>
+      </article>
     </div>
 
-    <div class="horizontal-card-container">
-      <RecruitmentCard
-        layout="horizontal"
-        title="HUG & SmartSocks for Anxiety Disorders"
-        buttonText="Read more about this project"
-        buttonLink="https://blogs.uwe.ac.uk/research-external-engagement/assistive-technologies-hug-by-laugh-and-milbotix-smartsocks-announce-a-care-collaboration-to-improve-quality-of-life-for-people-living-with-dementia/"
-        theme="light"
-        imageUrl="/HUGandMilbotix.jpg"
-        imageAlt="HUG therapeutic comforter and Milbotix SmartSocks sensors for anxiety research"
-        involvementDetails={["90 min lab session"]}
-      >
-        <p>
-          We're exploring whether HUG, a therapeutic comforter designed for people with dementia, can also help people with anxiety. Using SmartSocks® sensors, we'll measure HUG's calming effects through physiological signals like heart rate and skin conductance.
-        </p>
-      </RecruitmentCard>
-    </div>
+    <section class="newsletter-band" data-card="newsletter" aria-labelledby="future-studies-heading">
+      <div class="band-text">
+        <h2 id="future-studies-heading">Hear about future studies</h2>
+        <p>The monthly newsletter is the first place new opportunities to take part are announced, and where we share what we learn from each phase.</p>
+      </div>
+      <SubscribeButtons />
+    </section>
 
-    <div class="voucher-note">
-      <p>All types of participation are rewarded with vouchers as a thank you for your valuable time and contribution.</p>
-    </div>
+    <p class="privacy-note">
+      Research participants' data is handled under the project's ethically approved
+      <a href="https://go.uwe.ac.uk/codesignPrivacyNotice" target="_blank" rel="noopener noreferrer">Co-design Participant Privacy Notice</a>
+      (UWE ethics ref. CATE-2324-274). Questions? <a href="/contact/">Get in touch</a>.
+    </p>
 
-    <div class="final-contact-prompt">
-      <p>If you have any further questions, please do not hesitate to <a href=`/contact/`>get in touch</a>.</p>
-    </div>
-
-    <ShareButtons 
-        pageTitle="Help Shape the Future of Mental Health Tech"
-        shareDescription="Join the MEMOPAD project co-design initiative to help shape a digital tool for anxiety disorders. Your voice matters!"
+    <ShareButtons
+      pageTitle="Help Shape the Future of Mental Health Tech"
+      shareDescription="Clinicians and carers: help shape MEMoPAD, a co-designed digital tool for anxiety disorders. Your voice matters!"
     />
   </section>
 </Layout>
 
 <style>
-  .header { text-align: center; max-width: 800px; margin: 0 auto 4rem auto; }
-  .header h1 { font-size: 3rem; }
-  .thank-you-note { margin-top: 1.5rem; font-size: 1.125rem; font-style: italic; color: var(--color-text-muted); }
-  .recruitment-grid { display: grid; gap: 2rem; grid-template-columns: 1fr; }
-  @media (min-width: 768px) { .recruitment-grid { grid-template-columns: 1fr 1fr; } }
-  .horizontal-card-container { margin-top: 2.5rem; }
-  .voucher-note { text-align: center; max-width: 600px; margin: 3rem auto 0 auto; font-style: italic; color: var(--color-text-muted); }
-  .final-contact-prompt { text-align: center; max-width: 600px; margin: 1.5rem auto 0; font-style: italic; color: var(--color-text-muted); }
-  .final-contact-prompt a { color: var(--color-primary); font-weight: 700; font-style: normal; text-decoration: none; border-bottom: 2px solid transparent; transition: border-color 0.2s ease; }
-  .final-contact-prompt a:hover { border-bottom-color: var(--color-primary); }
+  .take-part {
+    max-width: 1000px;
+  }
+
+  .page-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 3rem;
+  }
+  .page-header h1 {
+    font-size: 2.75rem;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  .intro {
+    margin-top: 1rem;
+    font-size: 1.15rem;
+    color: var(--color-text-muted);
+  }
+
+  .card-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  @media (min-width: 768px) {
+    .card-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  .info-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .info-card h2 {
+    text-wrap: balance;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    margin-bottom: 0.75rem;
+  }
+  .info-card p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .info-card p:last-child {
+    margin-bottom: 0;
+  }
+  .info-card ul {
+    padding-left: 1.25rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .info-card .facts {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0.5rem 0 1.25rem;
+  }
+  .facts li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-background);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    color: var(--color-text-muted);
+  }
+  .facts strong {
+    font-size: 1.35rem;
+    color: var(--color-primary-strong);
+  }
+  .card-link a {
+    color: var(--color-primary-strong);
+    font-weight: 700;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .newsletter-band {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #E8F3F0;
+  }
+  @media (min-width: 1000px) {
+    .newsletter-band { grid-template-columns: 1fr auto; gap: 2rem; }
+  }
+  .newsletter-band h2 {
+    font-size: 1.35rem;
+    margin-bottom: 0.5rem;
+  }
+  .newsletter-band p {
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+  .newsletter-band :global(.subscribe-buttons) {
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+  }
+
+  .privacy-note {
+    text-align: center;
+    max-width: 680px;
+    margin: 2.5rem auto 0;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+  .privacy-note a {
+    color: var(--color-primary-strong);
+    font-weight: 700;
+  }
+
+  @media (max-width: 600px) {
+    .page-header h1 { font-size: 2.1rem; }
+    .info-card, .newsletter-band { padding: 1.5rem; }
+    .facts { gap: 0.5rem; }
+    .facts li { padding: 0.6rem 0.7rem; }
+    .facts strong { font-size: 1.15rem; }
+    .newsletter-band :global(.subscribe-buttons) { flex-wrap: wrap; }
+  }
 </style>

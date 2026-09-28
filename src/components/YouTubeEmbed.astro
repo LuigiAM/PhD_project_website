@@ -1,0 +1,97 @@
+---
+// src/components/YouTubeEmbed.astro
+// Click-to-load YouTube facade: shows a locally hosted poster and only loads the
+// privacy-enhanced (youtube-nocookie) player after the visitor presses play.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+type Props = {
+  id: string;
+  title: string;
+  poster: ImageMetadata;
+  eager?: boolean;
+  sizes?: string;
+};
+
+const { id, title, poster, eager = false, sizes = '(max-width: 900px) 100vw, 800px' } = Astro.props;
+---
+<div class="yt" data-yt-id={id} data-yt-title={title}>
+  <button type="button" class="yt-play" aria-label={`Play video: ${title}`}>
+    <Image
+      src={poster}
+      alt=""
+      widths={[480, 800, 1280]} width={Math.min(1280, poster.width)}
+      sizes={sizes}
+      loading={eager ? 'eager' : 'lazy'}
+      class="yt-poster"
+    />
+    <span class="yt-icon" aria-hidden="true">
+      <svg viewBox="0 0 68 48" width="68" height="48"><path d="M66.5 7.7a8.5 8.5 0 0 0-6-6C55.3.3 34 .3 34 .3s-21.3 0-26.5 1.4a8.5 8.5 0 0 0-6 6C.1 12.9.1 24 .1 24s0 11.1 1.4 16.3a8.5 8.5 0 0 0 6 6c5.2 1.4 26.5 1.4 26.5 1.4s21.3 0 26.5-1.4a8.5 8.5 0 0 0 6-6c1.4-5.2 1.4-16.3 1.4-16.3s0-11.1-1.4-16.3z" fill="#212121" fill-opacity="0.85"/><path d="M45 24 27 14v20z" fill="#fff"/></svg>
+    </span>
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.yt').forEach((el) => {
+    const button = el.querySelector('button');
+    button?.addEventListener('click', () => {
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${el.dataset.ytId}?autoplay=1&rel=0`;
+      iframe.title = el.dataset.ytTitle || 'YouTube video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      el.replaceChildren(iframe);
+      iframe.focus();
+    }, { once: true });
+  });
+</script>
+
+<style>
+  .yt {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    overflow: hidden;
+  }
+  .yt-play {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .yt :global(.yt-poster) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .yt-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 0;
+    transition: transform 0.2s ease;
+  }
+  .yt-play:hover .yt-icon path:first-child,
+  .yt-play:focus-visible .yt-icon path:first-child {
+    fill: #c00;
+    fill-opacity: 1;
+  }
+  .yt-play:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: -4px;
+  }
+  .yt :global(iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>

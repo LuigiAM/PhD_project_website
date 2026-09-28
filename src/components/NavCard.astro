@@ -1,9 +1,19 @@
 ---
 // src/components/NavCard.astro
-const { href, title, imgSrc, alt, linkTitle } = Astro.props;
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+type Props = {
+  href: string;
+  title: string;
+  img: ImageMetadata;
+};
+
+// The visible title is the link's accessible name; the image is decorative.
+const { href, title, img } = Astro.props;
 ---
-<a href={href} class="nav-card" title={linkTitle} aria-label={linkTitle}>
-  <img src={imgSrc} alt={alt || title} class="card-bg" loading="lazy" />
+<a href={href} class="nav-card">
+  <Image src={img} alt="" class="card-bg" widths={[400, 700]} width={Math.min(700, img.width)} sizes="(max-width: 900px) 100vw, 340px" />
   <div class="card-overlay"></div>
   <h3 class="card-title">{title}</h3>
 </a>
@@ -25,7 +35,7 @@ const { href, title, imgSrc, alt, linkTitle } = Astro.props;
     transform: translateY(-5px);
   }
 
-  .card-bg {
+  .nav-card :global(.card-bg) {
     position: absolute;
     top: 0;
     left: 0;
@@ -34,7 +44,7 @@ const { href, title, imgSrc, alt, linkTitle } = Astro.props;
     object-fit: cover;
     transition: transform 0.4s ease-out;
   }
-  .nav-card:hover .card-bg {
+  .nav-card:hover :global(.card-bg) {
     transform: scale(1.05);
   }
 

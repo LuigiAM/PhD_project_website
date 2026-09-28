@@ -7,10 +7,11 @@ import IconMilestone from './icons/IconMilestone.astro';
 type Props = {
   title: string;
   date: string;
+  datetime?: string;
   position: 'left' | 'right';
   icon: 'publication' | 'award' | 'milestone';
 }
-const { title, date, position, icon } = Astro.props;
+const { title, date, datetime, position, icon } = Astro.props;
 
 const icons = {
   publication: IconPublication,
@@ -24,7 +25,7 @@ const IconComponent = icons[icon];
     <IconComponent />
   </div>
   <div class="timeline-content">
-    <time class="timeline-date">{date}</time>
+    <time class="timeline-date" datetime={datetime}>{date}</time>
     <h3 class="timeline-title">{title}</h3>
     <div class="timeline-description">
       <slot />
@@ -57,7 +58,7 @@ const IconComponent = icons[icon];
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--color-primary);
+    color: var(--color-primary-strong);
     z-index: 5;
   }
   .timeline-item.position-left .timeline-dot {
@@ -75,7 +76,7 @@ const IconComponent = icons[icon];
   .timeline-date {
     font-size: 0.875rem;
     font-weight: bold;
-    color: var(--color-primary);
+    color: var(--color-primary-strong);
     margin-bottom: 0.5rem;
     display: block;
   }
@@ -91,7 +92,6 @@ const IconComponent = icons[icon];
       left: 0;
       text-align: left; /* Ensure text is always left-aligned on mobile */
       
-      /* THIS IS THE FIX: Drastically reduced left padding */
       padding-left: 3.5rem; 
       padding-right: 0.5rem;
     }

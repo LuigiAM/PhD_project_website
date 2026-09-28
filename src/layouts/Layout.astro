@@ -1,316 +1,282 @@
 ---
+import '@fontsource-variable/inter';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { PROJECT, SITE_URL } from '../data/project';
+
+type Props = {
+  title?: string;
+  description?: string;
+  image?: string;
+  imageAlt?: string;
+  ogType?: 'website' | 'article';
+  publishedTime?: string;
+  breadcrumbName?: string;
+  includeProjectSchema?: boolean;
+};
 
 const {
-  title = "MEMoPAD: Multimodal Emotion Monitoring for Anxiety Disorders",
-  description = "A PhD project exploring how co-designed emotion recognition technology can benefit mental health."
+  title = `MEMoPAD | ${PROJECT.acronym}`,
+  description = "A PhD project co-designing wearable emotion monitoring with people with anxiety disorders, carers and clinicians.",
+  image = '/og-image.jpg',
+  imageAlt = 'MEMoPAD: wearable emotion monitoring for anxiety disorders',
+  ogType = 'website',
+  publishedTime,
+  breadcrumbName = title,
+  includeProjectSchema = false,
 } = Astro.props;
 
-// Construct full URL for Open Graph
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL('/og-image.jpg', Astro.site);
+const ogImageURL = new URL(image, Astro.site);
 
-// Schema.org structured data - using stable core types
+// Human-readable names for breadcrumb segments
+const segmentNames: Record<string, string> = {
+  'project-story': 'Project Story',
+  research: 'The Research',
+  achievements: 'Achievements',
+  collaborate: 'Collaborate',
+  'take-part': 'Take Part',
+  newsletter: 'Newsletter',
+  contact: 'Contact',
+  privacy: 'Privacy Policy',
+};
+
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+  { name: 'Home', item: `${SITE_URL}/` },
+  ...segments.map((segment, i) => ({
+    name: i === segments.length - 1 ? breadcrumbName : (segmentNames[segment] ?? segment),
+    item: `${SITE_URL}/${segments.slice(0, i + 1).join('/')}/`,
+  })),
+];
+
+const PERSON_ID = 'https://luigiandreamoretti.com/#person';
+const UWE_ID = 'https://www.uwe.ac.uk/#organization';
+const PROJECT_ID = `${SITE_URL}/#research-project`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
+
+// Nodes present on every page
+const baseGraph = [
+  {
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    "url": `${SITE_URL}/`,
+    "name": "MEMoPAD Project",
+    "description": "Website of the MEMoPAD research project on wearable emotion monitoring for anxiety disorders",
+    "publisher": { "@id": PERSON_ID },
+    "inLanguage": "en-GB"
+  },
+  {
+    "@type": "WebPage",
+    "@id": `${canonicalURL.href}#webpage`,
+    "url": canonicalURL.href,
+    "name": title,
+    "description": description,
+    "isPartOf": { "@id": WEBSITE_ID },
+    "about": { "@id": PROJECT_ID },
+    "breadcrumb": { "@id": `${canonicalURL.href}#breadcrumb` },
+    "inLanguage": "en-GB"
+  },
+  {
+    "@type": "BreadcrumbList",
+    "@id": `${canonicalURL.href}#breadcrumb`,
+    "itemListElement": breadcrumbItems.map((b, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "name": b.name,
+      "item": b.item
+    }))
+  }
+];
+
+// Full project graph: homepage only
+const projectGraph = [
+  {
+    "@type": "Project",
+    "@id": PROJECT_ID,
+    "name": "MEMoPAD",
+    "alternateName": PROJECT.acronym,
+    "description": "A PhD research project co-designing a human-centred digital tool that uses consumer wearables (Google Pixel Watch 2) to provide clear, continuous and interpretable emotion data for anxiety care. The project bridges clinical research and real-world deployment through participatory design with patients, clinicians and carers.",
+    "url": `${SITE_URL}/`,
+    "image": `${SITE_URL}/og-image.jpg`,
+    "startDate": "2023-10-01",
+    "keywords": "wearable technology, emotion monitoring, anxiety disorders, affective computing, digital mental health, co-design, Google Pixel Watch, electrodermal activity, photoplethysmography, clinical decision support",
+    "sameAs": ["https://www.youtube.com/watch?v=_PDEcOkDbsQ"],
+    "about": [
+      { "@type": "MedicalCondition", "name": "Generalized Anxiety Disorder", "code": { "@type": "MedicalCode", "codeValue": "F41.1", "codingSystem": "ICD-10" } },
+      { "@type": "MedicalCondition", "name": "Post-Traumatic Stress Disorder", "code": { "@type": "MedicalCode", "codeValue": "F43.1", "codingSystem": "ICD-10" } },
+      { "@type": "MedicalCondition", "name": "Obsessive-Compulsive Disorder", "code": { "@type": "MedicalCode", "codeValue": "F42", "codingSystem": "ICD-10" } },
+      { "@type": "MedicalCondition", "name": "Panic Disorder", "code": { "@type": "MedicalCode", "codeValue": "F41.0", "codingSystem": "ICD-10" } },
+      { "@type": "MedicalCondition", "name": "Social Anxiety Disorder", "code": { "@type": "MedicalCode", "codeValue": "F40.1", "codingSystem": "ICD-10" } }
+    ],
+    "founder": { "@id": PERSON_ID },
+    "member": [
+      {
+        "@type": "Person",
+        "name": "Dr David Western",
+        "jobTitle": "Director of Studies",
+        "affiliation": { "@id": UWE_ID },
+        "sameAs": "https://people.uwe.ac.uk/Person/DavidWestern"
+      },
+      {
+        "@type": "Person",
+        "name": "Dr Miles Thompson",
+        "jobTitle": "Supervisor",
+        "affiliation": { "@id": UWE_ID },
+        "sameAs": "https://people.uwe.ac.uk/Person/Miles2Thompson"
+      },
+      {
+        "@type": "Person",
+        "name": "Dr Paul Matthews",
+        "jobTitle": "Supervisor",
+        "affiliation": { "@id": UWE_ID },
+        "sameAs": "https://people.uwe.ac.uk/Person/Paul2Matthews"
+      },
+      {
+        "@type": "Person",
+        "name": "Dr Michael Loizou",
+        "jobTitle": "Supervisor",
+        "affiliation": { "@type": "Organization", "name": "University of Plymouth", "url": "https://www.plymouth.ac.uk/" },
+        "sameAs": "https://www.plymouth.ac.uk/staff/michael-loizou"
+      }
+    ],
+    "funder": [
+      { "@id": UWE_ID },
+      { "@type": "Organization", "name": "NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board", "url": "https://bnssg.icb.nhs.uk/" }
+    ],
+    "parentOrganization": { "@id": UWE_ID }
+  },
+  {
+    "@type": "Person",
+    "@id": PERSON_ID,
+    "name": "Luigi A. Moretti",
+    "alternateName": "Luigi Andrea Moretti",
+    "jobTitle": "PhD Researcher in Wearable Mental Health Technology",
+    "affiliation": { "@id": UWE_ID },
+    "sameAs": [
+      "https://orcid.org/0009-0002-6180-0565",
+      "https://scholar.google.co.uk/citations?user=KJTGED4AAAAJ",
+      "https://www.linkedin.com/in/luigiandreamoretti/",
+      "https://luigiandreamoretti.com",
+      "https://github.com/LuigiAM",
+      "https://www.researchgate.net/profile/Luigi-Moretti-2",
+      "https://x.com/LuigiAndreaM"
+    ]
+  },
+  {
+    "@type": "EducationalOrganization",
+    "@id": UWE_ID,
+    "name": "University of the West of England, Bristol",
+    "url": "https://www.uwe.ac.uk/"
+  },
+  {
+    "@type": "ScholarlyArticle",
+    "@id": `${SITE_URL}/#publication-healthinf-2025`,
+    "name": "Affective Computing in Anxiety Disorders: A Rapid Literature Review of Emotion Recognition Applications",
+    "datePublished": "2025-02",
+    "isPartOf": { "@type": "PublicationEvent", "name": "HEALTHINF 2025 - 18th International Conference on Health Informatics (BIOSTEC 2025)" },
+    "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.5220/0013322800003911" },
+    "url": "https://doi.org/10.5220/0013322800003911",
+    "about": { "@id": PROJECT_ID },
+    "author": { "@id": PERSON_ID }
+  },
+  {
+    "@type": "ScholarlyArticle",
+    "@id": `${SITE_URL}/#publication-nmi-2025`,
+    "name": "Towards deployment-centric multimodal AI beyond vision and language",
+    "datePublished": "2025-10",
+    "isPartOf": { "@type": "Periodical", "name": "Nature Machine Intelligence" },
+    "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.1038/s42256-025-01116-5" },
+    "url": "https://doi.org/10.1038/s42256-025-01116-5",
+    "author": { "@id": PERSON_ID }
+  },
+  {
+    "@type": "ScholarlyArticle",
+    "@id": `${SITE_URL}/#publication-ih-2026`,
+    "name": "Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders",
+    "datePublished": "2026-07",
+    "isPartOf": { "@type": "PublicationEvent", "name": "ACM Interactive Health 2026 (IH '26), Porto" },
+    "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.1145/3786579.3804994" },
+    "url": "https://dl.acm.org/doi/10.1145/3786579.3804994",
+    "about": { "@id": PROJECT_ID },
+    "author": { "@id": PERSON_ID }
+  },
+  {
+    "@type": "SoftwareApplication",
+    "@id": `${SITE_URL}/#software`,
+    "name": "MEMoPAD",
+    "alternateName": "MEMoPAD research prototype",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Android, Wear OS",
+    "description": "Research prototype (not publicly available) for personal emotion tracking, mood logging and data visualisation using Google Pixel Watch 2 sensors (cEDA, PPG, skin temperature), with a clinician web dashboard.",
+    "featureList": [
+      "Continuous emotion monitoring via wearable sensors",
+      "Mood logging and self-report integration",
+      "Contextual note-taking linked to physiological data",
+      "Data visualisation and pattern recognition",
+      "Clinician dashboard for healthcare providers"
+    ],
+    "author": { "@id": PERSON_ID },
+    "provider": { "@id": UWE_ID },
+    "isRelatedTo": { "@id": PROJECT_ID }
+  },
+  {
+    "@type": "DefinedTerm",
+    "@id": `${SITE_URL}/#ethics`,
+    "name": "UWE Research Ethics Approval",
+    "identifier": "CATE-2324-274",
+    "inDefinedTermSet": "University of the West of England Research Ethics Committee"
+  }
+];
+
 const schemaData = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Project",
-      "@id": "https://memopad.luigiandreamoretti.com/#research-project",
-      "name": "MEMoPAD",
-      "alternateName": "Multimodal Emotion Monitoring using Wearable Devices for Anxiety Disorders",
-      "description": "A PhD research project co-designing a human-centered digital tool that uses consumer wearables (Google Pixel Watch 2) to provide clear, continuous, and interpretable emotion data for anxiety care. The project bridges clinical research and real-world deployment through participatory design with patients, clinicians, and carers.",
-      "url": "https://memopad.luigiandreamoretti.com/",
-      "image": "https://memopad.luigiandreamoretti.com/memopad-hero-image.png",
-      
-      "startDate": "2023-10-01",
-      "endDate": "2026-09-30",
-      "status": "Active",
-      
-      "keywords": "wearable technology, emotion monitoring, anxiety disorders, affective computing, digital mental health, co-design, Google Pixel Watch, electrodermal activity, photoplethysmography, clinical decision support",
-      
-      "sameAs": [
-        "https://www.youtube.com/watch?v=_PDEcOkDbsQ"
-      ],
-
-      "about": [
-        {
-          "@type": "MedicalCondition",
-          "name": "Generalized Anxiety Disorder",
-          "code": {
-            "@type": "MedicalCode",
-            "codeValue": "F41.1",
-            "codingSystem": "ICD-10"
-          }
-        },
-        {
-          "@type": "MedicalCondition",
-          "name": "Post-Traumatic Stress Disorder",
-          "code": {
-            "@type": "MedicalCode",
-            "codeValue": "F43.1",
-            "codingSystem": "ICD-10"
-          }
-        },
-        {
-          "@type": "MedicalCondition",
-          "name": "Obsessive-Compulsive Disorder",
-          "code": {
-            "@type": "MedicalCode",
-            "codeValue": "F42",
-            "codingSystem": "ICD-10"
-          }
-        },
-        {
-          "@type": "MedicalCondition",
-          "name": "Panic Disorder",
-          "code": {
-            "@type": "MedicalCode",
-            "codeValue": "F41.0",
-            "codingSystem": "ICD-10"
-          }
-        },
-        {
-          "@type": "MedicalCondition",
-          "name": "Social Anxiety Disorder",
-          "code": {
-            "@type": "MedicalCode",
-            "codeValue": "F40.1",
-            "codingSystem": "ICD-10"
-          }
-        }
-      ],
-      
-      "author": {
-        "@type": "Person",
-        "@id": "https://luigiandreamoretti.com/#person",
-        "name": "Luigi A. Moretti",
-        "alternateName": "Luigi Andrea Moretti",
-        "jobTitle": "PhD Researcher in Wearable Mental Health Technology",
-        "affiliation": {
-          "@type": "EducationalOrganization",
-          "@id": "https://www.uwe.ac.uk/#organization",
-          "name": "University of the West of England, Bristol",
-          "url": "https://www.uwe.ac.uk/"
-        },
-        "sameAs": [
-          "https://orcid.org/0009-0002-6180-0565",
-          "https://scholar.google.co.uk/citations?user=KJTGED4AAAAJ",
-          "https://www.linkedin.com/in/luigiandreamoretti/",
-          "https://luigiandreamoretti.com",
-          "https://www.uwe.ac.uk/research/centres-and-groups/reach/members#section-5",
-          "https://github.com/LuigiAM",
-          "https://www.researchgate.net/profile/Luigi-Moretti-2",
-          "https://x.com/LuigiAndreaM",
-          "https://sites.google.com/view/ai-cv-for-nds/home#h.63g48x9s290p",
-          "https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html"
-        ]
-      },
-      
-      "contributor": [
-        {
-          "@type": "Person",
-          "name": "Dr. David Western",
-          "jobTitle": "Lead Supervisor",
-          "affiliation": {
-            "@type": "EducationalOrganization",
-            "@id": "https://www.uwe.ac.uk/#organization"
-          },
-          "sameAs": "https://people.uwe.ac.uk/Person/DavidWestern"
-        },
-        {
-          "@type": "Person",
-          "name": "Dr. Miles Thompson",
-          "jobTitle": "Second Supervisor",
-          "affiliation": {
-            "@type": "EducationalOrganization",
-            "@id": "https://people.uwe.ac.uk/Person/Miles2Thompson"
-          }
-        },
-        {
-          "@type": "Person",
-          "name": "Dr. Paul Matthews",
-          "jobTitle": "Second Supervisor",
-          "affiliation": {
-            "@type": "EducationalOrganization",
-            "@id": "https://people.uwe.ac.uk/Person/Paul2Matthews"
-          }
-        },
-        {
-          "@type": "Person",
-          "name": "Dr. Michael Loizou",
-          "jobTitle": "External Supervisor",
-          "affiliation": {
-            "@type": "Organization",
-            "name": "University of Plymouth",
-            "url": "https://www.plymouth.ac.uk/staff/michael-loizou"
-          }
-        }
-      ],
-      
-      "funder": [
-        {
-          "@type": "EducationalOrganization",
-          "@id": "https://www.uwe.ac.uk/#organization"
-        },
-        {
-          "@type": "Organization",
-          "name": "NHS Bristol, North Somerset and South Gloucestershire Integrated Care Board",
-          "url": "https://bnssg.icb.nhs.uk/"
-        }
-      ],
-      
-      "parentOrganization": {
-        "@type": "EducationalOrganization",
-        "@id": "https://www.uwe.ac.uk/#organization"
-      }
-    },
-    
-    {
-      "@type": "ScholarlyArticle",
-      "@id": "https://memopad.luigiandreamoretti.com/#publication-1",
-      "name": "Wearable and Mobile Affective Computing for Anxiety Disorders: A Scoping Review",
-      "datePublished": "2025-01-01",
-      "isPartOf": {
-        "@type": "EventSeries",
-        "name": "HEALTHINF 2025 - 18th International Conference on Health Informatics"
-      },
-      "identifier": [
-        {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5220/0013322800003911"
-        }
-      ],
-      "url": "https://doi.org/10.5220/0013322800003911",
-      "about": {
-        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
-      },
-      "author": {
-        "@id": "https://luigiandreamoretti.com/#person"
-      }
-    },
-    
-    {
-      "@type": "SoftwareApplication",
-      "@id": "https://memopad.luigiandreamoretti.com/#software",
-      "name": "MEMoPAD",
-      "alternateName": "MEMoPAD Mobile App",
-      "applicationCategory": "HealthApplication",
-      "operatingSystem": "Android",
-      "description": "Mobile application for personal emotion tracking, mood logging, and data visualization using Google Pixel Watch 2 sensors (cEDA, PPG, skin temperature).",
-      "screenshot": "https://memopad.luigiandreamoretti.com/memopad-hero-image.png",
-      
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "GBP"
-      },
-      
-      "featureList": [
-        "Continuous emotion monitoring via wearable sensors",
-        "Real-time mood logging and self-report integration",
-        "Contextual note-taking linked to physiological data",
-        "Data visualization and pattern recognition",
-        "Privacy-preserving local data storage",
-        "Clinical dashboard integration for healthcare providers"
-      ],
-      
-      "softwareRequirements": "Android 9.0+, Google Pixel Watch 2",
-      
-      "author": {
-        "@id": "https://luigiandreamoretti.com/#person"
-      },
-      
-      "provider": {
-        "@type": "EducationalOrganization",
-        "@id": "https://www.uwe.ac.uk/#organization"
-      },
-      
-      "isRelatedTo": {
-        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
-      }
-    },
-    
-    {
-      "@type": "WebSite",
-      "@id": "https://memopad.luigiandreamoretti.com/#website",
-      "url": "https://memopad.luigiandreamoretti.com/",
-      "name": "MEMoPAD Project",
-      "description": "Official website for the MEMoPAD research project on wearable emotion monitoring for anxiety disorders",
-      "publisher": {
-        "@id": "https://www.uwe.ac.uk/#organization"
-      },
-      "mainEntity": {
-        "@id": "https://memopad.luigiandreamoretti.com/#research-project"
-      },
-      "inLanguage": "en-GB"
-    },
-    
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://memopad.luigiandreamoretti.com/#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://memopad.luigiandreamoretti.com/"
-        }
-      ]
-    },
-    
-    {
-      "@type": "DefinedTerm",
-      "@id": "https://memopad.luigiandreamoretti.com/#ethics",
-      "name": "UWE Research Ethics Approval",
-      "identifier": "CATE-2324-274",
-      "inDefinedTermSet": "University of the West of England Research Ethics Committee"
-    }
-  ]
+  "@graph": includeProjectSchema ? [...baseGraph, ...projectGraph] : baseGraph
 };
 ---
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width" />
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  
-  <!-- Preconnect to Google Fonts for performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
+  <link rel="alternate" type="application/rss+xml" title="MEMoPAD Newsletter" href="/rss.xml" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL} />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
+  <!-- Open Graph -->
+  <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:image" content={ogImageURL} />
+  <meta property="og:image:alt" content={imageAlt} />
   <meta property="og:site_name" content="MEMoPAD Project" />
+  <meta property="og:locale" content="en_GB" />
+  {ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content={canonicalURL} />
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image" content={ogImageURL} />
+  <meta name="twitter:image:alt" content={imageAlt} />
   <meta name="twitter:creator" content="@LuigiAndreaM" />
 
   <!-- Schema.org Structured Data -->
-  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(schemaData)} />
+  <slot name="head" />
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to main content</a>
   <Header />
-  <main>
+  <main id="main" tabindex="-1">
     <slot />
   </main>
   <Footer />

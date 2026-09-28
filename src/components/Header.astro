@@ -1,4 +1,6 @@
 ---
+import { PRIMARY_EMAIL, mailto } from '../data/project';
+
 // Get the current page's path to determine the active link
 const currentPath = Astro.url.pathname;
 
@@ -20,11 +22,11 @@ const navLinks = [
     {/* Hamburger Menu Button */}
     <button class="menu-toggle" aria-controls="primary-navigation" aria-expanded="false">
       <span class="sr-only">Menu</span>
-      <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      <svg aria-hidden="true" focusable="false" class="icon-menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg aria-hidden="true" focusable="false" class="icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
 
-    <nav class="site-nav" id="primary-navigation">
+    <nav class="site-nav" id="primary-navigation" aria-label="Main">
       <div class="mobile-menu-header">
         <a href="/" class="mobile-menu-logo">MEMoPAD</a>
       </div>
@@ -36,7 +38,7 @@ const navLinks = [
           const isActive = currentPath.startsWith(link.href);
           return (
             <li>
-              <a href={link.href} class:list={[{ 'is-active': isActive }]}>
+              <a href={link.href} class:list={[{ 'is-active': isActive }]} aria-current={isActive ? 'page' : undefined}>
                 {link.text}
               </a>
             </li>
@@ -45,21 +47,32 @@ const navLinks = [
       </ul>
       <hr class="mobile-menu-divider" />
       <div class="mobile-menu-contact">
-        <a href="mailto:luigi.moretti@uwe.ac.uk">luigi.moretti@uwe.ac.uk</a>
+        <a href={mailto()}>{PRIMARY_EMAIL}</a>
       </div>
     </nav>
   </div>
 </header>
 
 <script>
-  const menuToggle = document.querySelector('.menu-toggle');
-  const primaryNav = document.querySelector('.site-nav');
+  const menuToggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const primaryNav = document.querySelector<HTMLElement>('.site-nav');
   if (menuToggle && primaryNav) {
+    const setOpen = (open: boolean, returnFocus = false) => {
+      menuToggle.setAttribute('aria-expanded', String(open));
+      primaryNav.classList.toggle('is-open', open);
+      document.body.classList.toggle('no-scroll', open);
+      if (!open && returnFocus) menuToggle.focus();
+    };
     menuToggle.addEventListener('click', () => {
-      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      menuToggle.setAttribute('aria-expanded', String(!isExpanded));
-      primaryNav.classList.toggle('is-open');
-      document.body.classList.toggle('no-scroll');
+      setOpen(menuToggle.getAttribute('aria-expanded') !== 'true');
+    });
+    // Close with Escape and return focus to the toggle
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) setOpen(false, true);
+    });
+    // Close after choosing a link (matters for same-page anchors)
+    primaryNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
     });
   }
 </script>
@@ -68,12 +81,11 @@ const navLinks = [
   /* Base Header Styles */
   .site-header { background-color: var(--color-white); border-bottom: 1px solid var(--color-border); padding: 1rem 0; position: sticky; top: 0; width: 100%; z-index: 100; }
   .container { max-width: 1100px; margin-left: auto; margin-right: auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-  .site-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; transition: color 0.2s ease; color: var(--color-primary); }
+  .site-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; transition: color 0.2s ease; color: var(--color-primary-strong); }
   .site-logo:hover { color: var(--color-text); }
 
   /* Hamburger Menu Styles */
   .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
-  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
   .icon-close { display: none; }
   .menu-toggle[aria-expanded="true"] .icon-menu { display: none; }
   .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
@@ -83,6 +95,7 @@ const navLinks = [
   /* Desktop Navigation */
   .site-nav ul { list-style: none; display: flex; gap: 2rem; margin: 0; padding: 0; }
   .site-nav a {
+    white-space: nowrap;
     color: var(--color-text);
     text-decoration: none;
     font-size: 1rem;
@@ -90,11 +103,10 @@ const navLinks = [
     position: relative;
     padding-bottom: 8px; /* Space for the underline */
   }
-  .site-nav a:hover { color: var(--color-primary); }
+  .site-nav a:hover { color: var(--color-primary-strong); }
 
-  /* --- NEW: Active Link Styles --- */
   .site-nav a.is-active {
-    color: var(--color-primary);
+    color: var(--color-primary-strong);
     font-weight: 700;
   }
   .site-nav a.is-active::after {
@@ -104,11 +116,12 @@ const navLinks = [
     left: 0;
     right: 0;
     height: 3px;
-    background-color: var(--color-primary);
+    background-color: var(--color-primary-strong);
   }
 
   /* Mobile Navigation Styles */
-  @media (max-width: 768px) {
+  /* Seven links don't fit on one line below ~1024px, so switch to the menu there */
+  @media (max-width: 1024px) {
     .menu-toggle { display: block; z-index: 1001; }
     .site-nav { display: none; position: fixed; inset: 0; background-color: var(--color-white); padding: 1rem 2rem; z-index: 1000; flex-direction: column; }
     .site-nav.is-open { display: flex; }
@@ -118,7 +131,7 @@ const navLinks = [
     .site-nav a:hover { background-color: var(--color-background); }
     .site-nav a.is-active::after { display: none; } /* Hide underline on mobile */
     .mobile-menu-header, .mobile-menu-contact { display: block; padding: 1rem 0; }
-    .mobile-menu-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; color: var(--color-primary); transition: color 0.2s ease; }
+    .mobile-menu-logo { font-size: 1.25rem; font-weight: 700; text-decoration: none; color: var(--color-primary-strong); transition: color 0.2s ease; }
     .mobile-menu-logo:hover { color: var(--color-text); }
     .mobile-menu-divider { display: block; border: none; border-top: 1px solid var(--color-border); margin: 0; }
     .mobile-menu-contact a { font-size: 1rem; color: var(--color-text-muted); padding: 1rem 0; }
