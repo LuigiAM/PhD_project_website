@@ -13,6 +13,8 @@ type Props = {
   ogType?: 'website' | 'article';
   publishedTime?: string;
   breadcrumbName?: string;
+  /** Sections a page belongs to but whose path it doesn't share, e.g. /co-design/ under The Research */
+  breadcrumbParents?: { name: string; path: string }[];
   includeProjectSchema?: boolean;
 };
 
@@ -24,6 +26,7 @@ const {
   ogType = 'website',
   publishedTime,
   breadcrumbName,
+  breadcrumbParents = [],
   includeProjectSchema = false,
 } = Astro.props;
 
@@ -49,6 +52,7 @@ const segments = Astro.url.pathname.split('/').filter(Boolean);
 const lastCrumb = breadcrumbName ?? segmentNames[segments.at(-1) ?? ''] ?? title;
 const breadcrumbItems = [
   { name: 'Home', item: `${SITE_URL}/` },
+  ...breadcrumbParents.map((p) => ({ name: p.name, item: `${SITE_URL}${p.path}` })),
   ...segments.map((segment, i) => ({
     name: i === segments.length - 1 ? lastCrumb : (segmentNames[segment] ?? segment),
     item: `${SITE_URL}/${segments.slice(0, i + 1).join('/')}/`,

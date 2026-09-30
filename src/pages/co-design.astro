@@ -44,10 +44,12 @@ const articleSchema = {
   ogType="article"
   publishedTime={published}
   breadcrumbName="Co-Design"
+  breadcrumbParents={[{ name: 'The Research', path: '/research/' }]}
 >
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
 
   <article class="container codesign">
+    <p class="eyebrow"><a href="/research/">The Research</a></p>
     <h1>{title}</h1>
     <p class="lead">
       MEMoPAD was not designed <em>for</em> people living with anxiety disorders; it was designed <em>with</em> them.
@@ -168,6 +170,7 @@ const articleSchema = {
 
 <style>
   .codesign { max-width: 800px; margin: 0 auto; padding-top: 3rem; }
+  .eyebrow { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.75rem; }
   .codesign h1 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; }
   .lead { font-size: 1.15rem; line-height: 1.7; }
   .event-note { margin-top: 1rem; padding: 0.75rem 1rem; background-color: var(--color-white); border-left: 4px solid var(--color-primary); font-size: 0.95rem; }

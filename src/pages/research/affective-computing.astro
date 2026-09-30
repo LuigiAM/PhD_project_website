@@ -41,6 +41,7 @@ const articleSchema = {
   <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
 
   <article class="container explainer">
+    <p class="eyebrow"><a href="/research/">The Research</a></p>
     <h1>What can a smartwatch tell us about emotions?</h1>
     <p class="lead">
       Affective computing and anxiety disorders, explained: what wearables measure, what the research shows,
@@ -153,6 +154,7 @@ const articleSchema = {
 
 <style>
   .explainer { max-width: 800px; margin: 0 auto; padding-top: 3rem; }
+  .eyebrow { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.75rem; }
   .explainer h1 { font-size: 2.75rem; line-height: 1.2; margin-bottom: 1rem; }
   .lead { font-size: 1.15rem; line-height: 1.7; color: var(--color-text-muted); }
   .explainer h2 { font-size: 1.75rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem; }
