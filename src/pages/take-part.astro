@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import RecruitmentCard from '../components/RecruitmentCard.astro';
 import ShareButtons from '../components/ShareButtons.astro';
 import SubscribeButtons from '../components/SubscribeButtons.astro';
-import { PHASES, PROJECT } from '../data/project';
+import { PHASES } from '../data/project';
 
 // Open call: clinicians and informal/unpaid carers.
 // Phase VI (people with lived experience) recruitment is closed.
@@ -14,7 +14,11 @@ const pastWaysToTakePart = [
   'Lab-based sessions with wearable sensors',
   'Using the MEMoPAD prototype in daily life (Phase VI)',
 ];
-const completedPhases = PHASES.filter((p) => p.status === 'completed').length;
+const completed = PHASES.filter((p) => p.status === 'completed');
+const completedPhases = completed.length;
+// Range over completed phases only (the ongoing phase's final numbers aren't known yet)
+const counts = completed.map((p) => p.participants);
+const completedRange = `${Math.min(...counts)}–${Math.max(...counts)} participants per phase`;
 ---
 <Layout
   title="Take Part: Co-Design Mental Health Tech | MEMoPAD"
@@ -60,7 +64,7 @@ const completedPhases = PHASES.filter((p) => p.status === 'completed').length;
       <article class="info-card" data-card="past">
         <p class="eyebrow">The co-design so far</p>
         <h2>How people have taken part</h2>
-        <p>Across {completedPhases} completed co-design phases ({PROJECT.participantsWording}), people have contributed through:</p>
+        <p>Across {completedPhases} completed co-design phases ({completedRange}), people have contributed through:</p>
         <ul>
           {pastWaysToTakePart.map((way) => <li>{way}</li>)}
         </ul>

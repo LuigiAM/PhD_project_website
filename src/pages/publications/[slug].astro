@@ -101,8 +101,12 @@ const articleSchema = {
     <div class="actions button-group">
       {pdfOk && <a class="button" href={pub.pdf}>Download PDF</a>}
       {pub.doi && <a class="button button-secondary" href={doiUrl(pub.doi)} target="_blank" rel="noopener noreferrer">View at publisher (DOI)</a>}
-      {pub.links?.map((l) => <a class="button button-secondary" href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>)}
     </div>
+    {pub.links && (
+      <p class="more-links">
+        {pub.links.map((l) => <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label} ↗</a>)}
+      </p>
+    )}
 
     {pub.abstract ? (
       <section>
@@ -123,7 +127,11 @@ const articleSchema = {
         <summary>BibTeX</summary>
         <pre><code>{toBibtex(pub)}</code></pre>
       </details>
-      {pub.licence && pdfOk && <p class="licence">Full text shared under {pub.licence}.</p>}
+      {pub.licence && pdfOk && (
+        <p class="licence">
+          {pub.licence.startsWith('CC') ? `Full text shared under ${pub.licence}.` : `The PDF is an ${pub.licence.toLowerCase()}.`}
+        </p>
+      )}
     </section>
 
     {pub.related && (
@@ -148,7 +156,8 @@ const articleSchema = {
   .paper h1 { font-size: 2.25rem; line-height: 1.25; margin-bottom: 1rem; }
   .authors { font-size: 1.05rem; font-weight: 700; }
   .venue { color: var(--color-text-muted); margin-bottom: 1.5rem; }
-  .actions { margin-bottom: 2rem; }
+  .actions { margin-bottom: 1rem; }
+  .more-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; font-size: 0.95rem; font-weight: 700; }
   .actions .button { color: var(--color-white); }
   .actions .button.button-secondary { color: var(--color-primary-strong); }
   .paper h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 0.75rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.4rem; }

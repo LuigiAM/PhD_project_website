@@ -111,6 +111,8 @@ export const PUBLICATIONS: Publication[] = [
     venue: "Co-Designing Human-Centered AI Technologies for Health and Wellbeing workshop, BCS HCI 2025",
     venueShort: 'BCS HCI 2025 workshop',
     url: 'https://sites.google.com/view/bcs-hci-2025-workshop/position-papers',
+    pdf: '/papers/moretti-2025-bcs-hci-co-designing-memopad.pdf',
+    licence: 'Author copy',
     summary:
       'Position paper for the BCS HCI 2025 workshop on co-designing human-centred AI for health and wellbeing, written with Carmel McGrath and Lucy Condon (NIHR ARC West). It reports the first three co-design phases: the three intervention scenarios chosen by participants, the smartwatch-plus-phone design, and the methodological lessons: lower-pressure, asynchronous tools for people living with anxiety disorders, involving carers from the start, and low-touch routes for clinicians.',
     memopad: true,
