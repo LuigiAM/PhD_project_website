@@ -4,9 +4,9 @@
 // https://scholar.google.com/intl/en/scholar/inclusion.html
 // The citation_* tags are emitted only when the PDF is really in /public (see hasPdf),
 // so Scholar never gets an abstract-only duplicate of a paper we cannot host.
-import Layout from '../../layouts/Layout.astro';
-import ShareButtons from '../../components/ShareButtons.astro';
-import { SITE_URL } from '../../data/project';
+import Layout from '../../../layouts/Layout.astro';
+import ShareButtons from '../../../components/ShareButtons.astro';
+import { SITE_URL } from '../../../data/project';
 import {
   PUBLICATIONS,
   authorsDisplay,
@@ -16,7 +16,7 @@ import {
   scholarDate,
   toBibtex,
   type Publication,
-} from '../../data/publications';
+} from '../../../data/publications';
 
 export function getStaticPaths() {
   return PUBLICATIONS.filter((p) => p.memopad).map((pub) => ({ params: { slug: pub.slug }, props: { pub } }));
@@ -26,7 +26,7 @@ const { pub } = Astro.props as { pub: Publication };
 const pdfOk = hasPdf(pub);
 const pdfAbsolute = pdfOk ? `${SITE_URL}${pub.pdf}` : undefined;
 const [firstPage, lastPage] = (pub.pages ?? '').split('-');
-const pageUrl = `${SITE_URL}/publications/${pub.slug}/`;
+const pageUrl = `${SITE_URL}/research/publications/${pub.slug}/`;
 // Page <title>: the hand-written seoTitle, else the paper title cut at a word boundary to fit 60 chars.
 const SUFFIX = ' | MEMoPAD';
 const pageTitle =
@@ -91,7 +91,7 @@ const articleSchema = {
   </Fragment>
 
   <article class="container paper">
-    <p class="eyebrow"><a href="/publications/">Publications</a> · {pub.venueShort ?? pub.venue}{!(pub.venueShort ?? pub.venue).includes(String(pub.year)) && ` · ${pub.year}`}</p>
+    <p class="eyebrow"><a href="/research/publications/">Publications</a> · {pub.venueShort ?? pub.venue}{!(pub.venueShort ?? pub.venue).includes(String(pub.year)) && ` · ${pub.year}`}</p>
     <h1>{pub.title}</h1>
     <p class="authors">{authorsDisplay(pub)}</p>
     <p class="venue">
@@ -143,7 +143,7 @@ const articleSchema = {
       </section>
     )}
 
-    <p class="back"><a href="/publications/">← All publications</a></p>
+    <p class="back"><a href="/research/publications/">← All publications</a></p>
 
     <ShareButtons pageTitle={pub.title} shareDescription={`${authorsDisplay(pub)} (${pub.year}). ${pub.venueShort ?? pub.venue}.`} />
   </article>

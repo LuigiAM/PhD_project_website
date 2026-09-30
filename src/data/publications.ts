@@ -10,7 +10,7 @@
 //   `citation_*` tags, only if that file exists at build time. A missing PDF never produces
 //   a broken link or a Scholar record pointing nowhere.
 // - Only self-host a PDF when its licence or the publisher's terms allow it.
-// - `memopad: true` gives the paper its own page at /publications/<slug>/.
+// - `memopad: true` gives the paper its own page at /research/publications/<slug>/.
 
 import fs from 'node:fs';
 import path from 'node:path';

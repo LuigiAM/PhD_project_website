@@ -40,8 +40,8 @@ function gitDate(...files) {
 function lastmodFor(pathname) {
   const parts = pathname.split('/').filter(Boolean);
   if (parts[0] === 'newsletter') return parts[1] ? newsletterDates[parts[1]] : latestNewsletter;
-  if (parts[0] === 'publications' && parts[1]) {
-    return gitDate('src/data/publications.ts', 'src/pages/publications/[slug].astro');
+  if (parts[0] === 'research' && parts[1] === 'publications' && parts[2]) {
+    return gitDate('src/data/publications.ts', 'src/pages/research/publications/[slug].astro');
   }
   const base = path.join('src/pages', ...parts);
   return gitDate(`${base}.astro`, path.join(base, 'index.astro'));

@@ -1,7 +1,7 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import ShareButtons from '../../components/ShareButtons.astro';
-import CiteProject from '../../components/CiteProject.astro';
+import Layout from '../../../layouts/Layout.astro';
+import ShareButtons from '../../../components/ShareButtons.astro';
+import CiteProject from '../../../components/CiteProject.astro';
 import {
   MEMOPAD_PUBLICATIONS,
   OTHER_PUBLICATIONS,
@@ -9,7 +9,7 @@ import {
   doiUrl,
   hasPdf,
   type Publication,
-} from '../../data/publications';
+} from '../../../data/publications';
 
 const venueLine = (p: Publication) => {
   const parts = [p.venueShort ?? p.venue];
@@ -27,8 +27,7 @@ const venueLine = (p: Publication) => {
     <h1>Publications</h1>
     <p class="intro">
       Papers from MEMoPAD, a UWE Bristol PhD project co-designing wearable emotion monitoring with people living with anxiety
-      disorders, their carers and mental health clinicians. Each MEMoPAD paper has its own page with the abstract or a
-      summary, the full text where we can share it, and ready-made citations. Talks and posters are listed on the
+      disorders, their carers and mental health clinicians. Talks and posters are listed on the
       <a href="/achievements/#publications-presentations">Achievements</a> page.
     </p>
 
@@ -36,11 +35,11 @@ const venueLine = (p: Publication) => {
     <ol class="pub-list" reversed>
       {MEMOPAD_PUBLICATIONS.map((p) => (
         <li class="pub-item">
-          <h3><a href={`/publications/${p.slug}/`}>{p.title}</a></h3>
+          <h3><a href={`/research/publications/${p.slug}/`}>{p.title}</a></h3>
           <p class="pub-authors">{authorsDisplay(p)}</p>
           <p class="pub-venue">{venueLine(p)}</p>
           <p class="pub-links">
-            <a href={`/publications/${p.slug}/`}>{p.abstract ? 'Abstract' : 'Summary'} and citation</a>
+            <a href={`/research/publications/${p.slug}/`}>{p.abstract ? 'Abstract' : 'Summary'} and citation</a>
             {hasPdf(p) && <a href={p.pdf}>PDF</a>}
             {p.doi && <a href={doiUrl(p.doi)} target="_blank" rel="noopener noreferrer">DOI: {p.doi}</a>}
           </p>
