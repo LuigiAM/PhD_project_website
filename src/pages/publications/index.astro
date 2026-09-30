@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import CiteProject from '../../components/CiteProject.astro';
+import {
+  MEMOPAD_PUBLICATIONS,
+  OTHER_PUBLICATIONS,
+  authorsDisplay,
+  doiUrl,
+  hasPdf,
+  type Publication,
+} from '../../data/publications';
+
+const venueLine = (p: Publication) => {
+  const parts = [p.venueShort ?? p.venue];
+  if (p.type === 'journal' && p.volume) parts[0] += ` ${p.volume}${p.issue ? `(${p.issue})` : ''}`;
+  if (p.pages) parts.push(p.type === 'journal' && !p.pages.includes('-') ? p.pages : `pp. ${p.pages.replace('-', '–')}`);
+  parts.push(String(p.year));
+  return parts.join(' · ');
+};
+---
+<Layout
+  title="Publications on Wearable Emotion Monitoring | MEMoPAD"
+  description="Papers from the MEMoPAD project on wearable emotion monitoring, affective computing and co-design for anxiety disorders, with abstracts, PDFs and citations."
+>
+  <section class="container publications">
+    <h1>Publications</h1>
+    <p class="intro">
+      Papers from MEMoPAD, a UWE Bristol PhD project co-designing wearable emotion monitoring with people living with anxiety
+      disorders, their carers and mental health clinicians. Each MEMoPAD paper has its own page with the abstract or a
+      summary, the full text where we can share it, and ready-made citations. Talks and posters are listed on the
+      <a href="/achievements/#publications-presentations">Achievements</a> page.
+    </p>
+
+    <h2>MEMoPAD papers</h2>
+    <ol class="pub-list" reversed>
+      {MEMOPAD_PUBLICATIONS.map((p) => (
+        <li class="pub-item">
+          <h3><a href={`/publications/${p.slug}/`}>{p.title}</a></h3>
+          <p class="pub-authors">{authorsDisplay(p)}</p>
+          <p class="pub-venue">{venueLine(p)}</p>
+          <p class="pub-links">
+            <a href={`/publications/${p.slug}/`}>{p.abstract ? 'Abstract' : 'Summary'} and citation</a>
+            {hasPdf(p) && <a href={p.pdf}>PDF</a>}
+            {p.doi && <a href={doiUrl(p.doi)} target="_blank" rel="noopener noreferrer">DOI: {p.doi}</a>}
+          </p>
+        </li>
+      ))}
+    </ol>
+
+    <h2>Other publications by Luigi Andrea Moretti</h2>
+    <p class="section-note">Earlier and related work in affective computing, biosignals and health AI.</p>
+    <ol class="pub-list pub-list-compact" reversed>
+      {OTHER_PUBLICATIONS.map((p) => (
+        <li class="pub-item">
+          <h3>
+            <a href={p.doi ? doiUrl(p.doi) : p.url} target="_blank" rel="noopener noreferrer">{p.title}</a>
+          </h3>
+          <p class="pub-authors">{authorsDisplay(p)}</p>
+          <p class="pub-venue">{venueLine(p)}</p>
+          {p.links && (
+            <p class="pub-links">
+              {p.links.map((l) => <a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>)}
+            </p>
+          )}
+        </li>
+      ))}
+    </ol>
+
+    <p class="profiles">
+      Full, up-to-date record:
+      <a href="https://scholar.google.com/citations?user=KJTGED4AAAAJ" target="_blank" rel="noopener noreferrer">Google Scholar</a> ·
+      <a href="https://orcid.org/0009-0002-6180-0565" target="_blank" rel="noopener noreferrer">ORCID</a>
+    </p>
+
+    <CiteProject showMoreLink={false} />
+
+    <ShareButtons pageTitle="MEMoPAD publications" shareDescription="Papers from the MEMoPAD project on wearable emotion monitoring and co-design for anxiety disorders." />
+  </section>
+</Layout>
+
+<style>
+  .publications { max-width: 800px; margin: 0 auto; padding-top: 3rem; }
+  .publications h1 { font-size: 3rem; text-align: center; margin-bottom: 1rem; }
+  .intro { color: var(--color-text-muted); margin-bottom: 2rem; }
+  .publications h2 { font-size: 2rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem; }
+  .section-note { color: var(--color-text-muted); margin-bottom: 1rem; }
+  .publications a { color: var(--color-primary-strong); }
+  .pub-list { list-style: none; padding: 0; }
+  .pub-item { padding: 1.25rem 0; border-bottom: 1px solid var(--color-border); }
+  .pub-item h3 { font-size: 1.2rem; line-height: 1.4; margin-bottom: 0.35rem; }
+  .pub-item h3 a { text-decoration: none; }
+  .pub-item h3 a:hover { text-decoration: underline; }
+  .pub-authors { font-size: 0.95rem; }
+  .pub-venue { font-size: 0.9rem; color: var(--color-text-muted); font-style: italic; }
+  .pub-links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-top: 0.5rem; font-size: 0.9rem; font-weight: 700; }
+  .pub-list-compact .pub-item h3 { font-size: 1.05rem; }
+  .profiles { margin-top: 2rem; font-weight: 700; }
+  @media (max-width: 600px) {
+    .publications h1 { font-size: 2.25rem; }
+    .publications h2 { font-size: 1.6rem; }
+  }
+</style>

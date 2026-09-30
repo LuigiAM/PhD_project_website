@@ -1,0 +1,208 @@
+---
+// Co-design methodology page. Also the landing page for the QR code on the
+// MHP Research Summit 2026 talk and poster (8 October 2026).
+// Content rule: only what is already published (BCS HCI 2025, CHI 2026 workshop, IH '26)
+// or already public on this site. Unpublished Phase V/VI results and the planned
+// co-design paper's framework stay out until that paper is submitted.
+import Layout from '../layouts/Layout.astro';
+import ShareButtons from '../components/ShareButtons.astro';
+import { PHASES, SITE_URL } from '../data/project';
+import { getPublication } from '../data/publications';
+
+// Set to the day this page goes live; bump `modified` on substantive edits.
+const published = '2026-10-01';
+const modified = '2026-10-01';
+
+const monthYear = (iso: string) =>
+  new Date(`${iso}-01T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+
+const codesignPapers = [
+  getPublication('co-designing-memopad-bcs-hci-2025'),
+  getPublication('sustained-engagement-anxiety-disorders-chi-2026'),
+  getPublication('memopad-interactive-health-2026'),
+];
+
+const title = 'Co-designing a wearable emotion monitoring tool with people living with anxiety disorders, their carers and mental health clinicians';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${SITE_URL}/co-design/#article`,
+  headline: 'How we co-designed MEMoPAD with people living with anxiety disorders, carers and clinicians',
+  description: 'Seven co-design phases, the methods used with each group, what participants shaped, and five lessons for co-design with people living with anxiety disorders.',
+  author: { '@type': 'Person', '@id': 'https://luigiandreamoretti.com/#person', name: 'Luigi Andrea Moretti' },
+  datePublished: published,
+  dateModified: modified,
+  about: { '@id': `${SITE_URL}/#research-project` },
+  mainEntityOfPage: `${SITE_URL}/co-design/`,
+  inLanguage: 'en-GB',
+};
+---
+<Layout
+  title="Co-Design with People Living with Anxiety Disorders | MEMoPAD"
+  description="How MEMoPAD was co-designed over seven phases with people living with anxiety disorders, carers and mental health clinicians: methods and lessons."
+  ogType="article"
+  publishedTime={published}
+  breadcrumbName="Co-Design"
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
+
+  <article class="container codesign">
+    <h1>{title}</h1>
+    <p class="lead">
+      MEMoPAD was not designed <em>for</em> people living with anxiety disorders; it was designed <em>with</em> them.
+      Over seven phases, patients, unpaid carers and mental health clinicians have shaped what the tool does, how it looks
+      and how it speaks to the person wearing it. This page explains how we did it, what came out of it, and what we
+      learned about co-design with this population.
+    </p>
+    <p class="event-note">
+      This page accompanies our talk and poster at the
+      <a href="https://www.mentalhealthplatform.ac.uk/event/mhp-research-summit-2026" target="_blank" rel="noopener noreferrer">Mental Health Platform Research Summit</a>
+      (Sheffield, 8 October 2026).
+    </p>
+
+    <h2>Why co-design?</h2>
+    <p>
+      Digital mental health tools often show promise in trials but lose their users in daily life: attrition has been called
+      the “Achilles heel” of digital therapeutics <a href="#ref-1" class="cite">[1]</a>. Anxiety disorders add their own
+      barriers. Avoidance, cognitive overload and fear of judgement are among the symptoms these tools aim to address, and
+      they may also work against sustained use of the tool itself <a href="#ref-3" class="cite">[3]</a>.
+    </p>
+    <p>
+      Co-design is one response: the people who will live with a technology help decide what it should be. We adapted the
+      co-design framework of Noorbergen and colleagues <a href="#ref-2" class="cite">[2]</a>, from understanding the
+      problem to testing in daily life, and ran it with three groups:
+    </p>
+    <ul>
+      <li><strong>Patients</strong>: people living with anxiety disorders. We use “patients” because it was the term our participants preferred in a terminology survey.</li>
+      <li><strong>Unpaid carers</strong>: the family members and friends who support them.</li>
+      <li><strong>Mental health clinicians</strong>, from the NHS and private practice.</li>
+    </ul>
+
+    <h2 id="phases">Seven phases at a glance</h2>
+    <div class="table-wrapper" role="region" aria-labelledby="phases-caption" tabindex="0">
+      <table>
+        <caption id="phases-caption">
+          MEMoPAD co-design phases. Numbers are per phase: many people took part in more than one phase, so they should not be added up.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Phase</th>
+            <th scope="col">Question</th>
+            <th scope="col">Main tools</th>
+            <th scope="col">Who took part</th>
+          </tr>
+        </thead>
+        <tbody>
+          {PHASES.map((p) => (
+            <tr>
+              <th scope="row">
+                <span class="phase-id">{p.id}</span> {p.name}
+                <span class="phase-date">{p.status === 'ongoing' ? `From ${monthYear(p.date)}, under way` : `Completed ${monthYear(p.date)}`}</span>
+              </th>
+              <td data-label="Question">{p.question}</td>
+              <td data-label="Main tools">{p.tools}</td>
+              <td data-label="Who took part">{p.breakdown}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <h2>How each phase worked</h2>
+    <ul>
+      <li><strong>A format for each group.</strong> In Phases I–IV, held online as most participants preferred, patients met in focus groups of up to six people, lasting about two hours. Carers and clinicians took part in separate one-to-one online interviews of around 30 minutes, to limit power imbalances and fit busy diaries.</li>
+      <li><strong>Building on the last phase.</strong> Every phase opened by presenting what the previous one had found, so all three groups worked from the same evidence.</li>
+      <li><strong>Tools matched to the question.</strong> A survey to map needs, storyboards to generate ideas, mock-ups to shape the interface, a click-through demo to test it, then the working prototype in the lab and in daily life.</li>
+      <li><strong>Analysis.</strong> Thematic analysis (Phases I–II) and affinity diagrams (Phases III–V), compared across the three groups, then a roundtable with the interdisciplinary supervisory team.</li>
+      <li><strong>Staying in touch.</strong> A <a href="/newsletter/">monthly newsletter</a> and this website kept participants informed between phases.</li>
+    </ul>
+
+    <h2>What participants shaped</h2>
+    <ul>
+      <li><strong>Three scenarios (Phase I).</strong> Participants chose where MEMoPAD should help: (A) supporting clinical conversations, which are short and rely on recall; (B) breaking anxiety loops in the moment; and (C) helping people seek help at the right time.</li>
+      <li><strong>Watch plus phone (Phase II).</strong> A smartwatch collects data continuously and a paired phone app is where people see it and add to it. Personalisation came out as essential, and body data only made sense alongside the person’s own notes and context.</li>
+      <li><strong>Emotions, not pathology (across phases).</strong> Participants rejected a tool that monitors anxiety. They wanted one that reflects their whole emotional life, pleasant moments included. This led to a four-colour vocabulary, now called <strong>Emotion Hues</strong>: Green (calm or relaxed), Yellow (nervous or excited), Red (panicky or angry) and Blue (tired or low).</li>
+      <li><strong>Two audiences, one dataset (Phases III–IV).</strong> A web dashboard shows clinicians what a patient chooses to share, using the same views the patient sees. Carers asked for practical and emotional support without it becoming surveillance.</li>
+      <li><strong>A check with fresh eyes (Phase V).</strong> 14 of the 16 lab participants were new to MEMoPAD, yet they valued the features that earlier groups had prioritised.</li>
+    </ul>
+
+    <h2>Five lessons for co-design with people living with anxiety disorders</h2>
+    <ol class="lessons">
+      <li><strong>Real-time group tools can backfire.</strong> Collaborative digital whiteboards added pressure and risked raising anxiety in the session itself. Lower-pressure, asynchronous and analogue options, such as sending a photo of a hand-annotated mock-up over WhatsApp, were more inclusive.</li>
+      <li><strong>Invite carers from the start.</strong> Patients asked for it in our first consultations. Anxiety disorders are lived within a network of family, friends and services, and designing for an isolated user misses how they are managed day to day.</li>
+      <li><strong>Build low-touch routes for clinicians.</strong> Clinician involvement fell over the phases. Short online interviews and asynchronous feedback suit time-poor experts better than long focus groups.</li>
+      <li><strong>Frame around emotions, not disorders.</strong> Tracking the full emotional spectrum, rather than monitoring pathology, may matter for sustained engagement as much as any single feature.</li>
+      <li><strong>Close the loop every time.</strong> Opening each phase with the last one’s findings, and sharing progress monthly, let participants see what their input had changed.</li>
+    </ol>
+
+    <h2>Where we are now</h2>
+    <p>
+      Phase VI is under way: 10 participants in Bristol are using the working watch and phone app in their daily lives for
+      up to five weeks. Its results will be reported in the PhD thesis and in forthcoming papers. To see what the prototype
+      measures, and what it deliberately does not claim, read
+      <a href="/research/affective-computing/">What can a smartwatch tell us about emotions?</a>
+    </p>
+    <div class="button-group cta">
+      <a href="/take-part/" class="button">Take part: clinicians and carers</a>
+      <a href="/newsletter/" class="button button-secondary">Follow the project</a>
+    </div>
+
+    <h2>Our papers on co-design</h2>
+    <ul class="papers">
+      {codesignPapers.map((p) => (
+        <li><a href={`/publications/${p.slug}/`}>{p.title}</a> <span>({p.venueShort}, {p.year})</span></li>
+      ))}
+    </ul>
+
+    <h2>References</h2>
+    <ol class="references">
+      <li id="ref-1">Nwosu, A., Boardman, S., Husain, M. M., &amp; Doraiswamy, P. M. (2022). Digital therapeutics for mental health: Is attrition the Achilles heel? <em>Frontiers in Psychiatry, 13</em>, 900615. <a href="https://doi.org/10.3389/fpsyt.2022.900615" target="_blank" rel="noopener noreferrer">doi:10.3389/fpsyt.2022.900615</a></li>
+      <li id="ref-2">Noorbergen, T. J., Adam, M. T. P., Teubner, T., &amp; Collins, C. E. (2021). Using co-design in mobile health system development: A qualitative study with experts in co-design and mobile health system development. <em>JMIR mHealth and uHealth, 9</em>(11), e27896. <a href="https://doi.org/10.2196/27896" target="_blank" rel="noopener noreferrer">doi:10.2196/27896</a></li>
+      <li id="ref-3">Moretti, L. A., Thompson, M., Matthews, P., Loizou, M., &amp; Western, D. (2026). Designing for sustained engagement in anxiety disorders: Lessons from MEMoPAD’s co-design journey. Engagement in Digital Health Interventions Workshop, CHI 2026. <a href="/publications/sustained-engagement-anxiety-disorders-chi-2026/">Paper page</a></li>
+    </ol>
+
+    <ShareButtons pageTitle="How MEMoPAD was co-designed with people living with anxiety disorders, carers and clinicians" shareDescription="Seven co-design phases, the methods used with each group, and five lessons for co-design with people living with anxiety disorders." />
+  </article>
+</Layout>
+
+<style>
+  .codesign { max-width: 800px; margin: 0 auto; padding-top: 3rem; }
+  .codesign h1 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; }
+  .lead { font-size: 1.15rem; line-height: 1.7; }
+  .event-note { margin-top: 1rem; padding: 0.75rem 1rem; background-color: var(--color-white); border-left: 4px solid var(--color-primary); font-size: 0.95rem; }
+  .codesign h2 { font-size: 1.75rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem; }
+  .codesign p { margin-bottom: 1rem; }
+  .codesign a { color: var(--color-primary-strong); font-weight: 700; }
+  .codesign ul, .codesign ol { padding-left: 1.5rem; }
+  .codesign li { margin-bottom: 0.75rem; }
+  .cite { text-decoration: none; }
+  .table-wrapper { overflow-x: auto; margin: 1rem 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; background-color: var(--color-white); }
+  caption { caption-side: bottom; text-align: left; font-size: 0.85rem; color: var(--color-text-muted); padding-top: 0.5rem; }
+  th, td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
+  thead th { background-color: var(--color-background); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  tbody th { font-weight: 700; min-width: 11rem; }
+  .phase-id { display: inline-block; min-width: 2rem; color: var(--color-primary-strong); }
+  .phase-date { display: block; font-weight: 400; font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.2rem; }
+  .lessons li { padding-left: 0.25rem; }
+  .cta { margin: 1.5rem 0 0; }
+  .cta .button { color: var(--color-white); }
+  .cta .button.button-secondary { color: var(--color-primary-strong); }
+  .papers span { color: var(--color-text-muted); font-size: 0.9rem; }
+  .references { font-size: 0.9rem; }
+  .references li { overflow-wrap: anywhere; }
+  /* Small screens: one card per phase instead of a four-column table. */
+  @media (max-width: 640px) {
+    table, caption, tbody, tr, th, td { display: block; width: 100%; }
+    caption { padding: 0.5rem 0.75rem; }
+    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    tr { border-bottom: 2px solid var(--color-border); padding: 0.5rem 0; }
+    tbody th, td { border-bottom: none; padding: 0.35rem 0.75rem; }
+    td::before { content: attr(data-label); display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-text-muted); }
+  }
+  @media (max-width: 600px) {
+    .codesign h1 { font-size: 1.85rem; }
+    .codesign h2 { font-size: 1.45rem; }
+  }
+</style>

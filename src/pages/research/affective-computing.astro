@@ -1,0 +1,175 @@
+---
+// Explainer: affective computing, wearables and anxiety disorders.
+// Claims rules this page must keep (vault):
+// - never "predict / forecast / score / risk level" (no-prediction claims rule, ADR-055);
+// - the system detects a change in body signals and invites reflection; the person names the emotion;
+// - Phase VI sensors are PPG (heart rate) + IMU (accelerometer, gyroscope); cEDA only for Phase V
+//   and the longer-term aims, said explicitly; skin temperature was dropped for Phase VI.
+import Layout from '../../layouts/Layout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import { SITE_URL } from '../../data/project';
+
+// Set to the day this page goes live; bump `modified` on substantive edits.
+const published = '2026-10-01';
+const modified = '2026-10-01';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  '@id': `${SITE_URL}/research/affective-computing/#article`,
+  headline: 'What can a smartwatch tell us about emotions? Affective computing and anxiety disorders, explained',
+  description: 'What wearables measure, what research on affective computing in anxiety disorders shows, what a smartwatch cannot tell you, and how MEMoPAD uses body signals.',
+  author: { '@type': 'Person', '@id': 'https://luigiandreamoretti.com/#person', name: 'Luigi Andrea Moretti' },
+  datePublished: published,
+  dateModified: modified,
+  about: [
+    { '@type': 'Thing', name: 'Affective computing' },
+    { '@type': 'MedicalCondition', name: 'Anxiety disorders' },
+    { '@id': `${SITE_URL}/#research-project` },
+  ],
+  mainEntityOfPage: `${SITE_URL}/research/affective-computing/`,
+  inLanguage: 'en-GB',
+};
+---
+<Layout
+  title="Affective Computing and Anxiety Disorders, Explained | MEMoPAD"
+  description="What can a smartwatch tell us about emotions? What wearables measure, what research on anxiety disorders shows, and what they cannot tell you."
+  ogType="article"
+  publishedTime={published}
+  breadcrumbName="Affective computing, explained"
+>
+  <script slot="head" type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
+
+  <article class="container explainer">
+    <h1>What can a smartwatch tell us about emotions?</h1>
+    <p class="lead">
+      Affective computing and anxiety disorders, explained: what wearables measure, what the research shows,
+      what a smartwatch cannot tell you, and how MEMoPAD uses body signals.
+    </p>
+
+    <h2>What is affective computing?</h2>
+    <p>
+      Affective computing is the study and design of technology that can recognise, interpret or respond to human emotions,
+      a field named by Rosalind Picard in the 1990s <a href="#ref-1" class="cite">[1]</a>. In mental health, the appeal is
+      simple to state and hard to deliver: technology that notices emotional patterns over days and weeks, outside
+      the clinic, would give people and their clinicians more to work with than memory alone
+      <a href="#ref-2" class="cite">[2]</a>.
+    </p>
+
+    <h2>What a smartwatch actually measures</h2>
+    <p>Consumer smartwatches such as the Google Pixel Watch 2 carry several sensors used in emotion research:</p>
+    <ul>
+      <li><strong>Heart rate and heart rate variability</strong>, from an optical sensor (photoplethysmography, or PPG).</li>
+      <li><strong>Electrodermal activity (EDA)</strong>: small changes in how well the skin conducts electricity as sweat glands respond to the sympathetic nervous system. The Pixel Watch 2 can measure it continuously (cEDA) <a href="#ref-5" class="cite">[5]</a>.</li>
+      <li><strong>Skin temperature.</strong></li>
+      <li><strong>Movement</strong>, from the accelerometer and gyroscope.</li>
+    </ul>
+    <p>
+      None of these measures an emotion. They measure how activated the body is, which rises with fear and with excitement
+      alike, and also with a flight of stairs or a strong coffee.
+    </p>
+
+    <h2>From body signals to emotions</h2>
+    <p>
+      Emotion research often describes feelings along a few dimensions rather than as a list of labels. The two most common
+      are <strong>valence</strong>, how pleasant or unpleasant a feeling is, and <strong>arousal</strong>, how calm or activated
+      the body is <a href="#ref-3" class="cite">[3]</a>. Our review of affective computing in anxiety disorders found valence
+      and arousal to be the most widespread way of quantifying emotion in this field <a href="#ref-2" class="cite">[2]</a>.
+    </p>
+    <p>
+      Body signals say a good deal about arousal and much less about valence. A large meta-analysis found no consistent
+      physiological “fingerprint” for individual emotion categories such as fear or anger
+      <a href="#ref-4" class="cite">[4]</a>. The same racing heart can belong to very different feelings.
+    </p>
+
+    <h2>What the research says about anxiety disorders</h2>
+    <p>
+      Anxiety disorders are diagnosed conditions, such as generalised anxiety disorder, panic disorder, social anxiety
+      disorder, obsessive-compulsive disorder (OCD) and post-traumatic stress disorder (PTSD), in which anxiety is too
+      intense, lasts too long or disrupts daily life. Our rapid literature review <a href="#ref-2" class="cite">[2]</a> found:
+    </p>
+    <ul>
+      <li><strong>Most technology detects everyday anxiety</strong>, the normal response to a stressful moment. Far fewer studies address anxiety disorders.</li>
+      <li><strong>The evidence is uneven.</strong> Of 355 search results, 38 studies met our criteria, and PTSD was by far the most studied condition.</li>
+      <li><strong>There are promising uses</strong>, from tracking progress during behavioural therapies to assessing deep brain stimulation for intractable OCD.</li>
+      <li><strong>Combining several signals tends to work better</strong> than relying on one.</li>
+      <li><strong>Clinical use is still rare.</strong> More evidence is needed, especially beyond PTSD, and so is work on how these tools fit into care pathways.</li>
+    </ul>
+
+    <h2>What a smartwatch cannot tell you</h2>
+    <ul>
+      <li><strong>What you are feeling.</strong> A change in body signals can be panic, excitement or exercise. Only you can say which.</li>
+      <li><strong>Whether you have an anxiety disorder.</strong> Diagnosis needs a clinical assessment. No consumer wearable replaces it.</li>
+      <li><strong>Anything with certainty in daily life.</strong> Movement, a loose strap, heat and cold all add noise, and everyday EDA recordings in particular contain artefacts that need careful handling <a href="#ref-6" class="cite">[6]</a>.</li>
+    </ul>
+
+    <h2>How MEMoPAD uses body signals: a prompt, not a verdict</h2>
+    <p>
+      MEMoPAD is designed around these limits, and around what our
+      <a href="/co-design/">co-design participants</a> asked for:
+    </p>
+    <ol>
+      <li>The watch looks for a <strong>change in body signals</strong>. It does not name an emotion.</li>
+      <li>When it notices one, the app can <strong>invite the person to check in</strong>, marking a Moment of Interest they can come back to later.</li>
+      <li>The person <strong>names the feeling</strong> using four Emotion Hues: Green (calm or relaxed), Yellow (nervous or excited), Red (panicky or angry) and Blue (tired or low). The hues are categories people choose, not a scale of severity.</li>
+      <li>Over weeks, body signals, self-reports and context such as triggers and sleep build a picture that the person can choose to <strong>share with their clinician</strong>, to support their conversations.</li>
+    </ol>
+    <p>
+      MEMoPAD does not score anxiety, rate risk or claim to predict an episode. Its aim is to make emotion monitoring
+      <strong>systematic</strong>, while interpretation stays with the person and, if they choose, their clinician.
+    </p>
+
+    <h3>Which sensors, and when</h3>
+    <p>
+      In our lab study (co-design Phase V) we recorded electrodermal activity, heart rate and skin temperature from the
+      Pixel Watch 2. The prototype now in daily use (Phase VI) uses <strong>heart rate (PPG)</strong> and
+      <strong>movement (accelerometer and gyroscope)</strong>. Continuous electrodermal activity remains part of the
+      project’s longer-term aims.
+    </p>
+
+    <p class="notice">
+      MEMoPAD is a research prototype. It is not a medical device, it is not publicly available, and it is not a substitute
+      for professional care.
+    </p>
+
+    <div class="button-group cta">
+      <a href="/publications/affective-computing-anxiety-disorders-review-2025/" class="button">Read our review</a>
+      <a href="/research/" class="button button-secondary">More about the research</a>
+    </div>
+
+    <h2>References</h2>
+    <ol class="references">
+      <li id="ref-1">Picard, R. W. (1997). <em>Affective computing</em>. MIT Press.</li>
+      <li id="ref-2">Moretti, L. A., Thompson, M., Matthews, P., Loizou, M., &amp; Western, D. (2025). Affective computing in anxiety disorders: A rapid literature review of emotion recognition applications. In <em>Proceedings of BIOSTEC 2025, Volume 2: HEALTHINF</em> (pp. 273–284). SCITEPRESS. <a href="/publications/affective-computing-anxiety-disorders-review-2025/">Abstract and PDF</a></li>
+      <li id="ref-3">Russell, J. A. (1980). A circumplex model of affect. <em>Journal of Personality and Social Psychology, 39</em>(6), 1161–1178. <a href="https://doi.org/10.1037/h0077714" target="_blank" rel="noopener noreferrer">doi:10.1037/h0077714</a></li>
+      <li id="ref-4">Siegel, E. H., Sands, M. K., Van den Noortgate, W., Condon, P., Chang, Y., Dy, J., Quigley, K. S., &amp; Barrett, L. F. (2018). Emotion fingerprints or emotion populations? A meta-analytic investigation of autonomic features of emotion categories. <em>Psychological Bulletin, 144</em>(4), 343–393. <a href="https://doi.org/10.1037/bul0000128" target="_blank" rel="noopener noreferrer">doi:10.1037/bul0000128</a></li>
+      <li id="ref-5">McDuff, D., Thomson, S., Abdel-Ghaffar, S., Galatzer-Levy, I. R., Poh, M.-Z., Sunshine, J., Barakat, A., Heneghan, C., &amp; Sunden, L. (2024). What does large-scale electrodermal sensing reveal? <em>bioRxiv</em>. <a href="https://doi.org/10.1101/2024.02.22.581472" target="_blank" rel="noopener noreferrer">doi:10.1101/2024.02.22.581472</a></li>
+      <li id="ref-6">Gashi, S., Di Lascio, E., Stancu, B., Das Swain, V., Mishra, V., Gjoreski, M., &amp; Santini, S. (2020). Detection of artifacts in ambulatory electrodermal activity data. <em>Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies, 4</em>(2). <a href="https://doi.org/10.1145/3397316" target="_blank" rel="noopener noreferrer">doi:10.1145/3397316</a></li>
+    </ol>
+
+    <ShareButtons pageTitle="What can a smartwatch tell us about emotions? Affective computing and anxiety disorders, explained" shareDescription="What wearables measure, what research on anxiety disorders shows, and what a smartwatch cannot tell you." />
+  </article>
+</Layout>
+
+<style>
+  .explainer { max-width: 800px; margin: 0 auto; padding-top: 3rem; }
+  .explainer h1 { font-size: 2.75rem; line-height: 1.2; margin-bottom: 1rem; }
+  .lead { font-size: 1.15rem; line-height: 1.7; color: var(--color-text-muted); }
+  .explainer h2 { font-size: 1.75rem; margin-top: 3rem; margin-bottom: 1rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.5rem; }
+  .explainer h3 { font-size: 1.25rem; margin-top: 2rem; margin-bottom: 0.5rem; }
+  .explainer p { margin-bottom: 1rem; }
+  .explainer a { color: var(--color-primary-strong); font-weight: 700; }
+  .explainer ul, .explainer ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+  .explainer li { margin-bottom: 0.6rem; }
+  .cite { text-decoration: none; }
+  .notice { background-color: var(--color-white); border-left: 4px solid var(--color-primary); padding: 1rem 1.25rem; font-size: 0.95rem; }
+  .cta { margin: 1.5rem 0 0; }
+  .cta .button { color: var(--color-white); }
+  .cta .button.button-secondary { color: var(--color-primary-strong); }
+  .references { font-size: 0.9rem; }
+  .references li { overflow-wrap: anywhere; }
+  @media (max-width: 600px) {
+    .explainer h1 { font-size: 2rem; }
+    .explainer h2 { font-size: 1.45rem; }
+  }
+</style>

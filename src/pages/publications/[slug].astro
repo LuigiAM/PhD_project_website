@@ -1,0 +1,161 @@
+---
+// One page per MEMoPAD paper. Google Scholar indexes papers only when each has its own URL
+// with citation_* meta tags and, ideally, a full-text PDF on the same site:
+// https://scholar.google.com/intl/en/scholar/inclusion.html
+// The citation_* tags are emitted only when the PDF is really in /public (see hasPdf),
+// so Scholar never gets an abstract-only duplicate of a paper we cannot host.
+import Layout from '../../layouts/Layout.astro';
+import ShareButtons from '../../components/ShareButtons.astro';
+import { SITE_URL } from '../../data/project';
+import {
+  PUBLICATIONS,
+  authorsDisplay,
+  doiUrl,
+  formatCitation,
+  hasPdf,
+  scholarDate,
+  toBibtex,
+  type Publication,
+} from '../../data/publications';
+
+export function getStaticPaths() {
+  return PUBLICATIONS.filter((p) => p.memopad).map((pub) => ({ params: { slug: pub.slug }, props: { pub } }));
+}
+
+const { pub } = Astro.props as { pub: Publication };
+const pdfOk = hasPdf(pub);
+const pdfAbsolute = pdfOk ? `${SITE_URL}${pub.pdf}` : undefined;
+const [firstPage, lastPage] = (pub.pages ?? '').split('-');
+const pageUrl = `${SITE_URL}/publications/${pub.slug}/`;
+const shortTitle = pub.title.length > 70 ? `${pub.title.slice(0, 67).trimEnd()}…` : pub.title;
+const description = (pub.abstract ?? pub.summary ?? pub.title).slice(0, 155).replace(/\s+\S*$/, '') + '…';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  '@id': `${pageUrl}#article`,
+  headline: pub.title,
+  name: pub.title,
+  author: pub.authors.map((name) =>
+    name === 'Luigi Andrea Moretti'
+      ? { '@type': 'Person', '@id': 'https://luigiandreamoretti.com/#person', name }
+      : { '@type': 'Person', name }
+  ),
+  datePublished: pub.date,
+  isPartOf: { '@type': pub.type === 'journal' ? 'Periodical' : 'Book', name: pub.venue },
+  ...(pub.publisher && { publisher: { '@type': 'Organization', name: pub.publisher } }),
+  ...(pub.pages && { pagination: pub.pages }),
+  ...(pub.doi && { identifier: { '@type': 'PropertyValue', propertyID: 'DOI', value: pub.doi }, sameAs: doiUrl(pub.doi) }),
+  ...(pub.abstract && { abstract: pub.abstract }),
+  ...(pdfAbsolute && { encoding: { '@type': 'MediaObject', contentUrl: pdfAbsolute, encodingFormat: 'application/pdf' } }),
+  ...(pub.licence?.startsWith('CC BY-NC-ND 4.0') && { license: 'https://creativecommons.org/licenses/by-nc-nd/4.0/' }),
+  about: { '@id': `${SITE_URL}/#research-project` },
+  mainEntityOfPage: pageUrl,
+  inLanguage: 'en',
+};
+---
+<Layout
+  title={`${shortTitle} | MEMoPAD`}
+  description={description}
+  ogType="article"
+  publishedTime={pub.date}
+  breadcrumbName={pub.venueShort ?? String(pub.year)}
+>
+  <Fragment slot="head">
+    {pdfOk && (
+      <>
+        <meta name="citation_title" content={pub.title} />
+        {pub.authors.map((a) => <meta name="citation_author" content={a} />)}
+        <meta name="citation_publication_date" content={scholarDate(pub)} />
+        {pub.type === 'journal'
+          ? <meta name="citation_journal_title" content={pub.venue} />
+          : <meta name="citation_conference_title" content={pub.venue} />}
+        {pub.volume && <meta name="citation_volume" content={pub.volume} />}
+        {pub.issue && <meta name="citation_issue" content={pub.issue} />}
+        {firstPage && <meta name="citation_firstpage" content={firstPage} />}
+        {lastPage && <meta name="citation_lastpage" content={lastPage} />}
+        {pub.publisher && <meta name="citation_publisher" content={pub.publisher} />}
+        {pub.isbn && <meta name="citation_isbn" content={pub.isbn} />}
+        {pub.doi && <meta name="citation_doi" content={pub.doi} />}
+        <meta name="citation_pdf_url" content={pdfAbsolute} />
+        <meta name="citation_abstract_html_url" content={pageUrl} />
+      </>
+    )}
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+
+  <article class="container paper">
+    <p class="eyebrow"><a href="/publications/">Publications</a> · {pub.venueShort ?? pub.venue}{!(pub.venueShort ?? pub.venue).includes(String(pub.year)) && ` · ${pub.year}`}</p>
+    <h1>{pub.title}</h1>
+    <p class="authors">{authorsDisplay(pub)}</p>
+    <p class="venue">
+      <em>{pub.venue}</em>{pub.pages && <>, {pub.pages.includes('-') ? `pp. ${pub.pages.replace('-', '–')}` : pub.pages}</>}{pub.publisher && <>. {pub.publisher}</>}.
+    </p>
+
+    <div class="actions button-group">
+      {pdfOk && <a class="button" href={pub.pdf}>Download PDF</a>}
+      {pub.doi && <a class="button button-secondary" href={doiUrl(pub.doi)} target="_blank" rel="noopener noreferrer">View at publisher (DOI)</a>}
+      {pub.links?.map((l) => <a class="button button-secondary" href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>)}
+    </div>
+
+    {pub.abstract ? (
+      <section>
+        <h2>Abstract</h2>
+        <p class="abstract">{pub.abstract}</p>
+      </section>
+    ) : pub.summary && (
+      <section>
+        <h2>Summary</h2>
+        <p>{pub.summary}</p>
+      </section>
+    )}
+
+    <section>
+      <h2>How to cite</h2>
+      <p class="citation">{formatCitation(pub)}</p>
+      <details>
+        <summary>BibTeX</summary>
+        <pre><code>{toBibtex(pub)}</code></pre>
+      </details>
+      {pub.licence && pdfOk && <p class="licence">Full text shared under {pub.licence}.</p>}
+    </section>
+
+    {pub.related && (
+      <section>
+        <h2>Related on this site</h2>
+        <ul class="related">
+          {pub.related.map((r) => <li><a href={r.href}>{r.label}</a></li>)}
+        </ul>
+      </section>
+    )}
+
+    <p class="back"><a href="/publications/">← All publications</a></p>
+
+    <ShareButtons pageTitle={pub.title} shareDescription={`${authorsDisplay(pub)} (${pub.year}). ${pub.venueShort ?? pub.venue}.`} />
+  </article>
+</Layout>
+
+<style>
+  .paper { max-width: 800px; margin: 0 auto; padding-top: 3rem; }
+  .eyebrow { font-size: 0.9rem; font-weight: 700; color: var(--color-text-muted); margin-bottom: 0.75rem; text-wrap: pretty; }
+  .eyebrow a, .paper a { color: var(--color-primary-strong); }
+  .paper h1 { font-size: 2.25rem; line-height: 1.25; margin-bottom: 1rem; }
+  .authors { font-size: 1.05rem; font-weight: 700; }
+  .venue { color: var(--color-text-muted); margin-bottom: 1.5rem; }
+  .actions { margin-bottom: 2rem; }
+  .actions .button { color: var(--color-white); }
+  .actions .button.button-secondary { color: var(--color-primary-strong); }
+  .paper h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 0.75rem; border-bottom: 2px solid var(--color-border); padding-bottom: 0.4rem; }
+  .abstract { line-height: 1.75; }
+  .citation { overflow-wrap: anywhere; }
+  details { margin-top: 0.75rem; }
+  summary { cursor: pointer; font-weight: 700; color: var(--color-primary-strong); }
+  pre { margin-top: 0.5rem; padding: 1rem; background-color: var(--color-white); border-radius: 4px; font-size: 0.8rem; overflow-x: auto; }
+  .licence { margin-top: 1rem; font-size: 0.9rem; color: var(--color-text-muted); }
+  .related { padding-left: 1.25rem; }
+  .related li { margin-bottom: 0.4rem; }
+  .back { margin-top: 2.5rem; font-weight: 700; }
+  @media (max-width: 600px) {
+    .paper h1 { font-size: 1.75rem; }
+  }
+</style>

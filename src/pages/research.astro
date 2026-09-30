@@ -76,7 +76,7 @@ const faqSchema = {
   <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)} />
 
   <section class="hero-banner">
-    <Image src={heroBanner} alt="Luigi A. Moretti presenting MEMoPAD wearable emotion monitoring research poster at digital mental health conference 2024" widths={[800, 1400, 2000]} width={Math.min(2000, heroBanner.width)} sizes="100vw" loading="eager" fetchpriority="high" />
+    <Image src={heroBanner} alt="Luigi Andrea Moretti presenting MEMoPAD wearable emotion monitoring research poster at digital mental health conference 2024" widths={[800, 1400, 2000]} width={Math.min(2000, heroBanner.width)} sizes="100vw" loading="eager" fetchpriority="high" />
   </section>
 
   <section class="container">
@@ -92,7 +92,7 @@ const faqSchema = {
 
       <h2 id="methodology">Methodology</h2>
       <p>
-        To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href="/achievements/#co-design-milestones">{numberWords[PHASE_COUNT]} phases: {numberWords[PHASES_COMPLETED]} completed, with the final phase (real-world use) under way</a>. Our approach focuses on using longitudinal emotion recognition data to identify anxiety patterns from bio-signals (e.g., heart rate, electrodermal activity) and user-generated data, such as diaries and recordings. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies. <a href="/project-story/">Learn more about our co-design journey</a>.
+        To address high dropout rates in digital mental health tools and focus on real-world needs, our co-design process involves people with anxiety disorders, unpaid carers, and clinicians across <a href="/achievements/#co-design-milestones">{numberWords[PHASE_COUNT]} phases: {numberWords[PHASES_COMPLETED]} completed, with the final phase (real-world use) under way</a>. Our approach pairs longitudinal body signals from a smartwatch (e.g. heart rate) with the person's own self-reports, such as diaries and recordings: the watch notices a change, and the person names what they feel. Information from mobile phones and wearables allows us to contextualise both the emotion data collected and the suggested coping strategies. <a href="/co-design/">See how we co-designed MEMoPAD, phase by phase</a>.
       </p>
 
       {/* --- VIDEO SECTION --- */}
@@ -114,11 +114,11 @@ const faqSchema = {
         </div>
         <div class="hardware-content">
           <div class="hardware-image">
-            <Image src={pixelWatch} alt="Google Pixel Watch 2 with cEDA electrodermal activity sensor for anxiety emotion monitoring" width={150} densities={[1, 2]} />
+            <Image src={pixelWatch} alt="Google Pixel Watch 2, the smartwatch used in MEMoPAD research" width={150} densities={[1, 2]} />
           </div>
           <div class="hardware-text">
             <p>
-              Our research leverages the advanced sensor suite of the <strong>Google Pixel Watch 2</strong>, specifically its unique continuous electrodermal activity (cEDA), but also photoplethysmography (PPG) and skin temperature sensors. The open nature of the <strong>Wear OS</strong> platform and Google's <strong>Health Connect API</strong> provides raw data access required for scientific validation and the development of novel <a href="#affective-computing">affective computing models</a>.
+              Our research uses the <strong>Google Pixel Watch 2</strong>. In our lab study (co-design Phase V) we recorded its continuous electrodermal activity (cEDA), photoplethysmography (PPG) and skin temperature sensors. The prototype now in daily use (Phase VI) uses heart rate (PPG) and movement (accelerometer and gyroscope), read by our own <strong>Wear OS</strong> app through Google's <strong>Health Services</strong> API. Continuous electrodermal activity remains part of the project's longer-term aims. <a href="/research/affective-computing/">What can a smartwatch tell us about emotions?</a>
             </p>
           </div>
         </div>
@@ -137,7 +137,7 @@ const faqSchema = {
         </div>
         <div class="definition-item" id="affective-computing">
           <h3>What is Affective Computing?</h3>
-          <p>A field of computer science that studies and explores emotions and their components. It involves developing systems and devices that can recognize, interpret, process, and simulate human affects, often by analyzing physiological and behavioral signals. Research consistently shows that in this field, multimodal approaches (using multiple data sources) tend to outperform unimodal ones <a href="#reference-3" class="citation-link">[3]</a>.</p>
+          <p>A field of computer science that studies and explores emotions and their components. It involves developing systems and devices that can recognize, interpret, process, and simulate human affects, often by analyzing physiological and behavioral signals. Research consistently shows that in this field, multimodal approaches (using multiple data sources) tend to outperform unimodal ones <a href="#reference-3" class="citation-link">[3]</a>. <a href="/research/affective-computing/">Read our explainer on affective computing and anxiety disorders</a>.</p>
         </div>
       </div>
       
@@ -153,7 +153,7 @@ const faqSchema = {
         </div>
         <div class="qna-item">
           <h3>How does MEMoPAD's approach address the current gaps?</h3>
-          <p>While existing research is promising, many studies are conducted in controlled lab settings. MEMoPAD aims to address this by focusing on collecting longitudinal data in real-world contexts using consumer wearables. Furthermore, by emphasizing a co-design methodology from the very beginning, we ensure the final tool is not only technologically advanced but also truly usable, interpretable, and valuable to both individuals with anxiety and their clinicians <a href="#reference-3" class="citation-link">[3]</a>.</p>
+          <p>While existing research is promising, many studies are conducted in controlled lab settings. MEMoPAD aims to address this by focusing on collecting longitudinal data in real-world contexts using consumer wearables. Furthermore, by emphasizing a co-design methodology from the very beginning, we ensure the final tool is not only technologically advanced but also truly usable, interpretable, and valuable to both people living with anxiety disorders and their clinicians <a href="#reference-3" class="citation-link">[3]</a>.</p>
         </div>
         <div class="qna-item">
           <h3>Why focus on consumer wearable devices?</h3>
@@ -164,7 +164,7 @@ const faqSchema = {
       <div class="slideshow-section">
         <h2>View the Slideshow</h2>
         <a href="https://www.linkedin.com/posts/luigiandreamoretti_literature-review-affective-computing-in-activity-7316080903959601153-aU0N/" target="_blank" rel="noopener noreferrer" class="slideshow-link">
-          <Image src={slideshowPreview} alt="Affective Computing in Anxiety Disorders rapid literature review presentation cover slide by Luigi A. Moretti" widths={[500, 1000]} width={Math.min(1000, slideshowPreview.width)} sizes="(max-width: 600px) 100vw, 500px" />
+          <Image src={slideshowPreview} alt="Affective Computing in Anxiety Disorders rapid literature review presentation cover slide by Luigi Andrea Moretti" widths={[500, 1000]} width={Math.min(1000, slideshowPreview.width)} sizes="(max-width: 600px) 100vw, 500px" />
           <span>Click to view on LinkedIn</span>
         </a>
       </div>

@@ -40,6 +40,8 @@ const segmentNames: Record<string, string> = {
   newsletter: 'Newsletter',
   contact: 'Contact',
   privacy: 'Privacy Policy',
+  'co-design': 'Co-Design',
+  publications: 'Publications',
 };
 
 const segments = Astro.url.pathname.split('/').filter(Boolean);
@@ -150,7 +152,7 @@ const projectGraph = [
   {
     "@type": "Person",
     "@id": PERSON_ID,
-    "name": "Luigi A. Moretti",
+    "name": "Luigi Andrea Moretti",
     "alternateName": "Luigi Andrea Moretti",
     "jobTitle": "PhD Researcher in Wearable Mental Health Technology",
     "affiliation": { "@id": UWE_ID },
@@ -194,7 +196,7 @@ const projectGraph = [
   {
     "@type": "ScholarlyArticle",
     "@id": `${SITE_URL}/#publication-ih-2026`,
-    "name": "Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders",
+    "name": "MEMoPAD: Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders",
     "datePublished": "2026-07",
     "isPartOf": { "@type": "PublicationEvent", "name": "ACM Interactive Health 2026 (IH '26), Porto" },
     "identifier": { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.1145/3786579.3804994" },
@@ -209,12 +211,12 @@ const projectGraph = [
     "alternateName": "MEMoPAD research prototype",
     "applicationCategory": "HealthApplication",
     "operatingSystem": "Android, Wear OS",
-    "description": "Research prototype (not publicly available) for personal emotion tracking, mood logging and data visualisation using Google Pixel Watch 2 sensors (cEDA, PPG, skin temperature), with a clinician web dashboard.",
+    "description": "Research prototype (not publicly available) for personal emotion tracking, mood logging and data visualisation. The current version uses Google Pixel Watch 2 heart rate (PPG) and movement sensors, with a clinician web dashboard.",
     "featureList": [
-      "Continuous emotion monitoring via wearable sensors",
+      "Detects changes in body signals and invites the person to check in",
       "Mood logging and self-report integration",
       "Contextual note-taking linked to physiological data",
-      "Data visualisation and pattern recognition",
+      "Longitudinal data visualisation",
       "Clinician dashboard for healthcare providers"
     ],
     "author": { "@id": PERSON_ID },

@@ -10,6 +10,7 @@ import IconCheckCircle from '../components/icons/IconCheckCircle.astro';
 import SubscribeButtons from '../components/SubscribeButtons.astro';
 import DemoCard from '../components/DemoCard.astro';
 import YouTubeEmbed from '../components/YouTubeEmbed.astro';
+import CiteProject from '../components/CiteProject.astro';
 import { Image } from 'astro:assets';
 import { PROJECT, PHASE_COUNT } from '../data/project';
 
@@ -37,7 +38,7 @@ const testimonials = [
 
 <Layout
   title="MEMoPAD | Wearable Emotion Monitoring for Anxiety Disorders"
-  description="A UWE Bristol PhD project co-designing wearable emotion monitoring with people with anxiety, carers and NHS clinicians, to support better care conversations."
+  description="UWE Bristol PhD project co-designing wearable emotion monitoring with people living with anxiety disorders, carers and mental health clinicians."
   breadcrumbName="Home"
   includeProjectSchema
 >
@@ -128,7 +129,7 @@ const testimonials = [
 <section class="container nav-grid-wrapper">
   <div class="nav-grid">
     <NavCard title="Meet the Team" href="/project-story/#team-section" img={teamCard} />
-    <NavCard title="Our Co-Design Process" href="/research/#methodology" img={codesignPlan} />
+    <NavCard title="Our Co-Design Process" href="/co-design/" img={codesignPlan} />
     <NavCard title="View Awards & Funding" href="/achievements/#funding-awards" img={presentationImg} />
   </div>
 </section>
@@ -137,8 +138,8 @@ const testimonials = [
   <div class="rationale-single">
     <div class="item-header"><IconTarget /><h2>Why MEMoPAD Exists</h2></div>
     <p>Previous attempts to integrate structured data in mental health have faced persistent challenges: multimodal data is complex to interpret, social stigma delays help-seeking, and poor user engagement leads to high dropout rates.</p>
-    <p>MEMoPAD addresses this by focusing on emotion as a universal common ground. We combine passive physiological sensing from consumer wearables (electrodermal activity, heart rate, skin temperature) with active self-reporting through a companion mobile app, creating contextualised, longitudinal data that is meaningful to both users and their clinicians.</p>
-    <p>The system is co-designed from the ground up with people with lived experience of anxiety, unpaid carers, and mental health clinicians. The goal: clear, continuous, interpretable emotion data that helps people understand themselves, manage their wellbeing proactively, and have deeper conversations with their care team.</p>
+    <p>MEMoPAD addresses this by focusing on emotion as a universal common ground. We combine passive physiological sensing from consumer wearables (heart rate and movement in the prototype now in daily use; electrodermal activity and skin temperature in our lab studies) with active self-reporting through a companion mobile app, creating contextualised, longitudinal data that is meaningful to both users and their clinicians.</p>
+    <p>The system is co-designed from the ground up with people living with anxiety disorders, unpaid carers, and mental health clinicians. The goal: clear, continuous, interpretable emotion data that helps people understand themselves, manage their wellbeing proactively, and have deeper conversations with their care team.</p>
   </div>
 </section>
 
@@ -157,7 +158,7 @@ const testimonials = [
     />
     <DemoCard
       title="Wearable Sensing"
-      description="Google Pixel Watch 2 captures continuous electrodermal activity, heart rate, and skin temperature. Milbotix SmartSocks provide a parallel physiological sensing pathway."
+      description="Google Pixel Watch 2: heart rate (PPG) and movement in daily use (Phase VI), plus electrodermal activity and skin temperature in our lab study (Phase V). Milbotix SmartSocks provide a parallel physiological sensing pathway."
       img={watchSocksImg}
       imgAlt="Hands wearing Google Pixel Watch 2 alongside Milbotix SmartSocks sensor for physiological monitoring"
     />
@@ -197,7 +198,7 @@ const testimonials = [
     <div class="about-photo">
       <Image
         src={luigiLaptop}
-        alt="Luigi A. Moretti, PhD candidate at UWE Bristol, sitting outdoors with a laptop showing the MEMoPAD clinician dashboard"
+        alt="Luigi Andrea Moretti, PhD candidate at UWE Bristol, sitting outdoors with a laptop showing the MEMoPAD clinician dashboard"
         widths={[400, 700]} width={Math.min(700, luigiLaptop.width)}
         sizes="(max-width: 900px) 400px, 420px"
       />
@@ -205,7 +206,7 @@ const testimonials = [
     </div>
     <div class="about-text">
       <h2>About the Researcher</h2>
-      <p>I'm Luigi A. Moretti, medical doctor (MD), former healthtech founder, and PhD candidate at UWE Bristol. I blend clinical insight, product thinking, and research rigour to build technology that clinicians actually adopt and patients genuinely use.</p>
+      <p>I'm Luigi Andrea Moretti, medical doctor (MD), former healthtech founder, and PhD candidate at UWE Bristol. I blend clinical insight, product thinking, and research rigour to build technology that clinicians actually adopt and patients genuinely use.</p>
       <p>MEMoPAD is my PhD research project. Before this, I co-founded other healthtech projects, including IntelliHearts, a wearable ECG system with emotion recognition.</p>
       
       <div class="about-links">
@@ -253,10 +254,14 @@ const testimonials = [
   </div>
 </section>
 
+<div class="container">
+  <CiteProject />
+</div>
+
 <div class="share-wrapper container">
   <ShareButtons 
     pageTitle="MEMoPAD: Help Shape the Future of Mental Health Tech" 
-    shareDescription="In the MEMoPAD project, Luigi A. Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
+    shareDescription="In the MEMoPAD project, Luigi Andrea Moretti and his supervisory team are co-designing a digital tool for anxiety disorders that uses technology to understand and measure emotional responses..." 
   />
 </div>
 </Layout>

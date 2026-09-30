@@ -211,7 +211,7 @@ const codesign: Achievement[] = [
     date: '2024-07',
     label: 'July 2024',
     title: 'Co-Design Phase 0 completed',
-    html: "Concluded the 'Recruiting Material Consultations' phase with 12 participants. Method: focus groups, interviews and surveys. Analysis: affinity diagrams.",
+    html: "Concluded the 'Recruiting Material Consultations' phase with 14 participants (8 patients and 6 clinicians). Method: focus groups, interviews and surveys. Analysis: affinity diagrams.",
   },
 ];
 
