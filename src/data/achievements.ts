@@ -175,7 +175,7 @@ const codesign: Achievement[] = [
     date: '2026-05',
     label: 'May 2026',
     title: 'Co-Design Phase V completed',
-    html: "Concluded the 'Implementation' phase with 16 lab participants and 120+ online survey responses, collecting feedback for the next iteration of the prototype. Method: lab-controlled data collection sessions. Analysis: physiological time-series analysis; expert roundtable.",
+    html: "Concluded the 'Implementation' phase with 16 lab participants and online surveys for patients and clinicians, collecting feedback for the next iteration of the prototype. Method: lab-controlled data collection sessions. Analysis: physiological time-series analysis; expert roundtable.",
   },
   {
     date: '2026-03',

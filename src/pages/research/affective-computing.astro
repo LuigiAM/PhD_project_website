@@ -2,7 +2,8 @@
 // Explainer: affective computing, wearables and anxiety disorders.
 // Claims rules this page must keep (vault):
 // - never "predict / forecast / score / risk level" (no-prediction claims rule, ADR-055);
-// - the system detects a change in body signals and invites reflection; the person names the emotion;
+// - describe sensing only as published (IH '26, CHI 2026 workshop): continuous sensing alongside
+//   self-reports, a balance that came out of co-design; unpublished design ideas stay out;
 // - Phase VI sensors are PPG (heart rate) + IMU (accelerometer, gyroscope); cEDA only for Phase V
 //   and the longer-term aims, said explicitly; skin temperature was dropped for Phase VI.
 import Layout from '../../layouts/Layout.astro';
@@ -104,15 +105,14 @@ const articleSchema = {
       <li><strong>Anything with certainty in daily life.</strong> Movement, a loose strap, heat and cold all add noise, and everyday EDA recordings in particular contain artefacts that need careful handling <a href="#ref-6" class="cite">[6]</a>.</li>
     </ul>
 
-    <h2>How MEMoPAD uses body signals: a prompt, not a verdict</h2>
+    <h2>How MEMoPAD uses body signals</h2>
     <p>
       MEMoPAD is designed around these limits, and around what our
       <a href="/co-design/">co-design participants</a> asked for:
     </p>
     <ol>
-      <li>The watch looks for a <strong>change in body signals</strong>. It does not name an emotion.</li>
-      <li>When it notices one, the app can <strong>invite the person to check in</strong>, marking a Moment of Interest they can come back to later.</li>
-      <li>The person <strong>names the feeling</strong> using four Emotion Hues: Green (calm or relaxed), Yellow (nervous or excited), Red (panicky or angry) and Blue (tired or low). The hues are categories people choose, not a scale of severity.</li>
+      <li>The watch <strong>records body signals in the background</strong>, alongside what the person chooses to log. This approach came out of co-design, to balance passive sensing with people’s autonomy.</li>
+      <li>The person <strong>records how they feel</strong> using four Emotion Hues: Green (calm or relaxed), Yellow (nervous or excited), Red (panicky or angry) and Blue (tired or low). The hues are categories people choose, not a scale of severity.</li>
       <li>Over weeks, body signals, self-reports and context such as triggers and sleep build a picture that the person can choose to <strong>share with their clinician</strong>, to support their conversations.</li>
     </ol>
     <p>
