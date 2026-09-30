@@ -23,7 +23,7 @@ const {
   imageAlt = 'MEMoPAD: wearable emotion monitoring for anxiety disorders',
   ogType = 'website',
   publishedTime,
-  breadcrumbName = title,
+  breadcrumbName,
   includeProjectSchema = false,
 } = Astro.props;
 
@@ -45,10 +45,12 @@ const segmentNames: Record<string, string> = {
 };
 
 const segments = Astro.url.pathname.split('/').filter(Boolean);
+// Last crumb: explicit prop, else the short section name, else the page title
+const lastCrumb = breadcrumbName ?? segmentNames[segments.at(-1) ?? ''] ?? title;
 const breadcrumbItems = [
   { name: 'Home', item: `${SITE_URL}/` },
   ...segments.map((segment, i) => ({
-    name: i === segments.length - 1 ? breadcrumbName : (segmentNames[segment] ?? segment),
+    name: i === segments.length - 1 ? lastCrumb : (segmentNames[segment] ?? segment),
     item: `${SITE_URL}/${segments.slice(0, i + 1).join('/')}/`,
   })),
 ];
@@ -153,14 +155,16 @@ const projectGraph = [
     "@type": "Person",
     "@id": PERSON_ID,
     "name": "Luigi Andrea Moretti",
-    "alternateName": "Luigi Andrea Moretti",
+    // Short forms appear only here, so search engines can match them to the full name
+    "alternateName": ["Luigi A. Moretti", "Luigi Moretti", "Moretti Luigi", "Dr Luigi Moretti"],
+    "url": "https://luigiandreamoretti.com/",
     "jobTitle": "PhD Researcher in Wearable Mental Health Technology",
     "affiliation": { "@id": UWE_ID },
     "sameAs": [
       "https://orcid.org/0009-0002-6180-0565",
       "https://scholar.google.co.uk/citations?user=KJTGED4AAAAJ",
       "https://www.linkedin.com/in/luigiandreamoretti/",
-      "https://luigiandreamoretti.com",
+      "https://luigiandreamoretti.com/",
       "https://github.com/LuigiAM",
       "https://www.researchgate.net/profile/Luigi-Moretti-2",
       "https://x.com/LuigiAndreaM"

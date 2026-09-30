@@ -20,6 +20,23 @@ const publishedISO = date.toISOString();
 const displayDate = date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 const articleURL = new URL(Astro.url.pathname, Astro.site);
 
+// Shorten to at most `max` chars (ellipsis included) on whole words, without ending on a filler word.
+const clip = (text: string, max: number) => {
+  if (text.length <= max) return text;
+  let t = text.slice(0, max);
+  t = t.slice(0, t.lastIndexOf(' '));
+  const trailing = /[\s:,;.\-–]+$|\s+(?:a|an|and|at|by|for|from|in|of|on|or|our|plus|the|their|to|with|your)$/i;
+  while (trailing.test(t)) t = t.replace(trailing, '');
+  return `${t}…`;
+};
+
+// <title>: "<title> | MEMoPAD, Aug 2026", max 60 chars. The month comes from `issue`
+// (the month covered), not the send date.
+const suffix = ` | MEMoPAD, ${issue.replace(/^(\w{3})\w*/, '$1')}`;
+const pageTitle = clip(title, 60 - suffix.length) + suffix;
+// Meta description: max 160 chars (the full text stays in the BlogPosting schema).
+const metaDescription = clip(description, 160);
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
@@ -58,8 +75,8 @@ const articleSchema = {
 ---
 
 <Layout
-  title={`${title} | MEMoPAD Newsletter, ${issue}`}
-  description={description}
+  title={pageTitle}
+  description={metaDescription}
   ogType="article"
   publishedTime={publishedISO}
   breadcrumbName={issue}

@@ -18,6 +18,8 @@ import path from 'node:path';
 export type Publication = {
   slug: string;
   title: string;
+  /** Page <title> for the paper page, 40–60 chars. Falls back to a shortened title. */
+  seoTitle?: string;
   /** In published order, "Given Family". */
   authors: string[];
   /** True when `authors` is a shortened list (large author teams). */
@@ -56,6 +58,7 @@ export const PUBLICATIONS: Publication[] = [
     // TODO(Luigi): Crossref records the title as "MEMOPAD: ..." (all caps). Check the casing on the
     // ACM Digital Library page and match it here if ACM really prints it that way.
     title: 'MEMoPAD: Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders',
+    seoTitle: "MEMoPAD: Emotion Monitoring for Anxiety Disorders (IH '26)",
     authors: ['Luigi Andrea Moretti', 'Miles Thompson', 'Paul Matthews', 'Michael Loizou', 'David Western'],
     year: 2026,
     date: '2026-07-04',
@@ -80,6 +83,7 @@ export const PUBLICATIONS: Publication[] = [
   {
     slug: 'sustained-engagement-anxiety-disorders-chi-2026',
     title: "Designing for Sustained Engagement in Anxiety Disorders: Lessons from MEMoPAD's Co-Design Journey",
+    seoTitle: 'Sustained Engagement in Anxiety Disorders | MEMoPAD',
     authors: ['Luigi Andrea Moretti', 'Miles Thompson', 'Paul Matthews', 'Michael Loizou', 'David Western'],
     year: 2026,
     date: '2026-04',
@@ -99,6 +103,7 @@ export const PUBLICATIONS: Publication[] = [
   {
     slug: 'co-designing-memopad-bcs-hci-2025',
     title: 'Co-Designing MEMoPAD: Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders',
+    seoTitle: 'Co-Designing MEMoPAD for Anxiety Disorders (BCS HCI 2025)',
     authors: ['Luigi Andrea Moretti', 'Carmel McGrath', 'Lucy Condon', 'Miles Thompson', 'Paul Matthews', 'Michael Loizou', 'David Western'],
     year: 2025,
     date: '2025-11',
@@ -118,6 +123,7 @@ export const PUBLICATIONS: Publication[] = [
   {
     slug: 'affective-computing-anxiety-disorders-review-2025',
     title: 'Affective Computing in Anxiety Disorders: A Rapid Literature Review of Emotion Recognition Applications',
+    seoTitle: 'Affective Computing in Anxiety Disorders: A Review | MEMoPAD',
     authors: ['Luigi Andrea Moretti', 'Miles Thompson', 'Paul Matthews', 'Michael Loizou', 'David Western'],
     year: 2025,
     date: '2025-02',

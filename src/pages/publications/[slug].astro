@@ -27,7 +27,13 @@ const pdfOk = hasPdf(pub);
 const pdfAbsolute = pdfOk ? `${SITE_URL}${pub.pdf}` : undefined;
 const [firstPage, lastPage] = (pub.pages ?? '').split('-');
 const pageUrl = `${SITE_URL}/publications/${pub.slug}/`;
-const shortTitle = pub.title.length > 70 ? `${pub.title.slice(0, 67).trimEnd()}…` : pub.title;
+// Page <title>: the hand-written seoTitle, else the paper title cut at a word boundary to fit 60 chars.
+const SUFFIX = ' | MEMoPAD';
+const pageTitle =
+  pub.seoTitle ??
+  (pub.title.length + SUFFIX.length <= 60
+    ? pub.title + SUFFIX
+    : `${pub.title.slice(0, 60 - SUFFIX.length - 1).replace(/[\s:,;.-]+\S*$/, '')}…${SUFFIX}`);
 const description = (pub.abstract ?? pub.summary ?? pub.title).slice(0, 155).replace(/\s+\S*$/, '') + '…';
 
 const articleSchema = {
@@ -55,7 +61,7 @@ const articleSchema = {
 };
 ---
 <Layout
-  title={`${shortTitle} | MEMoPAD`}
+  title={pageTitle}
   description={description}
   ogType="article"
   publishedTime={pub.date}
