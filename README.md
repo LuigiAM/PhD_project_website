@@ -18,7 +18,7 @@ This repository contains both software and non-software materials, governed by *
 
 **Non-software materials** — including all written content, the MEMoPAD name and brand, all images and graphics under `public/`, prototype-related imagery and screenshots, and all PDF documents — are **© 2025–2026 Luigi A. Moretti, all rights reserved**. These materials are **not** covered by the MIT License. See [NOTICE.md](./NOTICE.md) for the full scope breakdown.
 
-Visual depictions of the MEMoPAD prototype (phone, smartwatch, web app) are subject to **pending UK registered design protection** and must not be reproduced, adapted, or incorporated into derivative works without written permission.
+Visual depictions of the MEMoPAD prototype (phone, smartwatch, web app) are protected by copyright, and MEMoPAD prototype designs are also protected by **UK registered designs**. They must not be reproduced, adapted, or incorporated into derivative works without written permission.
 
 For licensing inquiries: **hello@luigimoretti.com**
 

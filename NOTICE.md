@@ -80,9 +80,10 @@ permission is not authorised.
 
 Screenshots, mockups, and any visual depictions of the MEMoPAD prototype
 (phone application, smartwatch interface, and web application) shown in any
-image, illustration, hero asset, or PDF in this repository are subject to
-**pending UK registered design protection**. Reproduction, derivative use, or
-incorporation into other products is prohibited without written permission.
+image, illustration, hero asset, or PDF in this repository are protected by
+copyright. MEMoPAD prototype designs are also protected by **UK registered
+designs**. Reproduction, derivative use, or incorporation into other products
+is prohibited without written permission.
 
 ## 5. Permissions and licensing inquiries
 
