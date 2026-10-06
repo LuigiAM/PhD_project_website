@@ -80,6 +80,7 @@ const articleSchema = {
   ogType="article"
   publishedTime={publishedISO}
   breadcrumbName={issue}
+  breadcrumbParents={[{ name: 'Project Story', path: '/project-story/' }]}
 >
   <script type="application/ld+json" is:inline set:html={JSON.stringify(articleSchema)} slot="head" />
 

@@ -8,7 +8,12 @@ type NavLink = { href: string; text: string; children?: { href: string; text: st
 
 // Define navigation links in an array for easier management
 const navLinks: NavLink[] = [
-  { href: "/project-story/", text: "Project Story" },
+  {
+    href: "/project-story/",
+    text: "Project Story",
+    // The newsletter keeps its /newsletter/ address (links in sent issues and the RSS feed).
+    children: [{ href: "/newsletter/", text: "Newsletter" }],
+  },
   {
     href: "/research/",
     text: "The Research",
@@ -22,7 +27,6 @@ const navLinks: NavLink[] = [
   { href: "/achievements/", text: "Achievements" },
   { href: "/collaborate/", text: "Collaborate" },
   { href: "/take-part/", text: "Take Part" },
-  { href: "/newsletter/", text: "Newsletter" },
   { href: "/contact/", text: "Contact" },
 ];
 

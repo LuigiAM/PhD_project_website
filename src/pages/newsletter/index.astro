@@ -15,9 +15,11 @@ const posts = (await getCollection('newsletter')).sort(
   title="MEMoPAD Newsletter Archive: Monthly Research Updates"
   description="Every monthly MEMoPAD newsletter since July 2024: research progress, co-design insights and project milestones."
   breadcrumbName="Newsletter"
+  breadcrumbParents={[{ name: 'Project Story', path: '/project-story/' }]}
 >
   <section class="container">
     <div class="archive-header">
+      <p class="eyebrow"><a href="/project-story/">Project Story</a></p>
       <h1>Newsletter Archive</h1>
       <p>A complete archive of our monthly updates, detailing our research progress, co-design insights, and project milestones.</p>
       <SubscribeButtons />
@@ -50,6 +52,8 @@ const posts = (await getCollection('newsletter')).sort(
     text-align: center;
     margin-bottom: 4rem;
   }
+  .eyebrow { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .eyebrow a { color: var(--color-primary-strong); }
   .archive-header h1 {
     font-size: 3rem;
   }
