@@ -4,22 +4,21 @@
 // - never "predict / forecast / score / risk level" (no-prediction claims rule, ADR-055);
 // - describe sensing only as published (IH '26, CHI 2026 workshop): continuous sensing alongside
 //   self-reports, a balance that came out of co-design; unpublished design ideas stay out;
-// - Phase VI sensors are PPG (heart rate) + IMU (accelerometer, gyroscope); cEDA only for Phase V
-//   and the longer-term aims, said explicitly; skin temperature was dropped for Phase VI.
+// - how MEMoPAD itself uses body signals is held back until the product paper is published.
 import Layout from '../../layouts/Layout.astro';
 import ShareButtons from '../../components/ShareButtons.astro';
 import { SITE_URL } from '../../data/project';
 
 // Set to the day this page goes live; bump `modified` on substantive edits.
 const published = '2026-10-01';
-const modified = '2026-10-01';
+const modified = '2026-10-06';
 
 const articleSchema = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   '@id': `${SITE_URL}/research/affective-computing/#article`,
   headline: 'What can a smartwatch tell us about emotions? Affective computing and anxiety disorders, explained',
-  description: 'What wearables measure, what research on affective computing in anxiety disorders shows, what a smartwatch cannot tell you, and how MEMoPAD uses body signals.',
+  description: 'What wearables measure, what research on affective computing in anxiety disorders shows, and what a smartwatch cannot tell you.',
   author: { '@type': 'Person', '@id': 'https://luigiandreamoretti.com/#person', name: 'Luigi Andrea Moretti' },
   datePublished: published,
   dateModified: modified,
@@ -46,7 +45,7 @@ const articleSchema = {
     <h1>What can a smartwatch tell us about emotions?</h1>
     <p class="lead">
       Affective computing and anxiety disorders, explained: what wearables measure, what the research shows,
-      what a smartwatch cannot tell you, and how MEMoPAD uses body signals.
+      and what a smartwatch cannot tell you.
     </p>
 
     <h2>What is affective computing?</h2>
@@ -104,29 +103,6 @@ const articleSchema = {
       <li><strong>Whether you have an anxiety disorder.</strong> Diagnosis needs a clinical assessment. No consumer wearable replaces it.</li>
       <li><strong>Anything with certainty in daily life.</strong> Movement, a loose strap, heat and cold all add noise, and everyday EDA recordings in particular contain artefacts that need careful handling <a href="#ref-6" class="cite">[6]</a>.</li>
     </ul>
-
-    <h2>How MEMoPAD uses body signals</h2>
-    <p>
-      MEMoPAD is designed around these limits, and around what our
-      <a href="/co-design/">co-design participants</a> asked for:
-    </p>
-    <ol>
-      <li>The watch <strong>records body signals in the background</strong>, alongside what the person chooses to log. This approach came out of co-design, to balance passive sensing with people’s autonomy.</li>
-      <li>The person <strong>records how they feel</strong> using four Emotion Hues: Green (calm or relaxed), Yellow (nervous or excited), Red (panicky or angry) and Blue (tired or low). The hues are categories people choose, not a scale of severity.</li>
-      <li>Over weeks, body signals, self-reports and context such as triggers and sleep build a picture that the person can choose to <strong>share with their clinician</strong>, to support their conversations.</li>
-    </ol>
-    <p>
-      MEMoPAD does not score anxiety, rate risk or claim to predict an episode. Its aim is to make emotion monitoring
-      <strong>systematic</strong>, while interpretation stays with the person and, if they choose, their clinician.
-    </p>
-
-    <h3>Which sensors, and when</h3>
-    <p>
-      In our lab study (co-design Phase V) we recorded electrodermal activity, heart rate and skin temperature from the
-      Pixel Watch 2. The prototype now in daily use (Phase VI) uses <strong>heart rate (PPG)</strong> and
-      <strong>movement (accelerometer and gyroscope)</strong>. Continuous electrodermal activity remains part of the
-      project’s longer-term aims.
-    </p>
 
     <p class="notice">
       MEMoPAD is a research prototype. It is not a medical device, it is not publicly available, and it is not a substitute

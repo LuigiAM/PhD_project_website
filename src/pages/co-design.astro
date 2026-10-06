@@ -6,15 +6,12 @@
 // co-design paper's framework stay out until that paper is submitted.
 import Layout from '../layouts/Layout.astro';
 import ShareButtons from '../components/ShareButtons.astro';
-import { PHASES, SITE_URL } from '../data/project';
+import { SITE_URL } from '../data/project';
 import { getPublication } from '../data/publications';
 
 // Set to the day this page goes live; bump `modified` on substantive edits.
 const published = '2026-10-01';
-const modified = '2026-10-01';
-
-const monthYear = (iso: string) =>
-  new Date(`${iso}-01T00:00:00Z`).toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' });
+const modified = '2026-10-06';
 
 const codesignPapers = [
   getPublication('co-designing-memopad-bcs-hci-2025'),
@@ -29,7 +26,7 @@ const articleSchema = {
   '@type': 'Article',
   '@id': `${SITE_URL}/co-design/#article`,
   headline: 'How we co-designed MEMoPAD with people living with anxiety disorders, carers and clinicians',
-  description: 'Seven co-design phases, the methods used with each group, what participants shaped, and four lessons for co-design with people living with anxiety disorders.',
+  description: 'Seven co-design phases, the methods used with each group, and four lessons for co-design with people living with anxiety disorders.',
   author: { '@type': 'Person', '@id': 'https://luigiandreamoretti.com/#person', name: 'Luigi Andrea Moretti' },
   datePublished: published,
   dateModified: modified,
@@ -81,36 +78,6 @@ const articleSchema = {
       <li><strong>Mental health clinicians</strong>, from the NHS and private practice.</li>
     </ul>
 
-    <h2 id="phases">Seven phases at a glance</h2>
-    <div class="table-wrapper" role="region" aria-labelledby="phases-caption" tabindex="0">
-      <table>
-        <caption id="phases-caption">
-          MEMoPAD co-design phases. Numbers are per phase: many people took part in more than one phase, so they should not be added up.
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">Phase</th>
-            <th scope="col">Question</th>
-            <th scope="col">Main tools</th>
-            <th scope="col">Who took part</th>
-          </tr>
-        </thead>
-        <tbody>
-          {PHASES.map((p) => (
-            <tr>
-              <th scope="row">
-                <span class="phase-id">{p.id}</span> {p.name}
-                <span class="phase-date">{p.status === 'ongoing' ? `From ${monthYear(p.date)}, under way` : `Completed ${monthYear(p.date)}`}</span>
-              </th>
-              <td data-label="Question">{p.question}</td>
-              <td data-label="Main tools">{p.tools}</td>
-              <td data-label="Who took part">{p.breakdown}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-
     <h2>How each phase worked</h2>
     <ul>
       <li><strong>A format for each group.</strong> In Phases I–IV, held online as most participants preferred, patients met in focus groups of up to six people, lasting about two hours. Carers and clinicians took part in separate one-to-one online interviews of around 30 minutes, to limit power imbalances and fit busy diaries.</li>
@@ -118,15 +85,6 @@ const articleSchema = {
       <li><strong>Tools matched to the question.</strong> A survey to map needs, storyboards to generate ideas, mock-ups to shape the interface, a click-through demo to test it, then the working prototype in the lab and in daily life.</li>
       <li><strong>Analysis.</strong> Thematic analysis (Phases I–II) and affinity diagrams (Phases III–V), compared across the three groups, then a roundtable with the interdisciplinary supervisory team.</li>
       <li><strong>Staying in touch.</strong> A <a href="/newsletter/">monthly newsletter</a> and this website kept participants informed between phases.</li>
-    </ul>
-
-    <h2>What participants shaped</h2>
-    <ul>
-      <li><strong>Three scenarios (Phase I).</strong> Participants chose where MEMoPAD should help: (A) supporting clinical conversations, which are short and rely on recall; (B) breaking anxiety loops in the moment; and (C) helping people seek help at the right time.</li>
-      <li><strong>Watch plus phone (Phase II).</strong> A smartwatch collects data continuously and a paired phone app is where people see it and add to it. Personalisation came out as essential, and body data only made sense alongside the person’s own notes and context.</li>
-      <li><strong>Emotions, not pathology (across phases).</strong> Participants rejected a tool that monitors anxiety. They wanted one that reflects their whole emotional life, pleasant moments included. This led to a four-colour vocabulary, now called <strong>Emotion Hues</strong>: Green (calm or relaxed), Yellow (nervous or excited), Red (panicky or angry) and Blue (tired or low).</li>
-      <li><strong>Two audiences, one dataset (Phases III–IV).</strong> A web dashboard shows clinicians what a patient chooses to share, using the same views the patient sees. Co-design also explored how the tool could support carers, practically and emotionally, and connect people with their care network without it feeling like surveillance.</li>
-      <li><strong>A cross-cohort check (Phase V).</strong> 14 of the 16 lab participants were new to MEMoPAD, yet they valued the features that earlier groups had prioritised.</li>
     </ul>
 
     <h2>Four lessons for co-design with people living with anxiety disorders</h2>
@@ -140,8 +98,8 @@ const articleSchema = {
     <h2>Where we are now</h2>
     <p>
       Phase VI is under way: 10 participants in Bristol are using the working watch and phone app in their daily lives for
-      up to five weeks. Its results will be reported in the PhD thesis and in forthcoming papers. To see what the prototype
-      measures, and what it deliberately does not claim, read
+      up to five weeks. Its results will be reported in the PhD thesis and in forthcoming papers. To read what a smartwatch can and
+      cannot tell us about emotions, see
       <a href="/research/affective-computing/">What can a smartwatch tell us about emotions?</a>
     </p>
     <div class="button-group cta">
@@ -179,14 +137,6 @@ const articleSchema = {
   .codesign ul, .codesign ol { padding-left: 1.5rem; }
   .codesign li { margin-bottom: 0.75rem; }
   .cite { text-decoration: none; }
-  .table-wrapper { overflow-x: auto; margin: 1rem 0; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.92rem; background-color: var(--color-white); }
-  caption { caption-side: bottom; text-align: left; font-size: 0.85rem; color: var(--color-text-muted); padding-top: 0.5rem; }
-  th, td { padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--color-border); text-align: left; vertical-align: top; }
-  thead th { background-color: var(--color-background); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
-  tbody th { font-weight: 700; min-width: 11rem; }
-  .phase-id { display: inline-block; min-width: 2rem; color: var(--color-primary-strong); }
-  .phase-date { display: block; font-weight: 400; font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.2rem; }
   .lessons li { padding-left: 0.25rem; }
   .cta { margin: 1.5rem 0 0; }
   .cta .button { color: var(--color-white); }
@@ -194,15 +144,6 @@ const articleSchema = {
   .papers span { color: var(--color-text-muted); font-size: 0.9rem; }
   .references { font-size: 0.9rem; }
   .references li { overflow-wrap: anywhere; }
-  /* Small screens: one card per phase instead of a four-column table. */
-  @media (max-width: 640px) {
-    table, caption, tbody, tr, th, td { display: block; width: 100%; }
-    caption { padding: 0.5rem 0.75rem; }
-    thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-    tr { border-bottom: 2px solid var(--color-border); padding: 0.5rem 0; }
-    tbody th, td { border-bottom: none; padding: 0.35rem 0.75rem; }
-    td::before { content: attr(data-label); display: block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--color-text-muted); }
-  }
   @media (max-width: 600px) {
     .codesign h1 { font-size: 1.85rem; }
     .codesign h2 { font-size: 1.45rem; }
