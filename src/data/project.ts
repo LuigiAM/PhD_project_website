@@ -9,7 +9,7 @@ export const PROJECT = {
   acronym: 'Multimodal Emotion Monitoring in Clinical Pathways for Anxiety Disorders',
   // Shown in the footer and used to keep status copy consistent.
   statusAsOf: 'October 2026',
-  status: 'Phase VI (real-world use) under way; thesis submission expected by the end of 2026, viva by March 2027.',
+  status: 'Phase VI (real-world use) under way, followed by the PhD thesis.',
   fundingTotal: '£10,500',
   // Never publish a summed participant total: people take part in more than one phase.
   participantsWording: '10–25 participants per phase',
