@@ -25,9 +25,15 @@ const navLinks: NavLink[] = [
     ],
   },
   { href: "/achievements/", text: "Achievements" },
-  { href: "/collaborate/", text: "Collaborate" },
-  { href: "/take-part/", text: "Take Part" },
-  { href: "/contact/", text: "Contact" },
+  {
+    href: "/contact/",
+    text: "Contact",
+    // Ways to get involved; both keep their own addresses.
+    children: [
+      { href: "/collaborate/", text: "Collaborate" },
+      { href: "/take-part/", text: "Take Part" },
+    ],
+  },
 ];
 
 // "page" on the page itself, "true" anywhere inside its section (e.g. /newsletter/<post>/)
@@ -213,13 +219,16 @@ const inSection = (link: NavLink) =>
   @media (min-width: 1025px) {
     /* Invisible bridge so the dropdown stays open while the pointer moves down to it */
     .has-sub::after { content: ''; position: absolute; left: -1rem; right: 0; top: 100%; height: 1.4rem; }
+    /* The last item's dropdown opens leftwards so it stays on screen */
+    .nav-list > .has-sub:last-child .submenu { left: auto; right: -1rem; }
+    .nav-list > .has-sub:last-child::after { left: 0; right: -1rem; }
   }
   @media (min-width: 1025px) and (hover: hover) {
     .has-sub:hover .submenu { display: block; }
   }
 
   /* Mobile Navigation Styles */
-  /* Seven links don't fit on one line below ~1024px, so switch to the menu there */
+  /* The links and dropdowns don't fit on one line below ~1024px, so switch to the menu there */
   @media (max-width: 1024px) {
     .menu-toggle { display: block; z-index: 1001; }
     .site-nav { display: none; position: fixed; inset: 0; background-color: var(--color-white); padding: 1rem 2rem; z-index: 1000; flex-direction: column; overflow-y: auto; overscroll-behavior: contain; }

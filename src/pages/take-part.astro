@@ -23,9 +23,11 @@ const completedRange = `${Math.min(...counts)}–${Math.max(...counts)} particip
 <Layout
   title="Take Part: Co-Design Mental Health Tech | MEMoPAD"
   description="Clinicians and informal carers: help shape MEMoPAD through short online interviews and surveys. Phase VI recruitment for people with lived experience is closed."
+  breadcrumbParents={[{ name: 'Contact', path: '/contact/' }]}
 >
   <section class="container take-part">
     <header class="page-header">
+      <p class="eyebrow"><a href="/contact/">Contact</a></p>
       <h1>Help Shape the Future of Mental Health Tech</h1>
       <p class="intro">
         MEMoPAD is co-designed with people with lived experience of anxiety, carers and clinicians. A sincere thank you to everyone who has guided this journey so far.
@@ -94,6 +96,8 @@ const completedRange = `${Math.min(...counts)}–${Math.max(...counts)} particip
 </Layout>
 
 <style>
+  .eyebrow { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .eyebrow a { color: var(--color-primary-strong); }
   .take-part {
     max-width: 1000px;
   }

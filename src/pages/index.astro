@@ -62,6 +62,8 @@ const testimonials = [
         Anxiety disorders affect 1 in 10 people in the UK. MEMoPAD uses wearable devices to monitor emotions. It is designed to help people notice and interrupt anxiety loops, and have better conversations with clinicians.
       </p>
       <p class="hero-status"><strong>Now:</strong> {PROJECT.status}</p>
+      {/* Remove when clinician and carer recruitment closes */}
+      <p class="hero-take-part">Clinicians and carers: you can still <a href="/take-part/">take part</a>.</p>
     </div>
   </div>
 
@@ -356,6 +358,8 @@ const testimonials = [
   margin: 0;
 }
 
+.hero-take-part { margin-top: 0.75rem; font-weight: 600; }
+.hero-take-part a { color: var(--color-primary-strong); font-weight: 700; }
 .hero-status {
   margin-top: 1.25rem;
   padding: 0.75rem 1rem;

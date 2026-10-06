@@ -66,6 +66,22 @@ import headshot from '../assets/images/hero-linkedin.webp';
       </div>
     </div>
 
+    <section class="get-involved" aria-labelledby="get-involved-heading">
+      <h2 id="get-involved-heading">Ways to get involved</h2>
+      <div class="involved-grid">
+        <a href="/collaborate/" class="involved-card">
+          <h3>Collaborate</h3>
+          <p>NHS teams, industry and funders: help MEMoPAD reach the people who need it, through commercialisation, NHS partnerships and clinical trials.</p>
+          <span class="involved-more" aria-hidden="true">Work with me →</span>
+        </a>
+        <a href="/take-part/" class="involved-card">
+          <h3>Take Part</h3>
+          <p>Clinicians and informal carers: help shape MEMoPAD through short online interviews and surveys.</p>
+          <span class="involved-more" aria-hidden="true">See how to take part →</span>
+        </a>
+      </div>
+    </section>
+
     <ShareButtons 
       pageTitle="Contact Luigi Andrea Moretti - MEMoPAD Project"
       shareDescription="Get in touch with the lead researcher of the MEMoPAD project to discuss collaborations or learn more about the work."
@@ -182,7 +198,21 @@ import headshot from '../assets/images/hero-linkedin.webp';
     margin-bottom: 1rem;
   }
 
+  .get-involved { padding-bottom: 3rem; }
+  .get-involved h2 { font-size: 1.75rem; margin-bottom: 1.5rem; text-align: center; }
+  .involved-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .involved-card {
+    display: flex; flex-direction: column; padding: 1.75rem 2rem;
+    background-color: var(--color-background); border: 1px solid var(--color-border); border-radius: 12px;
+    color: var(--color-text); text-decoration: none; transition: all 0.2s ease;
+  }
+  .involved-card:hover { border-color: var(--color-primary); transform: translateY(-4px); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+  .involved-card h3 { font-size: 1.35rem; margin-bottom: 0.5rem; color: var(--color-primary-strong); }
+  .involved-card p { color: var(--color-text-muted); line-height: 1.6; flex-grow: 1; }
+  .involved-more { margin-top: 1rem; font-weight: 700; color: var(--color-primary-strong); }
+
   @media (max-width: 900px) {
+    .involved-grid { grid-template-columns: 1fr; }
     .contact-grid {
       grid-template-columns: 1fr;
       gap: 3rem;
