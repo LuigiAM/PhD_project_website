@@ -22,6 +22,12 @@ const ext = (href: string, text: string) =>
 
 const funding: Achievement[] = [
   {
+    date: '2026-10',
+    label: 'October 2026',
+    title: "Won the Dermot O'Reilly Memorial Prize at the MHP Research Summit 2026",
+    html: "Awarded the Dermot O'Reilly Memorial Prize for the Most Innovative Science and Engaging Presentation by an early career researcher, in the MQ and DATAMIND Spotlight Session of the Mental Health Platform Research Summit, Sheffield, 8 October 2026.",
+  },
+  {
     date: '2026-08',
     label: 'August 2026',
     title: 'Joined the UKRI Mental Health Platform as an Associate Member',
@@ -86,9 +92,9 @@ const funding: Achievement[] = [
 const publications: Achievement[] = [
   {
     date: '2026-10',
-    label: 'October 2026 (upcoming)',
+    label: 'October 2026',
     title: 'Talk and poster at the MHP Research Summit 2026',
-    html: "MEMoPAD's co-design story was selected, by an external panel that included people with lived experience, for both a talk and a poster at the Mental Health Platform Research Summit in Sheffield on 8 October 2026.",
+    html: "MEMoPAD's co-design story was selected, by an external panel that included people with lived experience, for both a talk and a poster at the Mental Health Platform Research Summit in Sheffield on 8 October 2026. The talk won the Dermot O'Reilly Memorial Prize.",
   },
   {
     date: '2026-07',
