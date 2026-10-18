@@ -69,14 +69,43 @@ any licence by this repository.
 
 ---
 
-## 3. Notes on the brand
+## 3. Text and data mining and AI training
+
+All rights in the non-software materials listed in section 2 are expressly
+reserved for text and data mining (TDM), including collecting, copying, or
+using them to train or fine-tune AI models. This is a reservation of rights
+under Article 4(3) of Directive (EU) 2019/790 (in Italy, articles 70-quater
+and 70-septies of Law 633/1941). Providers of general-purpose AI models must
+respect it under Article 53(1)(c) of the EU AI Act (Regulation (EU) 2024/1689).
+
+The reservation is also published in machine-readable form on the website:
+- `public/robots.txt`: Content Signals (`ai-train=no`), IETF AI preferences
+  (`Content-Usage: train-ai=n`), and a list of AI training crawlers that are
+  disallowed
+- `public/.well-known/tdmrep.json` and a `tdm-reservation` meta tag on every
+  page (W3C TDM Reservation Protocol)
+
+It does not affect:
+- search engines and AI tools that find, link to, or quote the website in
+  search results and answers
+- the MIT-licensed software in section 1
+- exceptions that cannot be reserved, such as TDM for scientific research
+  (Article 3 of the Directive)
+- papers shared under a Creative Commons licence, which keep the terms of that
+  licence (shown on each publication page)
+
+To license content for TDM or AI training, contact hello@luigimoretti.com.
+
+---
+
+## 4. Notes on the brand
 
 The MEMoPAD name and logo are currently in **draft form**. A formal trademark
 filing decision is pending. Until then, the name and logo are protected only
 by unregistered rights (passing-off, copyright in the artwork). Reuse without
 permission is not authorised.
 
-## 4. Notes on the prototype design
+## 5. Notes on the prototype design
 
 Screenshots, mockups, and any visual depictions of the MEMoPAD prototype
 (phone application, smartwatch interface, and web application) shown in any
@@ -85,7 +114,7 @@ copyright. MEMoPAD prototype designs are also protected by **UK registered
 designs**. Reproduction, derivative use, or incorporation into other products
 is prohibited without written permission.
 
-## 5. Permissions and licensing inquiries
+## 6. Permissions and licensing inquiries
 
 For any use of the non-software materials listed above — including academic
 citation that exceeds fair-dealing limits, commercial reuse, derivative works,
@@ -97,4 +126,4 @@ https://luigiandreamoretti.com
 
 ---
 
-*Last updated: 2026-05-19*
+*Last updated: 2026-10-19*
