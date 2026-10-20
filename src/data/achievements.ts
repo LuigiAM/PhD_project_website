@@ -136,13 +136,13 @@ const publications: Achievement[] = [
     date: '2025-02',
     label: 'February 2025',
     title: 'Paper at HEALTHINF 2025',
-    html: `Published 'Affective Computing in Anxiety Disorders: A Rapid Literature Review of Emotion Recognition Applications' at the 18th International Joint Conference on Biomedical Engineering Systems and Technologies. The paper was selected for a post-publication invitation. ${ext('https://doi.org/10.5220/0013322800003911', 'Read the paper')}`,
+    html: `Published 'Affective Computing in Anxiety Disorders: A Rapid Literature Review of Emotion Recognition Applications' at the 18th International Joint Conference on Biomedical Engineering Systems and Technologies. The paper was selected for a post-publication invitation. ${ext('https://doi.org/10.5220/0013322800003911', 'Read the paper')} · ${ext('https://www.insticc.org/node/TechnicalProgram/biostec/2025/personDetails/1250de27-8986-4eaf-9863-721c3293a074', 'BIOSTEC 2025 speaker page')}`,
   },
   {
     date: '2024-07',
     label: 'July 2024',
     title: 'Presented at an NIHR ARC West & University of Bristol event',
-    html: `Presented at 'Researcher coffee catch-up: Digital solutions for anxiety disorders', organised by NIHR Applied Research Collaboration West (ARC West). ${ext('https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html', 'See event')}`,
+    html: `Presented at 'Researcher coffee catch-up: Digital solutions for anxiety disorders', organised by NIHR Applied Research Collaboration West (ARC West). ${ext('https://www.bristolhealthpartners.org.uk/events/researcher-coffee-catch-up-digital-solutions-for-anxiety-disorders/', 'See event')} · ${ext('https://www.bristol.ac.uk/neuroscience/events/2024/phwe-23jul.html', 'University of Bristol listing')}`,
   },
   {
     date: '2024-06',

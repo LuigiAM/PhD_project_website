@@ -50,4 +50,4 @@ While firmly a work of fiction (AI doesn't have consciousness or sense of identi
 
 We’re proud to share that our last conference paper has been recognised as a high-quality contribution and was selected for post-publication invitation.
 
-You can read it here: [Affective_Computing_in_Anxiety_Disorders_A_Rapid_Literature_Review_of_Emotion_Recognition_Applications](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.researchgate.net%2Fpublication%2F389361853_Affective_Computing_in_Anxiety_Disorders_A_Rapid_Literature_Review_of_Emotion_Recognition_Applications%23fullTextFileContent&data=05%7C02%7Cluigi.moretti%40uwe.ac.uk%7C1f8109d6e4614e4a17c408dd713789d0%7C07ef1208413c4b5e9cdd64ef305754f0%7C0%7C0%7C638791205530127291%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=iQ3DUcHA5GSoGIsvtMQOmTKTaYVMh%2B9hqd%2BJkeXqJoA%3D&reserved=0)
+You can read it here: [Affective_Computing_in_Anxiety_Disorders_A_Rapid_Literature_Review_of_Emotion_Recognition_Applications](https://doi.org/10.5220/0013322800003911)
